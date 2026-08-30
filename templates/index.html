@@ -68,56 +68,50 @@
     </div>
   </nav>
 
-  <!-- Hero Promotional Banner (#hero-carousel) -->
-  <section class="container" id="hero-carousel">
-    <div class="hero-carousel-container">
+  <!-- Hero Panoramic Banner (#hero-carousel) -->
+  <section class="container-fluid p-0" id="hero-carousel">
+    <div class="hero-panoramic-container">
       <div id="snackyCarousel" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-indicators">
           <button type="button" data-bs-target="#snackyCarousel" data-bs-slide-to="0" class="active"></button>
           <button type="button" data-bs-target="#snackyCarousel" data-bs-slide-to="1"></button>
+          <button type="button" data-bs-target="#snackyCarousel" data-bs-slide-to="2"></button>
+          <button type="button" data-bs-target="#snackyCarousel" data-bs-slide-to="3"></button>
         </div>
         <div class="carousel-inner">
+          <!-- Slide 1: Signature Range -->
           <div class="carousel-item active">
-            <div class="hero-slide-banner">
-              <div class="row align-items-center w-100">
-                <div class="col-lg-7">
-                  <span class="hero-badge-pill">JUST LAUNCHED</span>
-                  <h1 class="hero-title">THE ULTIMATE PUFFS COLLECTION!</h1>
-                  <p class="hero-subtitle">Explosive Flavors, Guilt-Free Snacking prepared in 100% pure groundnut oil with zero palm oil.</p>
-                  <div class="d-flex gap-3">
-                    <a href="products.html?category=healthy" class="btn btn-snacky-primary">Shop Collection <i class="bi bi-arrow-right"></i></a>
-                    <a href="offers.html" class="btn btn-snacky-secondary">View Deals</a>
-                  </div>
-                </div>
-                <div class="col-lg-5 text-center mt-4 mt-lg-0">
-                  <img src="../static/images/hero_puffs_banner.jpg" alt="Puffs Collection Banner" class="hero-banner-img">
-                </div>
-              </div>
-            </div>
+            <a href="products.html?category=signature">
+              <img src="../static/images/hero_signature_banner.jpg" alt="Signature Range New Arrival" class="hero-panoramic-img">
+            </a>
           </div>
+
+          <!-- Slide 2: Puffs Collection -->
           <div class="carousel-item">
-            <div class="hero-slide-banner bg-gradient-hero-2">
-              <div class="row align-items-center w-100">
-                <div class="col-lg-7">
-                  <span class="hero-badge-pill bg-badge-sale">SHARK TANK FEATURED</span>
-                  <h1 class="hero-title">TRADITIONAL NAMKEENS REINVENTED!</h1>
-                  <p class="hero-subtitle">Crispy, authentic homemade taste made with zero white sugar and zero trans fats.</p>
-                  <div class="d-flex gap-3">
-                    <a href="products.html?category=namkeen" class="btn btn-snacky-primary">Explore Namkeens <i class="bi bi-arrow-right"></i></a>
-                  </div>
-                </div>
-                <div class="col-lg-5 text-center mt-4 mt-lg-0">
-                  <img src="../static/images/hero_namkeen_banner.jpg" alt="Traditional Namkeen Banner" class="hero-banner-img">
-                </div>
-              </div>
-            </div>
+            <a href="products.html?category=healthy">
+              <img src="../static/images/hero_puffs_banner.jpg" alt="Ultimate Puffs Collection" class="hero-panoramic-img">
+            </a>
+          </div>
+
+          <!-- Slide 3: Traditional Namkeens -->
+          <div class="carousel-item">
+            <a href="products.html?category=namkeen">
+              <img src="../static/images/hero_namkeen_banner.jpg" alt="Traditional Namkeens" class="hero-panoramic-img">
+            </a>
+          </div>
+
+          <!-- Slide 4: Special Offers -->
+          <div class="carousel-item">
+            <a href="offers.html">
+              <img src="../static/images/hero_offers_banner.jpg" alt="Snacky Special Offers" class="hero-panoramic-img">
+            </a>
           </div>
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#snackyCarousel" data-bs-slide="prev">
-          <span class="carousel-control-prev-icon"></span>
+        <button class="hero-nav-arrow-btn hero-nav-prev" type="button" data-bs-target="#snackyCarousel" data-bs-slide="prev" title="Previous Slide">
+          <i class="bi bi-chevron-left"></i>
         </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#snackyCarousel" data-bs-slide="next">
-          <span class="carousel-control-next-icon"></span>
+        <button class="hero-nav-arrow-btn hero-nav-next" type="button" data-bs-target="#snackyCarousel" data-bs-slide="next" title="Next Slide">
+          <i class="bi bi-chevron-right"></i>
         </button>
       </div>
     </div>
@@ -125,36 +119,54 @@
 
   <!-- Categories Blobs Section (#categories-section) -->
   <section class="container py-4" id="categories-section">
-    <h2 class="section-title text-center">Shop by Category</h2>
+    <h2 class="section-title text-center mb-4">Shop by Category</h2>
     
-    <div class="row g-4">
-      <div class="col-md-4">
-        <a href="products.html?category=namkeen" class="d-block text-decoration-none">
-          <div class="category-card-clean">
-            <div class="category-icon-box bg-pastel-orange">🥠</div>
-            <h4 class="fw-bold text-navy mb-2">Namkeens</h4>
-            <p class="text-muted small mb-0">Traditional Bhujia, Sev, Mixture & Gathiya prepared in groundnut oil.</p>
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-4 g-4 justify-content-center">
+      <!-- 1. Signature Range -->
+      <div class="col d-flex justify-content-center">
+        <a href="products.html?category=signature" class="category-blob-card">
+          <div class="category-blob-frame">
+            <div class="category-blob-shape bg-blob-purple"></div>
+            <img src="../static/images/signature_hot_chips.jpg" alt="Signature Pack 1" class="pouch-back">
+            <img src="../static/images/signature_tapioca_chips.jpg" alt="Signature Pack 2" class="pouch-front">
           </div>
+          <h3 class="category-blob-title">Signature Range</h3>
         </a>
       </div>
 
-      <div class="col-md-4">
-        <a href="products.html?category=chips" class="d-block text-decoration-none">
-          <div class="category-card-clean">
-            <div class="category-icon-box bg-pastel-blue">🍟</div>
-            <h4 class="fw-bold text-navy mb-2">Chips & Wafers</h4>
-            <p class="text-muted small mb-0">Potato Wafers, Soya Katori, Ragi Chips & Banana Crisps.</p>
+      <!-- 2. Namkeens -->
+      <div class="col d-flex justify-content-center">
+        <a href="products.html?category=namkeen" class="category-blob-card">
+          <div class="category-blob-frame">
+            <div class="category-blob-shape"></div>
+            <img src="../static/images/paachratan_mixture.jpg" alt="Namkeens Pack 1" class="pouch-back">
+            <img src="../static/images/aloo_bhujia.jpg" alt="Namkeens Pack 2" class="pouch-front">
           </div>
+          <h3 class="category-blob-title">Namkeens</h3>
         </a>
       </div>
 
-      <div class="col-md-4">
-        <a href="products.html?category=healthy" class="d-block text-decoration-none">
-          <div class="category-card-clean">
-            <div class="category-icon-box bg-pastel-green">🍿</div>
-            <h4 class="fw-bold text-navy mb-2">Healthy Snacks</h4>
-            <p class="text-muted small mb-0">Roasted Makhana, Millet Chakli, Quinoa Puffs & Roasted Nuts.</p>
+      <!-- 3. Wafers & Chips -->
+      <div class="col d-flex justify-content-center">
+        <a href="products.html?category=chips" class="category-blob-card">
+          <div class="category-blob-frame">
+            <div class="category-blob-shape"></div>
+            <img src="../static/images/snack_chips.jpg" alt="Wafers Pack 1" class="pouch-back">
+            <img src="../static/images/banana_chips.jpg" alt="Wafers Pack 2" class="pouch-front">
           </div>
+          <h3 class="category-blob-title">Wafers & Chips</h3>
+        </a>
+      </div>
+
+      <!-- 4. Healthy Snacks -->
+      <div class="col d-flex justify-content-center">
+        <a href="products.html?category=healthy" class="category-blob-card">
+          <div class="category-blob-frame">
+            <div class="category-blob-shape"></div>
+            <img src="../static/images/snack_chakli.jpg" alt="Healthy Pack 1" class="pouch-back">
+            <img src="../static/images/snack_makhana.jpg" alt="Healthy Pack 2" class="pouch-front">
+          </div>
+          <h3 class="category-blob-title">Healthy Snacks</h3>
         </a>
       </div>
     </div>
@@ -486,7 +498,6 @@
           <p class="text-muted small mb-0">Ordered the Bestselling Combo. Incredible value for money and authentic homemade taste.</p>
         </div>
       </div>
-    </div>
   </section>
 
   <!-- Multi-Column Dark Footer (#main-footer) -->

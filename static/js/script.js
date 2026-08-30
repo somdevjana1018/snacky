@@ -111,7 +111,29 @@ const SNACKY_PRODUCTS = [
   { id: 317, title: "Baked Beetroot Munch", category: "healthy", price: 85, mrp: 105, discount: 19, weight: "60 g", frameClass: "frame-orange", inStock: true, tags: ["No Palm Oil"], image: "../static/images/snack_chips.jpg" },
   { id: 318, title: "Multi-Seed Energy Bar", category: "healthy", price: 50, mrp: 65, discount: 23, weight: "40 g", frameClass: "frame-orange", inStock: true, tags: ["High Fiber"], image: "../static/images/snack_makhana.jpg" },
   { id: 319, title: "Dry Fruit Laddu", category: "healthy", price: 190, mrp: 240, discount: 21, weight: "150 g", frameClass: "frame-orange", inStock: true, tags: ["Fasting Special / Vrat"], image: "../static/images/paachratan_mixture.jpg" },
-  { id: 320, title: "Baked Mathri Whole Wheat", category: "healthy", price: 90, mrp: 110, discount: 18, weight: "140 g", frameClass: "frame-orange", inStock: true, tags: ["High Fiber"], image: "../static/images/snack_chakli.jpg" }
+  { id: 320, title: "Baked Mathri Whole Wheat", category: "healthy", price: 90, mrp: 110, discount: 18, weight: "140 g", frameClass: "frame-orange", inStock: true, tags: ["High Fiber"], image: "../static/images/snack_chakli.jpg" },
+
+  // --- SIGNATURE RANGE (20 Items) ---
+  { id: 401, title: "Tapioca Chips", category: "signature", price: 110, mrp: 140, discount: 21, weight: "120 g", frameClass: "frame-purple", inStock: true, tags: ["Signature Range", "No Palm Oil"], image: "../static/images/signature_tapioca_chips.jpg" },
+  { id: 402, title: "Signature Hot Chips", category: "signature", price: 95, mrp: 120, discount: 21, weight: "100 g", frameClass: "frame-red", inStock: true, tags: ["Signature Range", "No Palm Oil"], image: "../static/images/signature_hot_chips.jpg" },
+  { id: 403, title: "Nylon Sev", category: "signature", price: 80, mrp: 100, discount: 20, weight: "150 g", frameClass: "frame-green", inStock: true, tags: ["Signature Range", "No Palm Oil"], image: "../static/images/aloo_bhujia.jpg" },
+  { id: 404, title: "Manglori Mixture", category: "signature", price: 120, mrp: 150, discount: 20, weight: "160 g", frameClass: "frame-green", inStock: true, tags: ["Signature Range", "No Palm Oil"], image: "../static/images/paachratan_mixture.jpg" },
+  { id: 405, title: "Truffle & Herb Chips", category: "signature", price: 130, mrp: 160, discount: 19, weight: "110 g", frameClass: "frame-purple", inStock: true, tags: ["Signature Range"], image: "../static/images/signature_tapioca_chips.jpg" },
+  { id: 406, title: "Smoky BBQ Cashews", category: "signature", price: 240, mrp: 300, discount: 20, weight: "150 g", frameClass: "frame-red", inStock: true, tags: ["Signature Range", "Premium Dryfruits"], image: "../static/images/paachratan_mixture.jpg" },
+  { id: 407, title: "Spicy Chili Lime Almonds", category: "signature", price: 220, mrp: 275, discount: 20, weight: "150 g", frameClass: "frame-red", inStock: true, tags: ["Signature Range"], image: "../static/images/paachratan_mixture.jpg" },
+  { id: 408, title: "Sea Salt Pretzels", category: "signature", price: 99, mrp: 125, discount: 21, weight: "100 g", frameClass: "frame-green", inStock: true, tags: ["Signature Range"], image: "../static/images/snack_chips.jpg" },
+  { id: 409, title: "Garlic Bhujia Special", category: "signature", price: 85, mrp: 110, discount: 23, weight: "150 g", frameClass: "frame-orange", inStock: true, tags: ["Signature Range", "No Palm Oil"], image: "../static/images/aloo_bhujia.jpg" },
+  { id: 410, title: "Signature Poha Mix", category: "signature", price: 80, mrp: 100, discount: 20, weight: "120 g", frameClass: "frame-orange", inStock: true, tags: ["Signature Range", "Groundnut Oil"], image: "../static/images/paachratan_mixture.jpg" },
+  { id: 411, title: "Soya Katori Supreme", category: "signature", price: 75, mrp: 95, discount: 21, weight: "100 g", frameClass: "frame-teal", inStock: true, tags: ["Signature Range"], image: "../static/images/snack_chips.jpg" },
+  { id: 412, title: "Quinoa Jalapeno Puffs", category: "signature", price: 90, mrp: 115, discount: 22, weight: "70 g", frameClass: "frame-green", inStock: true, tags: ["Signature Range", "Roasted"], image: "../static/images/snack_makhana.jpg" },
+  { id: 413, title: "Peri Peri Makhana", category: "signature", price: 140, mrp: 175, discount: 20, weight: "80 g", frameClass: "frame-red", inStock: true, tags: ["Signature Range", "Roasted"], image: "../static/images/snack_makhana.jpg" },
+  { id: 414, title: "Caramelized Roasted Nuts", category: "signature", price: 250, mrp: 310, discount: 19, weight: "150 g", frameClass: "frame-purple", inStock: true, tags: ["Signature Range"], image: "../static/images/paachratan_mixture.jpg" },
+  { id: 415, title: "Chatpata Chana Jor", category: "signature", price: 70, mrp: 90, discount: 22, weight: "140 g", frameClass: "frame-orange", inStock: true, tags: ["Signature Range"], image: "../static/images/snack_namkeen.jpg" },
+  { id: 416, title: "Kabab Banana Chips", category: "signature", price: 85, mrp: 110, discount: 23, weight: "100 g", frameClass: "frame-teal", inStock: true, tags: ["Signature Range"], image: "../static/images/banana_chips.jpg" },
+  { id: 417, title: "Schezwan Sev Sticks", category: "signature", price: 80, mrp: 100, discount: 20, weight: "140 g", frameClass: "frame-red", inStock: true, tags: ["Signature Range"], image: "../static/images/aloo_bhujia.jpg" },
+  { id: 418, title: "Panchratan Royal Mix", category: "signature", price: 190, mrp: 240, discount: 21, weight: "160 g", frameClass: "frame-purple", inStock: true, tags: ["Signature Range"], image: "../static/images/paachratan_mixture.jpg" },
+  { id: 419, title: "Cheese Herb Corn Balls", category: "signature", price: 85, mrp: 105, discount: 19, weight: "75 g", frameClass: "frame-yellow", inStock: true, tags: ["Signature Range"], image: "../static/images/snack_makhana.jpg" },
+  { id: 420, title: "Masala Roasted Peanuts", category: "signature", price: 65, mrp: 85, discount: 24, weight: "150 g", frameClass: "frame-orange", inStock: true, tags: ["Signature Range"], image: "../static/images/snack_namkeen.jpg" }
 ];
 
 // --------------------------------------------------------------------------
@@ -383,20 +405,6 @@ function renderProductsGrid() {
       <div class="col">
         <div class="product-card">
           <div class="card-top-frame">
-            <div class="snack-particles-overlay">
-              <svg viewBox="0 0 160 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M20 70 L25 45 L30 52" stroke="#F5A623" stroke-width="3.5" stroke-linecap="round"/>
-                <path d="M45 60 L40 30 L50 38" stroke="#FBBF24" stroke-width="4" stroke-linecap="round"/>
-                <path d="M70 50 L75 15 L80 28" stroke="#F5A623" stroke-width="3.5" stroke-linecap="round"/>
-                <path d="M95 55 L90 20 L100 32" stroke="#FCD34D" stroke-width="4" stroke-linecap="round"/>
-                <path d="M120 65 L125 40 L130 48" stroke="#F5A623" stroke-width="3.5" stroke-linecap="round"/>
-                <circle cx="35" cy="35" r="3.5" fill="#F5A623"/>
-                <circle cx="65" cy="20" r="4" fill="#FCD34D"/>
-                <circle cx="85" cy="12" r="3.5" fill="#FBBF24"/>
-                <circle cx="110" cy="25" r="4" fill="#F5A623"/>
-                <circle cx="135" cy="30" r="3" fill="#FCD34D"/>
-              </svg>
-            </div>
             <a href="product-detail.html?id=${p.id}">
               <img src="${p.image}" alt="${p.title}" class="product-card-img">
             </a>
