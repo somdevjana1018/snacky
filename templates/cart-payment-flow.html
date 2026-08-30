@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout & Payment Gateway - Snacky</title>
+  <meta name="description" content="Securely complete your snack order using UPI, Credit/Debit cards, or Net Banking.">
+  
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../static/css/style.css">
+</head>
+<body>
+
+  <!-- 1. Top Feature Ticker Bar -->
+  <div class="top-ticker-bar">
+    No White Sugar <span class="divider">|</span> High Fiber <span class="divider">|</span> No Palm Oil <span class="divider">|</span> No Cholesterol <span class="divider">|</span> No Trans Fat <span class="divider">|</span> No White Sugar
+  </div>
+
+  <!-- 2. Top Announcement Bar -->
+  <div class="top-announcement-bar">
+    🚚 FREE DELIVERY ABOVE ₹199
+  </div>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar navbar-expand-lg main-navbar" id="main-navbar">
+    <div class="container">
+      <a class="brand-logo-container" href="index.html">
+        <span class="snacky-basket-icon"><i class="bi bi-basket-fill"></i></span>
+        <span class="snacky-brand-text">Snacky<span class="snacky-brand-dot">.</span></span>
+      </a>
+
+      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarContent">
+        <ul class="navbar-nav mx-auto mb-2 mb-lg-0 gap-3">
+          <li class="nav-item"><a class="nav-link nav-link-custom" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link nav-link-custom" href="products.html">Products</a></li>
+          <li class="nav-item"><a class="nav-link nav-link-custom" href="offers.html">Offers</a></li>
+          <li class="nav-item"><a class="nav-link nav-link-custom" href="about.html">About</a></li>
+          <li class="nav-item"><a class="nav-link nav-link-custom" href="contact.html">Contact</a></li>
+        </ul>
+
+        <div class="nav-actions-right">
+          <div class="nav-search-container">
+            <input type="text" class="nav-search-input" id="nav-search-input" placeholder="Search snacks...">
+            <i class="bi bi-search nav-search-icon"></i>
+          </div>
+          <a href="profile.html" class="nav-action-btn" id="user-profile-btn" title="User Profile"><i class="bi bi-person"></i></a>
+          <button class="nav-action-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#cartOffcanvas" title="Shopping Cart">
+            <i class="bi bi-cart3"></i>
+            <span class="cart-count-badge">0</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Checkout Stepper Bar -->
+  <div class="container mt-4">
+    <div class="checkout-stepper-container">
+      <div class="checkout-stepper">
+        <div class="checkout-step-item completed">
+          <div class="checkout-step-dot"><i class="bi bi-check"></i></div>
+          <div class="checkout-step-label">Order</div>
+        </div>
+        <div class="checkout-step-item completed">
+          <div class="checkout-step-dot"><i class="bi bi-check"></i></div>
+          <div class="checkout-step-label">Shipping</div>
+        </div>
+        <div class="checkout-step-item active">
+          <div class="checkout-step-dot">3</div>
+          <div class="checkout-step-label">Payment</div>
+        </div>
+        <div class="checkout-step-item">
+          <div class="checkout-step-dot">4</div>
+          <div class="checkout-step-label">Review</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Checkout Grid Section -->
+  <section class="container mb-5" id="payment-gateway-wrapper">
+    <div class="row g-4">
+      <!-- Left Column: Items List & Order Summary -->
+      <div class="col-lg-7">
+        <!-- Card 1: Selected Cart Items -->
+        <div class="checkout-card mb-4">
+          <div class="d-flex justify-content-between align-items-center mb-4">
+            <h5 class="fw-extrabold text-navy mb-0">Items (<span id="checkout-item-count">0</span> items)</h5>
+            <button class="btn btn-link text-danger p-0 text-decoration-none fw-bold small" id="checkout-clear-all-btn">
+              <i class="bi bi-trash me-1"></i> Remove all
+            </button>
+          </div>
+
+          <!-- Dynamic List of Items selected from Add to Cart -->
+          <div id="checkout-cart-items-list">
+            <!-- Rendered by JavaScript -->
+          </div>
+        </div>
+
+        <!-- Card 2: Order Summary -->
+        <div class="checkout-card">
+          <h5 class="fw-extrabold text-navy mb-4">Order summary</h5>
+          <div class="d-flex justify-content-between mb-3 text-muted">
+            <span>Subtotal</span>
+            <span class="fw-bold text-navy" id="checkout-subtotal">₹0.00</span>
+          </div>
+          <div class="d-flex justify-content-between mb-3 text-muted">
+            <span>Discount</span>
+            <span class="text-success fw-bold" id="checkout-discount">-₹30.00</span>
+          </div>
+          <div class="d-flex justify-content-between mb-3 text-muted">
+            <span>Shipping</span>
+            <span class="text-success fw-bold" id="checkout-shipping">FREE</span>
+          </div>
+          <hr class="my-3">
+          <div class="d-flex justify-content-between align-items-center">
+            <span class="fw-extrabold fs-5 text-navy">Total Price</span>
+            <span class="fw-extrabold fs-4 text-primary-violet" id="checkout-total-price">₹0.00</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column: Checkout Payment Gateway Box -->
+      <div class="col-lg-5">
+        <div class="checkout-card">
+          <h4 class="fw-extrabold text-navy mb-4">Checkout</h4>
+
+          <!-- 3 Payment Method Tabs -->
+          <ul class="nav nav-pills mb-4 gap-2 border-0" id="paymentMethodTabs" role="tablist">
+            <li class="nav-item flex-fill">
+              <button class="payment-method-tab-btn active w-100 text-center" id="tab-upi-btn" data-bs-toggle="pill" data-bs-target="#tab-upi" type="button">
+                <i class="bi bi-qr-code-scan d-block fs-5 mb-1"></i> UPI / QR
+              </button>
+            </li>
+            <li class="nav-item flex-fill">
+              <button class="payment-method-tab-btn w-100 text-center" id="tab-card-btn" data-bs-toggle="pill" data-bs-target="#tab-card" type="button">
+                <i class="bi bi-credit-card d-block fs-5 mb-1"></i> Card
+              </button>
+            </li>
+            <li class="nav-item flex-fill">
+              <button class="payment-method-tab-btn w-100 text-center" id="tab-cod-btn" data-bs-toggle="pill" data-bs-target="#tab-cod" type="button">
+                <i class="bi bi-cash d-block fs-5 mb-1"></i> COD
+              </button>
+            </li>
+          </ul>
+
+          <div class="tab-content" id="paymentMethodTabsContent">
+            <!-- Method 1: UPI / QR Code -->
+            <div class="tab-pane fade show active" id="tab-upi">
+              <div class="text-center py-2 mb-3">
+                <p class="text-muted small mb-3">Scan QR code using GPay, PhonePe, Paytm, or BHIM</p>
+                <div class="p-3 bg-light rounded-4 d-inline-block shadow-sm mb-3">
+                  <img src="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22160%22%20height%3D%22160%22%3E%3Crect%20width%3D%22160%22%20height%3D%22160%22%20fill%3D%22%23ffffff%22%2F%3E%3Crect%20x%3D%2215%22%20y%3D%2215%22%20width%3D%2245%22%20height%3D%2245%22%20fill%3D%22%237c3aed%22%2F%3E%3Crect%20x%3D%22100%22%20y%3D%2215%22%20width%3D%2245%22%20height%3D%2245%22%20fill%3D%22%237c3aed%22%2F%3E%3Crect%20x%3D%2215%22%20y%3D%22100%22%20width%3D%2245%22%20height%3D%2245%22%20fill%3D%22%237c3aed%22%2F%3E%3Crect%20x%3D%2270%22%20y%3D%2270%22%20width%3D%2220%22%20height%3D%2220%22%20fill%3D%22%23f5a623%22%2F%3E%3Ctext%20x%3D%2280%22%20y%3D%22150%22%20font-size%3D%2211%22%20font-weight%3D%22bold%22%20text-anchor%3D%22middle%22%3ESNACKY%20PAY%3C%2Ftext%3E%3C%2Fsvg%3E" alt="UPI QR Code" class="img-fluid">
+                </div>
+                <div class="form-floating mb-3">
+                  <input type="text" class="form-control rounded-3" id="upi-id-input" placeholder="user@upi" value="snacky@okicici">
+                  <label for="upi-id-input">VPA / UPI ID</label>
+                </div>
+              </div>
+              <button class="btn btn-pay-now text-center" id="pay-now-btn">
+                Pay Now <span id="pay-btn-amount">₹0.00</span>
+              </button>
+            </div>
+
+            <!-- Method 2: Credit / Debit Card -->
+            <div class="tab-pane fade" id="tab-card">
+              <div class="mb-3">
+                <label class="form-label small fw-bold text-muted">Cardholder name</label>
+                <input type="text" class="form-control rounded-3" id="card-holder-name" placeholder="John Doe">
+              </div>
+              <div class="mb-3">
+                <label class="form-label small fw-bold text-muted">Card number</label>
+                <input type="text" class="form-control rounded-3" id="card-number-input" placeholder="4532 •••• •••• 8921">
+              </div>
+              <div class="row g-3 mb-4">
+                <div class="col-6">
+                  <label class="form-label small fw-bold text-muted">Expiration date</label>
+                  <input type="text" class="form-control rounded-3" placeholder="MM/YY">
+                </div>
+                <div class="col-6">
+                  <label class="form-label small fw-bold text-muted">CVC</label>
+                  <input type="password" class="form-control rounded-3" placeholder="•••" maxlength="3">
+                </div>
+              </div>
+              <button class="btn btn-pay-now text-center" id="pay-card-now-btn">
+                Pay Now <span id="pay-card-btn-amount">₹0.00</span>
+              </button>
+            </div>
+
+            <!-- Method 3: Cash on Delivery -->
+            <div class="tab-pane fade text-center py-3" id="tab-cod">
+              <div class="display-3 mb-2 text-warning">💵</div>
+              <h5 class="fw-bold text-navy mb-2">Cash on Delivery (COD)</h5>
+              <p class="text-muted small mb-4">Pay in cash or via UPI scan to courier executive upon delivery at your doorstep.</p>
+              <button class="btn btn-pay-now text-center" id="pay-cod-now-btn">
+                Place Order <span id="pay-cod-btn-amount">₹0.00</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Address Modal (#addressModal) -->
+  <div class="modal fade" id="addressModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content rounded-4 border-0 p-4">
+        <div class="modal-header border-0 pb-0">
+          <h5 class="fw-bold text-navy">Add / Select Shipping Address</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3">
+            <label class="form-label small fw-bold">Recipient Name</label>
+            <input type="text" class="form-control rounded-3" id="addr-name" value="Vipin Sharma">
+          </div>
+          <div class="mb-3">
+            <label class="form-label small fw-bold">Full Street Address</label>
+            <textarea class="form-control rounded-3" id="addr-street">329, 1st Floor, Indra Vihar, Delhi - 110009</textarea>
+          </div>
+          <button class="btn btn-snacky-primary w-100 py-2" id="save-address-btn">Save Address</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Payment Failed Modal (#paymentFailedModal) -->
+  <div class="modal fade" id="paymentFailedModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content rounded-4 border-0 text-center p-4">
+        <div class="mx-auto mb-3 text-white bg-danger rounded-circle d-flex align-items-center justify-content-center w-70px h-70px font-size-2-5rem">
+          ✕
+        </div>
+        <h4 class="fw-extrabold text-navy mb-2">Payment Failed</h4>
+        <p class="small text-muted mb-2">Reference ID: <strong class="text-dark">PAY_1787907895947_8z3z7dt7j</strong></p>
+        <p class="text-muted small mb-4">Sorry, your payment request could not be processed. Please try again or choose another payment method.</p>
+        <div class="d-flex gap-2">
+          <button type="button" class="btn btn-snacky-primary flex-grow-1 py-2" data-bs-dismiss="modal">Try Again</button>
+          <a href="index.html" class="btn btn-outline-secondary flex-grow-1 py-2 fw-bold">Back to Home</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Dark Footer -->
+  <footer class="main-footer" id="main-footer">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-lg-4">
+          <a class="navbar-brand navbar-brand-logo text-white mb-3 d-inline-block" href="index.html">
+            <div class="brand-logo-circle">Let's<br>Try</div> Snacky
+          </a>
+          <p class="small text-muted mb-3">Snacky is India's premium snacks brand bringing you authentic, palm-oil free crunch.</p>
+        </div>
+        <div class="col-6 col-lg-2">
+          <h6 class="footer-title">SHOP</h6>
+          <ul class="footer-links-list">
+            <li><a href="products.html?category=namkeen">Namkeen</a></li>
+            <li><a href="products.html?category=chips">Chips</a></li>
+            <li><a href="products.html?category=healthy">Healthy Snacks</a></li>
+          </ul>
+        </div>
+        <div class="col-6 col-lg-2">
+          <h6 class="footer-title">EXPLORE</h6>
+          <ul class="footer-links-list">
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="contact.html">Bulk Orders</a></li>
+          </ul>
+        </div>
+        <div class="col-6 col-lg-2">
+          <h6 class="footer-title">HELP</h6>
+          <ul class="footer-links-list">
+            <li><a href="contact.html">Contact Us</a></li>
+            <li><a href="track-order.html">Track Order</a></li>
+          </ul>
+        </div>
+        <div class="col-6 col-lg-2">
+          <h6 class="footer-title">CONTACT</h6>
+          <p class="small mb-0">+91 9654932262</p>
+        </div>
+      </div>
+      <div class="footer-bottom-bar">
+        <p class="small mb-0">© 2026 Snacky Foods Private Limited. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Offcanvas Cart Drawer -->
+  <div class="offcanvas offcanvas-end cart-offcanvas-custom" tabindex="-1" id="cartOffcanvas">
+    <div class="offcanvas-header border-bottom">
+      <h5 class="offcanvas-title fw-bold text-navy"><i class="bi bi-bag me-2"></i> Cart Items</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+    </div>
+    <div class="free-delivery-meter text-center">
+      <div class="fw-bold small text-navy mb-1" id="free-shipping-text">Add ₹199 more for free delivery</div>
+      <div class="progress progress-sm">
+        <div class="progress-bar bg-warning" id="free-shipping-progress"></div>
+      </div>
+    </div>
+    <div class="offcanvas-body" id="cart-drawer-items"></div>
+    <div class="offcanvas-footer p-3 border-top bg-light">
+      <div class="d-flex justify-content-between mb-2">
+        <span class="text-muted">Subtotal</span>
+        <span class="fw-bold text-navy" id="cart-subtotal-val">₹0.00</span>
+      </div>
+      <div class="d-flex justify-content-between mb-3">
+        <span class="fw-bold text-navy fs-5">Total</span>
+        <span class="fw-bold text-warning fs-5" id="cart-total-val">₹0.00</span>
+      </div>
+      <a href="cart-payment-flow.html" class="btn btn-snacky-primary w-100 py-3 text-center">Proceed to Checkout <i class="bi bi-arrow-right"></i></a>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../static/js/script.js"></script>
+</body>
+</html>
