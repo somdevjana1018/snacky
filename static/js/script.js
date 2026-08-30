@@ -328,6 +328,30 @@ function initProductsPage() {
   renderProductsGrid();
 }
 
+function getCartItemQty(productId) {
+  const item = snackyCart.find(i => i.id === productId);
+  return item ? item.qty : 0;
+}
+
+function updateCartItemQty(productId, delta) {
+  const item = snackyCart.find(i => i.id === productId);
+  if (item) {
+    item.qty += delta;
+    if (item.qty <= 0) {
+      const idx = snackyCart.findIndex(i => i.id === productId);
+      if (idx > -1) snackyCart.splice(idx, 1);
+    }
+  } else if (delta > 0) {
+    addToCart(productId);
+    return;
+  }
+  saveCartState();
+  const valElem = document.getElementById(`card-qty-val-${productId}`);
+  if (valElem) {
+    valElem.textContent = getCartItemQty(productId) || 1;
+  }
+}
+
 function renderProductsGrid() {
   const container = document.getElementById('products-grid-container');
   const countHeader = document.getElementById('products-count-header');
@@ -354,28 +378,48 @@ function renderProductsGrid() {
 
   let html = '';
   displayed.forEach(p => {
+    const currentQty = getCartItemQty(p.id);
     html += `
       <div class="col">
         <div class="product-card">
-          <div class="card-top-frame ${p.frameClass}">
-            <span class="sale-pink-badge">🔥 SALE</span>
+          <div class="card-top-frame">
+            <div class="snack-particles-overlay">
+              <svg viewBox="0 0 160 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20 70 L25 45 L30 52" stroke="#F5A623" stroke-width="3.5" stroke-linecap="round"/>
+                <path d="M45 60 L40 30 L50 38" stroke="#FBBF24" stroke-width="4" stroke-linecap="round"/>
+                <path d="M70 50 L75 15 L80 28" stroke="#F5A623" stroke-width="3.5" stroke-linecap="round"/>
+                <path d="M95 55 L90 20 L100 32" stroke="#FCD34D" stroke-width="4" stroke-linecap="round"/>
+                <path d="M120 65 L125 40 L130 48" stroke="#F5A623" stroke-width="3.5" stroke-linecap="round"/>
+                <circle cx="35" cy="35" r="3.5" fill="#F5A623"/>
+                <circle cx="65" cy="20" r="4" fill="#FCD34D"/>
+                <circle cx="85" cy="12" r="3.5" fill="#FBBF24"/>
+                <circle cx="110" cy="25" r="4" fill="#F5A623"/>
+                <circle cx="135" cy="30" r="3" fill="#FCD34D"/>
+              </svg>
+            </div>
             <a href="product-detail.html?id=${p.id}">
               <img src="${p.image}" alt="${p.title}" class="product-card-img">
             </a>
           </div>
           <div class="product-card-body">
-            <a href="product-detail.html?id=${p.id}">
+            <a href="product-detail.html?id=${p.id}" class="text-decoration-none">
               <h6 class="product-title">${p.title}</h6>
             </a>
-            <span class="weight-label-subtext">WEIGHT</span>
-            <span class="weight-badge-pill">${p.weight}</span>
             <div class="price-row-box">
               <span class="price-selling">₹${p.price.toFixed(2)}</span>
               <span class="price-mrp">₹${p.mrp.toFixed(2)}</span>
             </div>
-            <span class="price-discount-green">${p.discount}% OFF</span>
+            <span class="price-discount-pill">${p.discount}% OFF</span>
+            <div class="weight-selector-box">
+              <span class="weight-label-subtext">WEIGHT</span>
+              <span class="weight-badge-pill">${p.weight}</span>
+            </div>
             ${p.inStock ? 
-              `<button class="btn-card-action" onclick="addToCart(${p.id}, '${p.weight}')">ADD TO CART</button>` : 
+              `<div class="card-qty-action-bar">
+                 <button class="card-qty-btn" onclick="updateCartItemQty(${p.id}, -1)">-</button>
+                 <span class="card-qty-val" id="card-qty-val-${p.id}">${currentQty || 1}</span>
+                 <button class="card-qty-btn" onclick="updateCartItemQty(${p.id}, 1)">+</button>
+               </div>` : 
               `<button class="btn-card-disabled" disabled>OUT OF STOCK</button>`}
           </div>
         </div>
@@ -627,27 +671,35 @@ function renderSearchResults() {
 
   let html = '';
   results.forEach(p => {
+    const currentQty = getCartItemQty(p.id);
     html += `
       <div class="col">
         <div class="product-card">
-          <div class="card-top-frame ${p.frameClass}">
-            <span class="sale-pink-badge">🔥 SALE</span>
+          <div class="card-top-frame">
             <a href="product-detail.html?id=${p.id}">
               <img src="${p.image}" alt="${p.title}" class="product-card-img">
             </a>
           </div>
           <div class="product-card-body">
-            <a href="product-detail.html?id=${p.id}">
+            <a href="product-detail.html?id=${p.id}" class="text-decoration-none">
               <h6 class="product-title">${p.title}</h6>
             </a>
-            <span class="weight-label-subtext">WEIGHT</span>
-            <span class="weight-badge-pill">${p.weight}</span>
             <div class="price-row-box">
               <span class="price-selling">₹${p.price.toFixed(2)}</span>
               <span class="price-mrp">₹${p.mrp.toFixed(2)}</span>
             </div>
-            <span class="price-discount-green">${p.discount}% OFF</span>
-            <button class="btn-card-action" onclick="addToCart(${p.id}, '${p.weight}')">ADD TO CART</button>
+            <span class="price-discount-pill">${p.discount}% OFF</span>
+            <div class="weight-selector-box">
+              <span class="weight-label-subtext">WEIGHT</span>
+              <span class="weight-badge-pill">${p.weight}</span>
+            </div>
+            ${p.inStock ? 
+              `<div class="card-qty-action-bar">
+                 <button class="card-qty-btn" onclick="updateCartItemQty(${p.id}, -1)">-</button>
+                 <span class="card-qty-val" id="card-qty-val-${p.id}">${currentQty || 1}</span>
+                 <button class="card-qty-btn" onclick="updateCartItemQty(${p.id}, 1)">+</button>
+               </div>` : 
+              `<button class="btn-card-disabled" disabled>OUT OF STOCK</button>`}
           </div>
         </div>
       </div>`;

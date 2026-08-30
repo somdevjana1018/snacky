@@ -528,25 +528,61 @@ a:hover {
 }
 
 .card-top-frame {
-  height: 220px;
-  padding: 16px;
+  height: 230px;
+  width: 100%;
+  padding: 12px;
+  margin: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
   overflow: hidden;
-  background: linear-gradient(180deg, #602A24 0%, #3D1916 100%);
+  background-color: #F0F8FF; /* Default light ice-blue backdrop */
+  border-radius: 14px 14px 0 0;
+  transition: background 0.4s ease;
+}
+
+.product-card:hover .card-top-frame {
+  background: linear-gradient(180deg, #6B21A8 0%, #4C1D95 100%); /* Vibrant purple hover backdrop */
+}
+
+.snack-particles-overlay {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%) translateY(25px) scale(0.6);
+  width: 160px;
+  height: 100px;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  z-index: 2;
+}
+
+.product-card:hover .snack-particles-overlay {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0) scale(1);
+  animation: particlePop 0.5s ease-out forwards;
+}
+
+@keyframes particlePop {
+  0% { opacity: 0; transform: translateX(-50%) translateY(30px) scale(0.5); }
+  60% { opacity: 1; transform: translateX(-50%) translateY(-5px) scale(1.08); }
+  100% { opacity: 1; transform: translateX(-50%) translateY(0) scale(1); }
 }
 
 .product-card-img {
-  max-height: 180px;
+  max-height: 195px;
   max-width: 100%;
   object-fit: contain;
+  border-radius: 10px;
+  display: block;
+  z-index: 1;
   transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .product-card:hover .product-card-img {
-  transform: scale(1.08) rotate(1deg);
+  transform: translateY(18px) scale(1.05);
 }
 
 .product-card-body {

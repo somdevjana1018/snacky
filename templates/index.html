@@ -171,23 +171,29 @@
       <!-- Combo 1 -->
       <div class="col">
         <div class="product-card">
-          <span class="badge-discount-ribbon">20% OFF</span>
-          <div class="card-top-frame frame-sage">
+          <div class="card-top-frame">
             <a href="product-detail.html?id=104">
               <img src="../static/images/snack_chakli.jpg" alt="Millet Chakli" class="product-card-img">
             </a>
           </div>
           <div class="product-card-body">
-            <a href="product-detail.html?id=104">
+            <a href="product-detail.html?id=104" class="text-decoration-none">
               <h6 class="product-title">Millet Chakli Pack</h6>
             </a>
-            <span class="weight-badge-pill">100 g</span>
             <div class="price-row-box">
               <span class="price-selling">₹64.00</span>
               <span class="price-mrp">₹80.00</span>
-              <span class="price-discount-tag">20% OFF</span>
             </div>
-            <button class="btn-card-action" onclick="addToCart(104, '100 g')">ADD TO CART</button>
+            <span class="price-discount-pill">20% OFF</span>
+            <div class="weight-selector-box">
+              <span class="weight-label-subtext">WEIGHT</span>
+              <span class="weight-badge-pill">100 g</span>
+            </div>
+            <div class="card-qty-action-bar">
+              <button class="card-qty-btn" onclick="updateCartItemQty(104, -1)">-</button>
+              <span class="card-qty-val" id="card-qty-val-104">1</span>
+              <button class="card-qty-btn" onclick="updateCartItemQty(104, 1)">+</button>
+            </div>
           </div>
         </div>
       </div>
@@ -195,23 +201,29 @@
       <!-- Combo 2 -->
       <div class="col">
         <div class="product-card">
-          <span class="badge-discount-ribbon">20% OFF</span>
-          <div class="card-top-frame frame-blue">
+          <div class="card-top-frame">
             <a href="product-detail.html?id=301">
               <img src="../static/images/snack_makhana.jpg" alt="Makhana Twisters" class="product-card-img">
             </a>
           </div>
           <div class="product-card-body">
-            <a href="product-detail.html?id=301">
+            <a href="product-detail.html?id=301" class="text-decoration-none">
               <h6 class="product-title">Makhana Twisters</h6>
             </a>
-            <span class="weight-badge-pill">60 g</span>
             <div class="price-row-box">
               <span class="price-selling">₹120.00</span>
               <span class="price-mrp">₹150.00</span>
-              <span class="price-discount-tag">20% OFF</span>
             </div>
-            <button class="btn-card-action" onclick="addToCart(301, '60 g')">ADD TO CART</button>
+            <span class="price-discount-pill">20% OFF</span>
+            <div class="weight-selector-box">
+              <span class="weight-label-subtext">WEIGHT</span>
+              <span class="weight-badge-pill">60 g</span>
+            </div>
+            <div class="card-qty-action-bar">
+              <button class="card-qty-btn" onclick="updateCartItemQty(301, -1)">-</button>
+              <span class="card-qty-val" id="card-qty-val-301">1</span>
+              <button class="card-qty-btn" onclick="updateCartItemQty(301, 1)">+</button>
+            </div>
           </div>
         </div>
       </div>
@@ -219,23 +231,29 @@
       <!-- Combo 3 -->
       <div class="col">
         <div class="product-card">
-          <span class="badge-discount-ribbon">20% OFF</span>
-          <div class="card-top-frame frame-orange">
+          <div class="card-top-frame">
             <a href="product-detail.html?id=101">
               <img src="../static/images/snack_namkeen.jpg" alt="Paachratan Mixture" class="product-card-img">
             </a>
           </div>
           <div class="product-card-body">
-            <a href="product-detail.html?id=101">
+            <a href="product-detail.html?id=101" class="text-decoration-none">
               <h6 class="product-title">Paachratan Mixture</h6>
             </a>
-            <span class="weight-badge-pill">120 g</span>
             <div class="price-row-box">
               <span class="price-selling">₹80.00</span>
               <span class="price-mrp">₹100.00</span>
-              <span class="price-discount-tag">20% OFF</span>
             </div>
-            <button class="btn-card-action" onclick="addToCart(101, '120 g')">ADD TO CART</button>
+            <span class="price-discount-pill">20% OFF</span>
+            <div class="weight-selector-box">
+              <span class="weight-label-subtext">WEIGHT</span>
+              <span class="weight-badge-pill">120 g</span>
+            </div>
+            <div class="card-qty-action-bar">
+              <button class="card-qty-btn" onclick="updateCartItemQty(101, -1)">-</button>
+              <span class="card-qty-val" id="card-qty-val-101">1</span>
+              <button class="card-qty-btn" onclick="updateCartItemQty(101, 1)">+</button>
+            </div>
           </div>
         </div>
       </div>
@@ -243,23 +261,29 @@
       <!-- Combo 4 -->
       <div class="col">
         <div class="product-card">
-          <span class="badge-discount-ribbon">20% OFF</span>
-          <div class="card-top-frame frame-teal">
+          <div class="card-top-frame">
             <a href="product-detail.html?id=201">
               <img src="../static/images/snack_chips.jpg" alt="Soya Katori Wafers" class="product-card-img">
             </a>
           </div>
           <div class="product-card-body">
-            <a href="product-detail.html?id=201">
+            <a href="product-detail.html?id=201" class="text-decoration-none">
               <h6 class="product-title">Soya Katori Wafers</h6>
             </a>
-            <span class="weight-badge-pill">85 g</span>
             <div class="price-row-box">
               <span class="price-selling">₹60.00</span>
               <span class="price-mrp">₹75.00</span>
-              <span class="price-discount-tag">20% OFF</span>
             </div>
-            <button class="btn-card-action" onclick="addToCart(201, '85 g')">ADD TO CART</button>
+            <span class="price-discount-pill">20% OFF</span>
+            <div class="weight-selector-box">
+              <span class="weight-label-subtext">WEIGHT</span>
+              <span class="weight-badge-pill">85 g</span>
+            </div>
+            <div class="card-qty-action-bar">
+              <button class="card-qty-btn" onclick="updateCartItemQty(201, -1)">-</button>
+              <span class="card-qty-val" id="card-qty-val-201">1</span>
+              <button class="card-qty-btn" onclick="updateCartItemQty(201, 1)">+</button>
+            </div>
           </div>
         </div>
       </div>
