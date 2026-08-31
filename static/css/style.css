@@ -414,9 +414,11 @@ a:hover {
   transform: scale(1.03);
 }
 
-/* Full-Bleed Edge-to-Edge Hero Banner Styling */
+/* Full-Bleed Edge-to-Edge Full Screen Hero Banner Styling */
 .hero-panoramic-container {
   width: 100%;
+  height: calc(100vh - 80px);
+  min-height: 600px;
   border-radius: 0;
   overflow: hidden;
   position: relative;
@@ -429,9 +431,9 @@ a:hover {
 
 .hero-panoramic-img {
   width: 100%;
-  height: auto;
-  aspect-ratio: 16 / 9;
-  object-fit: fill;
+  height: calc(100vh - 80px);
+  min-height: 600px;
+  object-fit: cover;
   display: block;
   border-radius: 0;
   transition: transform 0.5s ease;
@@ -442,180 +444,123 @@ a:hover {
 }
 
 /* --------------------------------------------------------------------------
-   Why Choose Us Comparison Table Component & Animation
+   Healthier Ways Occasion Showcase Component & Animations
    -------------------------------------------------------------------------- */
-.why-choose-table-wrapper {
-  max-width: 960px;
-  margin: 0 auto;
-  padding: 25px 10px;
+.occasion-showcase-card {
+  background-color: #FAF5EB;
+  border-radius: 28px;
+  overflow: hidden;
+  box-shadow: 0 12px 35px rgba(44, 24, 16, 0.06);
+  border: 1px solid #EAE2D7;
 }
 
-.why-choose-table-container {
-  display: grid;
-  grid-template-columns: 1.25fr 1.35fr 1.1fr 1.1fr;
+.occasion-poster-wrapper {
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
   background-color: #FFFFFF;
-  border-radius: 24px;
-  box-shadow: 0 15px 35px rgba(16, 42, 67, 0.08);
-  border: 1px solid #E2E8F0;
+}
+
+.occasion-poster-img {
+  width: 100%;
+  height: 420px;
+  object-fit: cover;
+  display: block;
+  transition: opacity 0.3s ease, transform 0.4s ease;
+}
+
+.occasion-poster-wrapper:hover .occasion-poster-img {
+  transform: scale(1.02);
+}
+
+.text-snacky-orange {
+  color: #FF6B35 !important;
+}
+
+/* Timeline Navigation Bar */
+.occasion-timeline-bar {
+  border-top: 1px solid #EAE2D7;
+  background-color: #FAF5EB;
+}
+
+.occasion-timeline-track {
   position: relative;
-  overflow: visible;
+  flex: 1;
+  max-width: 800px;
+  padding-top: 18px;
 }
 
-.table-row {
-  display: contents;
+.occasion-timeline-track::before {
+  content: '';
+  position: absolute;
+  top: 27px;
+  left: 12px;
+  right: 12px;
+  height: 4px;
+  background-color: #CBD5E1;
+  border-radius: 2px;
+  z-index: 1;
 }
 
-.table-cell {
-  padding: 18px 20px;
+.occasion-progress-line {
+  position: absolute;
+  top: 27px;
+  left: 12px;
+  height: 4px;
+  width: 12%;
+  background: linear-gradient(90deg, #FF6B35 0%, #F59E0B 100%);
+  border-radius: 2px;
+  z-index: 1;
+  transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 0 8px rgba(255, 107, 53, 0.5);
+}
+
+.occasion-tab-btn {
+  background: none;
+  border: none;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  text-align: center;
-  font-size: 0.98rem;
-  border-bottom: 1px solid #EDF2F7;
-  border-right: 1px solid #EDF2F7;
+  gap: 8px;
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.25s ease;
 }
 
-.table-row:last-child .table-cell {
-  border-bottom: none;
-}
-
-.border-right-0 {
-  border-right: none !important;
-}
-
-/* Feature Header Cell (Top-Left) */
-.cell-feature-hdr {
-  background-color: #58A5ED;
-  color: #FFFFFF;
-  font-weight: 800;
-  font-size: 1.15rem;
-  border-top-left-radius: 22px;
-  border-bottom: none !important;
-}
-
-/* Brand A & B Header Cells (Top-Right) */
-.cell-brand-hdr {
-  background-color: #103B75;
-  color: #FFFFFF;
-  font-weight: 800;
-  font-size: 1.15rem;
-  border-bottom: none !important;
-}
-
-.table-header-row .border-right-0 {
-  border-top-right-radius: 22px;
-}
-
-/* Feature Row Labels (Left Column) */
-.cell-feature-name {
-  font-weight: 800;
-  color: #0F172A;
-  justify-content: flex-start;
-  padding-left: 28px;
-  font-size: 1.05rem;
-}
-
-/* Muted Brand Data Cells */
-.cell-muted-data {
-  color: #64748B;
-  font-weight: 500;
-}
-
-/* Elevated Floating "Snacky" Column Pillar (Center Highlight) */
-.cell-brand-snacky-hdr,
-.cell-snacky-data {
-  position: relative;
-  z-index: 5;
-  background-color: #FFFFFF;
-}
-
-.cell-brand-snacky-hdr {
-  padding-top: 15px;
-  padding-bottom: 15px;
-  border-top: 3.5px solid #60A5FA;
-  border-left: 3.5px solid #60A5FA;
-  border-right: 3.5px solid #60A5FA;
-  border-top-left-radius: 20px;
-  border-top-right-radius: 20px;
-  margin-top: -18px;
-  box-shadow: -6px -8px 20px rgba(96, 165, 250, 0.15), 6px -8px 20px rgba(96, 165, 250, 0.15);
-  animation: pillarGlowPulse 3s infinite alternate ease-in-out;
-}
-
-.table-row:last-child .cell-snacky-data {
-  border-bottom: 3.5px solid #60A5FA;
-  border-bottom-left-radius: 20px;
-  border-bottom-right-radius: 20px;
-  margin-bottom: -18px;
-  box-shadow: -6px 8px 20px rgba(96, 165, 250, 0.15), 6px 8px 20px rgba(96, 165, 250, 0.15);
-}
-
-.cell-snacky-data {
-  border-left: 3.5px solid #60A5FA;
-  border-right: 3.5px solid #60A5FA;
-  border-bottom: 1px solid #EFF6FF !important;
-  box-shadow: -6px 0 20px rgba(96, 165, 250, 0.1), 6px 0 20px rgba(96, 165, 250, 0.1);
-}
-
-@keyframes pillarGlowPulse {
-  0% {
-    border-color: #60A5FA;
-    box-shadow: 0 0 20px rgba(96, 165, 250, 0.25);
-  }
-  100% {
-    border-color: #3B82F6;
-    box-shadow: 0 0 28px rgba(59, 130, 246, 0.4);
-  }
-}
-
-/* Golden Round Circle Badge */
-.brand-yellow-circle {
-  width: 68px;
-  height: 68px;
+.occasion-node-dot {
+  width: 18px;
+  height: 18px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #FCD34D 0%, #F59E0B 100%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
-  transition: transform 0.35s ease;
+  background-color: #94A3B8;
+  border: 3px solid #FAF5EB;
+  transition: all 0.3s ease;
 }
 
-.why-choose-table-container:hover .brand-yellow-circle {
-  transform: scale(1.1) rotate(6deg);
+.occasion-tab-btn.active .occasion-node-dot {
+  background-color: #FF6B35;
+  transform: scale(1.35);
+  box-shadow: 0 0 10px rgba(255, 107, 53, 0.5);
 }
 
-.brand-circle-text {
-  font-weight: 900;
-  font-size: 0.92rem;
-  color: #1E293B;
+.occasion-tab-label {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #64748B;
+  transition: color 0.25s ease;
 }
 
-/* Green Highlighted Text & Bounce Animation */
-.highlight-green-text {
-  color: #16A34A;
+.occasion-tab-btn.active .occasion-tab-label {
+  color: #FF6B35;
   font-weight: 800;
-  font-size: 1.05rem;
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  transition: transform 0.25s ease;
 }
 
-.why-choose-table-container:hover .highlight-green-text {
-  transform: scale(1.04);
+.static-arrow {
+  position: static !important;
+  transform: none !important;
 }
 
-.highlight-green-text i {
-  color: #22C55E;
-  font-size: 1.1rem;
-  animation: checkBounce 2s infinite ease-in-out;
-}
-
-@keyframes checkBounce {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.2); }
+.static-arrow:hover {
+  transform: scale(1.08) !important;
 }
 
 .hero-nav-arrow-btn {

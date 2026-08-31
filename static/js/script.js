@@ -983,3 +983,122 @@ function initTrackOrderPage() {
     if (dashboardCard) dashboardCard.style.display = 'block';
   }
 }
+
+// --------------------------------------------------------------------------
+// Healthier Ways Snacking Occasion Slider Data & Logic
+// --------------------------------------------------------------------------
+const OCCASION_SLIDES = [
+  {
+    id: 0,
+    title: "Study Breaks",
+    headline: "Crunch. Focus. Conquer.",
+    description: "Fuel your focus with our healthy namkeens—perfect for study breaks! Made with 100% groundnut oil and wholesome ingredients, our snacks give the right crunch without the guilt. Whether prepping for exams or powering through assignments, these light yet satisfying bites help keep energy up and mind sharp.",
+    image: "../static/images/occasion_study.jpg",
+    progress: "12%"
+  },
+  {
+    id: 1,
+    title: "Travelling",
+    headline: "Light. Crunchy. Anywhere.",
+    description: "Snack smart while you travel with our wide range of makhana and puffs—light, crunchy, and packed with goodness. Whether on a road trip, catching a flight, or just commuting, these healthy snacks are easy to carry and perfect for guilt-free munching on the go.",
+    image: "../static/images/occasion_travel.jpg",
+    progress: "40%"
+  },
+  {
+    id: 2,
+    title: "Post Workout",
+    headline: "Protein. Power. Purity.",
+    description: "Recharge naturally after a workout with our nutritious sattu—packed with protein, fiber, and essential minerals. It's a perfect post-workout drink to help rebuild muscle, boost energy, and keep you full and refreshed without added sugar or preservatives.",
+    image: "../static/images/occasion_workout.jpg",
+    progress: "70%"
+  },
+  {
+    id: 3,
+    title: "Meeting Breaks",
+    headline: "Wholesome. Focused. Ready.",
+    description: "Take a wholesome pause during meetings with our Paachmeva mix and healthy cookies—loaded with the goodness of dry fruits and whole grains. They offer the right balance of taste and nutrition—keeping energy steady, focus sharp, and the day on track.",
+    image: "../static/images/paachratan_mixture.jpg",
+    progress: "100%"
+  }
+];
+
+let currentOccasionIndex = 0;
+let occasionAutoplayTimer = null;
+
+function startOccasionAutoplay() {
+  stopOccasionAutoplay();
+  occasionAutoplayTimer = setInterval(() => {
+    nextOccasion();
+  }, 4000);
+}
+
+function stopOccasionAutoplay() {
+  if (occasionAutoplayTimer) {
+    clearInterval(occasionAutoplayTimer);
+    occasionAutoplayTimer = null;
+  }
+}
+
+function switchOccasion(index, isUserClick = false) {
+  if (index < 0) index = OCCASION_SLIDES.length - 1;
+  if (index >= OCCASION_SLIDES.length) index = 0;
+  currentOccasionIndex = index;
+
+  const data = OCCASION_SLIDES[index];
+  const posterImg = document.getElementById('occasion-poster-img');
+  const headline = document.getElementById('occasion-headline');
+  const description = document.getElementById('occasion-description');
+  const progressLine = document.getElementById('occasion-progress-line');
+
+  if (posterImg) {
+    posterImg.style.opacity = '0.3';
+    setTimeout(() => {
+      posterImg.src = data.image;
+      posterImg.style.opacity = '1';
+    }, 150);
+  }
+  if (headline) headline.textContent = data.headline;
+  if (description) description.textContent = data.description;
+  if (progressLine) progressLine.style.width = data.progress;
+
+  const tabBtns = document.querySelectorAll('.occasion-tab-btn');
+  tabBtns.forEach((btn, idx) => {
+    if (idx === index) {
+      btn.classList.add('active');
+    } else {
+      btn.classList.remove('active');
+    }
+  });
+
+  if (isUserClick) {
+    startOccasionAutoplay();
+  }
+}
+
+function prevOccasion() {
+  switchOccasion(currentOccasionIndex - 1, true);
+}
+
+function nextOccasion() {
+  switchOccasion(currentOccasionIndex + 1, false);
+}
+
+// Auto-start occasion slider & hero carousel 2s autoplay on DOM load
+document.addEventListener('DOMContentLoaded', () => {
+  const occasionSec = document.getElementById('healthier-ways-section');
+  if (occasionSec) {
+    startOccasionAutoplay();
+    occasionSec.addEventListener('mouseenter', stopOccasionAutoplay);
+    occasionSec.addEventListener('mouseleave', startOccasionAutoplay);
+  }
+
+  const carouselEl = document.getElementById('snackyCarousel');
+  if (carouselEl && window.bootstrap && window.bootstrap.Carousel) {
+    const bsCarousel = window.bootstrap.Carousel.getOrCreateInstance(carouselEl, {
+      interval: 2000,
+      ride: 'carousel',
+      wrap: true
+    });
+    bsCarousel.cycle();
+  }
+});

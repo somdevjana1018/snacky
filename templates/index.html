@@ -1,16 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Snacky - Explosive Flavors, Guilt-Free Snacking</title>
-  <meta name="description" content="Order authentic, healthy Indian snacks online. 100% Groundnut oil, zero palm oil, trans-fat free. Free delivery above ₹199.">
-  
+  <meta name="description"
+    content="Order authentic, healthy Indian snacks online. 100% Groundnut oil, zero palm oil, trans-fat free. Free delivery above ₹199.">
+
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="../static/css/style.css">
 </head>
+
 <body>
 
   <!-- Top Announcement Bar -->
@@ -59,7 +64,8 @@
             <i class="bi bi-person"></i>
           </a>
 
-          <button class="nav-action-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#cartOffcanvas" title="Shopping Cart">
+          <button class="nav-action-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#cartOffcanvas"
+            title="Shopping Cart">
             <i class="bi bi-cart3"></i>
             <span class="cart-count-badge">0</span>
           </button>
@@ -71,7 +77,7 @@
   <!-- Hero Panoramic Banner (#hero-carousel) -->
   <section class="container-fluid p-0" id="hero-carousel">
     <div class="hero-panoramic-container">
-      <div id="snackyCarousel" class="carousel slide" data-bs-ride="carousel">
+      <div id="snackyCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="2000">
         <div class="carousel-indicators">
           <button type="button" data-bs-target="#snackyCarousel" data-bs-slide-to="0" class="active"></button>
           <button type="button" data-bs-target="#snackyCarousel" data-bs-slide-to="1"></button>
@@ -82,14 +88,16 @@
           <!-- Slide 1: Signature Range -->
           <div class="carousel-item active">
             <a href="products.html?category=signature">
-              <img src="../static/images/hero_signature_banner.jpg" alt="Signature Range New Arrival" class="hero-panoramic-img">
+              <img src="../static/images/hero_signature_banner.jpg" alt="Signature Range New Arrival"
+                class="hero-panoramic-img">
             </a>
           </div>
 
           <!-- Slide 2: Puffs Collection -->
           <div class="carousel-item">
             <a href="products.html?category=healthy">
-              <img src="../static/images/hero_puffs_banner.jpg" alt="Ultimate Puffs Collection" class="hero-panoramic-img">
+              <img src="../static/images/hero_puffs_banner.jpg" alt="Ultimate Puffs Collection"
+                class="hero-panoramic-img">
             </a>
           </div>
 
@@ -107,10 +115,12 @@
             </a>
           </div>
         </div>
-        <button class="hero-nav-arrow-btn hero-nav-prev" type="button" data-bs-target="#snackyCarousel" data-bs-slide="prev" title="Previous Slide">
+        <button class="hero-nav-arrow-btn hero-nav-prev" type="button" data-bs-target="#snackyCarousel"
+          data-bs-slide="prev" title="Previous Slide">
           <i class="bi bi-chevron-left"></i>
         </button>
-        <button class="hero-nav-arrow-btn hero-nav-next" type="button" data-bs-target="#snackyCarousel" data-bs-slide="next" title="Next Slide">
+        <button class="hero-nav-arrow-btn hero-nav-next" type="button" data-bs-target="#snackyCarousel"
+          data-bs-slide="next" title="Next Slide">
           <i class="bi bi-chevron-right"></i>
         </button>
       </div>
@@ -120,7 +130,7 @@
   <!-- Categories Blobs Section (#categories-section) -->
   <section class="container py-4" id="categories-section">
     <h2 class="section-title text-center mb-4">Shop by Category</h2>
-    
+
     <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-4 g-4 justify-content-center">
       <!-- 1. Signature Range -->
       <div class="col d-flex justify-content-center">
@@ -302,7 +312,7 @@
     </div>
   </section>
 
-  <!-- Product Showcase Grid 2 - Sale Section (#sale-section) -->
+  <!-- Product Showcase Grid 2 - Flash Sale Items (#sale-section) -->
   <section class="container py-4" id="sale-section">
     <div class="d-flex align-items-center justify-content-between mb-4 flex-wrap gap-2">
       <div>
@@ -313,86 +323,250 @@
     </div>
 
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
+      <!-- Item 1 -->
       <div class="col">
         <div class="product-card">
           <span class="badge-discount-ribbon">21% OFF</span>
-          <div class="card-top-frame frame-sage">
+          <div class="card-top-frame">
+            <a href="product-detail.html?id=401">
+              <img src="../static/images/signature_tapioca_chips.jpg" alt="Tapioca Chips" class="product-card-img">
+            </a>
+          </div>
+          <div class="product-card-body">
+            <a href="product-detail.html?id=401" class="text-decoration-none">
+              <h6 class="product-title">Tapioca Chips</h6>
+            </a>
+            <div class="price-row-box">
+              <span class="price-selling">₹110.00</span>
+              <span class="price-mrp">₹140.00</span>
+            </div>
+            <span class="price-discount-pill">21% OFF</span>
+            <div class="weight-selector-box">
+              <span class="weight-label-subtext">WEIGHT</span>
+              <span class="weight-badge-pill">120 g</span>
+            </div>
+            <div class="card-qty-action-bar">
+              <button class="card-qty-btn" onclick="updateCartItemQty(401, -1)">-</button>
+              <span class="card-qty-val" id="card-qty-val-401">1</span>
+              <button class="card-qty-btn" onclick="updateCartItemQty(401, 1)">+</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Item 2 -->
+      <div class="col">
+        <div class="product-card">
+          <span class="badge-discount-ribbon">21% OFF</span>
+          <div class="card-top-frame">
+            <a href="product-detail.html?id=402">
+              <img src="../static/images/signature_hot_chips.jpg" alt="Signature Hot Chips" class="product-card-img">
+            </a>
+          </div>
+          <div class="product-card-body">
+            <a href="product-detail.html?id=402" class="text-decoration-none">
+              <h6 class="product-title">Signature Hot Chips</h6>
+            </a>
+            <div class="price-row-box">
+              <span class="price-selling">₹95.00</span>
+              <span class="price-mrp">₹120.00</span>
+            </div>
+            <span class="price-discount-pill">21% OFF</span>
+            <div class="weight-selector-box">
+              <span class="weight-label-subtext">WEIGHT</span>
+              <span class="weight-badge-pill">100 g</span>
+            </div>
+            <div class="card-qty-action-bar">
+              <button class="card-qty-btn" onclick="updateCartItemQty(402, -1)">-</button>
+              <span class="card-qty-val" id="card-qty-val-402">1</span>
+              <button class="card-qty-btn" onclick="updateCartItemQty(402, 1)">+</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Item 3 -->
+      <div class="col">
+        <div class="product-card">
+          <span class="badge-discount-ribbon">21% OFF</span>
+          <div class="card-top-frame">
             <a href="product-detail.html?id=102">
               <img src="../static/images/snack_namkeen.jpg" alt="Millet Mixture" class="product-card-img">
             </a>
           </div>
           <div class="product-card-body">
-            <a href="product-detail.html?id=102"><h6 class="product-title">Millet Mixture</h6></a>
-            <span class="weight-badge-pill">150 g</span>
+            <a href="product-detail.html?id=102" class="text-decoration-none">
+              <h6 class="product-title">Millet Mixture</h6>
+            </a>
             <div class="price-row-box">
               <span class="price-selling">₹95.00</span>
               <span class="price-mrp">₹120.00</span>
-              <span class="price-discount-tag">21% OFF</span>
             </div>
-            <button class="btn-card-action" onclick="addToCart(102, '150 g')">ADD TO CART</button>
+            <span class="price-discount-pill">21% OFF</span>
+            <div class="weight-selector-box">
+              <span class="weight-label-subtext">WEIGHT</span>
+              <span class="weight-badge-pill">150 g</span>
+            </div>
+            <div class="card-qty-action-bar">
+              <button class="card-qty-btn" onclick="updateCartItemQty(102, -1)">-</button>
+              <span class="card-qty-val" id="card-qty-val-102">1</span>
+              <button class="card-qty-btn" onclick="updateCartItemQty(102, 1)">+</button>
+            </div>
           </div>
         </div>
       </div>
 
+      <!-- Item 4 -->
       <div class="col">
         <div class="product-card">
           <span class="badge-discount-ribbon">22% OFF</span>
-          <div class="card-top-frame frame-blue">
+          <div class="card-top-frame">
             <a href="product-detail.html?id=202">
               <img src="../static/images/snack_chips.jpg" alt="Ragi Masala Chips" class="product-card-img">
             </a>
           </div>
           <div class="product-card-body">
-            <a href="product-detail.html?id=202"><h6 class="product-title">Ragi Masala Chips</h6></a>
-            <span class="weight-badge-pill">90 g</span>
+            <a href="product-detail.html?id=202" class="text-decoration-none">
+              <h6 class="product-title">Ragi Masala Chips</h6>
+            </a>
             <div class="price-row-box">
               <span class="price-selling">₹70.00</span>
               <span class="price-mrp">₹90.00</span>
-              <span class="price-discount-tag">22% OFF</span>
             </div>
-            <button class="btn-card-action" onclick="addToCart(202, '90 g')">ADD TO CART</button>
+            <span class="price-discount-pill">22% OFF</span>
+            <div class="weight-selector-box">
+              <span class="weight-label-subtext">WEIGHT</span>
+              <span class="weight-badge-pill">90 g</span>
+            </div>
+            <div class="card-qty-action-bar">
+              <button class="card-qty-btn" onclick="updateCartItemQty(202, -1)">-</button>
+              <span class="card-qty-val" id="card-qty-val-202">1</span>
+              <button class="card-qty-btn" onclick="updateCartItemQty(202, 1)">+</button>
+            </div>
           </div>
         </div>
       </div>
 
+      <!-- Item 5 -->
       <div class="col">
         <div class="product-card">
           <span class="badge-discount-ribbon">20% OFF</span>
-          <div class="card-top-frame frame-orange">
+          <div class="card-top-frame">
             <a href="product-detail.html?id=303">
-              <img src="../static/images/snack_namkeen.jpg" alt="Roasted Cashews" class="product-card-img">
+              <img src="../static/images/snack_namkeen.jpg" alt="Roasted Cashews Masala" class="product-card-img">
             </a>
           </div>
           <div class="product-card-body">
-            <a href="product-detail.html?id=303"><h6 class="product-title">Roasted Cashews Masala</h6></a>
-            <span class="weight-badge-pill">100 g</span>
+            <a href="product-detail.html?id=303" class="text-decoration-none">
+              <h6 class="product-title">Roasted Cashews Masala</h6>
+            </a>
             <div class="price-row-box">
               <span class="price-selling">₹240.00</span>
               <span class="price-mrp">₹300.00</span>
-              <span class="price-discount-tag">20% OFF</span>
             </div>
-            <button class="btn-card-action" onclick="addToCart(303, '100 g')">ADD TO CART</button>
+            <span class="price-discount-pill">20% OFF</span>
+            <div class="weight-selector-box">
+              <span class="weight-label-subtext">WEIGHT</span>
+              <span class="weight-badge-pill">100 g</span>
+            </div>
+            <div class="card-qty-action-bar">
+              <button class="card-qty-btn" onclick="updateCartItemQty(303, -1)">-</button>
+              <span class="card-qty-val" id="card-qty-val-303">1</span>
+              <button class="card-qty-btn" onclick="updateCartItemQty(303, 1)">+</button>
+            </div>
           </div>
         </div>
       </div>
 
+      <!-- Item 6 -->
       <div class="col">
         <div class="product-card">
           <span class="badge-discount-ribbon">20% OFF</span>
-          <div class="card-top-frame frame-teal">
+          <div class="card-top-frame">
             <a href="product-detail.html?id=208">
-              <img src="../static/images/snack_chips.jpg" alt="Banana Chips" class="product-card-img">
+              <img src="../static/images/banana_chips.jpg" alt="Banana Chips Salted" class="product-card-img">
             </a>
           </div>
           <div class="product-card-body">
-            <a href="product-detail.html?id=208"><h6 class="product-title">Banana Chips Salted</h6></a>
-            <span class="weight-badge-pill">120 g</span>
+            <a href="product-detail.html?id=208" class="text-decoration-none">
+              <h6 class="product-title">Banana Chips Salted</h6>
+            </a>
             <div class="price-row-box">
               <span class="price-selling">₹80.00</span>
               <span class="price-mrp">₹100.00</span>
-              <span class="price-discount-tag">20% OFF</span>
             </div>
-            <button class="btn-card-action" onclick="addToCart(208, '120 g')">ADD TO CART</button>
+            <span class="price-discount-pill">20% OFF</span>
+            <div class="weight-selector-box">
+              <span class="weight-label-subtext">WEIGHT</span>
+              <span class="weight-badge-pill">120 g</span>
+            </div>
+            <div class="card-qty-action-bar">
+              <button class="card-qty-btn" onclick="updateCartItemQty(208, -1)">-</button>
+              <span class="card-qty-val" id="card-qty-val-208">1</span>
+              <button class="card-qty-btn" onclick="updateCartItemQty(208, 1)">+</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Item 7 -->
+      <div class="col">
+        <div class="product-card">
+          <span class="badge-discount-ribbon">20% OFF</span>
+          <div class="card-top-frame">
+            <a href="product-detail.html?id=403">
+              <img src="../static/images/aloo_bhujia.jpg" alt="Nylon Sev" class="product-card-img">
+            </a>
+          </div>
+          <div class="product-card-body">
+            <a href="product-detail.html?id=403" class="text-decoration-none">
+              <h6 class="product-title">Nylon Sev</h6>
+            </a>
+            <div class="price-row-box">
+              <span class="price-selling">₹80.00</span>
+              <span class="price-mrp">₹100.00</span>
+            </div>
+            <span class="price-discount-pill">20% OFF</span>
+            <div class="weight-selector-box">
+              <span class="weight-label-subtext">WEIGHT</span>
+              <span class="weight-badge-pill">150 g</span>
+            </div>
+            <div class="card-qty-action-bar">
+              <button class="card-qty-btn" onclick="updateCartItemQty(403, -1)">-</button>
+              <span class="card-qty-val" id="card-qty-val-403">1</span>
+              <button class="card-qty-btn" onclick="updateCartItemQty(403, 1)">+</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Item 8 -->
+      <div class="col">
+        <div class="product-card">
+          <span class="badge-discount-ribbon">20% OFF</span>
+          <div class="card-top-frame">
+            <a href="product-detail.html?id=413">
+              <img src="../static/images/snack_makhana.jpg" alt="Peri Peri Makhana" class="product-card-img">
+            </a>
+          </div>
+          <div class="product-card-body">
+            <a href="product-detail.html?id=413" class="text-decoration-none">
+              <h6 class="product-title">Peri Peri Makhana</h6>
+            </a>
+            <div class="price-row-box">
+              <span class="price-selling">₹140.00</span>
+              <span class="price-mrp">₹175.00</span>
+            </div>
+            <span class="price-discount-pill">20% OFF</span>
+            <div class="weight-selector-box">
+              <span class="weight-label-subtext">WEIGHT</span>
+              <span class="weight-badge-pill">80 g</span>
+            </div>
+            <div class="card-qty-action-bar">
+              <button class="card-qty-btn" onclick="updateCartItemQty(413, -1)">-</button>
+              <span class="card-qty-val" id="card-qty-val-413">1</span>
+              <button class="card-qty-btn" onclick="updateCartItemQty(413, 1)">+</button>
+            </div>
           </div>
         </div>
       </div>
@@ -467,7 +641,8 @@
             </div>
           </div>
           <h6 class="fw-bold text-navy">"Best Makhana & Chakli in Delhi!"</h6>
-          <p class="text-muted small mb-0">The groundnut oil crunch is so crisp and light on the stomach. My kids love the Millet Chakli!</p>
+          <p class="text-muted small mb-0">The groundnut oil crunch is so crisp and light on the stomach. My kids love
+            the Millet Chakli!</p>
         </div>
       </div>
 
@@ -481,7 +656,8 @@
             </div>
           </div>
           <h6 class="fw-bold text-navy">"Zero Palm Oil is a gamechanger!"</h6>
-          <p class="text-muted small mb-0">Finally a snack brand that actually cares about health. Fast delivery and beautiful packaging.</p>
+          <p class="text-muted small mb-0">Finally a snack brand that actually cares about health. Fast delivery and
+            beautiful packaging.</p>
         </div>
       </div>
 
@@ -495,9 +671,72 @@
             </div>
           </div>
           <h6 class="fw-bold text-navy">"Great Combo Discounts!"</h6>
-          <p class="text-muted small mb-0">Ordered the Bestselling Combo. Incredible value for money and authentic homemade taste.</p>
+          <p class="text-muted small mb-0">Ordered the Bestselling Combo. Incredible value for money and authentic
+            homemade taste.</p>
         </div>
       </div>
+  </section>
+
+  <!-- Healthier Ways to Enjoy Everyday Snacking (#healthier-ways-section) -->
+  <section class="container py-5" id="healthier-ways-section">
+    <h2 class="section-title text-center mb-5 fw-extrabold text-navy">Healthier ways to Enjoy your everyday Snacking!
+    </h2>
+
+    <div class="occasion-showcase-card">
+      <div class="row align-items-center g-4 p-4 p-md-5">
+        <div class="col-lg-6">
+          <div class="occasion-poster-wrapper">
+            <img id="occasion-poster-img" src="../static/images/occasion_study.jpg" alt="Snacking Occasion Poster"
+              class="occasion-poster-img">
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="occasion-content-box ps-lg-4">
+            <h3 id="occasion-headline" class="fw-extrabold text-snacky-orange mb-3 fs-2">Crunch. Focus. Conquer.</h3>
+            <p id="occasion-description" class="lead text-navy mb-4 fs-5" style="line-height: 1.7;">
+              Fuel your focus with our healthy namkeens—perfect for study breaks! Made with 100% groundnut oil and
+              wholesome ingredients, our snacks give the right crunch without the guilt. Whether prepping for exams or
+              powering through assignments, these light yet satisfying bites help keep energy up and mind sharp.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Timeline Progress Nav Bar -->
+      <div class="occasion-timeline-bar px-4 px-md-5 py-3">
+        <div class="d-flex align-items-center justify-content-between flex-wrap gap-3">
+          <div class="occasion-timeline-track">
+            <div class="occasion-progress-line" id="occasion-progress-line" style="width: 12%;"></div>
+            <div class="d-flex justify-content-between position-relative z-2">
+              <button class="occasion-tab-btn active" onclick="switchOccasion(0)">
+                <span class="occasion-node-dot"></span>
+                <span class="occasion-tab-label">Study Breaks</span>
+              </button>
+              <button class="occasion-tab-btn" onclick="switchOccasion(1)">
+                <span class="occasion-node-dot"></span>
+                <span class="occasion-tab-label">Travelling</span>
+              </button>
+              <button class="occasion-tab-btn" onclick="switchOccasion(2)">
+                <span class="occasion-node-dot"></span>
+                <span class="occasion-tab-label">Post Workout</span>
+              </button>
+              <button class="occasion-tab-btn" onclick="switchOccasion(3)">
+                <span class="occasion-node-dot"></span>
+                <span class="occasion-tab-label">Meeting Breaks</span>
+              </button>
+            </div>
+          </div>
+          <div class="d-flex gap-2 ms-auto">
+            <button class="hero-nav-arrow-btn static-arrow" onclick="prevOccasion()" title="Previous Occasion">
+              <i class="bi bi-chevron-left"></i>
+            </button>
+            <button class="hero-nav-arrow-btn static-arrow" onclick="nextOccasion()" title="Next Occasion">
+              <i class="bi bi-chevron-right"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
   </section>
 
   <!-- Multi-Column Dark Footer (#main-footer) -->
@@ -509,7 +748,8 @@
             <span class="fs-4">🍿</span> <span class="fs-4 fw-extrabold">Snacky</span>
           </a>
           <p class="small text-muted mb-3">
-            Snacky is India's premium snacks brand bringing you authentic, palm-oil free, 100% groundnut oil crunch for guilt-free everyday snacking.
+            Snacky is India's premium snacks brand bringing you authentic, palm-oil free, 100% groundnut oil crunch for
+            guilt-free everyday snacking.
           </p>
         </div>
 
@@ -584,11 +824,13 @@
         <span class="fw-bold text-navy fs-5">Total</span>
         <span class="fw-bold text-warning fs-5" id="cart-total-val">₹0.00</span>
       </div>
-      <a href="cart-payment-flow.html" class="btn btn-snacky-primary w-100 py-3 text-center">Proceed to Checkout <i class="bi bi-arrow-right"></i></a>
+      <a href="cart-payment-flow.html" class="btn btn-snacky-primary w-100 py-3 text-center">Proceed to Checkout <i
+          class="bi bi-arrow-right"></i></a>
     </div>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   <script src="../static/js/script.js"></script>
 </body>
+
 </html>
