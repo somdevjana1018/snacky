@@ -64,15 +64,44 @@ a:hover {
    3. Top Announcement Bar
    -------------------------------------------------------------------------- */
 .top-announcement-bar {
-  background-color: var(--snacky-yellow);
-  color: #000000;
+  background: linear-gradient(90deg, #2C1810 0%, #4A271B 50%, #2C1810 100%);
+  color: #F5A623;
   font-weight: 800;
-  font-size: 0.9rem;
+  font-size: 0.88rem;
   letter-spacing: 0.5px;
-  padding: 8px 16px;
-  text-align: center;
+  padding: 8px 0;
+  overflow: hidden;
   position: relative;
   z-index: 1040;
+  white-space: nowrap;
+  border-bottom: 1.5px solid rgba(245, 166, 35, 0.2);
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marqueeScroll 22s linear infinite;
+}
+
+.top-announcement-bar:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+.marquee-content {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  padding-right: 28px;
+}
+
+.marquee-dot {
+  color: rgba(245, 166, 35, 0.45);
+  font-size: 0.85rem;
+}
+
+@keyframes marqueeScroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
 }
 
 /* --------------------------------------------------------------------------
@@ -93,50 +122,118 @@ a:hover {
   align-items: center;
   gap: 10px;
   text-decoration: none;
+  margin-right: auto;
+  padding-left: 0;
+  margin-left: -6px;
 }
 
-.snacky-basket-icon {
-  font-size: 1.6rem;
-  color: #F59E0B;
-  display: flex;
-  align-items: center;
+.brand-logo-img {
+  height: 62px;
+  width: auto;
+  object-fit: contain;
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  filter: drop-shadow(0 3px 8px rgba(0, 121, 128, 0.18));
 }
 
-.snacky-brand-text {
-  font-size: 1.65rem;
-  font-weight: 800;
-  color: #D93838;
-  letter-spacing: -0.5px;
-  line-height: 1;
+.brand-logo-container:hover .brand-logo-img {
+  transform: scale(1.06) rotate(-2deg);
 }
 
-.snacky-brand-dot {
-  color: #F59E0B;
+.footer-logo-img {
+  height: 56px;
+  width: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.3));
+  transition: transform 0.25s ease;
+}
+
+.footer-logo-img:hover {
+  transform: scale(1.06);
 }
 
 .nav-link-custom {
-  font-weight: 600;
-  font-size: 0.96rem;
-  color: #4A3E3D;
-  padding: 8px 24px;
-  border-radius: 50px;
+  font-weight: 700;
+  font-size: 1rem;
+  color: #1E293B;
+  padding: 8px 16px;
+  border-radius: 0;
   transition: all 0.25s ease-in-out;
   display: inline-block;
   text-decoration: none;
   letter-spacing: 0.2px;
+  position: relative;
+}
+
+.nav-link-custom::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #FF6B35 0%, #F59E0B 100%);
+  border-radius: 2px;
+  transition: width 0.3s ease;
 }
 
 .nav-link-custom:hover {
-  color: #F59E0B;
-  background-color: rgba(245, 166, 35, 0.08);
+  color: #FF6B35;
+  background-color: transparent !important;
+}
+
+.nav-link-custom:hover::after {
+  width: 80%;
 }
 
 .nav-link-custom.active {
-  background-color: #F5A623;
-  color: #2B1810;
+  background-color: transparent !important;
+  color: #FF6B35;
+  font-weight: 800;
+  box-shadow: none;
+}
+
+.nav-link-custom.active::after {
+  width: 85%;
+}
+
+/* Realistic User Auth Button in Navbar (No Red / No Green) */
+.nav-auth-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(135deg, #0E4B5B 0%, #166073 100%);
+  color: #FFFFFF !important;
   font-weight: 700;
-  padding: 8px 26px;
-  box-shadow: 0 4px 14px rgba(245, 166, 35, 0.3);
+  font-size: 0.92rem;
+  padding: 8px 18px;
+  border-radius: 50px;
+  text-decoration: none;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 12px rgba(14, 75, 91, 0.2);
+  border: 2px solid transparent;
+}
+
+.nav-auth-btn:hover {
+  background: linear-gradient(135deg, #F5A623 0%, #E09212 100%);
+  color: #0E4B5B !important;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(245, 166, 35, 0.4);
+}
+
+.nav-auth-btn.user-logged-in {
+  background: #FAF5EB;
+  color: #0E4B5B !important;
+  border: 2px solid #0E4B5B;
+  box-shadow: 0 2px 8px rgba(14, 75, 91, 0.1);
+}
+
+.nav-auth-btn.user-logged-in:hover {
+  background: linear-gradient(135deg, #0E4B5B 0%, #166073 100%);
+  color: #FFFFFF !important;
+  border-color: #0E4B5B;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 14px rgba(14, 75, 91, 0.25);
 }
 
 .nav-item.dropdown:hover .dropdown-menu {
@@ -948,56 +1045,210 @@ a:hover {
   margin-top: auto;
 }
 
-/* --------------------------------------------------------------------------
-   8. Comparison Table & Features
-   -------------------------------------------------------------------------- */
-.comparison-table-wrapper {
-  background-color: #ffffff;
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-md);
-  padding: 32px;
-  border: 1px solid var(--border-color);
-  margin-top: 40px;
-  margin-bottom: 40px;
-}
-
-.table-custom {
+/* Clean Add to Cart Button for Product Cards */
+.btn-card-add-to-cart {
   width: 100%;
-  border-collapse: separate;
-  border-spacing: 0;
-}
-
-.table-custom th,
-.table-custom td {
-  padding: 16px 20px;
-  text-align: center;
-  vertical-align: middle;
-  border-bottom: 1px solid var(--border-color);
-}
-
-.table-custom th:first-child,
-.table-custom td:first-child {
-  text-align: left;
-  font-weight: 700;
-}
-
-.snacky-col-highlight {
-  background-color: #f0f7ff;
-  border-left: 2.5px solid #2563eb !important;
-  border-right: 2.5px solid #2563eb !important;
-}
-
-.snacky-header-box {
-  background-color: #2563eb;
-  color: #ffffff;
-  padding: 12px 16px;
-  border-radius: var(--radius-sm);
+  background: linear-gradient(135deg, #0E4B5B 0%, #166073 100%);
+  color: #FFFFFF;
   font-weight: 800;
-  font-size: 1.1rem;
+  font-size: 0.88rem;
+  letter-spacing: 0.5px;
+  padding: 10px 16px;
+  border-radius: 10px;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 12px rgba(14, 75, 91, 0.2);
+  margin-top: auto;
 }
 
-.feature-check-positive { color: var(--snacky-green); font-weight: 700; font-size: 1.1rem; }
-.feature-cross-negative { color: var(--snacky-red); font-size: 1.1rem; }
+.btn-card-add-to-cart:hover {
+  background: linear-gradient(135deg, #F5A623 0%, #E09212 100%);
+  color: #0E4B5B;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(245, 166, 35, 0.4);
+}
+
+/* --------------------------------------------------------------------------
+   8. Comparison Table & Features (Real-World Attractive Why Choose Us)
+   -------------------------------------------------------------------------- */
+.why-choose-table-wrapper {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 25px 10px;
+}
+
+.why-choose-table-container {
+  display: grid;
+  grid-template-columns: 1.25fr 1.35fr 1.1fr 1.1fr;
+  background-color: #FFFFFF;
+  border-radius: 24px;
+  box-shadow: 0 15px 35px rgba(16, 42, 67, 0.08);
+  border: 1px solid #E2E8F0;
+  position: relative;
+  overflow: visible;
+}
+
+.table-row {
+  display: contents;
+}
+
+.table-cell {
+  padding: 18px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 0.98rem;
+  border-bottom: 1px solid #EDF2F7;
+  border-right: 1px solid #EDF2F7;
+}
+
+.table-row:last-child .table-cell {
+  border-bottom: none;
+}
+
+.border-right-0 {
+  border-right: none !important;
+}
+
+/* Feature Header Cell (Top-Left) */
+.cell-feature-hdr {
+  background-color: #58A5ED;
+  color: #FFFFFF;
+  font-weight: 800;
+  font-size: 1.15rem;
+  border-top-left-radius: 22px;
+  border-bottom: none !important;
+}
+
+/* Brand A & B Header Cells (Top-Right) */
+.cell-brand-hdr {
+  background-color: #103B75;
+  color: #FFFFFF;
+  font-weight: 800;
+  font-size: 1.15rem;
+  border-bottom: none !important;
+}
+
+.table-header-row .border-right-0 {
+  border-top-right-radius: 22px;
+}
+
+/* Feature Row Labels (Left Column) */
+.cell-feature-name {
+  font-weight: 800;
+  color: #0F172A;
+  justify-content: flex-start;
+  padding-left: 28px;
+  font-size: 1.05rem;
+}
+
+/* Muted Brand Data Cells */
+.cell-muted-data {
+  color: #64748B;
+  font-weight: 500;
+}
+
+/* Elevated Floating "Snacky" Column Pillar (Center Highlight) */
+.cell-brand-snacky-hdr,
+.cell-snacky-data {
+  position: relative;
+  z-index: 5;
+  background-color: #FFFFFF;
+}
+
+.cell-brand-snacky-hdr {
+  padding-top: 15px;
+  padding-bottom: 15px;
+  border-top: 3.5px solid #60A5FA;
+  border-left: 3.5px solid #60A5FA;
+  border-right: 3.5px solid #60A5FA;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  margin-top: -18px;
+  box-shadow: -6px -8px 20px rgba(96, 165, 250, 0.15), 6px -8px 20px rgba(96, 165, 250, 0.15);
+  animation: pillarGlowPulse 3s infinite alternate ease-in-out;
+}
+
+.table-row:last-child .cell-snacky-data {
+  border-bottom: 3.5px solid #60A5FA;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  margin-bottom: -18px;
+  box-shadow: -6px 8px 20px rgba(96, 165, 250, 0.15), 6px 8px 20px rgba(96, 165, 250, 0.15);
+}
+
+.cell-snacky-data {
+  border-left: 3.5px solid #60A5FA;
+  border-right: 3.5px solid #60A5FA;
+  border-bottom: 1px solid #EFF6FF !important;
+  box-shadow: -6px 0 20px rgba(96, 165, 250, 0.1), 6px 0 20px rgba(96, 165, 250, 0.1);
+}
+
+@keyframes pillarGlowPulse {
+  0% {
+    border-color: #60A5FA;
+    box-shadow: 0 0 20px rgba(96, 165, 250, 0.25);
+  }
+  100% {
+    border-color: #3B82F6;
+    box-shadow: 0 0 28px rgba(59, 130, 246, 0.4);
+  }
+}
+
+/* Golden Round Circle Badge */
+.brand-yellow-circle {
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #FCD34D 0%, #F59E0B 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+  transition: transform 0.35s ease;
+}
+
+.why-choose-table-container:hover .brand-yellow-circle {
+  transform: scale(1.1) rotate(6deg);
+}
+
+.brand-circle-text {
+  font-weight: 900;
+  font-size: 0.92rem;
+  color: #1E293B;
+}
+
+/* Green Highlighted Text & Bounce Animation */
+.highlight-green-text {
+  color: #16A34A;
+  font-weight: 800;
+  font-size: 1.05rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: transform 0.25s ease;
+}
+
+.why-choose-table-container:hover .highlight-green-text {
+  transform: scale(1.04);
+}
+
+.highlight-green-text i {
+  color: #22C55E;
+  font-size: 1.1rem;
+  animation: checkBounce 2s infinite ease-in-out;
+}
+
+@keyframes checkBounce {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+}
 
 /* --------------------------------------------------------------------------
    9. Multi-Column Dark Footer
@@ -1894,4 +2145,429 @@ a:hover {
   color: #2C1810;
   transform: translate(-1px, -1px);
   box-shadow: 5px 5px 0px #2C1810;
+}
+
+/* --------------------------------------------------------------------------
+   10. 3-Step Checkout Flow (Account -> Address -> Payment) - Snacky Brand Theme
+   -------------------------------------------------------------------------- */
+/* Complete Suppression of Step 1 (Sign Up) for Logged-In Users */
+.user-logged-in-mode #step-1-content,
+.user-logged-in-mode #flow-step-1,
+.user-logged-in-mode #line-step-1 {
+  display: none !important;
+}
+
+.user-logged-in-mode #step-2-content {
+  display: block !important;
+}
+
+.checkout-flow-stepper-header {
+  background: #FFFDF9;
+  border-bottom: 1.5px solid #EAE0D2;
+  padding: 20px 0;
+  margin-bottom: 32px;
+  box-shadow: 0 4px 15px rgba(14, 75, 91, 0.04);
+}
+
+.checkout-flow-steps {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.flow-step-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  opacity: 0.55;
+  transition: all 0.3s ease;
+}
+
+.flow-step-item.active, .flow-step-item.completed {
+  opacity: 1;
+}
+
+.flow-step-circle {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: #CBD5E1;
+  color: #FFFFFF;
+  font-weight: 800;
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.flow-step-item.active .flow-step-circle {
+  background: linear-gradient(135deg, #0E4B5B 0%, #166073 100%);
+  box-shadow: 0 4px 12px rgba(14, 75, 91, 0.35);
+  transform: scale(1.05);
+}
+
+.flow-step-item.completed .flow-step-circle {
+  background-color: #10B981;
+  box-shadow: 0 4px 10px rgba(16, 185, 129, 0.3);
+}
+
+.flow-step-label {
+  font-weight: 800;
+  font-size: 0.98rem;
+  color: #0E4B5B;
+  letter-spacing: -0.2px;
+}
+
+.flow-step-line {
+  flex-grow: 1;
+  height: 3px;
+  background-color: #E2E8F0;
+  max-width: 70px;
+  border-radius: 2px;
+  transition: background-color 0.3s ease;
+}
+
+.flow-step-line.active {
+  background: linear-gradient(90deg, #0E4B5B, #10B981);
+}
+
+/* Step 1 Account Option Cards */
+.checkout-account-card {
+  background: #FFFDF9;
+  border: 1.5px solid #EAE0D2;
+  border-radius: 20px;
+  padding: 30px 22px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+}
+
+.checkout-account-card:hover {
+  transform: translateY(-4px);
+  border-color: #0E4B5B;
+  box-shadow: 0 12px 30px rgba(14, 75, 91, 0.12);
+}
+
+.checkout-account-illustration {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #FAF5EB 0%, #FFFDF9 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 18px;
+  font-size: 2.4rem;
+  color: #0E4B5B;
+  border: 2px solid #EAE0D2;
+}
+
+.btn-checkout-login {
+  background: linear-gradient(135deg, #0E4B5B 0%, #166073 100%);
+  color: #FFFFFF !important;
+  font-weight: 800;
+  border-radius: 12px;
+  padding: 12px 24px;
+  width: 100%;
+  border: none;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 12px rgba(14, 75, 91, 0.2);
+}
+
+.btn-checkout-login:hover {
+  background: linear-gradient(135deg, #FF6B35 0%, #E8551F 100%);
+  color: #FFFFFF !important;
+  box-shadow: 0 6px 16px rgba(255, 107, 53, 0.3);
+}
+
+.btn-checkout-signup {
+  background: #FFFFFF;
+  color: #0E4B5B !important;
+  border: 2px solid #0E4B5B;
+  font-weight: 800;
+  border-radius: 12px;
+  padding: 12px 24px;
+  width: 100%;
+  transition: all 0.25s ease;
+}
+
+.btn-checkout-signup:hover {
+  background: #0E4B5B;
+  color: #FFFFFF !important;
+}
+
+.btn-checkout-guest {
+  background: #FFFFFF;
+  color: #475569 !important;
+  border: 2px solid #CBD5E1;
+  font-weight: 700;
+  border-radius: 12px;
+  padding: 12px 24px;
+  width: 100%;
+  transition: all 0.25s ease;
+}
+
+.btn-checkout-guest:hover {
+  border-color: #0E4B5B;
+  color: #0E4B5B !important;
+  background: #FAF5EB;
+}
+
+/* Step 2 Address Selection & Offcanvas Drawer Theme */
+.add-address-dashed-card {
+  border: 2.5px dashed #0E4B5B;
+  background-color: #FAF5EB;
+  border-radius: 20px;
+  padding: 44px 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+}
+
+.add-address-dashed-card:hover {
+  background-color: #FFFDF9;
+  border-color: #FF6B35;
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(255, 107, 53, 0.12);
+}
+
+.saved-address-card {
+  border: 2px solid #EAE0D2;
+  background-color: #FFFFFF;
+  border-radius: 20px;
+  padding: 24px;
+  transition: all 0.25s ease;
+  position: relative;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.saved-address-card.selected {
+  border-color: #0E4B5B;
+  background-color: #FFFDF9;
+  box-shadow: 0 6px 20px rgba(14, 75, 91, 0.12);
+}
+
+.address-drawer-offcanvas {
+  width: 440px !important;
+  border-top-left-radius: 24px;
+  border-bottom-left-radius: 24px;
+  border: none;
+  box-shadow: -10px 0 40px rgba(0, 0, 0, 0.12);
+}
+
+.address-drawer-offcanvas .offcanvas-header {
+  background: linear-gradient(135deg, #0E4B5B 0%, #166073 100%);
+  color: #FFFFFF;
+}
+
+.address-drawer-offcanvas .offcanvas-title {
+  color: #FFFFFF !important;
+}
+
+.address-drawer-offcanvas .btn-close {
+  filter: invert(1);
+}
+
+@media (max-width: 576px) {
+  .address-drawer-offcanvas {
+    width: 100% !important;
+    border-radius: 0;
+  }
+}
+
+/* Step 3 Payment Selection Tabs & Theme */
+.payment-tabs-vertical {
+  border-right: 1.5px solid #EAE0D2;
+  background-color: #FAF5EB !important;
+}
+
+.payment-tab-item-btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 18px 22px;
+  border: none;
+  background: transparent;
+  width: 100%;
+  text-align: left;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: #475569;
+  border-left: 4px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.payment-tab-item-btn:hover {
+  background-color: #FFFDF9;
+  color: #0E4B5B;
+}
+
+.payment-tab-item-btn.active {
+  background-color: #FFFFFF;
+  color: #0E4B5B;
+  border-left-color: #FF6B35;
+  font-weight: 800;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+}
+
+.btn-pay-now {
+  background: linear-gradient(135deg, #FF6B35 0%, #E8551F 100%) !important;
+  color: #FFFFFF !important;
+  font-weight: 800 !important;
+  font-size: 1.05rem !important;
+  border-radius: 14px !important;
+  border: none !important;
+  box-shadow: 0 6px 18px rgba(255, 107, 53, 0.3) !important;
+  transition: all 0.25s ease !important;
+}
+
+.btn-pay-now:hover {
+  background: linear-gradient(135deg, #0E4B5B 0%, #166073 100%) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(14, 75, 91, 0.35) !important;
+}
+
+.sidebar-summary-card {
+  background: #FFFFFF;
+  border: 1.5px solid #EAE0D2;
+  border-radius: 20px;
+  padding: 26px;
+  box-shadow: 0 6px 20px rgba(14, 75, 91, 0.05);
+}
+
+.savings-highlight-banner {
+  background-color: #ECFDF5;
+  color: #047857;
+  font-weight: 800;
+  font-size: 0.92rem;
+  padding: 12px 16px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid #A7F3D0;
+}
+
+/* Auth Reference Card Styling (Nykaa / Let's Try Theme) */
+.auth-card-container {
+  background: #FFFFFF;
+  border-radius: 24px;
+  box-shadow: 0 20px 50px rgba(14, 75, 91, 0.09);
+  padding: 40px 36px;
+  max-width: 440px;
+  width: 100%;
+  margin: 0 auto;
+  border: 1.5px solid #EAE0D2;
+}
+
+.auth-logo-header-wrapper {
+  display: inline-block;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0;
+  margin-bottom: 16px;
+}
+
+.auth-badge-logo {
+  height: 76px;
+  width: auto;
+  max-width: 220px;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 10px rgba(14, 75, 91, 0.1));
+}
+
+/* Sign In / Sign Up Segmented Toggle Pill Bar */
+.auth-toggle-pill-bar {
+  background-color: #FAF5EB;
+  border-radius: 50px;
+  padding: 5px;
+  display: flex;
+  gap: 6px;
+  border: 1.5px solid #EAE0D2;
+}
+
+.auth-toggle-pill-btn {
+  flex: 1;
+  padding: 10px 16px;
+  border-radius: 50px;
+  border: none;
+  background: transparent;
+  font-weight: 800;
+  font-size: 0.95rem;
+  color: #475569;
+  transition: all 0.25s ease;
+  cursor: pointer;
+}
+
+.auth-toggle-pill-btn:hover {
+  color: #0E4B5B;
+}
+
+.auth-toggle-pill-btn.active {
+  background: linear-gradient(135deg, #0E4B5B 0%, #166073 100%);
+  color: #FFFFFF !important;
+  box-shadow: 0 4px 14px rgba(14, 75, 91, 0.25);
+}
+
+.auth-phone-input-group {
+  border: 1.5px solid #CBD5E1;
+  border-radius: 14px !important;
+  overflow: hidden;
+  transition: border-color 0.2s ease;
+}
+
+.auth-phone-input-group:focus-within {
+  border-color: #0E4B5B;
+  box-shadow: 0 0 0 3px rgba(14, 75, 91, 0.1);
+}
+
+.auth-phone-input-group .input-group-text {
+  border: none;
+  background-color: #FAF5EB !important;
+  color: #0E4B5B;
+  font-weight: 800;
+  padding: 12px 18px;
+}
+
+.auth-phone-input-group .form-control {
+  border: none;
+  box-shadow: none !important;
+  font-weight: 600;
+  height: 50px;
+}
+
+.btn-auth-continue {
+  background: linear-gradient(135deg, #0E4B5B 0%, #166073 100%) !important;
+  color: #FFFFFF !important;
+  border-radius: 14px !important;
+  font-weight: 800;
+  font-size: 1.05rem;
+  border: none;
+  height: 50px;
+  box-shadow: 0 6px 18px rgba(14, 75, 91, 0.25);
+  transition: all 0.25s ease-in-out;
+}
+
+.btn-auth-continue:hover {
+  background: linear-gradient(135deg, #FF6B35 0%, #E8551F 100%) !important;
+  box-shadow: 0 8px 22px rgba(255, 107, 53, 0.35);
+  transform: translateY(-2px);
 }

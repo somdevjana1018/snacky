@@ -181,6 +181,13 @@ function addToCart(productId, weight, qty = 1) {
 
   saveCartState();
   showToast(`Added ${prod.title} (${selectedWeight}) to cart!`);
+
+  // Automatically slide open the Add to Cart Drawer Section
+  const cartDrawerEl = document.getElementById('cartOffcanvas');
+  if (cartDrawerEl && window.bootstrap) {
+    const offcanvas = window.bootstrap.Offcanvas.getInstance(cartDrawerEl) || new window.bootstrap.Offcanvas(cartDrawerEl);
+    offcanvas.show();
+  }
 }
 
 function updateCartQuantity(index, delta) {
@@ -423,11 +430,9 @@ function renderProductsGrid() {
               <span class="weight-badge-pill">${p.weight}</span>
             </div>
             ${p.inStock ? 
-              `<div class="card-qty-action-bar">
-                 <button class="card-qty-btn" onclick="updateCartItemQty(${p.id}, -1)">-</button>
-                 <span class="card-qty-val" id="card-qty-val-${p.id}">${currentQty || 1}</span>
-                 <button class="card-qty-btn" onclick="updateCartItemQty(${p.id}, 1)">+</button>
-               </div>` : 
+              `<button class="btn-card-add-to-cart" onclick="addToCart(${p.id})">
+                 <i class="bi bi-cart-plus-fill me-1"></i> ADD TO CART
+               </button>` : 
               `<button class="btn-card-disabled" disabled>OUT OF STOCK</button>`}
           </div>
         </div>
@@ -702,11 +707,9 @@ function renderSearchResults() {
               <span class="weight-badge-pill">${p.weight}</span>
             </div>
             ${p.inStock ? 
-              `<div class="card-qty-action-bar">
-                 <button class="card-qty-btn" onclick="updateCartItemQty(${p.id}, -1)">-</button>
-                 <span class="card-qty-val" id="card-qty-val-${p.id}">${currentQty || 1}</span>
-                 <button class="card-qty-btn" onclick="updateCartItemQty(${p.id}, 1)">+</button>
-               </div>` : 
+              `<button class="btn-card-add-to-cart" onclick="addToCart(${p.id})">
+                 <i class="bi bi-cart-plus-fill me-1"></i> ADD TO CART
+               </button>` : 
               `<button class="btn-card-disabled" disabled>OUT OF STOCK</button>`}
           </div>
         </div>
@@ -722,7 +725,6 @@ function initAuthPage() {
   const continuePhoneBtn = document.getElementById('auth-continue-phone-btn');
   const verifyOtpBtn = document.getElementById('auth-verify-otp-btn');
   const otpDigits = document.querySelectorAll('.otp-digit-input');
-  const emailLoginBtn = document.getElementById('email-login-btn');
 
   let tempPhone = "";
 
@@ -731,8 +733,8 @@ function initAuthPage() {
       const phoneInput = document.getElementById('auth-phone-input');
       if (phoneInput && phoneInput.value.trim().length >= 10) {
         tempPhone = phoneInput.value.trim();
-        phoneStep.style.display = 'none';
-        otpStep.style.display = 'block';
+        phoneStep.classList.add('d-none');
+        otpStep.classList.remove('d-none');
         if (otpDigits[0]) otpDigits[0].focus();
         showToast("OTP sent! (Use code 123456)");
       } else {
@@ -744,16 +746,19 @@ function initAuthPage() {
   otpDigits.forEach((digitInput, idx) => {
     digitInput.addEventListener('keyup', (e) => {
       if (e.key >= '0' && e.key <= '9') {
-        if (idx < otpDigits.length - 1) otpDigits[idx + 1].focus();
+        const next = digitInput.nextElementSibling;
+        if (next && next.classList.contains('otp-digit-input')) next.focus();
       } else if (e.key === 'Backspace') {
-        if (idx > 0) otpDigits[idx - 1].focus();
+        const prev = digitInput.previousElementSibling;
+        if (prev && prev.classList.contains('otp-digit-input')) prev.focus();
       }
     });
   });
 
   if (verifyOtpBtn) {
     verifyOtpBtn.addEventListener('click', () => {
-      const code = Array.from(otpDigits).map(d => d.value).join('');
+      const signinOtpDigits = document.querySelectorAll('#auth-step-otp .otp-digit-input');
+      const code = Array.from(signinOtpDigits).map(d => d.value).join('');
       if (code === '123456' || code.length === 6) {
         localStorage.setItem('isLoggedIn', 'true');
         const phoneFormatted = tempPhone ? "+91 " + tempPhone : "+91 9876543210";
@@ -771,27 +776,74 @@ function initAuthPage() {
       }
     });
   }
+}
 
-  if (emailLoginBtn) {
-    emailLoginBtn.addEventListener('click', () => {
-      const emailInput = document.getElementById('email-login-input');
-      if (emailInput && emailInput.value.trim()) {
-        const enteredEmail = emailInput.value.trim();
-        localStorage.setItem('isLoggedIn', 'true');
-        snackyUser = {
-          name: enteredEmail.split('@')[0],
-          email: enteredEmail,
-          phone: snackyUser.phone || "+91 9876543210",
-          dob: "1995-05-15"
-        };
-        localStorage.setItem('snacky_user', JSON.stringify(snackyUser));
-        showToast("Login Successful! Creating your profile...");
-        setTimeout(() => { window.location.href = 'profile.html'; }, 1000);
-      } else {
-        showToast("Please enter a valid email address.");
-      }
-    });
+function toggleAuthView(viewName) {
+  const signinView = document.getElementById('view-signin');
+  const signupView = document.getElementById('view-signup');
+  const btnSignin = document.getElementById('btn-toggle-signin');
+  const btnSignup = document.getElementById('btn-toggle-signup');
+
+  if (viewName === 'signup') {
+    if (signinView) signinView.classList.add('d-none');
+    if (signupView) signupView.classList.remove('d-none');
+    if (btnSignin) btnSignin.classList.remove('active');
+    if (btnSignup) btnSignup.classList.add('active');
+  } else {
+    if (signupView) signupView.classList.add('d-none');
+    if (signinView) signinView.classList.remove('d-none');
+    if (btnSignup) btnSignup.classList.remove('active');
+    if (btnSignin) btnSignin.classList.add('active');
   }
+}
+
+function proceedToSignupOtp() {
+  const nameVal = document.getElementById('signup-name-input')?.value.trim();
+  const phoneVal = document.getElementById('signup-phone-input')?.value.trim();
+
+  if (!nameVal) {
+    showToast("Please enter your full name!");
+    return;
+  }
+  if (!phoneVal || phoneVal.length < 10) {
+    showToast("Please enter a valid 10-digit mobile number!");
+    return;
+  }
+
+  const fieldsStep = document.getElementById('signup-step-fields');
+  const otpStep = document.getElementById('signup-step-otp');
+  const signupOtpDigits = document.querySelectorAll('.signup-otp');
+
+  if (fieldsStep) fieldsStep.classList.add('d-none');
+  if (otpStep) otpStep.classList.remove('d-none');
+  if (signupOtpDigits[0]) signupOtpDigits[0].focus();
+
+  showToast("OTP sent to " + phoneVal + "! (Use code 123456)");
+}
+
+function completeCustomAuthSignup() {
+  const nameVal = document.getElementById('signup-name-input')?.value.trim() || 'Customer';
+  const phoneVal = document.getElementById('signup-phone-input')?.value.trim() || '9876543210';
+  const signupOtpDigits = document.querySelectorAll('.signup-otp');
+  const code = Array.from(signupOtpDigits).map(d => d.value).join('');
+
+  if (code && code !== '123456' && code.length < 6) {
+    showToast("Please enter valid 6-digit OTP! (Use code 123456)");
+    return;
+  }
+
+  localStorage.setItem('isLoggedIn', 'true');
+  const newUser = {
+    name: nameVal,
+    phone: "+91 " + phoneVal,
+    email: nameVal.toLowerCase().replace(/\s+/g, '') + "@snacky.com",
+    dob: "1998-08-15"
+  };
+  localStorage.setItem('snacky_user', JSON.stringify(newUser));
+  showToast(`Account Created for ${nameVal}! Redirecting...`);
+  setTimeout(() => {
+    window.location.href = 'profile.html';
+  }, 1000);
 }
 
 // Profile Page
@@ -843,7 +895,214 @@ function initProfilePage() {
   }
 }
 
-// Payment Gateway Page
+// --------------------------------------------------------------------------
+// 3-Step Checkout Flow Logic (Account -> Address -> Payment)
+// --------------------------------------------------------------------------
+let currentCheckoutStep = 1;
+
+function switchCheckoutStep(step) {
+  currentCheckoutStep = step;
+
+  const step1 = document.getElementById('flow-step-1');
+  const step2 = document.getElementById('flow-step-2');
+  const step3 = document.getElementById('flow-step-3');
+
+  const circle1 = document.getElementById('circle-step-1');
+  const circle2 = document.getElementById('circle-step-2');
+  const circle3 = document.getElementById('circle-step-3');
+
+  const line1 = document.getElementById('line-step-1');
+  const line2 = document.getElementById('line-step-2');
+
+  const content1 = document.getElementById('step-1-content');
+  const content2 = document.getElementById('step-2-content');
+  const content3 = document.getElementById('step-3-content');
+  const deliveryBox = document.getElementById('sidebar-deliver-to-box');
+
+  if (content1) content1.classList.add('d-none');
+  if (content2) content2.classList.add('d-none');
+  if (content3) content3.classList.add('d-none');
+
+  if (step === 1) {
+    if (content1) content1.classList.remove('d-none');
+    if (step1) { step1.className = 'flow-step-item active'; }
+    if (step2) { step2.className = 'flow-step-item'; }
+    if (step3) { step3.className = 'flow-step-item'; }
+    if (circle1) circle1.innerHTML = '1';
+    if (circle2) circle2.innerHTML = '2';
+    if (circle3) circle3.innerHTML = '3';
+    if (line1) line1.classList.remove('active');
+    if (line2) line2.classList.remove('active');
+    if (deliveryBox) deliveryBox.classList.add('d-none');
+  } else if (step === 2) {
+    if (content2) content2.classList.remove('d-none');
+    if (step1) { step1.className = 'flow-step-item completed'; }
+    if (step2) { step2.className = 'flow-step-item active'; }
+    if (step3) { step3.className = 'flow-step-item'; }
+    if (circle1) circle1.innerHTML = '<i class="bi bi-check-lg"></i>';
+    if (circle2) circle2.innerHTML = '2';
+    if (circle3) circle3.innerHTML = '3';
+    if (line1) line1.classList.add('active');
+    if (line2) line2.classList.remove('active');
+    if (deliveryBox) deliveryBox.classList.remove('d-none');
+  } else if (step === 3) {
+    if (content3) content3.classList.remove('d-none');
+    if (step1) { step1.className = 'flow-step-item completed'; }
+    if (step2) { step2.className = 'flow-step-item completed'; }
+    if (step3) { step3.className = 'flow-step-item active'; }
+    if (circle1) circle1.innerHTML = '<i class="bi bi-check-lg"></i>';
+    if (circle2) circle2.innerHTML = '<i class="bi bi-check-lg"></i>';
+    if (circle3) circle3.innerHTML = '3';
+    if (line1) line1.classList.add('active');
+    if (line2) line2.classList.add('active');
+    if (deliveryBox) deliveryBox.classList.remove('d-none');
+  }
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function openLoginModal() {
+  const modalEl = document.getElementById('checkoutLoginModal');
+  if (modalEl && window.bootstrap) {
+    const modal = new window.bootstrap.Modal(modalEl);
+    modal.show();
+  }
+}
+
+function openSignupModal() {
+  const modalEl = document.getElementById('checkoutSignupModal');
+  if (modalEl && window.bootstrap) {
+    const modal = new window.bootstrap.Modal(modalEl);
+    modal.show();
+  }
+}
+
+function completeCheckoutLogin() {
+  const input = document.getElementById('chk-login-input');
+  const val = input ? input.value.trim() : 'khushi@snacky.com';
+  const name = val.split('@')[0] || 'Khushi';
+  
+  localStorage.setItem('isLoggedIn', 'true');
+  const userObj = { name: name, email: val, phone: "+91 9876543210" };
+  localStorage.setItem('snacky_user', JSON.stringify(userObj));
+  
+  if (window.updateNavbarUserSession) updateNavbarUserSession();
+  
+  const modalEl = document.getElementById('checkoutLoginModal');
+  if (modalEl && window.bootstrap) {
+    const modal = window.bootstrap.Modal.getInstance(modalEl);
+    if (modal) modal.hide();
+  }
+  showToast(`Welcome back, ${name}! Proceeding to Address...`);
+  switchCheckoutStep(2);
+}
+
+function completeCheckoutSignup() {
+  const nameInput = document.getElementById('chk-signup-name');
+  const phoneInput = document.getElementById('chk-signup-phone');
+  const name = nameInput ? nameInput.value.trim() || 'Khushi' : 'Khushi';
+  const phone = phoneInput ? phoneInput.value.trim() : '9876543210';
+  
+  localStorage.setItem('isLoggedIn', 'true');
+  const userObj = { name: name, phone: "+91 " + phone, email: "user@snacky.com" };
+  localStorage.setItem('snacky_user', JSON.stringify(userObj));
+  
+  if (window.updateNavbarUserSession) updateNavbarUserSession();
+
+  const modalEl = document.getElementById('checkoutSignupModal');
+  if (modalEl && window.bootstrap) {
+    const modal = window.bootstrap.Modal.getInstance(modalEl);
+    if (modal) modal.hide();
+  }
+  showToast(`Account created for ${name}! Proceeding to Address...`);
+  switchCheckoutStep(2);
+}
+
+function proceedAsGuest() {
+  localStorage.setItem('checkoutAsGuest', 'true');
+  showToast("Proceeding as Guest User...");
+  switchCheckoutStep(2);
+}
+
+function saveNewAddressAndShip() {
+  const pincode = document.getElementById('input-pincode')?.value.trim();
+  const city = document.getElementById('input-city')?.value.trim();
+  const state = document.getElementById('input-state')?.value.trim();
+  const house = document.getElementById('input-house')?.value.trim();
+  const area = document.getElementById('input-area')?.value.trim();
+  const name = document.getElementById('input-name')?.value.trim();
+  const phone = document.getElementById('input-phone')?.value.trim();
+
+  if (!pincode || !house || !area || !name || !phone) {
+    showToast("Please fill in all required address & contact fields!");
+    return;
+  }
+
+  const fullAddrText = `${house}, ${area}, ${city ? city + ', ' : ''}${state ? state + ' - ' : ''}${pincode}`;
+  
+  const cardContainer = document.getElementById('saved-addr-card-container');
+  const nameElem = document.getElementById('addr-display-name');
+  const textElem = document.getElementById('addr-display-text');
+  const phoneElem = document.getElementById('addr-display-phone');
+  const summaryElem = document.getElementById('sidebar-delivery-summary');
+
+  if (cardContainer) cardContainer.classList.remove('d-none');
+  if (nameElem) nameElem.innerText = name;
+  if (textElem) textElem.innerText = fullAddrText;
+  if (phoneElem) phoneElem.innerText = "+91 " + phone;
+  if (summaryElem) summaryElem.innerText = `${name}, ${pincode}`;
+
+  const drawerEl = document.getElementById('addressDrawerOffcanvas');
+  if (drawerEl && window.bootstrap) {
+    const offcanvas = window.bootstrap.Offcanvas.getInstance(drawerEl);
+    if (offcanvas) offcanvas.hide();
+  }
+
+  showToast("Address Saved Successfully!");
+  switchCheckoutStep(3);
+}
+
+function selectAddressAndProceed() {
+  const nameElem = document.getElementById('addr-display-name')?.innerText || 'Khushi Sharma';
+  const pincode = '831002';
+  const summaryElem = document.getElementById('sidebar-delivery-summary');
+  if (summaryElem) summaryElem.innerText = `${nameElem}, ${pincode}`;
+
+  showToast("Address Confirmed! Select Payment Method...");
+  switchCheckoutStep(3);
+}
+
+function switchPaymentTab(tabName) {
+  const tabs = ['upi', 'card', 'cod', 'net'];
+  tabs.forEach(t => {
+    const link = document.getElementById(`tab-${t}-link`);
+    const panel = document.getElementById(`panel-${t}`);
+    if (link) link.classList.remove('active');
+    if (panel) panel.classList.add('d-none');
+  });
+
+  const activeLink = document.getElementById(`tab-${tabName}-link`);
+  const activePanel = document.getElementById(`panel-${tabName}`);
+  if (activeLink) activeLink.classList.add('active');
+  if (activePanel) activePanel.classList.remove('d-none');
+}
+
+function processPaymentSuccess() {
+  if (snackyCart.length === 0) {
+    showToast("Your cart is empty!");
+    return;
+  }
+  showToast("Processing payment securely...");
+  setTimeout(() => {
+    snackyCart = [];
+    saveCartState();
+    showToast("🎉 Order Placed Successfully! Redirecting...");
+    setTimeout(() => {
+      window.location.href = 'track-order.html';
+    }, 1000);
+  }, 1200);
+}
+
+// Payment Gateway Page Init
 function initPaymentFlowPage() {
   const itemsContainer = document.getElementById('checkout-cart-items-list');
   const itemCountBadge = document.getElementById('checkout-item-count');
@@ -851,22 +1110,23 @@ function initPaymentFlowPage() {
   const discountElem = document.getElementById('checkout-discount');
   const shippingElem = document.getElementById('checkout-shipping');
   const totalPriceElem = document.getElementById('checkout-total-price');
-  const clearAllBtn = document.getElementById('checkout-clear-all-btn');
 
   const payBtnAmount = document.getElementById('pay-btn-amount');
   const payCardBtnAmount = document.getElementById('pay-card-btn-amount');
   const payCodBtnAmount = document.getElementById('pay-cod-btn-amount');
+  const payNetBtnAmount = document.getElementById('pay-net-btn-amount');
+  const savingsElem = document.getElementById('sidebar-savings-amount');
 
   window.renderCheckoutItems = function() {
     if (!itemsContainer) return;
 
     if (snackyCart.length === 0) {
       itemsContainer.innerHTML = `
-        <div class="text-center py-5">
-          <div class="display-3 mb-3 text-muted">🛒</div>
-          <h5 class="fw-bold text-navy mb-2">Your cart is empty</h5>
-          <p class="text-muted small mb-4">Add your favorite delicious snacks to proceed to checkout.</p>
-          <a href="products.html" class="btn btn-snacky-primary py-2 px-4">Browse Snacks <i class="bi bi-arrow-right"></i></a>
+        <div class="text-center py-4">
+          <div class="fs-1 mb-2 text-muted">🛒</div>
+          <h6 class="fw-bold text-navy mb-1">Your bag is empty</h6>
+          <p class="text-muted small mb-3">Add snacks to continue checkout.</p>
+          <a href="products.html" class="btn btn-snacky-primary py-2 px-3 small">Browse Snacks</a>
         </div>
       `;
       if (itemCountBadge) itemCountBadge.innerText = '0';
@@ -877,6 +1137,7 @@ function initPaymentFlowPage() {
       if (payBtnAmount) payBtnAmount.innerText = '₹0.00';
       if (payCardBtnAmount) payCardBtnAmount.innerText = '₹0.00';
       if (payCodBtnAmount) payCodBtnAmount.innerText = '₹0.00';
+      if (payNetBtnAmount) payNetBtnAmount.innerText = '₹0.00';
       return;
     }
 
@@ -888,23 +1149,15 @@ function initPaymentFlowPage() {
       const itemTotal = item.price * item.qty;
       subtotal += itemTotal;
       return `
-        <div class="checkout-item-row">
-          <img src="${item.image}" alt="${item.title}" class="checkout-item-img">
-          <div class="flex-grow-1">
-            <h6 class="fw-bold text-navy mb-1">${item.title}</h6>
-            <span class="badge bg-light text-muted fw-normal border">${item.weight || '100g'}</span>
-            <div class="d-flex align-items-center gap-2 mt-2">
-              <button class="qty-control-btn" onclick="updateCartQuantity(${index}, -1)">-</button>
-              <span class="fw-bold px-2 text-navy">${item.qty}</span>
-              <button class="qty-control-btn" onclick="updateCartQuantity(${index}, 1)">+</button>
+        <div class="checkout-item-row border-bottom py-2 d-flex align-items-center justify-content-between">
+          <div class="d-flex align-items-center gap-2">
+            <img src="${item.image}" alt="${item.title}" class="checkout-item-img rounded" style="width: 48px; height: 48px; object-fit: cover;">
+            <div>
+              <h6 class="fw-bold text-navy mb-0 fs-7">${item.title}</h6>
+              <span class="text-muted small">Qty: ${item.qty} × ₹${item.price}</span>
             </div>
           </div>
-          <div class="text-end">
-            <button class="btn btn-link text-danger p-0 border-0 mb-2" onclick="removeFromCart(${index})" title="Remove item">
-              <i class="bi bi-x-lg"></i>
-            </button>
-            <div class="fw-extrabold text-navy fs-6">₹${itemTotal.toFixed(2)}</div>
-          </div>
+          <div class="fw-bold text-navy fs-7">₹${itemTotal.toFixed(2)}</div>
         </div>
       `;
     }).join('');
@@ -917,56 +1170,62 @@ function initPaymentFlowPage() {
     if (discountElem) discountElem.innerText = discount > 0 ? `-₹${discount.toFixed(2)}` : '₹0.00';
     if (shippingElem) shippingElem.innerText = shipping === 0 ? 'FREE' : `₹${shipping.toFixed(2)}`;
     if (totalPriceElem) totalPriceElem.innerText = `₹${finalTotal.toFixed(2)}`;
+    if (savingsElem) savingsElem.innerText = `₹${discount}`;
 
     const formattedTotal = `₹${finalTotal.toFixed(2)}`;
     if (payBtnAmount) payBtnAmount.innerText = formattedTotal;
     if (payCardBtnAmount) payCardBtnAmount.innerText = formattedTotal;
     if (payCodBtnAmount) payCodBtnAmount.innerText = formattedTotal;
+    if (payNetBtnAmount) payNetBtnAmount.innerText = formattedTotal;
   };
 
   renderCheckoutItems();
-
-  // Listen to cart changes
   window.addEventListener('storage', renderCheckoutItems);
 
-  if (clearAllBtn) {
-    clearAllBtn.addEventListener('click', () => {
-      if (snackyCart.length === 0) return;
-      if (confirm("Are you sure you want to remove all items from your checkout?")) {
-        snackyCart = [];
-        saveCartState();
-        renderCheckoutItems();
-        showToast("Cart cleared.");
+  // Handle Logged In User State for Checkout
+  const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+  const storedUserRaw = localStorage.getItem('snacky_user');
+  const isLogged = isLoggedIn || Boolean(storedUserRaw);
+
+  let userName = "Khushi";
+  let userPhone = "";
+  let userEmail = "";
+
+  if (storedUserRaw) {
+    try {
+      const parsed = JSON.parse(storedUserRaw);
+      if (parsed) {
+        if (parsed.name) userName = parsed.name;
+        if (parsed.phone) userPhone = parsed.phone;
+        if (parsed.email) userEmail = parsed.email;
       }
-    });
+    } catch(e) {}
   }
 
-  // Payment triggers
-  function processCheckoutPayment(methodName) {
-    if (snackyCart.length === 0) {
-      showToast("Your cart is empty!");
-      return;
-    }
+  const circle1 = document.getElementById('circle-step-1');
+  const circle2 = document.getElementById('circle-step-2');
+  const circle3 = document.getElementById('circle-step-3');
+  const inputName = document.getElementById('input-name');
+  const inputPhone = document.getElementById('input-phone');
 
-    showToast(`Processing payment via ${methodName}...`);
-    setTimeout(() => {
-      snackyCart = [];
-      saveCartState();
-      showToast("Order Placed Successfully!");
-      setTimeout(() => {
-        window.location.href = 'track-order.html';
-      }, 1000);
-    }, 1500);
+  if (isLogged) {
+    document.documentElement.classList.add('user-logged-in-mode');
+    if (circle2) circle2.innerHTML = '1';
+    if (circle3) circle3.innerHTML = '2';
+    
+    // Auto-fill contact details in address drawer
+    if (inputName && !inputName.value) inputName.value = userName;
+    if (inputPhone && !inputPhone.value) inputPhone.value = userPhone.replace('+91 ', '');
+
+    // Directly open Step 2 (Choose Address)
+    switchCheckoutStep(2);
+  } else {
+    document.documentElement.classList.remove('user-logged-in-mode');
+    if (circle1) circle1.innerHTML = '1';
+    if (circle2) circle2.innerHTML = '2';
+    if (circle3) circle3.innerHTML = '3';
+    switchCheckoutStep(1);
   }
-
-  const payUpiBtn = document.getElementById('pay-now-btn');
-  if (payUpiBtn) payUpiBtn.addEventListener('click', () => processCheckoutPayment("UPI / QR Code"));
-
-  const payCardBtn = document.getElementById('pay-card-now-btn');
-  if (payCardBtn) payCardBtn.addEventListener('click', () => processCheckoutPayment("Credit/Debit Card"));
-
-  const payCodBtn = document.getElementById('pay-cod-now-btn');
-  if (payCodBtn) payCodBtn.addEventListener('click', () => processCheckoutPayment("Cash on Delivery"));
 }
 
 // Track Order Page
@@ -1083,8 +1342,46 @@ function nextOccasion() {
   switchOccasion(currentOccasionIndex + 1, false);
 }
 
+// Dynamic Navbar User Session Handler ("Login / Sign Up" -> "Hi! [Name]")
+function updateNavbarUserSession() {
+  const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+  const storedUserRaw = localStorage.getItem('snacky_user');
+  let userName = "Khushi";
+
+  if (storedUserRaw) {
+    try {
+      const parsed = JSON.parse(storedUserRaw);
+      if (parsed && parsed.name && parsed.name.trim()) {
+        userName = parsed.name.trim().split(' ')[0];
+      }
+    } catch(e) {}
+  } else if (localStorage.getItem('userName')) {
+    userName = localStorage.getItem('userName').trim().split(' ')[0];
+  }
+
+  const userBtn = document.getElementById('nav-user-account-btn');
+  const userText = document.getElementById('nav-user-text');
+
+  if (userBtn && userText) {
+    if (isLoggedIn) {
+      userText.textContent = `Hi! ${userName}`;
+      userBtn.href = 'profile.html';
+      userBtn.title = `Logged in as ${userName}`;
+      userBtn.classList.add('user-logged-in');
+    } else {
+      userText.textContent = 'Login / Sign Up';
+      userBtn.href = 'auth.html';
+      userBtn.title = 'Login or Sign Up';
+      userBtn.classList.remove('user-logged-in');
+    }
+  }
+}
+
 // Auto-start occasion slider & hero carousel 2s autoplay on DOM load
 document.addEventListener('DOMContentLoaded', () => {
+  updateNavbarUserSession();
+  window.addEventListener('storage', updateNavbarUserSession);
+
   const occasionSec = document.getElementById('healthier-ways-section');
   if (occasionSec) {
     startOccasionAutoplay();

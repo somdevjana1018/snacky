@@ -13,6 +13,7 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap"
     rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="../static/images/favicon.svg">
   <link rel="stylesheet" href="../static/css/style.css">
 </head>
 
@@ -20,15 +21,14 @@
 
   <!-- Top Announcement Bar -->
   <div class="top-announcement-bar">
-    🚚 FREE DELIVERY ABOVE ₹199
+    🚚 FREE DELIVERY ABOVE ₹250
   </div>
 
   <!-- Navigation Bar (#main-navbar) -->
   <nav class="navbar navbar-expand-lg main-navbar" id="main-navbar">
     <div class="container">
       <a class="brand-logo-container" href="index.html">
-        <span class="snacky-basket-icon"><i class="bi bi-basket-fill"></i></span>
-        <span class="snacky-brand-text">Snacky<span class="snacky-brand-dot">.</span></span>
+        <img src="../static/images/snacky_logo.svg" alt="Snacky Logo" class="brand-logo-img">
       </a>
 
       <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
@@ -60,8 +60,9 @@
             <i class="bi bi-search nav-search-icon"></i>
           </div>
 
-          <a href="profile.html" class="nav-action-btn" id="user-profile-btn" title="User Profile">
-            <i class="bi bi-person"></i>
+          <a href="auth.html" class="nav-auth-btn" id="nav-user-account-btn">
+            <i class="bi bi-person-circle"></i>
+            <span id="nav-user-text">Login / Sign Up</span>
           </a>
 
           <button class="nav-action-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#cartOffcanvas"
@@ -185,7 +186,7 @@
   <!-- Product Showcase Grid 1 - Bestselling Combos (#combos-section) -->
   <section class="container py-5" id="combos-section">
     <div class="d-flex align-items-center justify-content-between mb-4">
-      <h2 class="section-title mb-0">Bestselling Combos</h2>
+      <h2 class="section-title mb-0">Bestselling </h2>
       <a href="products.html" class="fw-bold text-navy">See All Products →</a>
     </div>
 
@@ -211,11 +212,9 @@
               <span class="weight-label-subtext">WEIGHT</span>
               <span class="weight-badge-pill">100 g</span>
             </div>
-            <div class="card-qty-action-bar">
-              <button class="card-qty-btn" onclick="updateCartItemQty(104, -1)">-</button>
-              <span class="card-qty-val" id="card-qty-val-104">1</span>
-              <button class="card-qty-btn" onclick="updateCartItemQty(104, 1)">+</button>
-            </div>
+            <button class="btn-card-add-to-cart" onclick="addToCart(104)">
+              <i class="bi bi-cart-plus-fill me-1"></i> ADD TO CART
+            </button>
           </div>
         </div>
       </div>
@@ -241,11 +240,9 @@
               <span class="weight-label-subtext">WEIGHT</span>
               <span class="weight-badge-pill">60 g</span>
             </div>
-            <div class="card-qty-action-bar">
-              <button class="card-qty-btn" onclick="updateCartItemQty(301, -1)">-</button>
-              <span class="card-qty-val" id="card-qty-val-301">1</span>
-              <button class="card-qty-btn" onclick="updateCartItemQty(301, 1)">+</button>
-            </div>
+            <button class="btn-card-add-to-cart" onclick="addToCart(301)">
+              <i class="bi bi-cart-plus-fill me-1"></i> ADD TO CART
+            </button>
           </div>
         </div>
       </div>
@@ -271,11 +268,9 @@
               <span class="weight-label-subtext">WEIGHT</span>
               <span class="weight-badge-pill">120 g</span>
             </div>
-            <div class="card-qty-action-bar">
-              <button class="card-qty-btn" onclick="updateCartItemQty(101, -1)">-</button>
-              <span class="card-qty-val" id="card-qty-val-101">1</span>
-              <button class="card-qty-btn" onclick="updateCartItemQty(101, 1)">+</button>
-            </div>
+            <button class="btn-card-add-to-cart" onclick="addToCart(101)">
+              <i class="bi bi-cart-plus-fill me-1"></i> ADD TO CART
+            </button>
           </div>
         </div>
       </div>
@@ -301,11 +296,9 @@
               <span class="weight-label-subtext">WEIGHT</span>
               <span class="weight-badge-pill">85 g</span>
             </div>
-            <div class="card-qty-action-bar">
-              <button class="card-qty-btn" onclick="updateCartItemQty(201, -1)">-</button>
-              <span class="card-qty-val" id="card-qty-val-201">1</span>
-              <button class="card-qty-btn" onclick="updateCartItemQty(201, 1)">+</button>
-            </div>
+            <button class="btn-card-add-to-cart" onclick="addToCart(201)">
+              <i class="bi bi-cart-plus-fill me-1"></i> ADD TO CART
+            </button>
           </div>
         </div>
       </div>
@@ -345,11 +338,9 @@
               <span class="weight-label-subtext">WEIGHT</span>
               <span class="weight-badge-pill">120 g</span>
             </div>
-            <div class="card-qty-action-bar">
-              <button class="card-qty-btn" onclick="updateCartItemQty(401, -1)">-</button>
-              <span class="card-qty-val" id="card-qty-val-401">1</span>
-              <button class="card-qty-btn" onclick="updateCartItemQty(401, 1)">+</button>
-            </div>
+            <button class="btn-card-add-to-cart" onclick="addToCart(401)">
+              <i class="bi bi-cart-plus-fill me-1"></i> ADD TO CART
+            </button>
           </div>
         </div>
       </div>
@@ -376,11 +367,9 @@
               <span class="weight-label-subtext">WEIGHT</span>
               <span class="weight-badge-pill">100 g</span>
             </div>
-            <div class="card-qty-action-bar">
-              <button class="card-qty-btn" onclick="updateCartItemQty(402, -1)">-</button>
-              <span class="card-qty-val" id="card-qty-val-402">1</span>
-              <button class="card-qty-btn" onclick="updateCartItemQty(402, 1)">+</button>
-            </div>
+            <button class="btn-card-add-to-cart" onclick="addToCart(402)">
+              <i class="bi bi-cart-plus-fill me-1"></i> ADD TO CART
+            </button>
           </div>
         </div>
       </div>
@@ -407,11 +396,9 @@
               <span class="weight-label-subtext">WEIGHT</span>
               <span class="weight-badge-pill">150 g</span>
             </div>
-            <div class="card-qty-action-bar">
-              <button class="card-qty-btn" onclick="updateCartItemQty(102, -1)">-</button>
-              <span class="card-qty-val" id="card-qty-val-102">1</span>
-              <button class="card-qty-btn" onclick="updateCartItemQty(102, 1)">+</button>
-            </div>
+            <button class="btn-card-add-to-cart" onclick="addToCart(102)">
+              <i class="bi bi-cart-plus-fill me-1"></i> ADD TO CART
+            </button>
           </div>
         </div>
       </div>
@@ -438,11 +425,9 @@
               <span class="weight-label-subtext">WEIGHT</span>
               <span class="weight-badge-pill">90 g</span>
             </div>
-            <div class="card-qty-action-bar">
-              <button class="card-qty-btn" onclick="updateCartItemQty(202, -1)">-</button>
-              <span class="card-qty-val" id="card-qty-val-202">1</span>
-              <button class="card-qty-btn" onclick="updateCartItemQty(202, 1)">+</button>
-            </div>
+            <button class="btn-card-add-to-cart" onclick="addToCart(202)">
+              <i class="bi bi-cart-plus-fill me-1"></i> ADD TO CART
+            </button>
           </div>
         </div>
       </div>
@@ -469,11 +454,9 @@
               <span class="weight-label-subtext">WEIGHT</span>
               <span class="weight-badge-pill">100 g</span>
             </div>
-            <div class="card-qty-action-bar">
-              <button class="card-qty-btn" onclick="updateCartItemQty(303, -1)">-</button>
-              <span class="card-qty-val" id="card-qty-val-303">1</span>
-              <button class="card-qty-btn" onclick="updateCartItemQty(303, 1)">+</button>
-            </div>
+            <button class="btn-card-add-to-cart" onclick="addToCart(303)">
+              <i class="bi bi-cart-plus-fill me-1"></i> ADD TO CART
+            </button>
           </div>
         </div>
       </div>
@@ -500,11 +483,9 @@
               <span class="weight-label-subtext">WEIGHT</span>
               <span class="weight-badge-pill">120 g</span>
             </div>
-            <div class="card-qty-action-bar">
-              <button class="card-qty-btn" onclick="updateCartItemQty(208, -1)">-</button>
-              <span class="card-qty-val" id="card-qty-val-208">1</span>
-              <button class="card-qty-btn" onclick="updateCartItemQty(208, 1)">+</button>
-            </div>
+            <button class="btn-card-add-to-cart" onclick="addToCart(208)">
+              <i class="bi bi-cart-plus-fill me-1"></i> ADD TO CART
+            </button>
           </div>
         </div>
       </div>
@@ -531,11 +512,9 @@
               <span class="weight-label-subtext">WEIGHT</span>
               <span class="weight-badge-pill">150 g</span>
             </div>
-            <div class="card-qty-action-bar">
-              <button class="card-qty-btn" onclick="updateCartItemQty(403, -1)">-</button>
-              <span class="card-qty-val" id="card-qty-val-403">1</span>
-              <button class="card-qty-btn" onclick="updateCartItemQty(403, 1)">+</button>
-            </div>
+            <button class="btn-card-add-to-cart" onclick="addToCart(403)">
+              <i class="bi bi-cart-plus-fill me-1"></i> ADD TO CART
+            </button>
           </div>
         </div>
       </div>
@@ -562,11 +541,9 @@
               <span class="weight-label-subtext">WEIGHT</span>
               <span class="weight-badge-pill">80 g</span>
             </div>
-            <div class="card-qty-action-bar">
-              <button class="card-qty-btn" onclick="updateCartItemQty(413, -1)">-</button>
-              <span class="card-qty-val" id="card-qty-val-413">1</span>
-              <button class="card-qty-btn" onclick="updateCartItemQty(413, 1)">+</button>
-            </div>
+            <button class="btn-card-add-to-cart" onclick="addToCart(413)">
+              <i class="bi bi-cart-plus-fill me-1"></i> ADD TO CART
+            </button>
           </div>
         </div>
       </div>
@@ -575,51 +552,63 @@
 
   <!-- Brand Comparison Section (#why-choose-us) -->
   <section class="container py-5" id="why-choose-us">
-    <div class="text-center mb-4">
-      <h2 class="section-title">Why choose us ?</h2>
-      <p class="text-muted">See how Snacky stands superior against ordinary market brands.</p>
+    <div class="text-center mb-5">
+      <span class="badge bg-warning-subtle text-dark px-3 py-2 rounded-pill fw-extrabold text-uppercase letter-spacing-1 mb-2 fs-7">THE SNACKY ADVANTAGE</span>
+      <h2 class="section-title text-navy display-6 fw-extrabold mb-2">Why choose us ?</h2>
+      <p class="text-muted lead mx-auto" style="max-width: 580px;">See how Snacky stands superior against ordinary market brands with 100% groundnut oil & zero compromise.</p>
     </div>
 
-    <div class="comparison-table-wrapper">
-      <div class="table-responsive">
-        <table class="table-custom">
-          <thead>
-            <tr>
-              <th>Features</th>
-              <th class="snacky-col-highlight">
-                <div class="snacky-header-box"><i class="bi bi-star-fill text-warning me-1"></i> Snacky</div>
-              </th>
-              <th>Brand A</th>
-              <th>Brand B</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Taste & Freshness</td>
-              <td class="snacky-col-highlight feature-check-positive">✓ Authentic & Homemade</td>
-              <td class="feature-cross-negative">✗ Processed & Bland</td>
-              <td class="feature-cross-negative">✗ Artificial Flavors</td>
-            </tr>
-            <tr>
-              <td>Ingredients Quality</td>
-              <td class="snacky-col-highlight feature-check-positive">✓ 100% Pure Groundnut Oil</td>
-              <td class="feature-cross-negative">✗ Harmful Palm Oil</td>
-              <td class="feature-cross-negative">✗ Hydrogenated Fats</td>
-            </tr>
-            <tr>
-              <td>Range of Products</td>
-              <td class="snacky-col-highlight feature-check-positive">✓ 60+ Healthy & Desi Varieties</td>
-              <td class="feature-cross-negative">✗ Limited 10-15 Varieties</td>
-              <td class="feature-cross-negative">✗ Standard Junk Only</td>
-            </tr>
-            <tr>
-              <td>Cost Efficiency</td>
-              <td class="snacky-col-highlight feature-check-positive">✓ Pocket Friendly (From ₹40)</td>
-              <td class="feature-cross-negative">✗ High Premium Markup</td>
-              <td class="feature-cross-negative">✗ Hidden Charges</td>
-            </tr>
-          </tbody>
-        </table>
+    <div class="why-choose-table-wrapper">
+      <div class="why-choose-table-container">
+        <!-- 1. Headers Row -->
+        <div class="table-row table-header-row">
+          <div class="table-cell cell-feature-hdr">Features</div>
+          <div class="table-cell cell-brand-snacky-hdr">
+            <img src="../static/images/snacky_logo.svg" alt="Snacky Logo" class="brand-logo-img" style="height: 54px;">
+          </div>
+          <div class="table-cell cell-brand-hdr">Brand A</div>
+          <div class="table-cell cell-brand-hdr border-right-0">Brand B</div>
+        </div>
+
+        <!-- 2. Row 1: Taste -->
+        <div class="table-row">
+          <div class="table-cell cell-feature-name">Taste</div>
+          <div class="table-cell cell-snacky-data">
+            <span class="highlight-green-text">Deliciously Healthy <i class="bi bi-check-circle-fill ms-1"></i></span>
+          </div>
+          <div class="table-cell cell-muted-data">Palm Oil-Based</div>
+          <div class="table-cell cell-muted-data border-right-0">Healthy</div>
+        </div>
+
+        <!-- 3. Row 2: Ingredients -->
+        <div class="table-row">
+          <div class="table-cell cell-feature-name">Ingredients</div>
+          <div class="table-cell cell-snacky-data">
+            <span class="highlight-green-text">Healthier Ingredients <i class="bi bi-check-circle-fill ms-1"></i></span>
+          </div>
+          <div class="table-cell cell-muted-data">Preservatives<br>Added</div>
+          <div class="table-cell cell-muted-data border-right-0">Preservatives<br>Added</div>
+        </div>
+
+        <!-- 4. Row 3: Range of Products -->
+        <div class="table-row">
+          <div class="table-cell cell-feature-name">Range of Products</div>
+          <div class="table-cell cell-snacky-data">
+            <span class="highlight-green-text">Crazy Wide Snackfest! <i class="bi bi-check-circle-fill ms-1"></i></span>
+          </div>
+          <div class="table-cell cell-muted-data">Limited Line-Up</div>
+          <div class="table-cell cell-muted-data border-right-0">Limited Line-Up</div>
+        </div>
+
+        <!-- 5. Row 4: Cost -->
+        <div class="table-row table-footer-row">
+          <div class="table-cell cell-feature-name">Cost</div>
+          <div class="table-cell cell-snacky-data">
+            <span class="highlight-green-text">Moderate <i class="bi bi-check-circle-fill ms-1"></i></span>
+          </div>
+          <div class="table-cell cell-muted-data">Cheap</div>
+          <div class="table-cell cell-muted-data border-right-0">Very High</div>
+        </div>
       </div>
     </div>
   </section>
@@ -744,8 +733,8 @@
     <div class="container">
       <div class="row g-4">
         <div class="col-lg-4">
-          <a class="navbar-brand d-flex align-items-center gap-2 text-white mb-3" href="index.html">
-            <span class="fs-4">🍿</span> <span class="fs-4 fw-extrabold">Snacky</span>
+          <a class="d-inline-block mb-3" href="index.html">
+            <img src="../static/images/snacky_logo.svg" alt="Snacky Logo" class="footer-logo-img">
           </a>
           <p class="small text-muted mb-3">
             Snacky is India's premium snacks brand bringing you authentic, palm-oil free, 100% groundnut oil crunch for

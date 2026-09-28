@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 210" width="240" height="210">
+  <defs>
+    <mask id="bite-mask-exact">
+      <!-- Cookie Base -->
+      <path d="M 120,15 C 175,10 218,48 220,105 C 222,162 178,202 120,200 C 60,198 16,155 18,98 C 20,41 65,20 120,15 Z" fill="#FFFFFF"/>
+      <!-- Bite cutout -->
+      <circle cx="188" cy="46" r="30" fill="#000000"/>
+      <circle cx="210" cy="72" r="20" fill="#000000"/>
+    </mask>
+  </defs>
+
+  <!-- Dark Teal Outer Border -->
+  <path d="M 120,12 C 178,7 222,46 224,105 C 226,164 180,205 120,203 C 58,201 13,157 15,98 C 17,39 62,17 120,12 Z" fill="#0C454D" mask="url(#bite-mask-exact)"/>
+
+  <!-- Inner Vibrant Teal Cookie Body -->
+  <path d="M 120,20 C 172,15 212,51 214,105 C 216,159 174,196 120,194 C 64,192 22,151 24,98 C 26,45 68,25 120,20 Z" fill="#007980" mask="url(#bite-mask-exact)"/>
+
+  <!-- Bite Crumb Specks Top Right -->
+  <circle cx="178" cy="22" r="4.5" fill="#0C454D"/>
+  <circle cx="198" cy="26" r="3" fill="#0C454D"/>
+  <circle cx="180" cy="44" r="5" fill="#0C454D"/>
+  <circle cx="195" cy="40" r="3.5" fill="#007980"/>
+  <circle cx="204" cy="52" r="4" fill="#0C454D"/>
+  <circle cx="214" cy="62" r="3" fill="#0C454D"/>
+
+  <!-- Bold White Text Snacky. -->
+  <text x="110" y="125" font-family="'Outfit', 'Plus Jakarta Sans', system-ui, sans-serif" font-weight="800" font-size="46" fill="#FFFFFF" text-anchor="middle" letter-spacing="-1.5px">Snacky.</text>
+</svg>

@@ -9,6 +9,7 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="../static/images/favicon.svg">
   <link rel="stylesheet" href="../static/css/style.css">
 </head>
 <body>
@@ -27,8 +28,7 @@
   <nav class="navbar navbar-expand-lg main-navbar" id="main-navbar">
     <div class="container">
       <a class="brand-logo-container" href="index.html">
-        <span class="snacky-basket-icon"><i class="bi bi-basket-fill"></i></span>
-        <span class="snacky-brand-text">Snacky<span class="snacky-brand-dot">.</span></span>
+        <img src="../static/images/snacky_logo.svg" alt="Snacky Logo" class="brand-logo-img">
       </a>
 
       <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
@@ -49,7 +49,10 @@
             <input type="text" class="nav-search-input" id="nav-search-input" placeholder="Search snacks...">
             <i class="bi bi-search nav-search-icon"></i>
           </div>
-          <a href="profile.html" class="nav-action-btn" id="user-profile-btn" title="User Profile"><i class="bi bi-person"></i></a>
+          <a href="auth.html" class="nav-auth-btn" id="nav-user-account-btn">
+            <i class="bi bi-person-circle"></i>
+            <span id="nav-user-text">Login / Sign Up</span>
+          </a>
           <button class="nav-action-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#cartOffcanvas" title="Shopping Cart">
             <i class="bi bi-cart3"></i>
             <span class="cart-count-badge">0</span>
@@ -60,77 +63,122 @@
   </nav>
 
   <!-- Auth Centered Card Section (#auth-card-wrapper) -->
-  <section class="container my-5" id="auth-card-wrapper">
-    <div class="auth-card-container">
-      <div class="text-center mb-4">
-        <div class="d-inline-flex align-items-center justify-content-center bg-warning text-dark rounded-circle mb-2 w-60px h-60px font-size-2rem">
-          🍿
-        </div>
-        <h3 class="fw-extrabold text-navy">Welcome to Snacky</h3>
-        <p class="text-muted small mb-0">Sign in to access your orders and saved addresses</p>
+  <section class="container my-5 d-flex justify-content-center align-items-center min-vh-75" id="auth-card-wrapper">
+    <div class="auth-card-container text-center">
+      
+      <!-- Top Website Brand Logo (Bigger Size, Transparent Background) -->
+      <div class="auth-logo-header-wrapper mx-auto mb-3">
+        <img src="../static/images/snacky_logo.svg" alt="Snacky Brand Logo" class="auth-badge-logo" style="height: 72px; width: auto;">
       </div>
 
-      <ul class="nav nav-pills nav-justified mb-4 p-1 bg-light rounded-pill" id="authTabs" role="tablist">
-        <li class="nav-item" role="presentation">
-          <button class="nav-link active rounded-pill fw-bold" id="otp-tab" data-bs-toggle="pill" data-bs-target="#otp-flow" type="button">Mobile OTP</button>
-        </li>
-        <li class="nav-item" role="presentation">
-          <button class="nav-link rounded-pill fw-bold" id="email-tab" data-bs-toggle="pill" data-bs-target="#email-flow" type="button">Email & Password</button>
-        </li>
-      </ul>
+      <!-- Segmented Pill Toggle Switch Bar (Sign In left, Sign Up right) -->
+      <div class="auth-toggle-pill-bar mb-4">
+        <button class="auth-toggle-pill-btn active" id="btn-toggle-signin" onclick="toggleAuthView('signin')">Sign In</button>
+        <button class="auth-toggle-pill-btn" id="btn-toggle-signup" onclick="toggleAuthView('signup')">Sign Up</button>
+      </div>
 
-      <div class="tab-content" id="authTabsContent">
-        <!-- Flow A: Mobile OTP Flow -->
-        <div class="tab-pane fade show active" id="otp-flow">
-          <div id="auth-step-phone">
-            <h5 class="fw-bold text-navy mb-1">Sign in with Phone</h5>
-            <p class="text-muted small mb-3">Enter your mobile number to receive a verification OTP.</p>
+      <!-- VIEW A: SIGN IN -->
+      <div id="view-signin">
+        <h2 class="fw-extrabold text-navy mb-1" id="auth-title-text">Sign in</h2>
+        <p class="text-muted small mb-4" id="auth-subtitle-text">Enter your phone number to continue</p>
 
-            <div class="input-group mb-4">
-              <span class="input-group-text bg-light fw-bold text-navy border-end-0 rounded-start-3">+91</span>
-              <input type="tel" class="form-control rounded-end-3 py-2" id="auth-phone-input" placeholder="Enter 10-digit mobile number" maxlength="10">
-            </div>
+        <!-- Step 1: Phone Input -->
+        <div id="auth-step-phone">
+          <div class="input-group auth-phone-input-group mb-4">
+            <span class="input-group-text">+91</span>
+            <input type="tel" class="form-control" id="auth-phone-input" placeholder="Enter phone number" maxlength="10">
+          </div>
 
-            <button class="btn btn-snacky-primary w-100 py-3 mb-3 text-center" id="auth-continue-phone-btn">
-              Continue <i class="bi bi-arrow-right"></i>
+          <button class="btn btn-auth-continue w-100 py-3 mb-3" id="auth-continue-phone-btn">
+            Continue
+          </button>
+
+          <div class="mb-3">
+            <button class="btn btn-link text-muted small p-0 text-decoration-none" type="button" onclick="showToast('OTP sent via SMS')">
+              Get message on SMS instead
             </button>
           </div>
 
-          <div id="auth-step-otp" class="display-none">
-            <h5 class="fw-bold text-navy mb-1">Enter Verification Code</h5>
-            <p class="text-muted small mb-2">We've sent a 6-digit OTP code to your phone. (Use code: <strong>123456</strong>)</p>
+          <hr class="my-3 text-muted opacity-25">
 
-            <div class="otp-input-group">
-              <input type="text" class="otp-digit-input" maxlength="1" autofocus>
-              <input type="text" class="otp-digit-input" maxlength="1">
-              <input type="text" class="otp-digit-input" maxlength="1">
-              <input type="text" class="otp-digit-input" maxlength="1">
-              <input type="text" class="otp-digit-input" maxlength="1">
-              <input type="text" class="otp-digit-input" maxlength="1">
-            </div>
-
-            <button class="btn btn-snacky-primary w-100 py-3 mb-3 text-center" id="auth-verify-otp-btn">
-              Verify & Sign In <i class="bi bi-check-circle"></i>
+          <div>
+            <button class="btn btn-link text-primary-violet fw-bold small text-decoration-none" type="button" onclick="toggleAuthView('signup')">
+              New to Snacky? Create Account (Sign Up)
             </button>
           </div>
         </div>
 
-        <!-- Flow B: Email & Password -->
-        <div class="tab-pane fade" id="email-flow">
-          <div class="form-floating mb-3">
-            <input type="email" class="form-control rounded-3" placeholder="name@example.com" id="email-login-input">
-            <label for="email-login-input">Email address</label>
-          </div>
-          <div class="form-floating mb-3">
-            <input type="password" class="form-control rounded-3" placeholder="Password" id="password-login-input">
-            <label for="password-login-input">Password</label>
+        <!-- Step 2: OTP Verification -->
+        <div id="auth-step-otp" class="d-none text-start">
+          <h6 class="fw-bold text-navy mb-1">Enter Verification Code</h6>
+          <p class="text-muted small mb-3">We've sent a 6-digit OTP code to your phone. (Use code: <strong>123456</strong>)</p>
+
+          <div class="otp-input-group mb-3">
+            <input type="text" class="otp-digit-input" maxlength="1" autofocus>
+            <input type="text" class="otp-digit-input" maxlength="1">
+            <input type="text" class="otp-digit-input" maxlength="1">
+            <input type="text" class="otp-digit-input" maxlength="1">
+            <input type="text" class="otp-digit-input" maxlength="1">
+            <input type="text" class="otp-digit-input" maxlength="1">
           </div>
 
-          <button class="btn btn-snacky-primary w-100 py-3 mb-3 text-center" id="email-login-btn">
-            Sign In <i class="bi bi-box-arrow-in-right"></i>
+          <button class="btn btn-auth-continue w-100 py-3 mb-3" id="auth-verify-otp-btn">
+            Verify & Continue
           </button>
         </div>
       </div>
+
+      <!-- VIEW B: SIGN UP -->
+      <div id="view-signup" class="d-none">
+        <div id="signup-step-fields">
+          <h2 class="fw-extrabold text-navy mb-1">Sign Up</h2>
+          <p class="text-muted small mb-4">Enter your details to create a new account</p>
+
+          <div class="mb-3 text-start">
+            <label class="form-label small fw-bold text-muted mb-1">Full Name</label>
+            <input type="text" class="form-control rounded-3 py-2" id="signup-name-input" placeholder="Enter full name">
+          </div>
+
+          <div class="mb-4 text-start">
+            <label class="form-label small fw-bold text-muted mb-1">Mobile Number</label>
+            <div class="input-group auth-phone-input-group">
+              <span class="input-group-text">+91</span>
+              <input type="tel" class="form-control" id="signup-phone-input" placeholder="Enter phone number" maxlength="10">
+            </div>
+          </div>
+
+          <button class="btn btn-auth-continue w-100 py-3 mb-3" id="signup-continue-btn" onclick="proceedToSignupOtp()">
+            Continue
+          </button>
+
+          <hr class="my-3 text-muted opacity-25">
+
+          <div>
+            <button class="btn btn-link text-primary-violet fw-bold small text-decoration-none" type="button" onclick="toggleAuthView('signin')">
+              Already have an account? Sign In
+            </button>
+          </div>
+        </div>
+
+        <div id="signup-step-otp" class="d-none text-start">
+          <h6 class="fw-bold text-navy mb-1">Enter Verification Code</h6>
+          <p class="text-muted small mb-3">We've sent a 6-digit OTP code to your phone. (Use code: <strong>123456</strong>)</p>
+
+          <div class="otp-input-group mb-3">
+            <input type="text" class="otp-digit-input signup-otp" maxlength="1" autofocus>
+            <input type="text" class="otp-digit-input signup-otp" maxlength="1">
+            <input type="text" class="otp-digit-input signup-otp" maxlength="1">
+            <input type="text" class="otp-digit-input signup-otp" maxlength="1">
+            <input type="text" class="otp-digit-input signup-otp" maxlength="1">
+            <input type="text" class="otp-digit-input signup-otp" maxlength="1">
+          </div>
+
+          <button class="btn btn-auth-continue w-100 py-3 mb-3" id="signup-verify-otp-btn" onclick="completeCustomAuthSignup()">
+            Verify & Create Account
+          </button>
+        </div>
+      </div>
+
     </div>
   </section>
 
@@ -139,8 +187,8 @@
     <div class="container">
       <div class="row g-4">
         <div class="col-lg-4">
-          <a class="navbar-brand navbar-brand-logo text-white mb-3 d-inline-block" href="index.html">
-            <div class="brand-logo-circle">Let's<br>Try</div> Snacky
+          <a class="d-inline-block mb-3" href="index.html">
+            <img src="../static/images/snacky_logo.svg" alt="Snacky Logo" class="footer-logo-img">
           </a>
           <p class="small text-muted mb-3">Snacky is India's premium snacks brand bringing you authentic, palm-oil free crunch.</p>
         </div>
