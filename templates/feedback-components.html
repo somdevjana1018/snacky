@@ -1,0 +1,349 @@
+<!-- ==========================================================================
+     SNACKY SNACKS MANAGEMENT SYSTEM - FEEDBACK & REVIEWS SYSTEM
+     Component Architecture: feedback-components.html
+     Strict Constraints: ZERO Inline CSS | ZERO Internal CSS | Bootstrap 5.3 CDN
+     ========================================================================== -->
+
+<!-- ==========================================================================
+     COMPONENT 1: Global Floating Feedback Trigger & Modal (#siteFeedbackModal)
+     (Can be placed on all pages before closing </body>)
+     ========================================================================== -->
+
+<!-- Floating Pill Trigger Button -->
+<button type="button" class="btn-floating-feedback" id="btn-floating-feedback" data-bs-toggle="modal" data-bs-target="#siteFeedbackModal" aria-label="Open Feedback Dialog">
+  <i class="bi bi-chat-heart-fill feedback-icon"></i>
+  <span class="feedback-label">Feedback</span>
+</button>
+
+<!-- Global Site Experience Feedback Modal -->
+<div class="modal fade feedback-modal-custom" id="siteFeedbackModal" tabindex="-1" aria-labelledby="siteFeedbackModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content feedback-modal-content">
+      
+      <!-- Modal Header -->
+      <div class="modal-header feedback-modal-header">
+        <div class="d-flex align-items-center gap-2">
+          <div class="feedback-header-icon-wrap">
+            <i class="bi bi-heart-pulse-fill"></i>
+          </div>
+          <div>
+            <h5 class="modal-title feedback-modal-title" id="siteFeedbackModalLabel">Share Your Experience</h5>
+            <p class="feedback-modal-subtitle mb-0">Help us make Snacky even crispier & delightful!</p>
+          </div>
+        </div>
+        <button type="button" class="btn-feedback-close" data-bs-dismiss="modal" aria-label="Close">
+          <i class="bi bi-x-lg"></i>
+        </button>
+      </div>
+
+      <!-- Modal Body Form -->
+      <form id="site-feedback-form" onsubmit="event.preventDefault(); submitSiteFeedback();">
+        <div class="modal-body feedback-modal-body">
+          
+          <!-- Rating Emoji Scale -->
+          <div class="feedback-section-block">
+            <label class="feedback-form-label">How was your Snacky experience?</label>
+            <div class="emoji-rating-grid" id="site-feedback-emojis" role="radiogroup" aria-label="Experience Rating">
+              <button type="button" class="emoji-item" data-rating="sad" data-label="Sad" aria-label="Sad">
+                <span class="emoji-icon">😞</span>
+                <span class="emoji-text">Sad</span>
+              </button>
+              <button type="button" class="emoji-item" data-rating="okay" data-label="Okay" aria-label="Okay">
+                <span class="emoji-icon">😐</span>
+                <span class="emoji-text">Okay</span>
+              </button>
+              <button type="button" class="emoji-item" data-rating="good" data-label="Good" aria-label="Good">
+                <span class="emoji-icon">😊</span>
+                <span class="emoji-text">Good</span>
+              </button>
+              <button type="button" class="emoji-item active" data-rating="loved" data-label="Loved" aria-label="Loved">
+                <span class="emoji-icon">😍</span>
+                <span class="emoji-text">Loved</span>
+              </button>
+            </div>
+            <input type="hidden" id="site-feedback-rating-val" value="loved">
+          </div>
+
+          <!-- Category Selection Pills -->
+          <div class="feedback-section-block">
+            <label class="feedback-form-label">What would you like to talk about?</label>
+            <div class="feedback-category-pills" id="site-feedback-categories">
+              <button type="button" class="feedback-pill-btn active" data-category="Taste & Freshness">
+                <i class="bi bi-cup-hot me-1"></i> Taste & Freshness
+              </button>
+              <button type="button" class="feedback-pill-btn" data-category="Packaging Quality">
+                <i class="bi bi-box-seam me-1"></i> Packaging Quality
+              </button>
+              <button type="button" class="feedback-pill-btn" data-category="Delivery Speed">
+                <i class="bi bi-lightning-charge me-1"></i> Delivery Speed
+              </button>
+              <button type="button" class="feedback-pill-btn" data-category="Website Experience">
+                <i class="bi bi-laptop me-1"></i> Website Experience
+              </button>
+            </div>
+            <input type="hidden" id="site-feedback-category-val" value="Taste & Freshness">
+          </div>
+
+          <!-- Message Textarea -->
+          <div class="feedback-section-block mb-1">
+            <label class="feedback-form-label" for="site-feedback-message">Tell us more details (Optional)</label>
+            <textarea class="form-control feedback-textarea" id="site-feedback-message" rows="3" placeholder="Tell us what you liked or how we can improve..."></textarea>
+          </div>
+
+        </div>
+
+        <!-- Modal Footer CTA -->
+        <div class="modal-footer feedback-modal-footer">
+          <button type="submit" class="btn-feedback-submit" id="site-feedback-submit-btn">
+            <span>Submit Feedback</span>
+            <i class="bi bi-arrow-right"></i>
+          </button>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</div>
+
+
+<!-- ==========================================================================
+     COMPONENT 2: Product & Delivered Order Rating Modal (#snackRatingModal)
+     (Used across Track Order, Customer Profile & Product Detail pages)
+     ========================================================================== -->
+<div class="modal fade snack-review-modal-custom" id="snackRatingModal" tabindex="-1" aria-labelledby="snackRatingModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content snack-review-modal-content">
+      
+      <!-- Modal Header -->
+      <div class="modal-header snack-review-modal-header">
+        <div class="d-flex align-items-center gap-2">
+          <div class="snack-header-icon-wrap">
+            <i class="bi bi-star-fill"></i>
+          </div>
+          <div>
+            <h5 class="modal-title snack-review-modal-title" id="snackRatingModalLabel">
+              <span id="rating-modal-snack-title">Review: Poha Mixture</span>
+            </h5>
+            <p class="snack-review-modal-subtitle mb-0">Verified Foodie Experience</p>
+          </div>
+        </div>
+        <button type="button" class="btn-feedback-close" data-bs-dismiss="modal" aria-label="Close">
+          <i class="bi bi-x-lg"></i>
+        </button>
+      </div>
+
+      <!-- Modal Body Form -->
+      <form id="snack-review-form" onsubmit="event.preventDefault(); submitSnackReview();">
+        <input type="hidden" id="snack-review-product-name" value="Poha Mixture">
+        <input type="hidden" id="snack-review-order-id" value="SNK-8947291">
+
+        <div class="modal-body snack-review-modal-body">
+          
+          <!-- Interactive 5-Star Rating Box -->
+          <div class="review-section-block text-center">
+            <label class="review-form-label mb-2 d-block">Overall Snack Rating</label>
+            <div class="star-rating-selector" id="modal-star-rating" role="radiogroup" aria-label="Star Rating">
+              <button type="button" class="star-item-btn active" data-rating="1" aria-label="1 Star"><i class="bi bi-star-fill"></i></button>
+              <button type="button" class="star-item-btn active" data-rating="2" aria-label="2 Stars"><i class="bi bi-star-fill"></i></button>
+              <button type="button" class="star-item-btn active" data-rating="3" aria-label="3 Stars"><i class="bi bi-star-fill"></i></button>
+              <button type="button" class="star-item-btn active" data-rating="4" aria-label="4 Stars"><i class="bi bi-star-fill"></i></button>
+              <button type="button" class="star-item-btn active" data-rating="5" aria-label="5 Stars"><i class="bi bi-star-fill"></i></button>
+            </div>
+            <div class="star-rating-status-text" id="star-rating-status-text">5.0 - Absolutely Delicious!</div>
+            <input type="hidden" id="snack-review-stars-val" value="5">
+          </div>
+
+          <!-- Quick Tag Pills (Multi-selectable) -->
+          <div class="review-section-block">
+            <label class="review-form-label">What describes this snack best?</label>
+            <div class="snack-quick-tags-grid" id="snack-review-tag-pills">
+              <button type="button" class="snack-tag-pill active" data-tag="Extra Crispy">
+                <i class="bi bi-check2 me-1"></i> Extra Crispy
+              </button>
+              <button type="button" class="snack-tag-pill active" data-tag="Perfect Spice">
+                <i class="bi bi-check2 me-1"></i> Perfect Spice
+              </button>
+              <button type="button" class="snack-tag-pill" data-tag="Low Oil">
+                <i class="bi bi-check2 me-1"></i> Low Oil
+              </button>
+              <button type="button" class="snack-tag-pill" data-tag="Slightly Salty">
+                <i class="bi bi-check2 me-1"></i> Slightly Salty
+              </button>
+              <button type="button" class="snack-tag-pill" data-tag="Fresh Aroma">
+                <i class="bi bi-check2 me-1"></i> Fresh Aroma
+              </button>
+              <button type="button" class="snack-tag-pill" data-tag="Munching Favorite">
+                <i class="bi bi-check2 me-1"></i> Munching Favorite
+              </button>
+            </div>
+          </div>
+
+          <!-- Review Comment Input -->
+          <div class="review-section-block mb-1">
+            <label class="review-form-label" for="snack-review-comment">Your Detailed Review</label>
+            <textarea class="form-control review-textarea" id="snack-review-comment" rows="3" placeholder="Share your crunch experience, taste notes, packaging feedback..."></textarea>
+          </div>
+
+        </div>
+
+        <!-- Modal Footer CTA -->
+        <div class="modal-footer snack-review-modal-footer">
+          <button type="submit" class="btn-snack-review-submit" id="snack-review-submit-btn">
+            <i class="bi bi-send-fill me-2"></i> Submit Snack Review
+          </button>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</div>
+
+
+<!-- ==========================================================================
+     COMPONENT 3: Product Detail Page Review Breakdown & Reviews List Block
+     (Placed below the nutrition table in product-detail.html)
+     ========================================================================== -->
+<section class="product-reviews-section mt-5" id="product-reviews-section">
+  
+  <!-- Section Title -->
+  <div class="d-flex align-items-center justify-content-between flex-wrap gap-3 mb-4 pb-3 border-bottom">
+    <div>
+      <h3 class="fw-extrabold text-navy mb-1 d-flex align-items-center gap-2">
+        <i class="bi bi-stars text-warning"></i> Customer Reviews & Ratings
+      </h3>
+      <p class="text-muted small mb-0">Honest feedback from 100% verified Snacky munchers</p>
+    </div>
+    
+    <button type="button" class="btn-write-review" onclick="openSnackRatingModalFromDetail()">
+      <i class="bi bi-pencil-square me-2"></i> Write a Review
+    </button>
+  </div>
+
+  <!-- Ratings Summary Card -->
+  <div class="ratings-summary-card mb-5">
+    <div class="row align-items-center g-4">
+      
+      <!-- Left Column: Large Numerical Score & Badge -->
+      <div class="col-lg-4 text-center border-end-lg">
+        <div class="rating-big-score" id="product-detail-avg-score">4.8</div>
+        <div class="rating-big-stars mb-2" id="product-detail-avg-stars">
+          <i class="bi bi-star-fill text-warning"></i>
+          <i class="bi bi-star-fill text-warning"></i>
+          <i class="bi bi-star-fill text-warning"></i>
+          <i class="bi bi-star-fill text-warning"></i>
+          <i class="bi bi-star-fill text-warning"></i>
+        </div>
+        <div class="rating-foodie-count" id="product-detail-review-count">Based on 128 verified foodies</div>
+        <div class="verified-badge-pill mt-2">
+          <i class="bi bi-patch-check-fill text-success me-1"></i> 100% Verified Purchases
+        </div>
+      </div>
+
+      <!-- Right Column: Star Breakdown Progress Bars -->
+      <div class="col-lg-8">
+        <div class="rating-breakdown-list">
+          
+          <!-- 5 Stars -->
+          <div class="rating-bar-row">
+            <span class="rating-bar-label">5 Stars</span>
+            <div class="progress rating-progress-track">
+              <div class="progress-bar rating-progress-fill rating-fill-5" role="progressbar" aria-valuenow="84" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+            <span class="rating-bar-percent">84%</span>
+          </div>
+
+          <!-- 4 Stars -->
+          <div class="rating-bar-row">
+            <span class="rating-bar-label">4 Stars</span>
+            <div class="progress rating-progress-track">
+              <div class="progress-bar rating-progress-fill rating-fill-4" role="progressbar" aria-valuenow="12" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+            <span class="rating-bar-percent">12%</span>
+          </div>
+
+          <!-- 3 Stars -->
+          <div class="rating-bar-row">
+            <span class="rating-bar-label">3 Stars</span>
+            <div class="progress rating-progress-track">
+              <div class="progress-bar rating-progress-fill rating-fill-3" role="progressbar" aria-valuenow="3" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+            <span class="rating-bar-percent">3%</span>
+          </div>
+
+          <!-- 2 Stars -->
+          <div class="rating-bar-row">
+            <span class="rating-bar-label">2 Stars</span>
+            <div class="progress rating-progress-track">
+              <div class="progress-bar rating-progress-fill rating-fill-2" role="progressbar" aria-valuenow="1" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+            <span class="rating-bar-percent">1%</span>
+          </div>
+
+          <!-- 1 Star -->
+          <div class="rating-bar-row">
+            <span class="rating-bar-label">1 Star</span>
+            <div class="progress rating-progress-track">
+              <div class="progress-bar rating-progress-fill rating-fill-1" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+            <span class="rating-bar-percent">0%</span>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Dynamic User Reviews Feed Container -->
+  <div class="product-reviews-feed" id="product-reviews-feed-container">
+    <!-- Populated dynamically by script.js from localStorage & verified seed data -->
+  </div>
+
+</section>
+
+
+<!-- ==========================================================================
+     COMPONENT 4: Delivered Order Summary Card Sample Trigger
+     (Placed in track-order.html & profile.html for delivered orders)
+     ========================================================================== -->
+<div class="delivered-order-review-card card card-body border-0 shadow-sm rounded-4 p-4 mb-4 bg-white">
+  <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 pb-3 border-bottom mb-3">
+    <div>
+      <span class="badge bg-success-subtle text-success font-bold px-3 py-1 rounded-pill mb-1">
+        <i class="bi bi-check-circle-fill me-1"></i> DELIVERED
+      </span>
+      <h5 class="fw-extrabold text-navy mb-0">Order #SNK-8947291</h5>
+    </div>
+    <div class="small text-muted">
+      Delivered on <strong>30 Aug 2026</strong>
+    </div>
+  </div>
+
+  <div class="order-snack-items-list mb-3">
+    <div class="order-snack-item d-flex justify-content-between align-items-center flex-wrap gap-2 py-2 border-bottom">
+      <div class="d-flex align-items-center gap-3">
+        <div class="order-snack-icon-box">🥣</div>
+        <div>
+          <h6 class="fw-bold text-navy mb-0">Poha Mixture</h6>
+          <span class="small text-muted">140 g • ₹75.00</span>
+        </div>
+      </div>
+      <button type="button" class="btn-rate-snack-trigger" onclick="openSnackRatingModal('Poha Mixture', 'SNK-8947291')">
+        <i class="bi bi-star-fill text-warning me-1"></i> Rate Snack
+      </button>
+    </div>
+
+    <div class="order-snack-item d-flex justify-content-between align-items-center flex-wrap gap-2 py-2 border-bottom">
+      <div class="d-flex align-items-center gap-3">
+        <div class="order-snack-icon-box">🌀</div>
+        <div>
+          <h6 class="fw-bold text-navy mb-0">Millet Chakli</h6>
+          <span class="small text-muted">100 g • ₹64.00</span>
+        </div>
+      </div>
+      <button type="button" class="btn-rate-snack-trigger" onclick="openSnackRatingModal('Millet Chakli', 'SNK-8947291')">
+        <i class="bi bi-star-fill text-warning me-1"></i> Rate Snack
+      </button>
+    </div>
+  </div>
+</div>

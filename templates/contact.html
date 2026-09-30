@@ -3,52 +3,79 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contact Us & Bulk Orders - Snacky</title>
-  <meta name="description" content="Get in touch with Snacky for customer support, bulk orders, corporate gifting, or distribution inquiries.">
+  <title>Contact Us - Snacky</title>
+  <meta name="description" content="Get in touch with Snacky for customer support, bulk orders, corporate gifting, or order inquiries.">
   
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
-  <link rel="icon" type="image/svg+xml" href="../static/images/favicon.svg">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="../static/images/snacky_logo_transparent.png">
   <link rel="stylesheet" href="../static/css/style.css">
 </head>
 <body>
 
-  <!-- Top Announcement Bar -->
+  <!-- Top Announcement Bar with Marquee Effect -->
   <div class="top-announcement-bar">
-    🚚 FREE DELIVERY ABOVE ₹199
+    <div class="marquee-track">
+      <div class="marquee-content">
+        <span>🚚 FREE DELIVERY ABOVE ₹199</span> <span class="marquee-dot">•</span>
+        <span>🍿 100% PURE GROUNDNUT OIL</span> <span class="marquee-dot">•</span>
+        <span>✨ NO PALM OIL • NO CHOLESTEROL</span> <span class="marquee-dot">•</span>
+        <span>🎉 USE CODE: SNACKY50 FOR ₹50 OFF</span> <span class="marquee-dot">•</span>
+      </div>
+      <div class="marquee-content">
+        <span>🚚 FREE DELIVERY ABOVE ₹199</span> <span class="marquee-dot">•</span>
+        <span>🍿 100% PURE GROUNDNUT OIL</span> <span class="marquee-dot">•</span>
+        <span>✨ NO PALM OIL • NO CHOLESTEROL</span> <span class="marquee-dot">•</span>
+        <span>🎉 USE CODE: SNACKY50 FOR ₹50 OFF</span> <span class="marquee-dot">•</span>
+      </div>
+    </div>
   </div>
 
-  <!-- Navigation Bar -->
+  <!-- Navigation Bar (#main-navbar) -->
   <nav class="navbar navbar-expand-lg main-navbar" id="main-navbar">
     <div class="container">
       <a class="brand-logo-container" href="index.html">
-        <img src="../static/images/snacky_logo.svg" alt="Snacky Logo" class="brand-logo-img">
+        <img src="../static/images/snacky_logo_transparent.png" alt="Snacky Logo" class="brand-logo-img">
       </a>
 
-      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
 
       <div class="collapse navbar-collapse" id="navbarContent">
-        <ul class="navbar-nav mx-auto mb-2 mb-lg-0 gap-3">
-          <li class="nav-item"><a class="nav-link nav-link-custom" href="index.html">Home</a></li>
-          <li class="nav-item"><a class="nav-link nav-link-custom" href="products.html">Products</a></li>
-          <li class="nav-item"><a class="nav-link nav-link-custom" href="offers.html">Offers</a></li>
-          <li class="nav-item"><a class="nav-link nav-link-custom" href="about.html">About</a></li>
-          <li class="nav-item"><a class="nav-link nav-link-custom active" href="contact.html">Contact</a></li>
+        <ul class="navbar-nav mb-2 mb-lg-0 gap-1 gap-lg-2">
+          <li class="nav-item">
+            <a class="nav-link nav-link-custom" href="index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-link-custom" href="products.html">Products</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-link-custom" href="offers.html">Offers</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-link-custom" href="about.html">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-link-custom active" href="contact.html">Contact</a>
+          </li>
         </ul>
 
         <div class="nav-actions-right">
           <div class="nav-search-container">
             <input type="text" class="nav-search-input" id="nav-search-input" placeholder="Search snacks...">
-            <i class="bi bi-search nav-search-icon"></i>
+            <i class="bi bi-search nav-search-icon" id="nav-search-trigger"></i>
           </div>
-          <a href="auth.html" class="nav-auth-btn" id="nav-user-account-btn">
-            <i class="bi bi-person-circle"></i>
-            <span id="nav-user-text">Login / Sign Up</span>
-          </a>
-          <button class="nav-action-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#cartOffcanvas" title="Shopping Cart">
+
+          <div id="auth-nav-container">
+            <a href="auth.html" class="nav-action-btn" id="nav-user-account-btn" title="Account / Login" aria-label="Account">
+              <i class="bi bi-person"></i>
+            </a>
+          </div>
+
+          <button class="nav-action-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#cartOffcanvas"
+            title="Shopping Cart">
             <i class="bi bi-cart3"></i>
             <span class="cart-count-badge">0</span>
           </button>
@@ -57,216 +84,379 @@
     </div>
   </nav>
 
-  <!-- Main Contact Page Content Wrapper -->
-  <div class="contact-page-wrapper">
-    <!-- 1. Hero Header Section -->
-    <section class="contact-hero-header">
-      <h1 class="contact-hero-title">Contact Us</h1>
-      <p class="contact-hero-subtitle">Have a question about our snacks, bulk orders, or your delivery? We'd love to hear from you.</p>
-    </section>
+  <!-- 1. Hero Header Section (#contact-hero) -->
+  <section class="contact-hero-banner py-4 py-md-5" id="contact-hero">
+    <div class="container text-center py-2 py-md-3">
+      <span class="badge bg-warning text-dark rounded-pill fw-bold px-3 py-1 mb-2 fs-7">WE ARE HERE TO HELP</span>
+      <h1 class="fw-extrabold text-navy mb-2 contact-page-title">Contact Us</h1>
+      <p class="text-muted mx-auto mw-600px mb-0 contact-page-subtitle">Have questions about ingredients, bulk orders, or your delivery? We'd love to hear from you.</p>
+    </div>
+  </section>
 
-    <!-- 2. Form & Image Split Card -->
-    <section class="container mb-5">
-      <div class="contact-main-card">
-        <div class="row align-items-stretch g-5">
-          <!-- Left Column: Form -->
-          <div class="col-lg-7">
-            <form id="contact-form">
-              <div class="row g-3 mb-3">
-                <div class="col-md-6">
-                  <label class="form-label fw-bold small">First Name</label>
-                  <input type="text" class="form-control contact-form-input" id="contact-first-name" placeholder="Ex. John" required>
-                </div>
-                <div class="col-md-6">
-                  <label class="form-label fw-bold small">Last Name</label>
-                  <input type="text" class="form-control contact-form-input" id="contact-last-name" placeholder="Ex. Sharma" required>
-                </div>
+  <!-- 2. Split Main Contact Section (#get-in-touch-section) -->
+  <section class="container my-4 my-md-5" id="get-in-touch-section">
+    <div class="row g-3 g-md-4">
+      
+      <!-- Left Column: Quick Contact Info Cards & Map -->
+      <div class="col-lg-6">
+        <!-- 2x2 Grid of Quick Contact Info Cards -->
+        <div class="row g-2 g-md-3 mb-3 mb-md-4">
+          <!-- Card 1: Phone -->
+          <div class="col-6 col-sm-6">
+            <div class="contact-quick-card">
+              <div class="contact-quick-icon-box bg-success-subtle text-success">
+                <i class="bi bi-telephone-fill"></i>
               </div>
-
-              <div class="row g-3 mb-3">
-                <div class="col-md-6">
-                  <label class="form-label fw-bold small">Email Address</label>
-                  <input type="email" class="form-control contact-form-input" id="contact-email" placeholder="example@mail.com" required>
-                </div>
-                <div class="col-md-6">
-                  <label class="form-label fw-bold small">Subject</label>
-                  <input type="text" class="form-control contact-form-input" id="contact-subject" placeholder="How can we help?" required>
-                </div>
-              </div>
-
-              <div class="mb-4">
-                <label class="form-label fw-bold small">Comments / Questions</label>
-                <textarea class="form-control contact-form-input" id="contact-message" rows="4" placeholder="Your message..." required></textarea>
-              </div>
-
-              <button type="submit" class="btn btn-contact-submit">
-                Submit
-              </button>
-            </form>
+              <h6 class="fw-extrabold text-navy mb-1 contact-card-heading">Phone Support</h6>
+              <a href="tel:+919654932262" class="text-decoration-none fw-bold text-navy d-block mb-1 contact-card-link">+91-9654-932-262</a>
+              <span class="text-muted small contact-card-subtext">Mon - Sat: 9 AM - 7 PM</span>
+            </div>
           </div>
 
-          <!-- Right Column: Interactive Working Location Map -->
-          <div class="col-lg-5">
-            <div class="contact-map-frame">
-              <a href="https://maps.google.com/?q=Indra+Vihar,+Delhi" target="_blank" class="map-direct-link-badge" title="Open location in Google Maps">
-                <i class="bi bi-geo-alt-fill me-1"></i> Open Google Maps <i class="bi bi-box-arrow-up-right ms-1"></i>
-              </a>
-
-              <div class="map-location-bottom-bar">
-                <i class="bi bi-geo-alt text-danger"></i> Snacky HQ, 329 Indra Vihar, Delhi
+          <!-- Card 2: WhatsApp -->
+          <div class="col-6 col-sm-6">
+            <div class="contact-quick-card">
+              <div class="contact-quick-icon-box bg-success-subtle text-success">
+                <i class="bi bi-whatsapp"></i>
               </div>
-
-              <iframe 
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14000.73715367675!2d77.20235315!3d28.6908581!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cfd917f69a531%3A0xf65fb18e38d6f9b8!2sIndra%20Vihar%2C%20Delhi%2C%20110009!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin" 
-                width="100%" 
-                height="100%" 
-                allowfullscreen="" 
-                loading="lazy" 
-                referrerpolicy="no-referrer-when-downgrade"
-                class="contact-map-iframe">
-              </iframe>
+              <h6 class="fw-extrabold text-navy mb-1 contact-card-heading">WhatsApp Chat</h6>
+              <a href="https://wa.me/919876543210" target="_blank" class="text-decoration-none fw-bold text-navy d-block mb-1 contact-card-link">+91-9876-543-210</a>
+              <span class="text-muted small contact-card-subtext">Instant Support</span>
             </div>
+          </div>
+
+          <!-- Card 3: Email -->
+          <div class="col-6 col-sm-6">
+            <div class="contact-quick-card">
+              <div class="contact-quick-icon-box bg-primary-subtle text-primary">
+                <i class="bi bi-envelope-fill"></i>
+              </div>
+              <h6 class="fw-extrabold text-navy mb-1 contact-card-heading">Email Us</h6>
+              <a href="mailto:support@snackyfoods.com" class="text-decoration-none fw-bold text-navy d-block mb-1 contact-card-link text-truncate">support@snackyfoods.com</a>
+              <span class="text-muted small contact-card-subtext">24/7 Response Time</span>
+            </div>
+          </div>
+
+          <!-- Card 4: Shop / HQ -->
+          <div class="col-6 col-sm-6">
+            <div class="contact-quick-card">
+              <div class="contact-quick-icon-box bg-warning-subtle text-warning">
+                <i class="bi bi-shop"></i>
+              </div>
+              <h6 class="fw-extrabold text-navy mb-1 contact-card-heading">Our Shop / HQ</h6>
+              <p class="text-muted small mb-0 contact-card-subtext">329, 1st Floor, Indra Vihar, Delhi</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Embedded Google Maps Card -->
+        <div class="contact-map-card">
+          <div class="d-flex justify-content-between align-items-center p-2 p-md-3 border-bottom bg-white flex-wrap gap-2">
+            <div class="d-flex align-items-center gap-2">
+              <i class="bi bi-geo-alt-fill text-danger fs-6 fs-md-5"></i>
+              <span class="fw-bold text-navy small">Snacky HQ, Indra Vihar, Delhi</span>
+            </div>
+            <a href="https://maps.google.com/?q=Indra+Vihar,+Delhi" target="_blank" class="btn btn-sm btn-outline-navy fw-bold py-1 px-2 py-md-1 px-md-3 fs-8">
+              Directions <i class="bi bi-box-arrow-up-right ms-1"></i>
+            </a>
+          </div>
+          <div class="contact-map-iframe-container">
+            <iframe 
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14000.73715367675!2d77.20235315!3d28.6908581!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cfd917f69a531%3A0xf65fb18e38d6f9b8!2sIndra%20Vihar%2C%20Delhi%2C%20110009!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin" 
+              width="100%" 
+              height="220" 
+              allowfullscreen="" 
+              loading="lazy" 
+              referrerpolicy="no-referrer-when-downgrade"
+              class="border-0 w-100 contact-map-frame">
+            </iframe>
           </div>
         </div>
       </div>
-    </section>
 
-    <!-- 3. Quick Info Strip Cards (Icon Row) -->
-    <section class="container mb-5">
-      <div class="row g-4">
-        <div class="col-md-4">
-          <div class="contact-info-strip-card">
-            <div class="contact-info-icon-circle">📞</div>
-            <div>
-              <h6 class="fw-extrabold text-navy mb-1">Call Us</h6>
-              <p class="small text-muted mb-0">+91 9654932262</p>
+      <!-- Right Column: Inquiry Form -->
+      <div class="col-lg-6">
+        <div class="contact-form-card" id="contact-inquiry-form-card">
+          <h3 class="fw-extrabold text-navy mb-1 contact-form-title">Get In Touch</h3>
+          <p class="text-muted small mb-3 mb-md-4">Send us a message and our support team will respond within 24 hours.</p>
+
+          <!-- Dismissible Success Alert -->
+          <div class="alert alert-success alert-dismissible fade show d-none py-2 px-3 mb-3" id="formSuccessAlert" role="alert">
+            <div class="d-flex align-items-center gap-2">
+              <i class="bi bi-check-circle-fill fs-5"></i>
+              <div class="small">
+                <strong>Thank you!</strong> Your message has been sent successfully. We'll be in touch shortly.
+              </div>
             </div>
+            <button type="button" class="btn-close" onclick="document.getElementById('formSuccessAlert').classList.add('d-none')"></button>
           </div>
-        </div>
 
-        <div class="col-md-4">
-          <div class="contact-info-strip-card">
-            <div class="contact-info-icon-circle">✉️</div>
-            <div>
-              <h6 class="fw-extrabold text-navy mb-1">Send Us an Email</h6>
-              <p class="small text-muted mb-0">support@snacky.com</p>
+          <form id="contact-inquiry-form" onsubmit="handleContactFormSubmit(event)">
+            <!-- Full Name -->
+            <div class="mb-2 mb-md-3">
+              <label class="form-label small fw-bold text-muted mb-1" for="contact-full-name">Full Name (Alphabets only) <span class="text-danger">*</span></label>
+              <input type="text" class="form-control rounded-3 py-2" id="contact-full-name" placeholder="Enter your full name" required maxlength="50" pattern="[a-zA-Z\s]*">
             </div>
-          </div>
-        </div>
 
-        <div class="col-md-4">
-          <div class="contact-info-strip-card">
-            <div class="contact-info-icon-circle">📍</div>
-            <div>
-              <h6 class="fw-extrabold text-navy mb-1">Our Offices</h6>
-              <p class="small text-muted mb-0">329 Indra Vihar, Delhi - 110009</p>
+            <div class="row g-2 g-md-3 mb-2 mb-md-3">
+              <!-- Email Address -->
+              <div class="col-md-6">
+                <label class="form-label small fw-bold text-muted mb-1">Email Address (Required)</label>
+                <input type="email" class="form-control rounded-3 py-2" id="contact-email-addr" placeholder="you@example.com" required>
+              </div>
+
+              <!-- Phone Number -->
+              <div class="col-md-6">
+                <label class="form-label small fw-bold text-muted mb-1">Phone Number (Required)</label>
+                <input type="tel" class="form-control rounded-3 py-2" id="contact-phone-num" placeholder="10-digit Mobile Number" required maxlength="10" inputmode="numeric" pattern="[0-9]{10}" oninput="this.value = this.value.replace(/\D/g, '').slice(0, 10)">
+              </div>
             </div>
+
+            <!-- Subject Dropdown -->
+            <div class="mb-2 mb-md-3">
+              <label class="form-label small fw-bold text-muted mb-1">Subject</label>
+              <select class="form-select rounded-3 py-2" id="contact-subject-select" required>
+                <option value="General Inquiry" selected>General Inquiry</option>
+                <option value="Order Tracking">Order Tracking</option>
+                <option value="Corporate & Bulk Order">Corporate & Bulk Order</option>
+                <option value="Quality Feedback">Quality Feedback</option>
+              </select>
+            </div>
+
+            <!-- Message Textarea -->
+            <div class="mb-3 mb-md-4">
+              <label class="form-label small fw-bold text-muted mb-1">Message (Required)</label>
+              <textarea class="form-control rounded-3 py-2" id="contact-message-body" rows="3" placeholder="Type your message here..." required></textarea>
+            </div>
+
+            <!-- Submit CTA -->
+            <button type="submit" class="btn btn-snacky-primary w-100 py-2 py-md-3 fw-extrabold" id="contact-submit-btn">
+              Send Message <i class="bi bi-send-fill ms-1"></i>
+            </button>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 3. Corporate & Bulk Order Banner (#bulk-order-banner) -->
+  <section class="container my-4 my-md-5" id="bulk-order-banner">
+    <div class="bulk-order-banner-card p-3 p-md-4 p-lg-5">
+      <div class="row align-items-center g-3 g-md-4">
+        <div class="col-lg-8">
+          <span class="badge bg-warning text-dark fw-bold rounded-pill px-3 py-1 mb-2 fs-7">📦 CORPORATE GIFTING & BULK SUPPLY</span>
+          <h2 class="fw-extrabold text-white mb-2 bulk-order-title">Looking for Custom Snack Boxes for Your Office or Event?</h2>
+          <p class="text-white-50 mb-0 bulk-order-desc">Enjoy attractive volume discounts, custom co-branded gift tags, and express pan-India dispatch for corporate festive gifting and parties.</p>
+        </div>
+        <div class="col-lg-4 text-lg-end">
+          <button class="btn btn-warning btn-md-lg fw-extrabold px-3 py-2 px-md-4 py-md-3 rounded-pill text-navy shadow-sm w-100 w-lg-auto" onclick="selectCorporateAndScroll()">
+            Request Bulk Quote <i class="bi bi-arrow-right ms-1"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. Frequently Asked Questions Accordion (#contact-faqs) -->
+  <section class="container my-4 my-md-5 py-2" id="contact-faqs">
+    <div class="text-center mb-4">
+      <span class="badge bg-warning text-dark rounded-pill fw-bold px-3 py-2 mb-2">HELP & SUPPORT</span>
+      <h2 class="display-6 fw-extrabold text-navy mb-2">Frequently Asked Questions</h2>
+      <p class="text-muted small mw-600px mx-auto">Quick answers to common questions regarding tracking, shipping, and ingredients.</p>
+    </div>
+
+    <div class="accordion accordion-custom shadow-sm rounded-4 overflow-hidden" id="contactFaqAccordion">
+      <!-- FAQ 1 -->
+      <div class="accordion-item border-0 border-bottom">
+        <h2 class="accordion-header" id="contactFaqHdr1">
+          <button class="accordion-button fw-bold text-navy" type="button" data-bs-toggle="collapse" data-bs-target="#contactFaqCol1" aria-expanded="true">
+            How can I track my snack order?
+          </button>
+        </h2>
+        <div id="contactFaqCol1" class="accordion-collapse collapse show" data-bs-parent="#contactFaqAccordion">
+          <div class="accordion-body text-muted small">
+            You can track your real-time shipment status at any time by visiting our <a href="track-order.html" class="fw-bold text-primary-violet">Track Order</a> page and entering your 10-digit mobile number or Order ID. Tracking updates are also sent via SMS.
           </div>
         </div>
       </div>
-    </section>
 
-    <!-- 4. "Find Snacky Outlets Near You" Section (Image Left, Content Right) -->
-    <section class="container mb-5 py-4">
-      <div class="row align-items-center g-5">
-        <div class="col-lg-6">
-          <div class="contact-photo-frame">
-            <img src="../static/images/contact_store_location.jpg" alt="Find Snacky Near You">
+      <!-- FAQ 2 -->
+      <div class="accordion-item border-0 border-bottom">
+        <h2 class="accordion-header" id="contactFaqHdr2">
+          <button class="accordion-button collapsed fw-bold text-navy" type="button" data-bs-toggle="collapse" data-bs-target="#contactFaqCol2">
+            What are the delivery charges and delivery times?
+          </button>
+        </h2>
+        <div id="contactFaqCol2" class="accordion-collapse collapse" data-bs-parent="#contactFaqAccordion">
+          <div class="accordion-body text-muted small">
+            We offer <strong>100% Free Doorstep Delivery</strong> on all orders above ₹199 across India. Standard orders are dispatched within 24 hours and delivered within 2-4 business days depending on your delivery location.
           </div>
         </div>
-        <div class="col-lg-6">
-          <h2 class="display-6 fw-extrabold text-navy mb-3">Find Snacky Outlets Near You</h2>
-          <p class="text-muted lead mb-4">Explore our retail stores, partner supermarkets, and gourmet snack counters across major cities.</p>
-          <a href="products.html" class="btn btn-retro-outline">View All Outlets</a>
-        </div>
       </div>
-    </section>
 
-    <!-- 5. "Please Visit Our FAQ's Before Contacting Us" Section (Content Left, Image Right) -->
-    <section class="container mb-5 py-4">
-      <div class="row align-items-center g-5">
-        <div class="col-lg-6 order-2 order-lg-1">
-          <h2 class="display-6 fw-extrabold text-navy mb-3">Please Visit Our FAQ's Before Contacting Us</h2>
-          <p class="text-muted lead mb-4">Find quick answers to common questions regarding delivery times, bulk orders, shelf life, and wholesome ingredients.</p>
-          <a href="about.html" class="btn btn-retro-outline">View FAQ's</a>
-        </div>
-        <div class="col-lg-6 order-1 order-lg-2">
-          <div class="contact-photo-frame">
-            <img src="../static/images/hero_about_banner.jpg" alt="Wholesome Snacky Ingredients">
+      <!-- FAQ 3 -->
+      <div class="accordion-item border-0">
+        <h2 class="accordion-header" id="contactFaqHdr3">
+          <button class="accordion-button collapsed fw-bold text-navy" type="button" data-bs-toggle="collapse" data-bs-target="#contactFaqCol3">
+            Are all Snacky products 100% Palm Oil-Free?
+          </button>
+        </h2>
+        <div id="contactFaqCol3" class="accordion-collapse collapse" data-bs-parent="#contactFaqAccordion">
+          <div class="accordion-body text-muted small">
+            Yes, absolutely! Every single batch of Snacky namkeen, chips, and roasted snacks is prepared using <strong>100% pure cold-filtered groundnut oil</strong> with zero palm oil, zero trans fat, zero cholesterol, and zero chemical preservatives.
           </div>
         </div>
       </div>
     </div>
+  </section>
+
+  <!-- Cart Offcanvas Drawer -->
+  <div class="offcanvas offcanvas-end cart-offcanvas-custom" tabindex="-1" id="cartOffcanvas">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title fw-bold" id="cartOffcanvasLabel">
+        <i class="bi bi-bag me-2"></i> Cart Items
+      </h5>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    
+    <div class="free-delivery-meter" id="free-delivery-banner">
+      <div class="small fw-bold mb-1 text-center" id="free-shipping-text">Add ₹199 more for free delivery</div>
+      <div class="progress free-shipping-progress">
+        <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" id="free-shipping-bar" role="progressbar"></div>
+      </div>
+    </div>
+
+    <div class="offcanvas-body" id="offcanvas-cart-body">
+      <!-- Injected via script.js -->
+    </div>
+
+    <div class="offcanvas-footer">
+      <div class="d-flex justify-content-between mb-2">
+        <span class="text-muted font-weight-600">Subtotal</span>
+        <span class="font-weight-bold" id="cart-subtotal-val">₹0.00</span>
+      </div>
+      <div class="d-flex justify-content-between mb-3">
+        <span class="font-weight-bold fs-5 text-navy">Total</span>
+        <span class="font-weight-bold fs-5" id="cart-total-val">₹0.00</span>
+      </div>
+      <a href="cart-payment-flow.html" class="btn btn-snacky-primary w-100 py-3" id="offcanvas-checkout-btn">
+        Proceed to Checkout <i class="bi bi-arrow-right ms-1"></i>
+      </a>
+    </div>
   </div>
 
-  <!-- Dark Footer -->
+  <!-- Organic Curved Wave Top (Navy Blue #0B1528) -->
+  <div class="footer-wave-wrapper">
+    <svg class="footer-wave-svg" viewBox="0 0 1440 100" fill="none" preserveAspectRatio="none">
+      <path d="M0,45 C280,85 520,15 800,55 C1080,95 1280,30 1440,50 L1440,100 L0,100 Z" fill="#0B1528"></path>
+    </svg>
+  </div>
+
+  <!-- Organic Deep Navy Blue Footer Section -->
   <footer class="main-footer" id="main-footer">
     <div class="container">
-      <div class="row g-4">
-        <div class="col-lg-4">
+      <div class="row g-4 justify-content-between align-items-start">
+        
+        <!-- Col 1: Brand & Socials -->
+        <div class="col-lg-3 col-md-6 mb-3 mb-lg-0">
           <a class="d-inline-block mb-3" href="index.html">
-            <img src="../static/images/snacky_logo.svg" alt="Snacky Logo" class="footer-logo-img">
+            <img src="../static/images/snacky_logo_transparent.png" alt="Snacky Logo" class="footer-logo-img">
           </a>
-          <p class="small text-muted mb-3">Snacky is India's premium snacks brand bringing you authentic, palm-oil free crunch.</p>
+          <p class="footer-tagline-text mb-3">
+            Age old wisdom meets modern nutrition. 100% pure groundnut oil, zero palm oil & trans-fat free crunch.
+          </p>
+          <div class="footer-social-pill-group">
+            <a href="https://instagram.com" target="_blank" class="footer-social-pill" aria-label="Instagram">
+              <i class="bi bi-instagram"></i>
+            </a>
+            <a href="https://youtube.com" target="_blank" class="footer-social-pill" aria-label="YouTube">
+              <i class="bi bi-youtube"></i>
+            </a>
+            <a href="https://facebook.com" target="_blank" class="footer-social-pill" aria-label="Facebook">
+              <i class="bi bi-facebook"></i>
+            </a>
+            <a href="https://linkedin.com" target="_blank" class="footer-social-pill" aria-label="LinkedIn">
+              <i class="bi bi-linkedin"></i>
+            </a>
+          </div>
         </div>
-        <div class="col-6 col-lg-2">
-          <h6 class="footer-title">SHOP</h6>
+
+        <!-- Col 2: Shop -->
+        <div class="col-6 col-md-3 col-lg-2">
+          <h6 class="footer-nav-heading">Shop</h6>
           <ul class="footer-links-list">
-            <li><a href="products.html?category=namkeen">Namkeen</a></li>
-            <li><a href="products.html?category=chips">Chips & Wafers</a></li>
+            <li><a href="products.html?category=namkeen">Namkeens & Bhujia</a></li>
+            <li><a href="products.html?category=chips">Chips & Crisps</a></li>
             <li><a href="products.html?category=healthy">Healthy Snacks</a></li>
+            <li><a href="offers.html">Offers</a></li>
           </ul>
         </div>
-        <div class="col-6 col-lg-2">
-          <h6 class="footer-title">EXPLORE</h6>
+
+        <!-- Col 3: Explore -->
+        <div class="col-6 col-md-3 col-lg-2">
+          <h6 class="footer-nav-heading">Explore</h6>
           <ul class="footer-links-list">
-            <li><a href="about.html">About Us</a></li>
-            <li><a href="contact.html">Contact Us</a></li>
+            <li><a href="about.html">Our Story</a></li>
+            <li><a href="products.html">All Snacks Catalog</a></li>
+            <li><a href="feedback.html">Customer Feedback</a></li>
           </ul>
         </div>
-        <div class="col-6 col-lg-2">
-          <h6 class="footer-title">HELP</h6>
+
+        <!-- Col 4: Policies & Help -->
+        <div class="col-6 col-md-3 col-lg-2">
+          <h6 class="footer-nav-heading">Customer Care</h6>
           <ul class="footer-links-list">
-            <li><a href="contact.html">Contact Support</a></li>
             <li><a href="track-order.html">Track Order</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+            <li><a href="contact.html#faq-section">Frequently Asked Questions</a></li>
+            <li><a href="about.html">Terms of Service</a></li>
+            <li><a href="about.html">Privacy Policy</a></li>
           </ul>
         </div>
-        <div class="col-6 col-lg-2">
-          <h6 class="footer-title">CONTACT</h6>
-          <p class="small mb-0">+91 9654932262</p>
+
+        <!-- Col 5: Join Squad & Feedback Direct Link -->
+        <div class="col-lg-3 col-md-6">
+          <h6 class="footer-squad-heading">JOIN THE SNACKY CO. SQUAD</h6>
+          <form class="footer-newsletter-form mb-3" onsubmit="event.preventDefault(); handleNewsletterSubmit(this);">
+            <div class="footer-email-input-group">
+              <input type="email" class="form-control footer-email-input" placeholder="E-mail" required>
+              <button type="submit" class="footer-email-btn" aria-label="Subscribe">
+                <i class="bi bi-arrow-right"></i>
+              </button>
+            </div>
+          </form>
+
+          <!-- Interactive Customer Feedback Bar -->
+          <div class="footer-feedback-prompt-box mb-3">
+            <div class="d-flex align-items-center justify-content-between gap-2">
+              <div>
+                <div class="footer-feedback-title">Loved our snacks?</div>
+                <div class="footer-feedback-subtitle">Share your feedback</div>
+              </div>
+              <a href="feedback.html" class="btn-footer-feedback-pill" aria-label="Give Feedback">
+                <i class="bi bi-chat-heart-fill me-1"></i> Feedback
+              </a>
+            </div>
+          </div>
+
+          <!-- Payment Methods & Copyright -->
+          <div class="d-flex align-items-center justify-content-between flex-wrap gap-2 pt-1">
+            <div class="footer-payment-badges-row">
+              <span class="payment-badge-pill visa-pill">VISA</span>
+              <span class="payment-badge-pill mc-pill"><span class="mc-c1"></span><span class="mc-c2"></span></span>
+              <span class="payment-badge-pill gpay-pill">G Pay</span>
+              <span class="payment-badge-pill upi-pill">UPI</span>
+            </div>
+            <div class="footer-copyright-text">
+              © Snacky Co. 2026
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="footer-bottom-bar">
-        <p class="small mb-0">© 2026 Snacky Foods Private Limited. All rights reserved.</p>
+
       </div>
     </div>
   </footer>
-
-  <!-- Offcanvas Cart Drawer -->
-  <div class="offcanvas offcanvas-end cart-offcanvas-custom" tabindex="-1" id="cartOffcanvas">
-    <div class="offcanvas-header border-bottom">
-      <h5 class="offcanvas-title fw-bold text-navy"><i class="bi bi-bag me-2"></i> Cart Items</h5>
-      <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
-    </div>
-    <div class="free-delivery-meter text-center">
-      <div class="fw-bold small text-navy mb-1" id="free-shipping-text">Add ₹199 more for free delivery</div>
-      <div class="progress progress-sm">
-        <div class="progress-bar bg-warning" id="free-shipping-progress"></div>
-      </div>
-    </div>
-    <div class="offcanvas-body" id="cart-drawer-items"></div>
-    <div class="offcanvas-footer p-3 border-top bg-light">
-      <div class="d-flex justify-content-between mb-2">
-        <span class="text-muted">Subtotal</span>
-        <span class="fw-bold text-navy" id="cart-subtotal-val">₹0.00</span>
-      </div>
-      <div class="d-flex justify-content-between mb-3">
-        <span class="fw-bold text-navy fs-5">Total</span>
-        <span class="fw-bold text-warning fs-5" id="cart-total-val">₹0.00</span>
-      </div>
-      <a href="cart-payment-flow.html" class="btn btn-snacky-primary w-100 py-3 text-center">Proceed to Checkout <i class="bi bi-arrow-right"></i></a>
-    </div>
-  </div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   <script src="../static/js/script.js"></script>

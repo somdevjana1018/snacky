@@ -9,51 +9,73 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
-  <link rel="icon" type="image/svg+xml" href="../static/images/favicon.svg">
+  <link rel="icon" type="image/png" href="../static/images/snacky_logo_transparent.png">
   <link rel="stylesheet" href="../static/css/style.css">
 </head>
 <body>
 
-  <!-- 1. Top Feature Ticker Bar -->
-  <div class="top-ticker-bar">
-    No White Sugar <span class="divider">|</span> High Fiber <span class="divider">|</span> No Palm Oil <span class="divider">|</span> No Cholesterol <span class="divider">|</span> No Trans Fat <span class="divider">|</span> No White Sugar
-  </div>
-
-  <!-- 2. Top Announcement Bar -->
+  <!-- Top Announcement Bar with Marquee Effect -->
   <div class="top-announcement-bar">
-    🚚 FREE DELIVERY ABOVE ₹199
+    <div class="marquee-track">
+      <div class="marquee-content">
+        <span>🚚 FREE DELIVERY ABOVE ₹199</span> <span class="marquee-dot">•</span>
+        <span>🍿 100% PURE GROUNDNUT OIL</span> <span class="marquee-dot">•</span>
+        <span>✨ NO PALM OIL • NO CHOLESTEROL</span> <span class="marquee-dot">•</span>
+        <span>🎉 USE CODE: SNACKY50 FOR ₹50 OFF</span> <span class="marquee-dot">•</span>
+      </div>
+      <div class="marquee-content">
+        <span>🚚 FREE DELIVERY ABOVE ₹199</span> <span class="marquee-dot">•</span>
+        <span>🍿 100% PURE GROUNDNUT OIL</span> <span class="marquee-dot">•</span>
+        <span>✨ NO PALM OIL • NO CHOLESTEROL</span> <span class="marquee-dot">•</span>
+        <span>🎉 USE CODE: SNACKY50 FOR ₹50 OFF</span> <span class="marquee-dot">•</span>
+      </div>
+    </div>
   </div>
 
-  <!-- Navigation Bar -->
+  <!-- Navigation Bar (#main-navbar) -->
   <nav class="navbar navbar-expand-lg main-navbar" id="main-navbar">
     <div class="container">
       <a class="brand-logo-container" href="index.html">
-        <img src="../static/images/snacky_logo.svg" alt="Snacky Logo" class="brand-logo-img">
+        <img src="../static/images/snacky_logo_transparent.png" alt="Snacky Logo" class="brand-logo-img">
       </a>
 
-      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
 
       <div class="collapse navbar-collapse" id="navbarContent">
-        <ul class="navbar-nav mx-auto mb-2 mb-lg-0 gap-3">
-          <li class="nav-item"><a class="nav-link nav-link-custom" href="index.html">Home</a></li>
-          <li class="nav-item"><a class="nav-link nav-link-custom" href="products.html">Products</a></li>
-          <li class="nav-item"><a class="nav-link nav-link-custom" href="offers.html">Offers</a></li>
-          <li class="nav-item"><a class="nav-link nav-link-custom" href="about.html">About</a></li>
-          <li class="nav-item"><a class="nav-link nav-link-custom" href="contact.html">Contact</a></li>
+        <ul class="navbar-nav mb-2 mb-lg-0 gap-1 gap-lg-2">
+          <li class="nav-item">
+            <a class="nav-link nav-link-custom" href="index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-link-custom" href="products.html">Products</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-link-custom" href="offers.html">Offers</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-link-custom" href="about.html">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-link-custom" href="contact.html">Contact</a>
+          </li>
         </ul>
 
         <div class="nav-actions-right">
           <div class="nav-search-container">
             <input type="text" class="nav-search-input" id="nav-search-input" placeholder="Search snacks...">
-            <i class="bi bi-search nav-search-icon"></i>
+            <i class="bi bi-search nav-search-icon" id="nav-search-trigger"></i>
           </div>
-          <a href="auth.html" class="nav-auth-btn" id="nav-user-account-btn">
-            <i class="bi bi-person-circle"></i>
-            <span id="nav-user-text">Login / Sign Up</span>
-          </a>
-          <button class="nav-action-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#cartOffcanvas" title="Shopping Cart">
+
+          <div id="auth-nav-container">
+            <a href="auth.html" class="nav-action-btn" id="nav-user-account-btn" title="Account / Login" aria-label="Account">
+              <i class="bi bi-person"></i>
+            </a>
+          </div>
+
+          <button class="nav-action-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#cartOffcanvas"
+            title="Shopping Cart">
             <i class="bi bi-cart3"></i>
             <span class="cart-count-badge">0</span>
           </button>
@@ -62,108 +84,364 @@
     </div>
   </nav>
 
-  <!-- Profile Dashboard Layout (#profile-wrapper) -->
-  <section class="container my-5" id="profile-wrapper">
-    <div class="row g-4">
-      <!-- Left Sidebar Column -->
-      <div class="col-lg-4" id="profile-sidebar">
-        <div class="card card-body border-0 shadow-sm rounded-4 text-center p-4 mb-4 bg-white">
-          <div class="mx-auto mb-3 text-warning bg-light rounded-circle d-flex align-items-center justify-content-center w-80px h-80px font-size-2-5rem">
+  <!-- Clean Profile Hero Banner -->
+  <section class="profile-clean-hero" id="profile-hero">
+    <div class="container">
+      <div class="d-flex align-items-center justify-content-between flex-wrap gap-3">
+        <div class="d-flex align-items-center gap-3">
+          <div class="profile-hero-avatar-circle" id="profile-avatar-initial">
             👤
           </div>
-          <h5 class="fw-bold text-navy mb-1" id="sidebar-user-name">User Account</h5>
-          <p class="small text-muted mb-0" id="sidebar-user-phone">Not signed in</p>
+          <div>
+            <div class="d-flex align-items-center gap-2 flex-wrap mb-1">
+              <h3 class="fw-extrabold text-white mb-0" id="header-user-name">Welcome!</h3>
+              <span class="profile-verified-pill">
+                <i class="bi bi-patch-check-fill me-1"></i> Verified Foodie
+              </span>
+            </div>
+            <div class="d-flex align-items-center gap-3 flex-wrap">
+              <span class="profile-meta-badge" id="header-user-phone">
+                <i class="bi bi-telephone me-1 text-warning"></i> +91 9876543210
+              </span>
+              <span class="profile-meta-badge" id="header-user-email">
+                <i class="bi bi-envelope me-1 text-warning"></i> user@snacky.com
+              </span>
+            </div>
+          </div>
         </div>
-
-        <div class="list-group rounded-4 shadow-sm border-0 bg-white">
-          <a href="profile.html" class="list-group-item list-group-item-action active border-0 p-3 fw-bold">
-            <i class="bi bi-person-circle me-2"></i> Account Details
-          </a>
-          <a href="track-order.html" class="list-group-item list-group-item-action border-0 p-3 fw-bold">
-            <i class="bi bi-box-seam me-2"></i> My Orders & Tracking
-          </a>
-          <button class="list-group-item list-group-item-action text-danger border-0 p-3 fw-bold" id="profile-logout-btn">
-            <i class="bi bi-box-arrow-right me-2"></i> Log Out
+        <div>
+          <button class="btn btn-profile-hero-logout" id="profile-header-logout-btn" onclick="handleUserLogout()">
+            <i class="bi bi-box-arrow-right me-1"></i> Log Out
           </button>
-        </div>
-      </div>
-
-      <!-- Right Content Area: Editable Details -->
-      <div class="col-lg-8" id="profile-details-card">
-        <div class="card card-body border-0 shadow-sm rounded-4 p-4 bg-white">
-          <h4 class="fw-extrabold text-navy mb-4">Edit Profile Information</h4>
-
-          <div class="row g-3 mb-3">
-            <div class="col-md-6">
-              <label class="form-label fw-bold text-navy small">Full Name</label>
-              <input type="text" class="form-control rounded-3" id="profile-name-input" placeholder="Enter full name">
-            </div>
-            <div class="col-md-6">
-              <label class="form-label fw-bold text-navy small">Email Address</label>
-              <input type="email" class="form-control rounded-3" id="profile-email-input" placeholder="Enter email address">
-            </div>
-          </div>
-
-          <div class="row g-3 mb-4">
-            <div class="col-md-6">
-              <label class="form-label fw-bold text-navy small">Mobile Number</label>
-              <input type="tel" class="form-control rounded-3" id="profile-phone-input" placeholder="Enter mobile number">
-            </div>
-            <div class="col-md-6">
-              <label class="form-label fw-bold text-navy small">Date of Birth</label>
-              <input type="date" class="form-control rounded-3">
-            </div>
-          </div>
-
-          <div class="d-flex justify-content-end">
-            <button class="btn btn-snacky-primary px-4 py-2" id="profile-save-btn">
-              Save Changes <i class="bi bi-check-lg"></i>
-            </button>
-          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Dark Footer -->
-  <footer class="main-footer" id="main-footer">
-    <div class="container">
-      <div class="row g-4">
-        <div class="col-lg-4">
-          <a class="d-inline-block mb-3" href="index.html">
-            <img src="../static/images/snacky_logo.svg" alt="Snacky Logo" class="footer-logo-img">
+  <!-- Profile Dashboard Layout (#profile-wrapper) -->
+  <section class="container my-5" id="profile-wrapper">
+    <div class="row g-4">
+      
+      <!-- Left Sidebar Navigation Column -->
+      <div class="col-lg-4 col-xl-3" id="profile-sidebar">
+        <div class="profile-nav-card">
+          <button type="button" class="profile-tab-item active" id="tab-btn-personal" onclick="switchProfileTab('personal')">
+            <span><i class="bi bi-person-circle me-2 text-warning fs-5"></i> Account Details</span>
+            <i class="bi bi-chevron-right small tab-chevron"></i>
+          </button>
+
+          <button type="button" class="profile-tab-item" id="tab-btn-addresses" onclick="switchProfileTab('addresses')">
+            <span><i class="bi bi-geo-alt-fill me-2 text-danger fs-5"></i> Delivery Addresses</span>
+            <i class="bi bi-chevron-right small tab-chevron"></i>
+          </button>
+
+          <button type="button" class="profile-tab-item" id="tab-btn-orders" onclick="switchProfileTab('orders')">
+            <span><i class="bi bi-box-seam me-2 text-primary fs-5"></i> Orders & Reviews</span>
+            <i class="bi bi-chevron-right small tab-chevron"></i>
+          </button>
+
+          <div class="profile-nav-divider"></div>
+
+          <a href="track-order.html" class="profile-tab-item">
+            <span><i class="bi bi-truck me-2 text-success fs-5"></i> Live Order Tracker</span>
+            <i class="bi bi-arrow-up-right small"></i>
           </a>
-          <p class="small text-muted mb-3">Snacky is India's premium snacks brand bringing you authentic, palm-oil free crunch.</p>
-        </div>
-        <div class="col-6 col-lg-2">
-          <h6 class="footer-title">SHOP</h6>
-          <ul class="footer-links-list">
-            <li><a href="products.html?category=namkeen">Namkeen</a></li>
-            <li><a href="products.html?category=chips">Chips</a></li>
-            <li><a href="products.html?category=healthy">Healthy Snacks</a></li>
-          </ul>
-        </div>
-        <div class="col-6 col-lg-2">
-          <h6 class="footer-title">EXPLORE</h6>
-          <ul class="footer-links-list">
-            <li><a href="about.html">About Us</a></li>
-            <li><a href="contact.html">Bulk Orders</a></li>
-          </ul>
-        </div>
-        <div class="col-6 col-lg-2">
-          <h6 class="footer-title">HELP</h6>
-          <ul class="footer-links-list">
-            <li><a href="contact.html">Contact Us</a></li>
-            <li><a href="track-order.html">Track Order</a></li>
-          </ul>
-        </div>
-        <div class="col-6 col-lg-2">
-          <h6 class="footer-title">CONTACT</h6>
-          <p class="small mb-0">+91 9654932262</p>
+
+          <button type="button" class="profile-tab-item text-danger" onclick="handleUserLogout()">
+            <span><i class="bi bi-box-arrow-right me-2 fs-5"></i> Log Out</span>
+            <i class="bi bi-box-arrow-right small"></i>
+          </button>
         </div>
       </div>
-      <div class="footer-bottom-bar">
-        <p class="small mb-0">© 2026 Snacky Foods Private Limited. All rights reserved.</p>
+
+      <!-- Right Content Details Area -->
+      <div class="col-lg-8 col-xl-9" id="profile-details-column">
+        
+        <!-- ================= TAB 1: PERSONAL INFORMATION ================= -->
+        <div class="profile-content-card" id="section-personal-info">
+          <div class="profile-section-header">
+            <h4 class="profile-section-title">Personal Information</h4>
+            <p class="profile-section-subtitle">Manage your account details and contact preferences</p>
+          </div>
+
+          <form id="profile-edit-form" onsubmit="event.preventDefault(); saveUserProfile();">
+            <div class="row g-4 mb-4">
+              <div class="col-md-6">
+                <label class="profile-form-label" for="profile-name-input">Full Name (Alphabets Only)</label>
+                <div class="input-group">
+                  <span class="input-group-text bg-light border-end-0"><i class="bi bi-person text-muted"></i></span>
+                  <input type="text" class="form-control profile-form-input border-start-0" id="profile-name-input" placeholder="Enter full name" pattern="[a-zA-Z\s]*" required>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <label class="profile-form-label" for="profile-email-input">Email Address</label>
+                <div class="input-group">
+                  <span class="input-group-text bg-light border-end-0"><i class="bi bi-envelope text-muted"></i></span>
+                  <input type="email" class="form-control profile-form-input border-start-0" id="profile-email-input" placeholder="Enter email address" required>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <label class="profile-form-label" for="profile-phone-input">Mobile Number (10 Digits)</label>
+                <div class="input-group">
+                  <span class="input-group-text bg-light border-end-0 fw-bold font-monospace">+91</span>
+                  <input type="tel" class="form-control profile-form-input border-start-0" id="profile-phone-input" placeholder="10-digit number" maxlength="10" inputmode="numeric" pattern="[0-9]{10}" oninput="this.value = this.value.replace(/\D/g, '').slice(0, 10)" required>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <label class="profile-form-label" for="profile-dob-input">Date of Birth</label>
+                <div class="input-group">
+                  <span class="input-group-text bg-light border-end-0"><i class="bi bi-calendar-event text-muted"></i></span>
+                  <input type="date" class="form-control profile-form-input border-start-0" id="profile-dob-input" value="1998-05-15">
+                </div>
+              </div>
+            </div>
+
+            <div class="d-flex justify-content-end pt-3 border-top">
+              <button type="submit" class="btn btn-snacky-primary px-4 py-2 fw-bold" id="profile-save-btn">
+                <i class="bi bi-check2-circle me-1"></i> Save Changes
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <!-- ================= TAB 2: SAVED DELIVERY ADDRESSES ================= -->
+        <div class="profile-content-card d-none" id="section-saved-addresses">
+          <div class="profile-section-header d-flex justify-content-between align-items-center flex-wrap gap-2">
+            <div>
+              <h4 class="profile-section-title">Saved Delivery Addresses</h4>
+              <p class="profile-section-subtitle">Manage multiple shipping locations for easy checkout</p>
+            </div>
+            <button type="button" class="btn btn-sm btn-snacky-primary fw-bold" id="btn-open-address-form" onclick="openProfileAddressForm()">
+              <i class="bi bi-plus-lg me-1"></i> Add New Address
+            </button>
+          </div>
+
+          <!-- Add / Edit Address Form (Collapsible) -->
+          <div class="p-4 border rounded-4 bg-light mb-4 d-none" id="profile-address-form-card">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <h6 class="fw-extrabold text-navy mb-0" id="profile-address-form-title">Add New Delivery Address</h6>
+              <button type="button" class="btn btn-sm btn-outline-secondary rounded-circle" onclick="closeProfileAddressForm()" title="Close Form">
+                ✕
+              </button>
+            </div>
+
+            <form id="profile-address-form" onsubmit="event.preventDefault(); saveAddressFromProfile();">
+              <input type="hidden" id="profile-addr-id" value="">
+
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label class="profile-form-label" for="profile-addr-name">Receiver's Name <span class="text-danger">*</span></label>
+                  <input type="text" class="form-control profile-form-input" id="profile-addr-name" placeholder="Full Name" required>
+                </div>
+
+                <div class="col-md-6">
+                  <label class="profile-form-label" for="profile-addr-phone">10-Digit Mobile <span class="text-danger">*</span></label>
+                  <div class="input-group">
+                    <span class="input-group-text bg-white border-end-0 fw-bold font-monospace">+91</span>
+                    <input type="tel" class="form-control profile-form-input border-start-0" id="profile-addr-phone" placeholder="9876543210" maxlength="10" required>
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <label class="profile-form-label" for="profile-addr-pincode">6-Digit Pincode <span class="text-danger">*</span></label>
+                  <input type="text" class="form-control profile-form-input" id="profile-addr-pincode" placeholder="e.g. 831001" maxlength="6" required>
+                </div>
+
+                <div class="col-md-4">
+                  <label class="profile-form-label" for="profile-addr-city">City <span class="text-danger">*</span></label>
+                  <input type="text" class="form-control profile-form-input" id="profile-addr-city" placeholder="e.g. Jamshedpur" required>
+                </div>
+
+                <div class="col-md-4">
+                  <label class="profile-form-label" for="profile-addr-state">State <span class="text-danger">*</span></label>
+                  <input type="text" class="form-control profile-form-input" id="profile-addr-state" placeholder="e.g. Jharkhand" required>
+                </div>
+
+                <div class="col-12">
+                  <label class="profile-form-label" for="profile-addr-house">House / Flat / Building <span class="text-danger">*</span></label>
+                  <input type="text" class="form-control profile-form-input" id="profile-addr-house" placeholder="Flat 4B, Silver Oak Heights" required>
+                </div>
+
+                <div class="col-12">
+                  <label class="profile-form-label" for="profile-addr-area">Road / Area / Landmark <span class="text-danger">*</span></label>
+                  <textarea class="form-control profile-form-input" id="profile-addr-area" rows="2" placeholder="Bistupur Main Road, Near Jubilee Park" required></textarea>
+                </div>
+
+                <div class="col-md-8">
+                  <label class="profile-form-label">Address Type</label>
+                  <div class="d-flex gap-3 flex-wrap mt-1">
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="profileAddressTypeRadio" id="p-addr-type-home" value="HOME" checked>
+                      <label class="form-check-label fw-bold small text-navy" for="p-addr-type-home"><i class="bi bi-house-door me-1"></i> Home</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="profileAddressTypeRadio" id="p-addr-type-work" value="WORK">
+                      <label class="form-check-label fw-bold small text-navy" for="p-addr-type-work"><i class="bi bi-briefcase me-1"></i> Work</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="profileAddressTypeRadio" id="p-addr-type-other" value="OTHER">
+                      <label class="form-check-label fw-bold small text-navy" for="p-addr-type-other"><i class="bi bi-geo me-1"></i> Other</label>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-4 d-flex align-items-center">
+                  <div class="form-check mt-3">
+                    <input class="form-check-input" type="checkbox" id="profile-addr-is-default" checked>
+                    <label class="form-check-label small fw-bold text-navy" for="profile-addr-is-default">
+                      Set as Default
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="d-flex justify-content-end gap-2 mt-4 pt-3 border-top">
+                <button type="button" class="btn btn-outline-secondary px-3 py-2 fw-bold" onclick="closeProfileAddressForm()">
+                  Cancel
+                </button>
+                <button type="submit" class="btn btn-snacky-primary px-4 py-2 fw-bold" id="profile-save-addr-btn">
+                  <i class="bi bi-check2 me-1"></i> Save Address
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Dynamic Saved Addresses Grid -->
+          <div class="row g-3" id="profile-saved-addresses-list">
+            <!-- Rendered by JavaScript -->
+          </div>
+        </div>
+
+        <!-- ================= TAB 3: DELIVERED ORDERS & REVIEWS ================= -->
+        <div class="profile-content-card d-none" id="section-delivered-orders">
+          <div class="profile-section-header d-flex justify-content-between align-items-center flex-wrap gap-2">
+            <div>
+              <h4 class="profile-section-title">Your Orders & Feedback</h4>
+              <p class="profile-section-subtitle">Track orders, view itemized receipts, and share reviews for snacks you have enjoyed</p>
+            </div>
+            <a href="track-order.html" class="btn btn-sm btn-outline-navy fw-bold rounded-pill">
+              <i class="bi bi-truck me-1"></i> Live Order Tracker
+            </a>
+          </div>
+
+          <!-- Dynamic Orders List Container -->
+          <div id="profile-orders-list-container">
+            <!-- Rendered by JavaScript -->
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Organic Curved Wave Top (Navy Blue #0B1528) -->
+  <div class="footer-wave-wrapper">
+    <svg class="footer-wave-svg" viewBox="0 0 1440 100" fill="none" preserveAspectRatio="none">
+      <path d="M0,45 C280,85 520,15 800,55 C1080,95 1280,30 1440,50 L1440,100 L0,100 Z" fill="#0B1528"></path>
+    </svg>
+  </div>
+
+  <!-- Organic Deep Navy Blue Footer Section -->
+  <footer class="main-footer" id="main-footer">
+    <div class="container">
+      <div class="row g-4 justify-content-between align-items-start">
+        
+        <!-- Col 1: Brand & Socials -->
+        <div class="col-lg-3 col-md-6 mb-3 mb-lg-0">
+          <a class="d-inline-block mb-3" href="index.html">
+            <img src="../static/images/snacky_logo_transparent.png" alt="Snacky Logo" class="footer-logo-img">
+          </a>
+          <p class="footer-tagline-text mb-3">
+            Age old wisdom meets modern nutrition. 100% pure groundnut oil, zero palm oil & trans-fat free crunch.
+          </p>
+          <div class="footer-social-pill-group">
+            <a href="https://instagram.com" target="_blank" class="footer-social-pill" aria-label="Instagram">
+              <i class="bi bi-instagram"></i>
+            </a>
+            <a href="https://youtube.com" target="_blank" class="footer-social-pill" aria-label="YouTube">
+              <i class="bi bi-youtube"></i>
+            </a>
+            <a href="https://facebook.com" target="_blank" class="footer-social-pill" aria-label="Facebook">
+              <i class="bi bi-facebook"></i>
+            </a>
+            <a href="https://linkedin.com" target="_blank" class="footer-social-pill" aria-label="LinkedIn">
+              <i class="bi bi-linkedin"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Col 2: Shop -->
+        <div class="col-6 col-md-3 col-lg-2">
+          <h6 class="footer-nav-heading">Shop</h6>
+          <ul class="footer-links-list">
+            <li><a href="products.html?category=namkeen">Namkeens & Bhujia</a></li>
+            <li><a href="products.html?category=chips">Chips & Crisps</a></li>
+            <li><a href="products.html?category=healthy">Healthy Snacks</a></li>
+            <li><a href="offers.html">Offers</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 3: Explore -->
+        <div class="col-6 col-md-3 col-lg-2">
+          <h6 class="footer-nav-heading">Explore</h6>
+          <ul class="footer-links-list">
+            <li><a href="about.html">Our Story</a></li>
+            <li><a href="products.html">All Snacks Catalog</a></li>
+            <li><a href="feedback.html">Customer Feedback</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 4: Policies & Help -->
+        <div class="col-6 col-md-3 col-lg-2">
+          <h6 class="footer-nav-heading">Customer Care</h6>
+          <ul class="footer-links-list">
+            <li><a href="track-order.html">Track Order</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+            <li><a href="contact.html#faq-section">Frequently Asked Questions</a></li>
+            <li><a href="about.html">Terms of Service</a></li>
+            <li><a href="about.html">Privacy Policy</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 5: Join Squad & Feedback Direct Link -->
+        <div class="col-lg-3 col-md-6">
+          <h6 class="footer-squad-heading">JOIN THE SNACKY CO. SQUAD</h6>
+          <form class="footer-newsletter-form mb-3" onsubmit="event.preventDefault(); handleNewsletterSubmit(this);">
+            <div class="footer-email-input-group">
+              <input type="email" class="form-control footer-email-input" placeholder="E-mail" required>
+              <button type="submit" class="footer-email-btn" aria-label="Subscribe">
+                <i class="bi bi-arrow-right"></i>
+              </button>
+            </div>
+          </form>
+
+          <!-- Interactive Customer Feedback Bar -->
+          <div class="footer-feedback-prompt-box mb-3">
+            <div class="d-flex align-items-center justify-content-between gap-2">
+              <div>
+                <div class="footer-feedback-title">Loved our snacks?</div>
+                <div class="footer-feedback-subtitle">Share your feedback</div>
+              </div>
+              <a href="feedback.html" class="btn-footer-feedback-pill" aria-label="Give Feedback">
+                <i class="bi bi-chat-heart-fill me-1"></i> Feedback
+              </a>
+            </div>
+          </div>
+
+          <!-- Payment Methods & Copyright -->
+          <div class="d-flex align-items-center justify-content-between flex-wrap gap-2 pt-1">
+            <div class="footer-payment-badges-row">
+              <span class="payment-badge-pill visa-pill">VISA</span>
+              <span class="payment-badge-pill mc-pill"><span class="mc-c1"></span><span class="mc-c2"></span></span>
+              <span class="payment-badge-pill gpay-pill">G Pay</span>
+              <span class="payment-badge-pill upi-pill">UPI</span>
+            </div>
+            <div class="footer-copyright-text">
+              © Snacky Co. 2026
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
   </footer>
@@ -191,6 +469,80 @@
         <span class="fw-bold text-warning fs-5" id="cart-total-val">₹0.00</span>
       </div>
       <a href="cart-payment-flow.html" class="btn btn-snacky-primary w-100 py-3 text-center">Proceed to Checkout <i class="bi bi-arrow-right"></i></a>
+    </div>
+  </div>
+
+  <!-- Snack Review Modal -->
+  <div class="modal fade snack-review-modal-custom" id="snackRatingModal" tabindex="-1" aria-labelledby="snackRatingModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content snack-review-modal-content">
+        <div class="modal-header snack-review-modal-header">
+          <div class="d-flex align-items-center gap-2">
+            <div class="snack-header-icon-wrap">
+              <i class="bi bi-star-fill"></i>
+            </div>
+            <div>
+              <h5 class="modal-title snack-review-modal-title" id="snackRatingModalLabel">
+                <span id="rating-modal-snack-title">Review: Poha Mixture</span>
+              </h5>
+              <p class="snack-review-modal-subtitle mb-0">Verified Foodie Experience</p>
+            </div>
+          </div>
+          <button type="button" class="btn-feedback-close" data-bs-dismiss="modal" aria-label="Close">
+            <i class="bi bi-x-lg"></i>
+          </button>
+        </div>
+        <form id="snack-review-form" onsubmit="event.preventDefault(); submitSnackReview();">
+          <input type="hidden" id="snack-review-product-name" value="Poha Mixture">
+          <input type="hidden" id="snack-review-order-id" value="SNK-8947291">
+          <div class="modal-body snack-review-modal-body">
+            <div class="review-section-block text-center">
+              <label class="review-form-label mb-2 d-block">Overall Snack Rating</label>
+              <div class="star-rating-selector" id="modal-star-rating" role="radiogroup" aria-label="Star Rating">
+                <button type="button" class="star-item-btn active" data-rating="1" aria-label="1 Star"><i class="bi bi-star-fill"></i></button>
+                <button type="button" class="star-item-btn active" data-rating="2" aria-label="2 Stars"><i class="bi bi-star-fill"></i></button>
+                <button type="button" class="star-item-btn active" data-rating="3" aria-label="3 Stars"><i class="bi bi-star-fill"></i></button>
+                <button type="button" class="star-item-btn active" data-rating="4" aria-label="4 Stars"><i class="bi bi-star-fill"></i></button>
+                <button type="button" class="star-item-btn active" data-rating="5" aria-label="5 Stars"><i class="bi bi-star-fill"></i></button>
+              </div>
+              <div class="star-rating-status-text" id="star-rating-status-text">5.0 - Absolutely Exceptional!</div>
+              <input type="hidden" id="snack-review-stars-val" value="5">
+            </div>
+            <div class="review-section-block">
+              <label class="review-form-label">What describes this snack best?</label>
+              <div class="snack-quick-tags-grid" id="snack-review-tag-pills">
+                <button type="button" class="snack-tag-pill active" data-tag="Extra Crispy">
+                  <i class="bi bi-check2 me-1"></i> Extra Crispy
+                </button>
+                <button type="button" class="snack-tag-pill active" data-tag="Perfect Spice">
+                  <i class="bi bi-check2 me-1"></i> Perfect Spice
+                </button>
+                <button type="button" class="snack-tag-pill" data-tag="Low Oil">
+                  <i class="bi bi-check2 me-1"></i> Low Oil
+                </button>
+                <button type="button" class="snack-tag-pill" data-tag="Slightly Salty">
+                  <i class="bi bi-check2 me-1"></i> Slightly Salty
+                </button>
+                <button type="button" class="snack-tag-pill" data-tag="Fresh Aroma">
+                  <i class="bi bi-check2 me-1"></i> Fresh Aroma
+                </button>
+                <button type="button" class="snack-tag-pill" data-tag="Munching Favorite">
+                  <i class="bi bi-check2 me-1"></i> Munching Favorite
+                </button>
+              </div>
+            </div>
+            <div class="review-section-block mb-1">
+              <label class="review-form-label" for="snack-review-comment">Your Detailed Review</label>
+              <textarea class="form-control review-textarea" id="snack-review-comment" rows="3" placeholder="Share your crunch experience, taste notes, packaging feedback..."></textarea>
+            </div>
+          </div>
+          <div class="modal-footer snack-review-modal-footer">
+            <button type="submit" class="btn-snack-review-submit" id="snack-review-submit-btn">
+              <i class="bi bi-send-fill me-2"></i> Submit Snack Review
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   </div>
 

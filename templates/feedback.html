@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Customer Feedback & Reviews - Snacky</title>
+  <meta name="description" content="Share your snacking experience with Snacky. We listen to every crunch, review, and feedback to make India's healthiest snacks even better.">
+  
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="../static/images/snacky_logo_transparent.png">
+  <link rel="stylesheet" href="../static/css/style.css">
+</head>
+<body>
+
+  <!-- Top Announcement Bar -->
+  <div class="top-announcement-bar">
+    <div class="marquee-track">
+      <div class="marquee-content">
+        <span>🚚 FREE DELIVERY ABOVE ₹199</span> <span class="marquee-dot">•</span>
+        <span>🍿 100% PURE GROUNDNUT OIL</span> <span class="marquee-dot">•</span>
+        <span>✨ NO PALM OIL • NO CHOLESTEROL</span> <span class="marquee-dot">•</span>
+        <span>🎉 USE CODE: SNACKY50 FOR ₹50 OFF</span> <span class="marquee-dot">•</span>
+      </div>
+      <div class="marquee-content">
+        <span>🚚 FREE DELIVERY ABOVE ₹199</span> <span class="marquee-dot">•</span>
+        <span>🍿 100% PURE GROUNDNUT OIL</span> <span class="marquee-dot">•</span>
+        <span>✨ NO PALM OIL • NO CHOLESTEROL</span> <span class="marquee-dot">•</span>
+        <span>🎉 USE CODE: SNACKY50 FOR ₹50 OFF</span> <span class="marquee-dot">•</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navigation Bar (#main-navbar) -->
+  <nav class="navbar navbar-expand-lg main-navbar" id="main-navbar">
+    <div class="container">
+      <a class="brand-logo-container" href="index.html">
+        <img src="../static/images/snacky_logo_transparent.png" alt="Snacky Logo" class="brand-logo-img">
+      </a>
+
+      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarContent">
+        <ul class="navbar-nav mb-2 mb-lg-0 gap-1 gap-lg-2">
+          <li class="nav-item">
+            <a class="nav-link nav-link-custom" href="index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-link-custom" href="products.html">Products</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-link-custom" href="offers.html">Offers</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-link-custom" href="about.html">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-link-custom" href="contact.html">Contact</a>
+          </li>
+        </ul>
+
+        <div class="nav-actions-right">
+          <div class="nav-search-container">
+            <input type="text" class="nav-search-input" id="nav-search-input" placeholder="Search snacks...">
+            <i class="bi bi-search nav-search-icon" id="nav-search-trigger"></i>
+          </div>
+
+          <div id="auth-nav-container">
+            <a href="auth.html" class="nav-action-btn" id="nav-user-account-btn" title="Account / Login" aria-label="Account">
+              <i class="bi bi-person"></i>
+            </a>
+          </div>
+
+          <button class="nav-action-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#cartOffcanvas"
+            title="Shopping Cart">
+            <i class="bi bi-bag"></i>
+            <span class="nav-cart-badge" id="nav-cart-count">0</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Header Section -->
+  <section class="feedback-page-hero">
+    <div class="container text-center">
+      <div class="feedback-badge-pill mb-3">
+        <i class="bi bi-chat-heart-fill"></i> Voice of Snacky Munchers
+      </div>
+      <h1 class="fw-extrabold display-5 text-white mb-3">Share Your Snacking Experience</h1>
+      <p class="lead text-white-50 mx-auto mb-4 feedback-hero-lead">
+        Every packet we craft is made with pure groundnut oil and love. Tell us what made your tastebuds dance or how we can make your crunch even crispier!
+      </p>
+
+      <!-- Key Satisfaction Statistics (Centered on All Screens) -->
+      <div class="feedback-stats-wrapper mx-auto">
+        <div class="row g-3 g-md-4 justify-content-center feedback-hero-stats-row">
+          <div class="col-6 col-lg-3">
+            <div class="feedback-stat-card">
+              <div class="feedback-stat-num text-warning">4.9 ★</div>
+              <div class="feedback-stat-label">Average Satisfaction</div>
+            </div>
+          </div>
+          <div class="col-6 col-lg-3">
+            <div class="feedback-stat-card">
+              <div class="feedback-stat-num text-navy">99.2%</div>
+              <div class="feedback-stat-label">Taste Delight Rate</div>
+            </div>
+          </div>
+          <div class="col-6 col-lg-3">
+            <div class="feedback-stat-card">
+              <div class="feedback-stat-num text-navy">15K+</div>
+              <div class="feedback-stat-label">Happy Foodies</div>
+            </div>
+          </div>
+          <div class="col-6 col-lg-3">
+            <div class="feedback-stat-card">
+              <div class="feedback-stat-num text-success">100%</div>
+              <div class="feedback-stat-label">Palm Oil Free</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Main Feedback Form & Community Board Section -->
+  <main class="py-5 bg-light">
+    <div class="container">
+      <div class="row g-5">
+        
+        <!-- Left Column: Interactive Feedback Submission Form -->
+        <div class="col-lg-6">
+          <div class="feedback-form-card">
+            <h2 class="feedback-section-title d-flex align-items-center gap-2">
+              <i class="bi bi-pencil-square text-warning"></i> Send Us Your Feedback
+            </h2>
+            <p class="feedback-section-desc">
+              Your feedback goes directly to our kitchen and product team.
+            </p>
+
+            <form id="feedback-page-form" onsubmit="event.preventDefault(); handleFeedbackPageSubmit();">
+              
+              <!-- 1. Emoji Experience Selector -->
+              <div class="mb-4">
+                <label class="form-label fw-bold text-navy small mb-2 d-block">1. How was your overall experience?</label>
+                <div class="feedback-emoji-selector" id="feedback-page-emojis" role="radiogroup" aria-label="Experience Rating">
+                  <button type="button" class="feedback-emoji-btn" data-rating="sad" data-label="Sad" aria-label="Sad">
+                    <span class="emoji-char">😞</span>
+                    <span class="emoji-tag">Sad</span>
+                  </button>
+                  <button type="button" class="feedback-emoji-btn" data-rating="okay" data-label="Okay" aria-label="Okay">
+                    <span class="emoji-char">😐</span>
+                    <span class="emoji-tag">Okay</span>
+                  </button>
+                  <button type="button" class="feedback-emoji-btn" data-rating="good" data-label="Good" aria-label="Good">
+                    <span class="emoji-char">😊</span>
+                    <span class="emoji-tag">Good</span>
+                  </button>
+                  <button type="button" class="feedback-emoji-btn active" data-rating="loved" data-label="Loved" aria-label="Loved">
+                    <span class="emoji-char">😍</span>
+                    <span class="emoji-tag">Loved</span>
+                  </button>
+                </div>
+                <input type="hidden" id="feedback-page-rating-val" value="loved">
+              </div>
+
+              <!-- 2. Category Selection -->
+              <div class="mb-4">
+                <label class="form-label fw-bold text-navy small mb-2 d-block">2. What would you like to talk about?</label>
+                <div class="feedback-category-grid" id="feedback-page-categories">
+                  <button type="button" class="feedback-category-tag active" data-category="Taste & Freshness">
+                    <i class="bi bi-cup-hot"></i> Taste & Freshness
+                  </button>
+                  <button type="button" class="feedback-category-tag" data-category="Packaging Quality">
+                    <i class="bi bi-box-seam"></i> Packaging Quality
+                  </button>
+                  <button type="button" class="feedback-category-tag" data-category="Delivery Speed">
+                    <i class="bi bi-lightning-charge"></i> Delivery Speed
+                  </button>
+                  <button type="button" class="feedback-category-tag" data-category="Website Experience">
+                    <i class="bi bi-laptop"></i> Website Experience
+                  </button>
+                  <button type="button" class="feedback-category-tag" data-category="New Snack Idea">
+                    <i class="bi bi-lightbulb"></i> New Snack Idea
+                  </button>
+                </div>
+                <input type="hidden" id="feedback-page-category-val" value="Taste & Freshness">
+              </div>
+
+              <!-- 3. Contact & User Details -->
+              <div class="row g-3 mb-3">
+                <div class="col-md-6">
+                  <label class="form-label fw-bold text-navy small" for="feedback-user-name">Your Full Name</label>
+                  <input type="text" class="form-control feedback-input-custom" id="feedback-user-name" placeholder="e.g. Ramesh Sharma" required>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label fw-bold text-navy small" for="feedback-user-email">Email or Phone</label>
+                  <input type="text" class="form-control feedback-input-custom" id="feedback-user-email" placeholder="e.g. ramesh@gmail.com" required>
+                </div>
+              </div>
+
+              <!-- 4. Favorite Snack / Order ID (Optional) -->
+              <div class="mb-3">
+                <label class="form-label fw-bold text-navy small" for="feedback-snack-product">Snack Product / Order ID (Optional)</label>
+                <input type="text" class="form-control feedback-input-custom" id="feedback-snack-product" placeholder="e.g. Aloo Bhujia / SNK-89472">
+              </div>
+
+              <!-- 5. Detailed Review / Feedback Message -->
+              <div class="mb-4">
+                <label class="form-label fw-bold text-navy small" for="feedback-page-message">Your Comments / Suggestions</label>
+                <textarea class="form-control feedback-input-custom" id="feedback-page-message" rows="4" placeholder="Tell us what you enjoyed, how the crunch tasted, or what we can improve..." required></textarea>
+              </div>
+
+              <!-- Submit Button -->
+              <button type="submit" class="btn-feedback-page-submit" id="btn-feedback-page-submit">
+                <span>Submit Your Feedback</span>
+                <i class="bi bi-send-fill"></i>
+              </button>
+
+            </form>
+          </div>
+        </div>
+
+        <!-- Right Column: Live Community Reviews & Verified Testimonials -->
+        <div class="col-lg-6">
+          <div class="d-flex align-items-center justify-content-between flex-wrap gap-2 mb-3">
+            <div>
+              <h2 class="feedback-section-title mb-0">Community Love</h2>
+              <p class="text-muted small mb-0">Real thoughts from verified Snacky munchers</p>
+            </div>
+            
+            <!-- Category Filter Tabs -->
+            <div class="d-flex gap-2 flex-wrap" id="community-feedback-filters">
+              <button type="button" class="feedback-filter-tab-btn active" data-filter="all">All</button>
+              <button type="button" class="feedback-filter-tab-btn" data-filter="Taste & Freshness">Taste</button>
+              <button type="button" class="feedback-filter-tab-btn" data-filter="Packaging Quality">Packaging</button>
+              <button type="button" class="feedback-filter-tab-btn" data-filter="Delivery Speed">Delivery</button>
+            </div>
+          </div>
+
+          <!-- Dynamic Community Feedbacks List Container -->
+          <div class="row g-3" id="community-feedbacks-container">
+            
+            <!-- Review 1 -->
+            <div class="col-12 feedback-item-node" data-cat="Taste & Freshness">
+              <div class="feedback-community-card">
+                <div>
+                  <div class="d-flex align-items-center justify-content-between mb-2">
+                    <div class="d-flex align-items-center gap-3">
+                      <div class="feedback-user-avatar">P</div>
+                      <div>
+                        <div class="fw-bold text-navy">Pooja Deshmukh</div>
+                        <div class="small text-muted">Verified Muncher • Mumbai</div>
+                      </div>
+                    </div>
+                    <span class="badge bg-warning text-dark fw-bold px-2 py-1">😍 Loved</span>
+                  </div>
+                  <p class="feedback-quote-text">
+                    "The Aloo Bhujia made with pure groundnut oil is mindblowing! Absolutely no greasy palm oil aftertaste. My whole family is hooked!"
+                  </p>
+                </div>
+                <div class="d-flex align-items-center justify-content-between pt-2 border-top">
+                  <span class="small text-navy fw-bold"><i class="bi bi-tag-fill text-warning me-1"></i> Taste & Freshness</span>
+                  <span class="small text-muted">2 days ago</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Review 2 -->
+            <div class="col-12 feedback-item-node" data-cat="Packaging Quality">
+              <div class="feedback-community-card">
+                <div>
+                  <div class="d-flex align-items-center justify-content-between mb-2">
+                    <div class="d-flex align-items-center gap-3">
+                      <div class="feedback-user-avatar">A</div>
+                      <div>
+                        <div class="fw-bold text-navy">Amit Verma</div>
+                        <div class="small text-muted">Verified Muncher • Delhi NCR</div>
+                      </div>
+                    </div>
+                    <span class="badge bg-warning text-dark fw-bold px-2 py-1">😍 Loved</span>
+                  </div>
+                  <p class="feedback-quote-text">
+                    "Zip-lock nitrogen flushed pouches kept the Tapioca & Banana chips crispy even after opening multiple times during our Goa trip."
+                  </p>
+                </div>
+                <div class="d-flex align-items-center justify-content-between pt-2 border-top">
+                  <span class="small text-navy fw-bold"><i class="bi bi-tag-fill text-warning me-1"></i> Packaging Quality</span>
+                  <span class="small text-muted">3 days ago</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Review 3 -->
+            <div class="col-12 feedback-item-node" data-cat="Delivery Speed">
+              <div class="feedback-community-card">
+                <div>
+                  <div class="d-flex align-items-center justify-content-between mb-2">
+                    <div class="d-flex align-items-center gap-3">
+                      <div class="feedback-user-avatar">S</div>
+                      <div>
+                        <div class="fw-bold text-navy">Sneha Rao</div>
+                        <div class="small text-muted">Verified Muncher • Bangalore</div>
+                      </div>
+                    </div>
+                    <span class="badge bg-success text-white fw-bold px-2 py-1">😊 Good</span>
+                  </div>
+                  <p class="feedback-quote-text">
+                    "Delivered in under 24 hours in Bangalore! Super fast shipping and packaged with care. Roasted Makhana was fresh & crunchy."
+                  </p>
+                </div>
+                <div class="d-flex align-items-center justify-content-between pt-2 border-top">
+                  <span class="small text-navy fw-bold"><i class="bi bi-tag-fill text-warning me-1"></i> Delivery Speed</span>
+                  <span class="small text-muted">5 days ago</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- Organic Curved Wave Top (Navy Blue #0B1528) -->
+  <div class="footer-wave-wrapper">
+    <svg class="footer-wave-svg" viewBox="0 0 1440 100" fill="none" preserveAspectRatio="none">
+      <path d="M0,45 C280,85 520,15 800,55 C1080,95 1280,30 1440,50 L1440,100 L0,100 Z" fill="#0B1528"></path>
+    </svg>
+  </div>
+
+  <!-- Organic Deep Navy Blue Footer Section -->
+  <footer class="main-footer" id="main-footer">
+    <div class="container">
+      <div class="row g-4 justify-content-between align-items-start">
+        
+        <!-- Col 1: Brand & Socials -->
+        <div class="col-lg-3 col-md-6 mb-3 mb-lg-0">
+          <a class="d-inline-block mb-3" href="index.html">
+            <img src="../static/images/snacky_logo_transparent.png" alt="Snacky Logo" class="footer-logo-img">
+          </a>
+          <p class="footer-tagline-text mb-3">
+            Age old wisdom meets modern nutrition. 100% pure groundnut oil, zero palm oil & trans-fat free crunch.
+          </p>
+          <div class="footer-social-pill-group">
+            <a href="https://instagram.com" target="_blank" class="footer-social-pill" aria-label="Instagram">
+              <i class="bi bi-instagram"></i>
+            </a>
+            <a href="https://youtube.com" target="_blank" class="footer-social-pill" aria-label="YouTube">
+              <i class="bi bi-youtube"></i>
+            </a>
+            <a href="https://facebook.com" target="_blank" class="footer-social-pill" aria-label="Facebook">
+              <i class="bi bi-facebook"></i>
+            </a>
+            <a href="https://linkedin.com" target="_blank" class="footer-social-pill" aria-label="LinkedIn">
+              <i class="bi bi-linkedin"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Col 2: Shop -->
+        <div class="col-6 col-md-3 col-lg-2">
+          <h6 class="footer-nav-heading">Shop</h6>
+          <ul class="footer-links-list">
+            <li><a href="products.html?category=namkeen">Namkeens & Bhujia</a></li>
+            <li><a href="products.html?category=chips">Chips & Crisps</a></li>
+            <li><a href="products.html?category=healthy">Healthy Snacks</a></li>
+            <li><a href="offers.html">Offers</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 3: Explore -->
+        <div class="col-6 col-md-3 col-lg-2">
+          <h6 class="footer-nav-heading">Explore</h6>
+          <ul class="footer-links-list">
+            <li><a href="about.html">Our Story</a></li>
+            <li><a href="products.html">All Snacks Catalog</a></li>
+            <li><a href="feedback.html">Customer Feedback</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 4: Policies & Help -->
+        <div class="col-6 col-md-3 col-lg-2">
+          <h6 class="footer-nav-heading">Customer Care</h6>
+          <ul class="footer-links-list">
+            <li><a href="track-order.html">Track Order</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+            <li><a href="contact.html#faq-section">Frequently Asked Questions</a></li>
+            <li><a href="about.html">Terms of Service</a></li>
+            <li><a href="about.html">Privacy Policy</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 5: Join Squad & Feedback Direct Link -->
+        <div class="col-lg-3 col-md-6">
+          <h6 class="footer-squad-heading">JOIN THE SNACKY CO. SQUAD</h6>
+          <form class="footer-newsletter-form mb-3" onsubmit="event.preventDefault(); handleNewsletterSubmit(this);">
+            <div class="footer-email-input-group">
+              <input type="email" class="form-control footer-email-input" placeholder="E-mail" required>
+              <button type="submit" class="footer-email-btn" aria-label="Subscribe">
+                <i class="bi bi-arrow-right"></i>
+              </button>
+            </div>
+          </form>
+
+          <!-- Interactive Customer Feedback Bar -->
+          <div class="footer-feedback-prompt-box mb-3">
+            <div class="d-flex align-items-center justify-content-between gap-2">
+              <div>
+                <div class="footer-feedback-title">Loved our snacks?</div>
+                <div class="footer-feedback-subtitle">Share your feedback</div>
+              </div>
+              <a href="feedback.html" class="btn-footer-feedback-pill" aria-label="Give Feedback">
+                <i class="bi bi-chat-heart-fill me-1"></i> Feedback
+              </a>
+            </div>
+          </div>
+
+          <!-- Payment Methods & Copyright -->
+          <div class="d-flex align-items-center justify-content-between flex-wrap gap-2 pt-1">
+            <div class="footer-payment-badges-row">
+              <span class="payment-badge-pill visa-pill">VISA</span>
+              <span class="payment-badge-pill mc-pill"><span class="mc-c1"></span><span class="mc-c2"></span></span>
+              <span class="payment-badge-pill gpay-pill">G Pay</span>
+              <span class="payment-badge-pill upi-pill">UPI</span>
+            </div>
+            <div class="footer-copyright-text">
+              © Snacky Co. 2026
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </footer>
+
+  <!-- Offcanvas Cart Drawer -->
+  <div class="offcanvas offcanvas-end cart-offcanvas-custom" tabindex="-1" id="cartOffcanvas">
+    <div class="offcanvas-header border-bottom">
+      <h5 class="offcanvas-title fw-bold text-navy"><i class="bi bi-bag me-2"></i> Cart Items</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+    </div>
+    <div class="free-delivery-meter text-center">
+      <div class="fw-bold small text-navy mb-1" id="free-shipping-text">Add ₹199 more for free delivery</div>
+      <div class="progress progress-sm">
+        <div class="progress-bar bg-warning" id="free-shipping-progress"></div>
+      </div>
+    </div>
+    <div class="offcanvas-body" id="cart-drawer-items"></div>
+    <div class="offcanvas-footer p-3 border-top bg-light">
+      <div class="d-flex justify-content-between mb-2">
+        <span class="text-muted">Subtotal</span>
+        <span class="fw-bold text-navy" id="cart-subtotal-val">₹0.00</span>
+      </div>
+      <div class="d-flex justify-content-between mb-3">
+        <span class="fw-bold text-navy fs-5">Total</span>
+        <span class="fw-bold text-warning fs-5" id="cart-total-val">₹0.00</span>
+      </div>
+      <a href="cart-payment-flow.html" class="btn btn-snacky-primary w-100 py-3 text-center">Proceed to Checkout <i class="bi bi-arrow-right"></i></a>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../static/js/script.js"></script>
+</body>
+</html>

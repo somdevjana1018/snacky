@@ -9,46 +9,73 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
-  <link rel="icon" type="image/svg+xml" href="../static/images/favicon.svg">
+  <link rel="icon" type="image/png" href="../static/images/snacky_logo_transparent.png">
   <link rel="stylesheet" href="../static/css/style.css">
 </head>
 <body>
 
-  <!-- Top Announcement Bar -->
+  <!-- Top Announcement Bar with Marquee Effect -->
   <div class="top-announcement-bar">
-    🚚 FREE DELIVERY ABOVE ₹199
+    <div class="marquee-track">
+      <div class="marquee-content">
+        <span>🚚 FREE DELIVERY ABOVE ₹199</span> <span class="marquee-dot">•</span>
+        <span>🍿 100% PURE GROUNDNUT OIL</span> <span class="marquee-dot">•</span>
+        <span>✨ NO PALM OIL • NO CHOLESTEROL</span> <span class="marquee-dot">•</span>
+        <span>🎉 USE CODE: SNACKY50 FOR ₹50 OFF</span> <span class="marquee-dot">•</span>
+      </div>
+      <div class="marquee-content">
+        <span>🚚 FREE DELIVERY ABOVE ₹199</span> <span class="marquee-dot">•</span>
+        <span>🍿 100% PURE GROUNDNUT OIL</span> <span class="marquee-dot">•</span>
+        <span>✨ NO PALM OIL • NO CHOLESTEROL</span> <span class="marquee-dot">•</span>
+        <span>🎉 USE CODE: SNACKY50 FOR ₹50 OFF</span> <span class="marquee-dot">•</span>
+      </div>
+    </div>
   </div>
 
-  <!-- Navigation Bar -->
+  <!-- Navigation Bar (#main-navbar) -->
   <nav class="navbar navbar-expand-lg main-navbar" id="main-navbar">
     <div class="container">
       <a class="brand-logo-container" href="index.html">
-        <img src="../static/images/snacky_logo.svg" alt="Snacky Logo" class="brand-logo-img">
+        <img src="../static/images/snacky_logo_transparent.png" alt="Snacky Logo" class="brand-logo-img">
       </a>
 
-      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
 
       <div class="collapse navbar-collapse" id="navbarContent">
-        <ul class="navbar-nav mx-auto mb-2 mb-lg-0 gap-3">
-          <li class="nav-item"><a class="nav-link nav-link-custom" href="index.html">Home</a></li>
-          <li class="nav-item"><a class="nav-link nav-link-custom" href="products.html">Products</a></li>
-          <li class="nav-item"><a class="nav-link nav-link-custom active" href="offers.html">Offers</a></li>
-          <li class="nav-item"><a class="nav-link nav-link-custom" href="about.html">About</a></li>
-          <li class="nav-item"><a class="nav-link nav-link-custom" href="contact.html">Contact</a></li>
+        <ul class="navbar-nav mb-2 mb-lg-0 gap-1 gap-lg-2">
+          <li class="nav-item">
+            <a class="nav-link nav-link-custom" href="index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-link-custom" href="products.html">Products</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-link-custom active" href="offers.html">Offers</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-link-custom" href="about.html">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-link-custom" href="contact.html">Contact</a>
+          </li>
         </ul>
 
         <div class="nav-actions-right">
           <div class="nav-search-container">
             <input type="text" class="nav-search-input" id="nav-search-input" placeholder="Search snacks...">
-            <i class="bi bi-search nav-search-icon"></i>
+            <i class="bi bi-search nav-search-icon" id="nav-search-trigger"></i>
           </div>
-          <a href="auth.html" class="nav-auth-btn" id="nav-user-account-btn">
-            <i class="bi bi-person-circle"></i>
-            <span id="nav-user-text">Login / Sign Up</span>
-          </a>
-          <button class="nav-action-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#cartOffcanvas" title="Shopping Cart">
+
+          <div id="auth-nav-container">
+            <a href="auth.html" class="nav-action-btn" id="nav-user-account-btn" title="Account / Login" aria-label="Account">
+              <i class="bi bi-person"></i>
+            </a>
+          </div>
+
+          <button class="nav-action-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#cartOffcanvas"
+            title="Shopping Cart">
             <i class="bi bi-cart3"></i>
             <span class="cart-count-badge">0</span>
           </button>
@@ -57,14 +84,25 @@
     </div>
   </nav>
 
-  <!-- Hero Offers Banner (#offers-hero) -->
-  <section class="container my-4" id="offers-hero">
-    <div class="p-5 rounded-4 text-white bg-gradient-offers">
-      <div class="row align-items-center g-4">
+  <!-- 1. Offer Hero Banner / Mega Discount Carousel (#offers-hero) -->
+  <section class="container my-3 my-md-4" id="offers-hero">
+    <div class="p-4 p-md-5 rounded-4 text-white bg-gradient-offers-hero">
+      <div class="row align-items-center g-3 g-md-4">
         <div class="col-lg-7 text-center text-lg-start">
-          <span class="badge bg-warning text-dark rounded-pill fw-bold px-3 py-2 mb-2">MEGASALE - UP TO 60% OFF</span>
-          <h1 class="display-4 fw-extrabold mb-3">Snack Deals & Special Coupons</h1>
-          <p class="lead text-light-50 mw-600px">Grab your favorite guilt-free munchies at unbeatable prices. Limited period offers!</p>
+          <span class="badge bg-warning text-dark rounded-pill fw-bold px-3 py-1 mb-2 fs-7">🔥 MONSOON CRUNCH BASH</span>
+          <h1 class="fw-extrabold mb-2 offers-hero-heading">Flat 30% Off On Bestselling Munchies!</h1>
+          <p class="text-light-50 mb-3 mw-600px offers-hero-desc">Stock up on 100% groundnut oil roasted snacks. Use code at checkout for instant savings.</p>
+          
+          <div class="d-flex flex-wrap align-items-center gap-2 gap-md-3 justify-content-center justify-content-lg-start">
+            <div class="hero-coupon-pill">
+              <span>Code: <strong>SNACKY30</strong></span>
+              <button class="hero-copy-btn" onclick="copyCouponCode('SNACKY30')">Copy Code</button>
+            </div>
+            <div class="d-flex align-items-center gap-2 text-warning fw-bold small">
+              <i class="bi bi-clock-history fs-5"></i>
+              <span>Ends in: <span class="timer-hours-val">04</span>h : <span class="timer-mins-val">18</span>m : <span class="timer-secs-val">32</span>s</span>
+            </div>
+          </div>
         </div>
         <div class="col-lg-5 text-center">
           <img src="../static/images/hero_offers_banner.jpg" alt="Snack Deals Banner" class="hero-banner-img">
@@ -73,33 +111,81 @@
     </div>
   </section>
 
-  <!-- Flash Sale Countdown Section (#flash-sale) -->
-  <section class="container my-5" id="flash-sale">
-    <div class="flash-sale-box" id="flash-sale-timer-box">
-      <div class="row align-items-center g-4">
-        <div class="col-lg-6">
-          <span class="badge bg-danger rounded-pill px-3 py-2 mb-2 fw-bold"><i class="bi bi-lightning-fill"></i> FLASH SALE ENDING SOON</span>
-          <h2 class="fw-extrabold mb-2">Midnight Snack Crunch Blitz</h2>
-          <p class="text-light-50 mb-0">Extra 25% discount automatically applied at checkout for orders above ₹399.</p>
-        </div>
+  <!-- 2. Coupon Hub / Promo Cards Grid (#coupon-hub) -->
+  <section class="container my-4 my-md-5" id="coupon-hub">
+    <div class="section-title-wrapper mb-3 mb-md-4">
+      <h2 class="section-title mb-1">🎟️ Coupon Hub &amp; Promo Codes</h2>
+      <p class="text-muted small mb-0">Tap 'Copy' to save promo code instantly for your cart.</p>
+    </div>
 
-        <div class="col-lg-6">
-          <div class="d-flex gap-3 justify-content-lg-end justify-content-center">
-            <div class="timer-pill-box">
-              <div class="timer-number" id="timer-days">01</div>
-              <div class="timer-label">Days</div>
+    <div class="row g-2 g-md-4">
+      <!-- Coupon 1 -->
+      <div class="col-6 col-md-6 col-lg-3">
+        <div class="coupon-hub-card">
+          <div>
+            <span class="coupon-discount-badge">FLAT ₹50 OFF</span>
+            <h5 class="fw-extrabold text-navy mb-1 coupon-card-title">SNACKY50</h5>
+            <p class="text-muted small mb-2 mb-md-3 coupon-card-desc">Flat ₹50 discount on orders above ₹299.</p>
+          </div>
+          <div>
+            <div class="small text-muted mb-1 mb-md-2 coupon-card-expiry"><i class="bi bi-calendar-event me-1"></i> 3 days left</div>
+            <div class="d-flex align-items-center justify-content-between gap-1">
+              <span class="dashed-code-box">SNACKY50</span>
+              <button class="btn btn-sm btn-snacky-primary py-1 px-2 px-md-3 fs-8" onclick="copyCouponCode('SNACKY50')">Copy</button>
             </div>
-            <div class="timer-pill-box">
-              <div class="timer-number" id="timer-hours">08</div>
-              <div class="timer-label">Hours</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Coupon 2 -->
+      <div class="col-6 col-md-6 col-lg-3">
+        <div class="coupon-hub-card">
+          <div>
+            <span class="coupon-discount-badge">EXTRA 20% OFF</span>
+            <h5 class="fw-extrabold text-navy mb-1 coupon-card-title">COMBO20</h5>
+            <p class="text-muted small mb-2 mb-md-3 coupon-card-desc">Extra 20% savings on Combo Packs above ₹499.</p>
+          </div>
+          <div>
+            <div class="small text-muted mb-1 mb-md-2 coupon-card-expiry"><i class="bi bi-calendar-event me-1"></i> Till Sunday</div>
+            <div class="d-flex align-items-center justify-content-between gap-1">
+              <span class="dashed-code-box">COMBO20</span>
+              <button class="btn btn-sm btn-snacky-primary py-1 px-2 px-md-3 fs-8" onclick="copyCouponCode('COMBO20')">Copy</button>
             </div>
-            <div class="timer-pill-box">
-              <div class="timer-number" id="timer-mins">45</div>
-              <div class="timer-label">Mins</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Coupon 3 -->
+      <div class="col-6 col-md-6 col-lg-3">
+        <div class="coupon-hub-card">
+          <div>
+            <span class="coupon-discount-badge bg-success">FREE SHIPPING</span>
+            <h5 class="fw-extrabold text-navy mb-1 coupon-card-title">FREESHIP</h5>
+            <p class="text-muted small mb-2 mb-md-3 coupon-card-desc">Free doorstep delivery on orders above ₹199.</p>
+          </div>
+          <div>
+            <div class="small text-muted mb-1 mb-md-2 coupon-card-expiry"><i class="bi bi-check-circle-fill text-success me-1"></i> Auto-applied</div>
+            <div class="d-flex align-items-center justify-content-between gap-1">
+              <span class="dashed-code-box">FREESHIP</span>
+              <button class="btn btn-sm btn-snacky-primary py-1 px-2 px-md-3 fs-8" onclick="copyCouponCode('FREESHIP')">Copy</button>
             </div>
-            <div class="timer-pill-box">
-              <div class="timer-number" id="timer-secs">30</div>
-              <div class="timer-label">Secs</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Coupon 4 -->
+      <div class="col-6 col-md-6 col-lg-3">
+        <div class="coupon-hub-card">
+          <div>
+            <span class="coupon-discount-badge bg-danger">FLAT ₹100 OFF</span>
+            <h5 class="fw-extrabold text-navy mb-1 coupon-card-title">SUPER100</h5>
+            <p class="text-muted small mb-2 mb-md-3 coupon-card-desc">Save ₹100 on orders above ₹699.</p>
+          </div>
+          <div>
+            <div class="small text-muted mb-1 mb-md-2 coupon-card-expiry"><i class="bi bi-fire me-1 text-danger"></i> Popular Deal</div>
+            <div class="d-flex align-items-center justify-content-between gap-1">
+              <span class="dashed-code-box">SUPER100</span>
+              <button class="btn btn-sm btn-snacky-primary py-1 px-2 px-md-3 fs-8" onclick="copyCouponCode('SUPER100')">Copy</button>
             </div>
           </div>
         </div>
@@ -107,90 +193,268 @@
     </div>
   </section>
 
-  <!-- Active Coupons Section (#active-coupons) -->
-  <section class="container my-5" id="active-coupons">
-    <div class="section-title-wrapper mb-4">
-      <h2 class="section-title mb-0">Active Promo Coupons</h2>
+  <!-- 3. Daily Flash Deals / Lightning Discounts (Timer Based) (#flash-deals) -->
+  <section class="container my-4 my-md-5" id="flash-deals">
+    <div class="d-flex flex-wrap justify-content-between align-items-center mb-4 gap-3">
+      <div>
+        <h2 class="section-title mb-0">⚡ Daily Lightning Flash Deals</h2>
+        <p class="text-muted small mb-0">Limited quantity offer—prices revert once timer expires!</p>
+      </div>
+      <div class="flash-timer-badge fs-6 px-3 py-2">
+        <i class="bi bi-lightning-charge-fill text-warning"></i> Ends In: 
+        <span class="timer-hours-val fw-bold">04</span>:<span class="timer-mins-val fw-bold">18</span>:<span class="timer-secs-val fw-bold">32</span>
+      </div>
     </div>
 
     <div class="row g-4">
-      <div class="col-md-4">
-        <div class="ticket-coupon">
-          <span class="badge bg-warning text-dark font-bold mb-2">FLAT ₹50 OFF</span>
-          <h5 class="fw-bold text-navy mb-1">SNACKY50</h5>
-          <p class="text-muted small mb-3">Get Flat ₹50 OFF on orders above ₹299. Applicable on all products.</p>
-          <div class="d-flex align-items-center justify-content-between">
-            <span class="dashed-code-box">SNACKY50</span>
-            <button class="btn btn-sm btn-outline-warning text-dark font-bold rounded-pill px-3 btn-copy-code" data-code="SNACKY50">Copy Code</button>
+      <!-- Flash Item 1 -->
+      <div class="col-6 col-md-3">
+        <div class="flash-deal-card">
+          <span class="badge-discount-ribbon">34% OFF</span>
+          <div class="card-top-frame">
+            <img src="../static/images/snack_makhana.jpg" alt="Roasted Peri Peri Makhana" class="product-card-img">
+          </div>
+          <div class="product-card-body">
+            <h6 class="product-title">Roasted Peri Peri Makhana</h6>
+            <div class="small text-muted mb-2">Pack: 100g</div>
+            <div class="price-row-box">
+              <span class="price-selling">₹99</span>
+              <span class="price-mrp">₹150</span>
+            </div>
+            <button class="btn btn-card-add-to-cart w-100 mt-2" onclick="addToCart({id:'makhana_peri_100', title:'Roasted Peri Peri Makhana', price:99, mrp:150, image:'../static/images/snack_makhana.jpg'}, '100g')">
+              <i class="bi bi-cart-plus me-1"></i> Add to Cart
+            </button>
           </div>
         </div>
       </div>
 
-      <div class="col-md-4">
-        <div class="ticket-coupon">
-          <span class="badge bg-danger text-white font-bold mb-2">FLAT ₹100 OFF</span>
-          <h5 class="fw-bold text-navy mb-1">CRUNCH100</h5>
-          <p class="text-muted small mb-3">Save ₹100 instantly on order value above ₹599 across any combo pack.</p>
-          <div class="d-flex align-items-center justify-content-between">
-            <span class="dashed-code-box">CRUNCH100</span>
-            <button class="btn btn-sm btn-outline-warning text-dark font-bold rounded-pill px-3 btn-copy-code" data-code="CRUNCH100">Copy Code</button>
+      <!-- Flash Item 2 -->
+      <div class="col-6 col-md-3">
+        <div class="flash-deal-card">
+          <span class="badge-discount-ribbon">34% OFF</span>
+          <div class="card-top-frame">
+            <img src="../static/images/paachratan_mixture.jpg" alt="Special Mixture Namkeen" class="product-card-img">
+          </div>
+          <div class="product-card-body">
+            <h6 class="product-title">Special Mixture Namkeen</h6>
+            <div class="small text-muted mb-2">Pack: 250g</div>
+            <div class="price-row-box">
+              <span class="price-selling">₹79</span>
+              <span class="price-mrp">₹120</span>
+            </div>
+            <button class="btn btn-card-add-to-cart w-100 mt-2" onclick="addToCart({id:'namkeen_mix_250', title:'Special Mixture Namkeen', price:79, mrp:120, image:'../static/images/paachratan_mixture.jpg'}, '250g')">
+              <i class="bi bi-cart-plus me-1"></i> Add to Cart
+            </button>
           </div>
         </div>
       </div>
 
-      <div class="col-md-4">
-        <div class="ticket-coupon">
-          <span class="badge bg-success text-white font-bold mb-2">20% EXTRA OFF</span>
-          <h5 class="fw-bold text-navy mb-1">HEALTHY20</h5>
-          <p class="text-muted small mb-3">Additional 20% discount on entire Healthy Makhana range.</p>
-          <div class="d-flex align-items-center justify-content-between">
-            <span class="dashed-code-box">HEALTHY20</span>
-            <button class="btn btn-sm btn-outline-warning text-dark font-bold rounded-pill px-3 btn-copy-code" data-code="HEALTHY20">Copy Code</button>
+      <!-- Flash Item 3 -->
+      <div class="col-6 col-md-3">
+        <div class="flash-deal-card">
+          <span class="badge-discount-ribbon">37% OFF</span>
+          <div class="card-top-frame">
+            <img src="../static/images/signature_hot_chips.jpg" alt="Tapioca Hot Chips" class="product-card-img">
+          </div>
+          <div class="product-card-body">
+            <h6 class="product-title">Tapioca Hot Chips</h6>
+            <div class="small text-muted mb-2">Pack: 150g</div>
+            <div class="price-row-box">
+              <span class="price-selling">₹69</span>
+              <span class="price-mrp">₹110</span>
+            </div>
+            <button class="btn btn-card-add-to-cart w-100 mt-2" onclick="addToCart({id:'tapioca_hot_150', title:'Tapioca Hot Chips', price:69, mrp:110, image:'../static/images/signature_hot_chips.jpg'}, '150g')">
+              <i class="bi bi-cart-plus me-1"></i> Add to Cart
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Flash Item 4 -->
+      <div class="col-6 col-md-3">
+        <div class="flash-deal-card">
+          <span class="badge-discount-ribbon">34% OFF</span>
+          <div class="card-top-frame">
+            <img src="../static/images/aloo_bhujia.jpg" alt="Crunchy Aloo Bhujia" class="product-card-img">
+          </div>
+          <div class="product-card-body">
+            <h6 class="product-title">Crunchy Aloo Bhujia</h6>
+            <div class="small text-muted mb-2">Pack: 200g</div>
+            <div class="price-row-box">
+              <span class="price-selling">₹59</span>
+              <span class="price-mrp">₹90</span>
+            </div>
+            <button class="btn btn-card-add-to-cart w-100 mt-2" onclick="addToCart({id:'aloo_bhujia_200', title:'Crunchy Aloo Bhujia', price:59, mrp:90, image:'../static/images/aloo_bhujia.jpg'}, '200g')">
+              <i class="bi bi-cart-plus me-1"></i> Add to Cart
+            </button>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Dark Footer -->
-  <footer class="main-footer" id="main-footer">
-    <div class="container">
-      <div class="row g-4">
-        <div class="col-lg-4">
-          <a class="d-inline-block mb-3" href="index.html">
-            <img src="../static/images/snacky_logo.svg" alt="Snacky Logo" class="footer-logo-img">
-          </a>
-          <p class="small text-muted mb-3">Snacky is India's premium snacks brand bringing you authentic, palm-oil free crunch.</p>
+
+
+  <!-- 5. Tiered Spend-and-Save / Freebie Progress Bar (#spend-save-tiers) -->
+  <section class="container my-5" id="spend-save-tiers">
+    <div class="spend-save-container">
+      <div class="text-center mb-5">
+        <span class="badge bg-warning text-dark fw-bold rounded-pill px-3 py-2 mb-2">UNLOCK UNLIMITED PERKS</span>
+        <h3 class="display-6 fw-extrabold text-navy mb-2">Tiered Spend & Save Milestones</h3>
+        <p class="text-muted small mw-600px mx-auto mb-0">The more you munch, the bigger your free gifts & savings! Rewards auto-apply at checkout.</p>
+      </div>
+
+      <div class="row g-4 text-center">
+        <!-- Milestone 1 -->
+        <div class="col-md-4">
+          <div class="spend-milestone-step">
+            <div class="milestone-icon-circle bg-success-subtle text-success">
+              <i class="bi bi-truck fs-1"></i>
+            </div>
+            <h5 class="fw-extrabold text-navy mb-2">Shop Above ₹199</h5>
+            <span class="milestone-reward-pill reward-green">
+              <i class="bi bi-check-circle-fill me-1"></i> FREE Doorstep Delivery
+            </span>
+          </div>
         </div>
-        <div class="col-6 col-lg-2">
-          <h6 class="footer-title">SHOP</h6>
-          <ul class="footer-links-list">
-            <li><a href="products.html?category=namkeen">Namkeen</a></li>
-            <li><a href="products.html?category=chips">Chips & Wafers</a></li>
-            <li><a href="products.html?category=healthy">Healthy Snacks</a></li>
-          </ul>
+
+        <!-- Milestone 2 -->
+        <div class="col-md-4">
+          <div class="spend-milestone-step">
+            <div class="milestone-icon-circle bg-warning-subtle text-warning">
+              <i class="bi bi-gift-fill fs-1"></i>
+            </div>
+            <h5 class="fw-extrabold text-navy mb-2">Shop Above ₹499</h5>
+            <span class="milestone-reward-pill reward-orange">
+              <i class="bi bi-box2-heart-fill me-1"></i> FREE Mini Dip & Snack Pack
+            </span>
+          </div>
         </div>
-        <div class="col-6 col-lg-2">
-          <h6 class="footer-title">EXPLORE</h6>
-          <ul class="footer-links-list">
-            <li><a href="about.html">About Us</a></li>
-            <li><a href="contact.html">Contact Us</a></li>
-          </ul>
-        </div>
-        <div class="col-6 col-lg-2">
-          <h6 class="footer-title">HELP</h6>
-          <ul class="footer-links-list">
-            <li><a href="contact.html">Contact Support</a></li>
-            <li><a href="track-order.html">Track Order</a></li>
-          </ul>
-        </div>
-        <div class="col-6 col-lg-2">
-          <h6 class="footer-title">CONTACT</h6>
-          <p class="small mb-0">+91 9654932262</p>
+
+        <!-- Milestone 3 -->
+        <div class="col-md-4">
+          <div class="spend-milestone-step">
+            <div class="milestone-icon-circle bg-primary-subtle text-primary">
+              <i class="bi bi-award-fill fs-1"></i>
+            </div>
+            <h5 class="fw-extrabold text-navy mb-2">Shop Above ₹799</h5>
+            <span class="milestone-reward-pill reward-purple">
+              <i class="bi bi-stars me-1"></i> Flat 20% OFF + Deluxe Gift Box
+            </span>
+          </div>
         </div>
       </div>
-      <div class="footer-bottom-bar">
-        <p class="small mb-0">© 2026 Snacky Foods Private Limited. All rights reserved.</p>
+    </div>
+  </section>
+
+  <!-- Organic Curved Wave Top (Navy Blue #0B1528) -->
+  <div class="footer-wave-wrapper">
+    <svg class="footer-wave-svg" viewBox="0 0 1440 100" fill="none" preserveAspectRatio="none">
+      <path d="M0,45 C280,85 520,15 800,55 C1080,95 1280,30 1440,50 L1440,100 L0,100 Z" fill="#0B1528"></path>
+    </svg>
+  </div>
+
+  <!-- Organic Deep Navy Blue Footer Section -->
+  <footer class="main-footer" id="main-footer">
+    <div class="container">
+      <div class="row g-4 justify-content-between align-items-start">
+        
+        <!-- Col 1: Brand & Socials -->
+        <div class="col-lg-3 col-md-6 mb-3 mb-lg-0">
+          <a class="d-inline-block mb-3" href="index.html">
+            <img src="../static/images/snacky_logo_transparent.png" alt="Snacky Logo" class="footer-logo-img">
+          </a>
+          <p class="footer-tagline-text mb-3">
+            Age old wisdom meets modern nutrition. 100% pure groundnut oil, zero palm oil & trans-fat free crunch.
+          </p>
+          <div class="footer-social-pill-group">
+            <a href="https://instagram.com" target="_blank" class="footer-social-pill" aria-label="Instagram">
+              <i class="bi bi-instagram"></i>
+            </a>
+            <a href="https://youtube.com" target="_blank" class="footer-social-pill" aria-label="YouTube">
+              <i class="bi bi-youtube"></i>
+            </a>
+            <a href="https://facebook.com" target="_blank" class="footer-social-pill" aria-label="Facebook">
+              <i class="bi bi-facebook"></i>
+            </a>
+            <a href="https://linkedin.com" target="_blank" class="footer-social-pill" aria-label="LinkedIn">
+              <i class="bi bi-linkedin"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Col 2: Shop -->
+        <div class="col-6 col-md-3 col-lg-2">
+          <h6 class="footer-nav-heading">Shop</h6>
+          <ul class="footer-links-list">
+            <li><a href="products.html?category=namkeen">Namkeens & Bhujia</a></li>
+            <li><a href="products.html?category=chips">Chips & Crisps</a></li>
+            <li><a href="products.html?category=healthy">Healthy Snacks</a></li>
+            <li><a href="offers.html">Offers</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 3: Explore -->
+        <div class="col-6 col-md-3 col-lg-2">
+          <h6 class="footer-nav-heading">Explore</h6>
+          <ul class="footer-links-list">
+            <li><a href="about.html">Our Story</a></li>
+            <li><a href="products.html">All Snacks Catalog</a></li>
+            <li><a href="feedback.html">Customer Feedback</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 4: Policies & Help -->
+        <div class="col-6 col-md-3 col-lg-2">
+          <h6 class="footer-nav-heading">Customer Care</h6>
+          <ul class="footer-links-list">
+            <li><a href="track-order.html">Track Order</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+            <li><a href="contact.html#faq-section">Frequently Asked Questions</a></li>
+            <li><a href="about.html">Terms of Service</a></li>
+            <li><a href="about.html">Privacy Policy</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 5: Join Squad & Feedback Direct Link -->
+        <div class="col-lg-3 col-md-6">
+          <h6 class="footer-squad-heading">JOIN THE SNACKY CO. SQUAD</h6>
+          <form class="footer-newsletter-form mb-3" onsubmit="event.preventDefault(); handleNewsletterSubmit(this);">
+            <div class="footer-email-input-group">
+              <input type="email" class="form-control footer-email-input" placeholder="E-mail" required>
+              <button type="submit" class="footer-email-btn" aria-label="Subscribe">
+                <i class="bi bi-arrow-right"></i>
+              </button>
+            </div>
+          </form>
+
+          <!-- Interactive Customer Feedback Bar -->
+          <div class="footer-feedback-prompt-box mb-3">
+            <div class="d-flex align-items-center justify-content-between gap-2">
+              <div>
+                <div class="footer-feedback-title">Loved our snacks?</div>
+                <div class="footer-feedback-subtitle">Share your feedback</div>
+              </div>
+              <a href="feedback.html" class="btn-footer-feedback-pill" aria-label="Give Feedback">
+                <i class="bi bi-chat-heart-fill me-1"></i> Feedback
+              </a>
+            </div>
+          </div>
+
+          <!-- Payment Methods & Copyright -->
+          <div class="d-flex align-items-center justify-content-between flex-wrap gap-2 pt-1">
+            <div class="footer-payment-badges-row">
+              <span class="payment-badge-pill visa-pill">VISA</span>
+              <span class="payment-badge-pill mc-pill"><span class="mc-c1"></span><span class="mc-c2"></span></span>
+              <span class="payment-badge-pill gpay-pill">G Pay</span>
+              <span class="payment-badge-pill upi-pill">UPI</span>
+            </div>
+            <div class="footer-copyright-text">
+              © Snacky Co. 2026
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
   </footer>

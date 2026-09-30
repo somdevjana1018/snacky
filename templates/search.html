@@ -9,51 +9,73 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
-  <link rel="icon" type="image/svg+xml" href="../static/images/favicon.svg">
+  <link rel="icon" type="image/png" href="../static/images/snacky_logo_transparent.png">
   <link rel="stylesheet" href="../static/css/style.css">
 </head>
 <body>
 
-  <!-- 1. Top Feature Ticker Bar -->
-  <div class="top-ticker-bar">
-    No White Sugar <span class="divider">|</span> High Fiber <span class="divider">|</span> No Palm Oil <span class="divider">|</span> No Cholesterol <span class="divider">|</span> No Trans Fat <span class="divider">|</span> No White Sugar
-  </div>
-
-  <!-- 2. Top Announcement Bar -->
+  <!-- Top Announcement Bar with Marquee Effect -->
   <div class="top-announcement-bar">
-    🚚 FREE DELIVERY ABOVE ₹199
+    <div class="marquee-track">
+      <div class="marquee-content">
+        <span>🚚 FREE DELIVERY ABOVE ₹199</span> <span class="marquee-dot">•</span>
+        <span>🍿 100% PURE GROUNDNUT OIL</span> <span class="marquee-dot">•</span>
+        <span>✨ NO PALM OIL • NO CHOLESTEROL</span> <span class="marquee-dot">•</span>
+        <span>🎉 USE CODE: SNACKY50 FOR ₹50 OFF</span> <span class="marquee-dot">•</span>
+      </div>
+      <div class="marquee-content">
+        <span>🚚 FREE DELIVERY ABOVE ₹199</span> <span class="marquee-dot">•</span>
+        <span>🍿 100% PURE GROUNDNUT OIL</span> <span class="marquee-dot">•</span>
+        <span>✨ NO PALM OIL • NO CHOLESTEROL</span> <span class="marquee-dot">•</span>
+        <span>🎉 USE CODE: SNACKY50 FOR ₹50 OFF</span> <span class="marquee-dot">•</span>
+      </div>
+    </div>
   </div>
 
-  <!-- Navigation Bar -->
+  <!-- Navigation Bar (#main-navbar) -->
   <nav class="navbar navbar-expand-lg main-navbar" id="main-navbar">
     <div class="container">
       <a class="brand-logo-container" href="index.html">
-        <img src="../static/images/snacky_logo.svg" alt="Snacky Logo" class="brand-logo-img">
+        <img src="../static/images/snacky_logo_transparent.png" alt="Snacky Logo" class="brand-logo-img">
       </a>
 
-      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
 
       <div class="collapse navbar-collapse" id="navbarContent">
-        <ul class="navbar-nav mx-auto mb-2 mb-lg-0 gap-3">
-          <li class="nav-item"><a class="nav-link nav-link-custom" href="index.html">Home</a></li>
-          <li class="nav-item"><a class="nav-link nav-link-custom active" href="products.html">Products</a></li>
-          <li class="nav-item"><a class="nav-link nav-link-custom" href="offers.html">Offers</a></li>
-          <li class="nav-item"><a class="nav-link nav-link-custom" href="about.html">About</a></li>
-          <li class="nav-item"><a class="nav-link nav-link-custom" href="contact.html">Contact</a></li>
+        <ul class="navbar-nav mb-2 mb-lg-0 gap-1 gap-lg-2">
+          <li class="nav-item">
+            <a class="nav-link nav-link-custom" href="index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-link-custom" href="products.html">Products</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-link-custom" href="offers.html">Offers</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-link-custom" href="about.html">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-link-custom" href="contact.html">Contact</a>
+          </li>
         </ul>
 
         <div class="nav-actions-right">
           <div class="nav-search-container">
             <input type="text" class="nav-search-input" id="nav-search-input" placeholder="Search snacks...">
-            <i class="bi bi-search nav-search-icon"></i>
+            <i class="bi bi-search nav-search-icon" id="nav-search-trigger"></i>
           </div>
-          <a href="auth.html" class="nav-auth-btn" id="nav-user-account-btn">
-            <i class="bi bi-person-circle"></i>
-            <span id="nav-user-text">Login / Sign Up</span>
-          </a>
-          <button class="nav-action-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#cartOffcanvas" title="Shopping Cart">
+
+          <div id="auth-nav-container">
+            <a href="auth.html" class="nav-action-btn" id="nav-user-account-btn" title="Account / Login" aria-label="Account">
+              <i class="bi bi-person"></i>
+            </a>
+          </div>
+
+          <button class="nav-action-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#cartOffcanvas"
+            title="Shopping Cart">
             <i class="bi bi-cart3"></i>
             <span class="cart-count-badge">0</span>
           </button>
@@ -62,133 +84,141 @@
     </div>
   </nav>
 
-  <!-- Live Search Input Section (#search-input-section) -->
-  <section class="container my-4" id="search-input-section">
-    <div class="card card-body p-4 border-0 shadow-sm rounded-4 bg-white">
-      <div class="position-relative mb-3">
-        <i class="bi bi-search fs-4 text-muted position-absolute search-page-icon"></i>
-        <input type="text" class="form-control form-control-lg rounded-pill ps-5 pe-5 py-3 fs-5" id="search-page-input" placeholder="Search for products (e.g., Bhujia, Makhana, Chips)...">
-        <button class="btn border-0 text-muted fs-4 position-absolute search-page-clear-btn" id="search-clear-btn">✕</button>
+  <!-- Page Header (#search-header) -->
+  <section class="container my-4" id="search-header">
+    <div class="d-flex align-items-center justify-content-between flex-wrap gap-2 pb-2 border-bottom">
+      <div class="d-flex align-items-center gap-3">
+        <a href="products.html" class="btn btn-sm btn-outline-secondary rounded-circle w-36px h-36px d-inline-flex align-items-center justify-content-center" title="Back to Products">
+          <i class="bi bi-arrow-left"></i>
+        </a>
+        <h2 class="section-title mb-0" id="search-query-header">Search Results</h2>
       </div>
-
-      <!-- Popular Searches Tag Bar -->
-      <div class="d-flex align-items-center gap-2 flex-wrap">
-        <span class="small text-muted fw-bold">Popular Searches:</span>
-        <button class="btn btn-sm btn-light border rounded-pill px-3 popular-tag-pill" data-tag="Bhujia">🔍 Bhujia</button>
-        <button class="btn btn-sm btn-light border rounded-pill px-3 popular-tag-pill" data-tag="Makhana">🔍 Makhana</button>
-        <button class="btn btn-sm btn-light border rounded-pill px-3 popular-tag-pill" data-tag="Chakli">🔍 Chakli</button>
-        <button class="btn btn-sm btn-light border rounded-pill px-3 popular-tag-pill" data-tag="Banana Chips">🔍 Banana Chips</button>
-        <button class="btn btn-sm btn-light border rounded-pill px-3 popular-tag-pill" data-tag="Cookies">🔍 Cookies</button>
-      </div>
+      <span class="badge bg-navy text-white px-3 py-2 rounded-pill fs-6" id="search-results-count">80 products found</span>
     </div>
   </section>
 
-  <!-- Split Search Body (#search-body) -->
+  <!-- Full-Width Products Grid Section -->
   <section class="container mb-5" id="search-body">
-    <div class="row g-4">
-      <!-- Left Sidebar: Multi-Filters -->
-      <div class="col-lg-3">
-        <div class="card card-body p-4 border-0 shadow-sm rounded-4 bg-white">
-          <div class="d-flex justify-content-between align-items-center mb-3">
-            <h6 class="fw-bold text-navy mb-0"><i class="bi bi-funnel me-1"></i> Filter Products</h6>
-            <a href="search.html" class="small text-warning fw-bold">Reset All</a>
-          </div>
+    <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-2 g-md-4" id="search-results-grid">
+      <!-- Dynamically populated by script.js -->
+    </div>
 
-          <!-- Category Checkboxes -->
-          <div class="mb-4">
-            <label class="fw-bold small text-muted mb-2 d-block">CATEGORIES</label>
-            <div class="form-check mb-2">
-              <input class="form-check-input filter-category-checkbox" type="checkbox" value="namkeen" id="filter-namkeen">
-              <label class="form-check-label small" for="filter-namkeen">Namkeens (20)</label>
-            </div>
-            <div class="form-check mb-2">
-              <input class="form-check-input filter-category-checkbox" type="checkbox" value="chips" id="filter-chips">
-              <label class="form-check-label small" for="filter-chips">Chips & Wafers (20)</label>
-            </div>
-            <div class="form-check mb-2">
-              <input class="form-check-input filter-category-checkbox" type="checkbox" value="healthy" id="filter-healthy">
-              <label class="form-check-label small" for="filter-healthy">Healthy Snacks (20)</label>
-            </div>
-          </div>
-
-          <!-- Price Slider -->
-          <div class="mb-4">
-            <div class="d-flex justify-content-between align-items-center mb-1">
-              <label class="fw-bold small text-muted mb-0">MAX PRICE</label>
-              <span class="fw-bold text-warning" id="price-slider-val">₹200</span>
-            </div>
-            <input type="range" class="form-range" min="40" max="200" step="10" value="200" id="price-range-slider">
-          </div>
-        </div>
-      </div>
-
-      <!-- Right Main Column: Results Toolbar & Products Grid -->
-      <div class="col-lg-9">
-        <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
-          <h5 class="fw-bold text-navy mb-0" id="search-results-count">60 products found</h5>
-          <div class="d-flex align-items-center gap-2">
-            <label class="small text-muted mb-0 fw-semibold">Sort By:</label>
-            <select class="form-select form-select-sm rounded-pill px-3 w-auto-imp" id="search-sort-select">
-              <option value="popularity">Popularity</option>
-              <option value="price-low">Price: Low to High</option>
-              <option value="price-high">Price: High to Low</option>
-              <option value="discount">Discount: High to Low</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4" id="search-results-grid">
-          <!-- Dynamically populated by script.js -->
-        </div>
-
-        <div class="text-center py-5 bg-white rounded-4 shadow-sm display-none" id="empty-search-state">
-          <div class="display-1 mb-3">🔍</div>
-          <h4 class="fw-bold text-navy">No snacks found matching your search</h4>
-          <p class="text-muted small mb-4">Try checking your spelling or exploring our popular recommendations.</p>
-        </div>
-      </div>
+    <div class="text-center py-5 bg-white rounded-4 shadow-sm display-none my-4" id="empty-search-state">
+      <div class="display-1 mb-3">🔍</div>
+      <h4 class="fw-bold text-navy" id="empty-search-heading">No products found. Try another search.</h4>
+      <p class="text-muted small mb-4">Try searching for other snacks or browse our full catalog.</p>
+      <a href="products.html" class="btn btn-snacky-primary px-4 py-2">View All Snacks</a>
     </div>
   </section>
 
-  <!-- Dark Footer -->
+  <!-- Organic Curved Wave Top (Navy Blue #0B1528) -->
+  <div class="footer-wave-wrapper">
+    <svg class="footer-wave-svg" viewBox="0 0 1440 100" fill="none" preserveAspectRatio="none">
+      <path d="M0,45 C280,85 520,15 800,55 C1080,95 1280,30 1440,50 L1440,100 L0,100 Z" fill="#0B1528"></path>
+    </svg>
+  </div>
+
+  <!-- Organic Deep Navy Blue Footer Section -->
   <footer class="main-footer" id="main-footer">
     <div class="container">
-      <div class="row g-4">
-        <div class="col-lg-4">
+      <div class="row g-4 justify-content-between align-items-start">
+        
+        <!-- Col 1: Brand & Socials -->
+        <div class="col-lg-3 col-md-6 mb-3 mb-lg-0">
           <a class="d-inline-block mb-3" href="index.html">
-            <img src="../static/images/snacky_logo.svg" alt="Snacky Logo" class="footer-logo-img">
+            <img src="../static/images/snacky_logo_transparent.png" alt="Snacky Logo" class="footer-logo-img">
           </a>
-          <p class="small text-muted mb-3">Snacky is India's premium snacks brand bringing you authentic, palm-oil free crunch.</p>
+          <p class="footer-tagline-text mb-3">
+            Age old wisdom meets modern nutrition. 100% pure groundnut oil, zero palm oil & trans-fat free crunch.
+          </p>
+          <div class="footer-social-pill-group">
+            <a href="https://instagram.com" target="_blank" class="footer-social-pill" aria-label="Instagram">
+              <i class="bi bi-instagram"></i>
+            </a>
+            <a href="https://youtube.com" target="_blank" class="footer-social-pill" aria-label="YouTube">
+              <i class="bi bi-youtube"></i>
+            </a>
+            <a href="https://facebook.com" target="_blank" class="footer-social-pill" aria-label="Facebook">
+              <i class="bi bi-facebook"></i>
+            </a>
+            <a href="https://linkedin.com" target="_blank" class="footer-social-pill" aria-label="LinkedIn">
+              <i class="bi bi-linkedin"></i>
+            </a>
+          </div>
         </div>
-        <div class="col-6 col-lg-2">
-          <h6 class="footer-title">SHOP</h6>
+
+        <!-- Col 2: Shop -->
+        <div class="col-6 col-md-3 col-lg-2">
+          <h6 class="footer-nav-heading">Shop</h6>
           <ul class="footer-links-list">
-            <li><a href="products.html?category=namkeen">Namkeen</a></li>
-            <li><a href="products.html?category=chips">Chips</a></li>
+            <li><a href="products.html?category=namkeen">Namkeens & Bhujia</a></li>
+            <li><a href="products.html?category=chips">Chips & Crisps</a></li>
             <li><a href="products.html?category=healthy">Healthy Snacks</a></li>
+            <li><a href="offers.html">Offers</a></li>
           </ul>
         </div>
-        <div class="col-6 col-lg-2">
-          <h6 class="footer-title">EXPLORE</h6>
+
+        <!-- Col 3: Explore -->
+        <div class="col-6 col-md-3 col-lg-2">
+          <h6 class="footer-nav-heading">Explore</h6>
           <ul class="footer-links-list">
-            <li><a href="about.html">About Us</a></li>
-            <li><a href="contact.html">Bulk Orders</a></li>
+            <li><a href="about.html">Our Story</a></li>
+            <li><a href="products.html">All Snacks Catalog</a></li>
+            <li><a href="feedback.html">Customer Feedback</a></li>
           </ul>
         </div>
-        <div class="col-6 col-lg-2">
-          <h6 class="footer-title">HELP</h6>
+
+        <!-- Col 4: Policies & Help -->
+        <div class="col-6 col-md-3 col-lg-2">
+          <h6 class="footer-nav-heading">Customer Care</h6>
           <ul class="footer-links-list">
-            <li><a href="contact.html">Contact Us</a></li>
             <li><a href="track-order.html">Track Order</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+            <li><a href="contact.html#faq-section">Frequently Asked Questions</a></li>
+            <li><a href="about.html">Terms of Service</a></li>
+            <li><a href="about.html">Privacy Policy</a></li>
           </ul>
         </div>
-        <div class="col-6 col-lg-2">
-          <h6 class="footer-title">CONTACT</h6>
-          <p class="small mb-0">+91 9654932262</p>
+
+        <!-- Col 5: Join Squad & Feedback Direct Link -->
+        <div class="col-lg-3 col-md-6">
+          <h6 class="footer-squad-heading">JOIN THE SNACKY CO. SQUAD</h6>
+          <form class="footer-newsletter-form mb-3" onsubmit="event.preventDefault(); handleNewsletterSubmit(this);">
+            <div class="footer-email-input-group">
+              <input type="email" class="form-control footer-email-input" placeholder="E-mail" required>
+              <button type="submit" class="footer-email-btn" aria-label="Subscribe">
+                <i class="bi bi-arrow-right"></i>
+              </button>
+            </div>
+          </form>
+
+          <!-- Interactive Customer Feedback Bar -->
+          <div class="footer-feedback-prompt-box mb-3">
+            <div class="d-flex align-items-center justify-content-between gap-2">
+              <div>
+                <div class="footer-feedback-title">Loved our snacks?</div>
+                <div class="footer-feedback-subtitle">Share your feedback</div>
+              </div>
+              <a href="feedback.html" class="btn-footer-feedback-pill" aria-label="Give Feedback">
+                <i class="bi bi-chat-heart-fill me-1"></i> Feedback
+              </a>
+            </div>
+          </div>
+
+          <!-- Payment Methods & Copyright -->
+          <div class="d-flex align-items-center justify-content-between flex-wrap gap-2 pt-1">
+            <div class="footer-payment-badges-row">
+              <span class="payment-badge-pill visa-pill">VISA</span>
+              <span class="payment-badge-pill mc-pill"><span class="mc-c1"></span><span class="mc-c2"></span></span>
+              <span class="payment-badge-pill gpay-pill">G Pay</span>
+              <span class="payment-badge-pill upi-pill">UPI</span>
+            </div>
+            <div class="footer-copyright-text">
+              © Snacky Co. 2026
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="footer-bottom-bar">
-        <p class="small mb-0">© 2026 Snacky Foods Private Limited. All rights reserved.</p>
+
       </div>
     </div>
   </footer>

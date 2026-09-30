@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Checkout & Payment Gateway - Snacky</title>
-  <meta name="description" content="Complete your snack purchase with our 3-step checkout: Account, Address, and Payment.">
+  <title>Payment Method - Snacky</title>
+  <meta name="description" content="Choose your payment method: UPI, Credit/Debit Card, NetBanking, or Cash on Delivery.">
   
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
@@ -92,112 +92,130 @@
     </div>
   </nav>
 
-  <!-- Main Checkout Container -->
-  <div class="container py-4 pb-5">
-    
-    <!-- Step Header -->
-    <div class="mb-4">
-      <h3 class="fw-extrabold text-navy mb-1"><i class="bi bi-geo-alt-fill text-snacky-orange me-2"></i>Delivery Address</h3>
-      <p class="text-muted small mb-0">Fill in your address details below to proceed to the secure payment step</p>
-    </div>
-
+  <!-- Main Payment Container -->
+  <div class="container py-4 pb-5" id="payment-page-container">
     <div class="row g-4 align-items-start">
 
-      <!-- LEFT COLUMN: Dynamic Step Content (Address -> Payment) -->
+      <!-- LEFT COLUMN: Payment Methods & Verified Address Summary -->
       <div class="col-lg-8">
 
-        <!-- ================= STEP 1: DELIVERY ADDRESS ================= -->
-        <div class="checkout-step-container" id="step-2-content">
-
-          <!-- Saved Address Quick Selection (if already saved) -->
-          <div class="mb-4 d-none" id="saved-addr-card-container">
-            <div class="saved-address-card selected p-3 border rounded-4 bg-white shadow-sm">
-              <div class="d-flex justify-content-between align-items-center mb-2">
-                <span class="badge bg-navy text-white font-monospace px-2 py-1" id="saved-badge-tag">HOME</span>
-                <span class="text-success small fw-bold"><i class="bi bi-check-circle-fill"></i> Saved Address</span>
+        <!-- Delivery Address Summary Banner -->
+        <div class="checkout-card p-3 mb-4 d-flex justify-content-between align-items-center flex-wrap gap-2">
+          <div class="d-flex align-items-center gap-3">
+            <div class="payment-step-check-icon">
+              <i class="bi bi-check-lg"></i>
+            </div>
+            <div>
+              <div class="d-flex align-items-center gap-2 flex-wrap">
+                <span class="badge bg-navy text-white font-monospace px-2 py-1" id="payment-step-addr-badge">HOME</span>
+                <strong class="text-navy" id="payment-step-addr-name">Customer</strong>
+                <span class="text-muted small" id="payment-step-addr-phone">+91 9876543210</span>
               </div>
-              <h6 class="fw-extrabold text-navy mb-1" id="addr-display-name"></h6>
-              <p class="text-muted small mb-1" id="addr-display-text"></p>
-              <div class="text-muted small"><i class="bi bi-telephone me-1"></i> <span id="addr-display-phone"></span></div>
-              <div class="d-flex gap-2 mt-3">
-                <button type="button" class="btn btn-snacky-primary flex-grow-1 py-2 fw-bold" onclick="selectAddressAndProceed()">
-                  Deliver to this Address <i class="bi bi-arrow-right ms-1"></i>
-                </button>
-                <button type="button" class="btn btn-outline-secondary py-2 px-3 fw-bold" onclick="toggleEditAddressForm()">
-                  <i class="bi bi-pencil me-1"></i> Edit Address
-                </button>
-              </div>
+              <div class="text-muted small mt-1" id="payment-step-addr-full">Delivering to your address</div>
             </div>
           </div>
+          <a href="cart-payment-flow.html" class="btn btn-outline-navy btn-sm fw-bold">
+            <i class="bi bi-pencil-square me-1"></i> Change Address
+          </a>
+        </div>
 
-          <!-- Direct In-Page Address Form Card -->
-          <div class="checkout-card p-4" id="checkout-address-form-card">
-            <h5 class="fw-extrabold text-navy mb-3" id="address-form-title">Enter Delivery Location & Contact</h5>
-            <div class="row g-3">
-              <div class="col-md-6">
-                <label class="form-label small fw-bold text-navy" for="input-name">Full Name (Receiver's Name) <span class="text-danger">*</span></label>
-                <div class="input-group">
-                  <span class="input-group-text bg-light border-end-0"><i class="bi bi-person text-muted"></i></span>
-                  <input type="text" class="form-control rounded-end-3 border-start-0" id="input-name" placeholder="Receiver's Full Name" required>
-                </div>
-              </div>
+        <!-- Section Title -->
+        <div class="mb-4">
+          <h3 class="fw-extrabold text-navy mb-1"><i class="bi bi-credit-card-2-front-fill text-snacky-orange me-2"></i>Choose Payment Method</h3>
+          <p class="text-muted small mb-0">Select your preferred payment method to securely complete your order</p>
+        </div>
 
-              <div class="col-md-6">
-                <label class="form-label small fw-bold text-navy" for="input-phone">10-Digit Mobile Number <span class="text-danger">*</span></label>
-                <div class="input-group">
-                  <span class="input-group-text bg-light border-end-0 fw-bold font-monospace">+91</span>
-                  <input type="tel" class="form-control rounded-end-3 border-start-0" id="input-phone" placeholder="9876543210" maxlength="10" required>
-                </div>
-              </div>
-
-              <div class="col-md-4">
-                <label class="form-label small fw-bold text-navy" for="input-pincode">6-Digit Pincode <span class="text-danger">*</span></label>
-                <input type="text" class="form-control rounded-3" id="input-pincode" placeholder="e.g. 831002" maxlength="6" required>
-              </div>
-
-              <div class="col-md-4">
-                <label class="form-label small fw-bold text-navy" for="input-city">City <span class="text-danger">*</span></label>
-                <input type="text" class="form-control rounded-3" id="input-city" placeholder="e.g. Jamshedpur" required>
-              </div>
-
-              <div class="col-md-4">
-                <label class="form-label small fw-bold text-navy" for="input-state">State <span class="text-danger">*</span></label>
-                <input type="text" class="form-control rounded-3" id="input-state" placeholder="e.g. Jharkhand" required>
-              </div>
-
-              <div class="col-12">
-                <label class="form-label small fw-bold text-navy" for="input-house">House / Flat / Office No. & Building <span class="text-danger">*</span></label>
-                <input type="text" class="form-control rounded-3" id="input-house" placeholder="e.g. Flat 4B, Silver Oak Heights" required>
-              </div>
-
-              <div class="col-12">
-                <label class="form-label small fw-bold text-navy" for="input-area">Road Name / Area / Colony / Landmark <span class="text-danger">*</span></label>
-                <textarea class="form-control rounded-3" id="input-area" rows="2" placeholder="e.g. Bistupur Main Road, Near Jubilee Park" required></textarea>
-              </div>
-
-              <div class="col-12">
-                <label class="form-label small fw-bold text-navy mb-2">Address Type</label>
-                <div class="d-flex gap-3 flex-wrap">
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="addressTypeRadio" id="addr-type-home" value="HOME" checked>
-                    <label class="form-check-label fw-bold small text-navy" for="addr-type-home"><i class="bi bi-house-door me-1"></i> Home (All Day)</label>
-                  </div>
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="addressTypeRadio" id="addr-type-work" value="WORK">
-                    <label class="form-check-label fw-bold small text-navy" for="addr-type-work"><i class="bi bi-briefcase me-1"></i> Work (10 AM - 6 PM)</label>
-                  </div>
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="addressTypeRadio" id="addr-type-other" value="OTHER">
-                    <label class="form-check-label fw-bold small text-navy" for="addr-type-other"><i class="bi bi-geo me-1"></i> Other</label>
-                  </div>
-                </div>
-              </div>
+        <!-- Payment Card with Tabs -->
+        <div class="checkout-card p-0 overflow-hidden">
+          <div class="row g-0">
+            <!-- Left Payment Tabs -->
+            <div class="col-md-4 payment-tabs-vertical bg-light py-2">
+              <button class="payment-tab-item-btn active" id="tab-upi-link" onclick="switchPaymentTab('upi')">
+                <i class="bi bi-qr-code-scan fs-5 text-primary-violet"></i>
+                <span>UPI / QR</span>
+              </button>
+              <button class="payment-tab-item-btn" id="tab-card-link" onclick="switchPaymentTab('card')">
+                <i class="bi bi-credit-card-2-front fs-5 text-primary-violet"></i>
+                <span>Credit/Debit Card</span>
+              </button>
+              <button class="payment-tab-item-btn" id="tab-cod-link" onclick="switchPaymentTab('cod')">
+                <i class="bi bi-cash-stack fs-5 text-success"></i>
+                <span>Cash on delivery</span>
+              </button>
+              <button class="payment-tab-item-btn" id="tab-net-link" onclick="switchPaymentTab('net')">
+                <i class="bi bi-bank fs-5 text-primary-violet"></i>
+                <span>NetBanking</span>
+              </button>
             </div>
 
-            <!-- Proceed to Payment Button -->
-            <button type="button" class="btn btn-snacky-primary w-100 py-3 fw-extrabold fs-6 mt-4 shadow-sm" onclick="saveNewAddressAndShip()">
-              <i class="bi bi-shield-check me-2"></i> Save Address & Proceed to Payment <i class="bi bi-arrow-right ms-2"></i>
-            </button>
+            <!-- Right Tab Panels -->
+            <div class="col-md-8 p-4 bg-white">
+              <!-- UPI Panel -->
+              <div class="payment-tab-panel" id="panel-upi">
+                <h6 class="fw-extrabold text-navy mb-3">Pay with UPI</h6>
+                <div class="text-center py-2 mb-3">
+                  <p class="text-muted small mb-3">Scan QR Code using GPay, PhonePe, Paytm, or BHIM</p>
+                  <div class="p-3 bg-light rounded-4 d-inline-block shadow-sm mb-3 border">
+                    <img src="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22160%22%20height%3D%22160%22%3E%3Crect%20width%3D%22160%22%20height%3D%22160%22%20fill%3D%22%23ffffff%22%2F%3E%3Crect%20x%3D%2215%22%20y%3D%2215%22%20width%3D%2245%22%20height%3D%2245%22%20fill%3D%22%230e4b5b%22%2F%3E%3Crect%20x%3D%22100%22%20y%3D%2215%22%20width%3D%2245%22%20height%3D%2245%22%20fill%3D%22%230e4b5b%22%2F%3E%3Crect%20x%3D%2215%22%20y%3D%22100%22%20width%3D%2245%22%20height%3D%2245%22%20fill%3D%22%230e4b5b%22%2F%3E%3Crect%20x%3D%2270%22%20y%3D%2270%22%20width%3D%2220%22%20height%3D%2220%22%20fill%3D%22%23f5a623%22%2F%3E%3Ctext%20x%3D%2280%22%20y%3D%22150%22%20font-size%3D%2211%22%20font-weight%3D%22bold%22%20text-anchor%3D%22middle%22%3ESNACKY%20PAY%3C%2Ftext%3E%3C%2Fsvg%3E" alt="UPI QR" class="img-fluid">
+                  </div>
+                </div>
+                <button class="btn btn-pay-now w-100 py-3" id="pay-now-btn" onclick="processPaymentSuccess()">
+                  Scan & Pay <span id="pay-btn-amount">₹0.00</span>
+                </button>
+              </div>
+
+              <!-- Card Panel -->
+              <div class="payment-tab-panel d-none" id="panel-card">
+                <h6 class="fw-extrabold text-navy mb-3">Credit / Debit Card</h6>
+                <div class="mb-3">
+                  <label class="form-label small fw-bold text-muted">Cardholder Name</label>
+                  <input type="text" class="form-control rounded-3" id="card-holder-name" placeholder="Name on Card">
+                </div>
+                <div class="mb-3">
+                  <label class="form-label small fw-bold text-muted">Card Number</label>
+                  <input type="text" class="form-control rounded-3" id="card-number-input" placeholder="4532 •••• •••• 8921">
+                </div>
+                <div class="row g-2 mb-4">
+                  <div class="col-6">
+                    <label class="form-label small fw-bold text-muted">Expiry (MM/YY)</label>
+                    <input type="text" class="form-control rounded-3" placeholder="MM/YY">
+                  </div>
+                  <div class="col-6">
+                    <label class="form-label small fw-bold text-muted">CVV</label>
+                    <input type="password" class="form-control rounded-3" placeholder="•••" maxlength="3">
+                  </div>
+                </div>
+                <button class="btn btn-pay-now w-100 py-3" onclick="processPaymentSuccess()">
+                  Pay Now <span id="pay-card-btn-amount">₹0.00</span>
+                </button>
+              </div>
+
+              <!-- COD Panel -->
+              <div class="payment-tab-panel d-none text-center py-3" id="panel-cod">
+                <div class="display-3 mb-2 text-success"><i class="bi bi-truck"></i></div>
+                <h5 class="fw-extrabold text-navy mb-2">Cash on Delivery</h5>
+                <p class="text-muted small mb-4">Pay in cash or via UPI scan to courier delivery executive upon arrival.</p>
+                <button class="btn btn-pay-now w-100 py-3" onclick="processPaymentSuccess()">
+                  Place Order <span id="pay-cod-btn-amount">₹0.00</span>
+                </button>
+              </div>
+
+              <!-- Netbanking Panel -->
+              <div class="payment-tab-panel d-none" id="panel-net">
+                <h6 class="fw-extrabold text-navy mb-3">Popular Banks</h6>
+                <select class="form-select rounded-3 mb-4 py-2">
+                  <option selected>Select your bank</option>
+                  <option>HDFC Bank</option>
+                  <option>ICICI Bank</option>
+                  <option>State Bank of India (SBI)</option>
+                  <option>Axis Bank</option>
+                  <option>Kotak Mahindra Bank</option>
+                </select>
+                <button class="btn btn-pay-now w-100 py-3" onclick="processPaymentSuccess()">
+                  Pay Now <span id="pay-net-btn-amount">₹0.00</span>
+                </button>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -221,11 +239,11 @@
             </div>
           </div>
 
-          <!-- Deliver to summary (Steps 1 & 2) -->
-          <div class="p-3 bg-light rounded-3 mb-3 d-none" id="sidebar-deliver-to-box">
+          <!-- Deliver to summary -->
+          <div class="p-3 bg-light rounded-3 mb-3" id="sidebar-deliver-to-box">
             <div class="d-flex justify-content-between align-items-center mb-1">
               <span class="text-muted small fw-bold">Deliver to</span>
-              <button class="btn btn-link p-0 small fw-bold text-decoration-none text-primary-violet" onclick="toggleEditAddressForm()">Change</button>
+              <a href="cart-payment-flow.html" class="btn btn-link p-0 small fw-bold text-decoration-none text-primary-violet">Change</a>
             </div>
             <div class="fw-bold text-navy small" id="sidebar-delivery-summary">No Address Selected</div>
           </div>
@@ -265,62 +283,6 @@
         </div>
       </div>
 
-    </div>
-  </div>
-
-
-  <!-- AUTH MODALS FOR STEP 1 LOGIN & SIGNUP -->
-  <!-- Login Modal -->
-  <div class="modal fade" id="checkoutLoginModal" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content rounded-4 border-0 p-4">
-        <div class="modal-header border-0 pb-0">
-          <h5 class="fw-bold text-navy">Log Into Your Account</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-        </div>
-        <div class="modal-body">
-          <div class="mb-3">
-            <label class="form-label small fw-bold">Email or Phone Number</label>
-            <input type="text" class="form-control rounded-3" id="chk-login-input" placeholder="user@snacky.com or 9876543210" value="">
-          </div>
-          <button class="btn btn-snacky-primary w-100 py-2 fw-bold" onclick="completeCheckoutLogin()">Login & Proceed to Address</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Signup Modal -->
-  <div class="modal fade" id="checkoutSignupModal" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content rounded-4 border-0 p-4">
-        <div class="modal-header border-0 pb-0">
-          <h5 class="fw-bold text-navy">Create New Account</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-        </div>
-        <div class="modal-body">
-          <div class="mb-3">
-            <label class="form-label small fw-bold">Full Name</label>
-            <input type="text" class="form-control rounded-3" id="chk-signup-name" placeholder="Enter Full Name" value="">
-          </div>
-          <div class="mb-3">
-            <label class="form-label small fw-bold">Mobile Number</label>
-            <input type="text" class="form-control rounded-3" id="chk-signup-phone" placeholder="Enter 10-digit Mobile Number" value="">
-          </div>
-          <button class="btn btn-snacky-primary w-100 py-2 fw-bold" onclick="completeCheckoutSignup()">Create Account & Proceed</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Payment Failed Modal (#paymentFailedModal) -->
-  <div class="modal fade" id="paymentFailedModal" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content rounded-4 border-0 text-center p-4">
-        <div class="display-1 text-danger mb-3"><i class="bi bi-x-circle-fill"></i></div>
-        <h4 class="fw-extrabold text-navy mb-2">Payment Failed</h4>
-        <p class="text-muted small mb-4">Your payment could not be processed. Please check your UPI ID or card details and try again.</p>
-        <button class="btn btn-snacky-primary py-2 px-4 mx-auto" data-bs-dismiss="modal">Try Again</button>
-      </div>
     </div>
   </div>
 
@@ -436,6 +398,33 @@
     </div>
   </footer>
 
+  </div>
+
+  <!-- Offcanvas Cart Drawer -->
+  <div class="offcanvas offcanvas-end cart-offcanvas-custom" tabindex="-1" id="cartOffcanvas">
+    <div class="offcanvas-header border-bottom">
+      <h5 class="offcanvas-title fw-bold text-navy"><i class="bi bi-bag me-2"></i> Cart Items</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+    </div>
+    <div class="free-delivery-meter text-center">
+      <div class="fw-bold small text-navy mb-1" id="free-shipping-text">Add ₹199 more for free delivery</div>
+      <div class="progress progress-sm">
+        <div class="progress-bar bg-warning" id="free-shipping-progress"></div>
+      </div>
+    </div>
+    <div class="offcanvas-body" id="cart-drawer-items"></div>
+    <div class="offcanvas-footer p-3 border-top bg-light">
+      <div class="d-flex justify-content-between mb-2">
+        <span class="text-muted">Subtotal</span>
+        <span class="fw-bold text-navy" id="cart-subtotal-val">₹0.00</span>
+      </div>
+      <div class="d-flex justify-content-between mb-3">
+        <span class="fw-bold text-navy fs-5">Total</span>
+        <span class="fw-bold text-warning fs-5" id="cart-total-val">₹0.00</span>
+      </div>
+      <a href="cart-payment-flow.html" class="btn btn-snacky-primary w-100 py-3 text-center">Proceed to Checkout <i class="bi bi-arrow-right"></i></a>
+    </div>
+  </div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   <script src="../static/js/script.js"></script>

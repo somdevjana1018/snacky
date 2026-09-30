@@ -13,30 +13,43 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap"
     rel="stylesheet">
-  <link rel="icon" type="image/svg+xml" href="../static/images/favicon.svg">
+  <link rel="icon" type="image/png" href="../static/images/snacky_logo_transparent.png">
   <link rel="stylesheet" href="../static/css/style.css">
 </head>
 
 <body>
 
-  <!-- Top Announcement Bar -->
+  <!-- Top Announcement Bar with Marquee Effect -->
   <div class="top-announcement-bar">
-    🚚 FREE DELIVERY ABOVE ₹250
+    <div class="marquee-track">
+      <div class="marquee-content">
+        <span>🚚 FREE DELIVERY ABOVE ₹199</span> <span class="marquee-dot">•</span>
+        <span>🍿 100% PURE GROUNDNUT OIL</span> <span class="marquee-dot">•</span>
+        <span>✨ NO PALM OIL • NO CHOLESTEROL</span> <span class="marquee-dot">•</span>
+        <span>🎉 USE CODE: SNACKY50 FOR ₹50 OFF</span> <span class="marquee-dot">•</span>
+      </div>
+      <div class="marquee-content">
+        <span>🚚 FREE DELIVERY ABOVE ₹199</span> <span class="marquee-dot">•</span>
+        <span>🍿 100% PURE GROUNDNUT OIL</span> <span class="marquee-dot">•</span>
+        <span>✨ NO PALM OIL • NO CHOLESTEROL</span> <span class="marquee-dot">•</span>
+        <span>🎉 USE CODE: SNACKY50 FOR ₹50 OFF</span> <span class="marquee-dot">•</span>
+      </div>
+    </div>
   </div>
 
   <!-- Navigation Bar (#main-navbar) -->
   <nav class="navbar navbar-expand-lg main-navbar" id="main-navbar">
     <div class="container">
       <a class="brand-logo-container" href="index.html">
-        <img src="../static/images/snacky_logo.svg" alt="Snacky Logo" class="brand-logo-img">
+        <img src="../static/images/snacky_logo_transparent.png" alt="Snacky Logo" class="brand-logo-img">
       </a>
 
-      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
 
       <div class="collapse navbar-collapse" id="navbarContent">
-        <ul class="navbar-nav mx-auto mb-2 mb-lg-0 gap-3">
+        <ul class="navbar-nav mb-2 mb-lg-0 gap-1 gap-lg-2">
           <li class="nav-item">
             <a class="nav-link nav-link-custom active" href="index.html">Home</a>
           </li>
@@ -57,13 +70,14 @@
         <div class="nav-actions-right">
           <div class="nav-search-container">
             <input type="text" class="nav-search-input" id="nav-search-input" placeholder="Search snacks...">
-            <i class="bi bi-search nav-search-icon"></i>
+            <i class="bi bi-search nav-search-icon" id="nav-search-trigger"></i>
           </div>
 
-          <a href="auth.html" class="nav-auth-btn" id="nav-user-account-btn">
-            <i class="bi bi-person-circle"></i>
-            <span id="nav-user-text">Login / Sign Up</span>
-          </a>
+          <div id="auth-nav-container">
+            <a href="auth.html" class="nav-action-btn" id="nav-user-account-btn" title="Account / Login" aria-label="Account">
+              <i class="bi bi-person"></i>
+            </a>
+          </div>
 
           <button class="nav-action-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#cartOffcanvas"
             title="Shopping Cart">
@@ -132,7 +146,7 @@
   <section class="container py-4" id="categories-section">
     <h2 class="section-title text-center mb-4">Shop by Category</h2>
 
-    <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-4 g-4 justify-content-center">
+    <div class="row row-cols-2 row-cols-md-4 g-3 justify-content-center">
       <!-- 1. Signature Range -->
       <div class="col d-flex justify-content-center">
         <a href="products.html?category=signature" class="category-blob-card">
@@ -190,18 +204,18 @@
       <a href="products.html" class="fw-bold text-navy">See All Products →</a>
     </div>
 
-    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
+    <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-2 g-md-4">
       <!-- Combo 1 -->
       <div class="col">
         <div class="product-card">
           <div class="card-top-frame">
             <a href="product-detail.html?id=104">
-              <img src="../static/images/snack_chakli.jpg" alt="Millet Chakli" class="product-card-img">
+              <img src="../static/images/products/butter_chakli_front.jpg" alt="Crispy Butter Chakli" class="product-card-img">
             </a>
           </div>
           <div class="product-card-body">
             <a href="product-detail.html?id=104" class="text-decoration-none">
-              <h6 class="product-title">Millet Chakli Pack</h6>
+              <h6 class="product-title">Crispy Butter Chakli Pack</h6>
             </a>
             <div class="price-row-box">
               <span class="price-selling">₹64.00</span>
@@ -252,7 +266,7 @@
         <div class="product-card">
           <div class="card-top-frame">
             <a href="product-detail.html?id=101">
-              <img src="../static/images/snack_namkeen.jpg" alt="Paachratan Mixture" class="product-card-img">
+              <img src="../static/images/products/paachratan_mixture_front.jpg" alt="Paachratan Mixture" class="product-card-img">
             </a>
           </div>
           <div class="product-card-body">
@@ -315,7 +329,7 @@
       <a href="offers.html" class="btn btn-sm btn-danger rounded-pill px-3 fw-bold">See All Deals →</a>
     </div>
 
-    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
+    <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-2 g-md-4">
       <!-- Item 1 -->
       <div class="col">
         <div class="product-card">
@@ -380,12 +394,12 @@
           <span class="badge-discount-ribbon">21% OFF</span>
           <div class="card-top-frame">
             <a href="product-detail.html?id=102">
-              <img src="../static/images/snack_namkeen.jpg" alt="Millet Mixture" class="product-card-img">
+              <img src="../static/images/products/millet_chakli_front.jpg" alt="Millet Chakli" class="product-card-img">
             </a>
           </div>
           <div class="product-card-body">
             <a href="product-detail.html?id=102" class="text-decoration-none">
-              <h6 class="product-title">Millet Mixture</h6>
+              <h6 class="product-title">Millet Chakli</h6>
             </a>
             <div class="price-row-box">
               <span class="price-selling">₹95.00</span>
@@ -552,19 +566,19 @@
 
   <!-- Brand Comparison Section (#why-choose-us) -->
   <section class="container py-5" id="why-choose-us">
-    <div class="text-center mb-5">
+    <div class="text-center mb-4 mb-md-5 reveal-on-scroll">
       <span class="badge bg-warning-subtle text-dark px-3 py-2 rounded-pill fw-extrabold text-uppercase letter-spacing-1 mb-2 fs-7">THE SNACKY ADVANTAGE</span>
       <h2 class="section-title text-navy display-6 fw-extrabold mb-2">Why choose us ?</h2>
-      <p class="text-muted lead mx-auto" style="max-width: 580px;">See how Snacky stands superior against ordinary market brands with 100% groundnut oil & zero compromise.</p>
+      <p class="text-muted lead mx-auto comparison-section-subtitle">See how Snacky stands superior against ordinary market brands with 100% groundnut oil &amp; zero compromise.</p>
     </div>
 
-    <div class="why-choose-table-wrapper">
+    <div class="why-choose-table-wrapper reveal-on-scroll">
       <div class="why-choose-table-container">
         <!-- 1. Headers Row -->
         <div class="table-row table-header-row">
           <div class="table-cell cell-feature-hdr">Features</div>
           <div class="table-cell cell-brand-snacky-hdr">
-            <img src="../static/images/snacky_logo.svg" alt="Snacky Logo" class="brand-logo-img" style="height: 54px;">
+            <img src="../static/images/snacky_logo_transparent.png" alt="Snacky Logo" class="brand-table-logo-img">
           </div>
           <div class="table-cell cell-brand-hdr">Brand A</div>
           <div class="table-cell cell-brand-hdr border-right-0">Brand B</div>
@@ -615,55 +629,76 @@
 
   <!-- Customer Testimonials Section (#testimonials) -->
   <section class="container py-5" id="testimonials">
-    <div class="section-title-wrapper mb-4">
-      <h2 class="section-title mb-0">Let our customer's speak for us</h2>
+    <div class="text-center mb-4 mb-md-5 reveal-on-scroll">
+      <span class="badge bg-warning-subtle text-dark px-3 py-2 rounded-pill fw-extrabold text-uppercase letter-spacing-1 mb-2 fs-7">REAL EXPERIENCES</span>
+      <h2 class="section-title text-navy display-6 fw-extrabold mb-2">Let our customer speak for us</h2>
+      <p class="text-muted lead mx-auto comparison-section-subtitle">Real feedback from snack lovers enjoying the healthy crunch across India.</p>
     </div>
 
-    <div class="row g-4">
-      <div class="col-md-4">
-        <div class="card card-body p-4 border-0 shadow-sm rounded-4 bg-white h-100">
+    <div class="row g-3 g-md-4">
+      <div class="col-12 col-md-6 col-lg-4">
+        <div class="customer-testimonial-card shadow-sm h-100 reveal-on-scroll delay-100">
           <div class="d-flex align-items-center gap-3 mb-3">
             <div class="avatar-circle">VS</div>
             <div>
               <h6 class="fw-bold mb-0 text-navy">Vipin Sharma</h6>
-              <span class="text-warning small">★★★★★ Verified Buyer</span>
+              <div class="text-warning small rating-stars">
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <span class="badge bg-success-subtle text-success ms-1 fs-8">Verified Buyer</span>
+              </div>
             </div>
           </div>
-          <h6 class="fw-bold text-navy">"Best Makhana & Chakli in Delhi!"</h6>
-          <p class="text-muted small mb-0">The groundnut oil crunch is so crisp and light on the stomach. My kids love
-            the Millet Chakli!</p>
+          <h6 class="fw-bold text-navy mb-2">"Best Makhana &amp; Chakli in Delhi!"</h6>
+          <p class="text-muted small mb-0">The groundnut oil crunch is so crisp and light on the stomach. My kids love the Millet Chakli!</p>
         </div>
       </div>
 
-      <div class="col-md-4">
-        <div class="card card-body p-4 border-0 shadow-sm rounded-4 bg-white h-100">
+      <div class="col-12 col-md-6 col-lg-4">
+        <div class="customer-testimonial-card shadow-sm h-100 reveal-on-scroll delay-200">
           <div class="d-flex align-items-center gap-3 mb-3">
             <div class="avatar-circle">PV</div>
             <div>
               <h6 class="fw-bold mb-0 text-navy">Priya Verma</h6>
-              <span class="text-warning small">★★★★★ Verified Buyer</span>
+              <div class="text-warning small rating-stars">
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <span class="badge bg-success-subtle text-success ms-1 fs-8">Verified Buyer</span>
+              </div>
             </div>
           </div>
-          <h6 class="fw-bold text-navy">"Zero Palm Oil is a gamechanger!"</h6>
-          <p class="text-muted small mb-0">Finally a snack brand that actually cares about health. Fast delivery and
-            beautiful packaging.</p>
+          <h6 class="fw-bold text-navy mb-2">"Zero Palm Oil is a gamechanger!"</h6>
+          <p class="text-muted small mb-0">Finally a snack brand that actually cares about health. Fast delivery and beautiful packaging.</p>
         </div>
       </div>
 
-      <div class="col-md-4">
-        <div class="card card-body p-4 border-0 shadow-sm rounded-4 bg-white h-100">
+      <div class="col-12 col-md-6 col-lg-4">
+        <div class="customer-testimonial-card shadow-sm h-100 reveal-on-scroll delay-300">
           <div class="d-flex align-items-center gap-3 mb-3">
             <div class="avatar-circle">AR</div>
             <div>
               <h6 class="fw-bold mb-0 text-navy">Ankit Roy</h6>
-              <span class="text-warning small">★★★★★ Verified Buyer</span>
+              <div class="text-warning small rating-stars">
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <span class="badge bg-success-subtle text-success ms-1 fs-8">Verified Buyer</span>
+              </div>
             </div>
           </div>
-          <h6 class="fw-bold text-navy">"Great Combo Discounts!"</h6>
-          <p class="text-muted small mb-0">Ordered the Bestselling Combo. Incredible value for money and authentic
-            homemade taste.</p>
+          <h6 class="fw-bold text-navy mb-2">"Great Combo Discounts!"</h6>
+          <p class="text-muted small mb-0">Ordered the Bestselling Combo. Incredible value for money and authentic homemade taste.</p>
         </div>
       </div>
+    </div>
   </section>
 
   <!-- Healthier Ways to Enjoy Everyday Snacking (#healthier-ways-section) -->
@@ -682,7 +717,7 @@
         <div class="col-lg-6">
           <div class="occasion-content-box ps-lg-4">
             <h3 id="occasion-headline" class="fw-extrabold text-snacky-orange mb-3 fs-2">Crunch. Focus. Conquer.</h3>
-            <p id="occasion-description" class="lead text-navy mb-4 fs-5" style="line-height: 1.7;">
+            <p id="occasion-description" class="lead text-navy mb-4 fs-5 occasion-desc-text">
               Fuel your focus with our healthy namkeens—perfect for study breaks! Made with 100% groundnut oil and
               wholesome ingredients, our snacks give the right crunch without the guilt. Whether prepping for exams or
               powering through assignments, these light yet satisfying bites help keep energy up and mind sharp.
@@ -695,7 +730,7 @@
       <div class="occasion-timeline-bar px-4 px-md-5 py-3">
         <div class="d-flex align-items-center justify-content-between flex-wrap gap-3">
           <div class="occasion-timeline-track">
-            <div class="occasion-progress-line" id="occasion-progress-line" style="width: 12%;"></div>
+            <div class="occasion-progress-line" id="occasion-progress-line"></div>
             <div class="d-flex justify-content-between position-relative z-2">
               <button class="occasion-tab-btn active" onclick="switchOccasion(0)">
                 <span class="occasion-node-dot"></span>
@@ -728,62 +763,114 @@
     </div>
   </section>
 
-  <!-- Multi-Column Dark Footer (#main-footer) -->
+  <!-- Organic Curved Wave Top (Navy Blue #0B1528) -->
+  <div class="footer-wave-wrapper">
+    <svg class="footer-wave-svg" viewBox="0 0 1440 100" fill="none" preserveAspectRatio="none">
+      <path d="M0,45 C280,85 520,15 800,55 C1080,95 1280,30 1440,50 L1440,100 L0,100 Z" fill="#0B1528"></path>
+    </svg>
+  </div>
+
+  <!-- Organic Deep Navy Blue Footer Section -->
   <footer class="main-footer" id="main-footer">
     <div class="container">
-      <div class="row g-4">
-        <div class="col-lg-4">
+      <div class="row g-4 justify-content-between align-items-start">
+        
+        <!-- Col 1: Brand & Socials -->
+        <div class="col-lg-3 col-md-6 mb-3 mb-lg-0">
           <a class="d-inline-block mb-3" href="index.html">
-            <img src="../static/images/snacky_logo.svg" alt="Snacky Logo" class="footer-logo-img">
+            <img src="../static/images/snacky_logo_transparent.png" alt="Snacky Logo" class="footer-logo-img">
           </a>
-          <p class="small text-muted mb-3">
-            Snacky is India's premium snacks brand bringing you authentic, palm-oil free, 100% groundnut oil crunch for
-            guilt-free everyday snacking.
+          <p class="footer-tagline-text mb-3">
+            Age old wisdom meets modern nutrition. 100% pure groundnut oil, zero palm oil & trans-fat free crunch.
           </p>
+          <div class="footer-social-pill-group">
+            <a href="https://instagram.com" target="_blank" class="footer-social-pill" aria-label="Instagram">
+              <i class="bi bi-instagram"></i>
+            </a>
+            <a href="https://youtube.com" target="_blank" class="footer-social-pill" aria-label="YouTube">
+              <i class="bi bi-youtube"></i>
+            </a>
+            <a href="https://facebook.com" target="_blank" class="footer-social-pill" aria-label="Facebook">
+              <i class="bi bi-facebook"></i>
+            </a>
+            <a href="https://linkedin.com" target="_blank" class="footer-social-pill" aria-label="LinkedIn">
+              <i class="bi bi-linkedin"></i>
+            </a>
+          </div>
         </div>
 
-        <div class="col-6 col-lg-2">
-          <h6 class="footer-title">SHOP</h6>
+        <!-- Col 2: Shop -->
+        <div class="col-6 col-md-3 col-lg-2">
+          <h6 class="footer-nav-heading">Shop</h6>
           <ul class="footer-links-list">
-            <li><a href="products.html?category=namkeen">Namkeen</a></li>
-            <li><a href="products.html?category=chips">Chips & Wafers</a></li>
+            <li><a href="products.html?category=namkeen">Namkeens & Bhujia</a></li>
+            <li><a href="products.html?category=chips">Chips & Crisps</a></li>
             <li><a href="products.html?category=healthy">Healthy Snacks</a></li>
-            <li><a href="offers.html">Combo Offers</a></li>
+            <li><a href="offers.html">Offers</a></li>
           </ul>
         </div>
 
-        <div class="col-6 col-lg-2">
-          <h6 class="footer-title">EXPLORE</h6>
+        <!-- Col 3: Explore -->
+        <div class="col-6 col-md-3 col-lg-2">
+          <h6 class="footer-nav-heading">Explore</h6>
           <ul class="footer-links-list">
-            <li><a href="about.html">About Us</a></li>
-            <li><a href="contact.html">Bulk Orders</a></li>
-            <li><a href="offers.html">Flash Deals</a></li>
+            <li><a href="about.html">Our Story</a></li>
+            <li><a href="products.html">All Snacks Catalog</a></li>
+            <li><a href="feedback.html">Customer Feedback</a></li>
           </ul>
         </div>
 
-        <div class="col-6 col-lg-2">
-          <h6 class="footer-title">HELP</h6>
+        <!-- Col 4: Policies & Help -->
+        <div class="col-6 col-md-3 col-lg-2">
+          <h6 class="footer-nav-heading">Customer Care</h6>
           <ul class="footer-links-list">
-            <li><a href="contact.html">Contact Us</a></li>
             <li><a href="track-order.html">Track Order</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+            <li><a href="contact.html#faq-section">Frequently Asked Questions</a></li>
+            <li><a href="about.html">Terms of Service</a></li>
+            <li><a href="about.html">Privacy Policy</a></li>
           </ul>
         </div>
 
-        <div class="col-6 col-lg-2">
-          <h6 class="footer-title">CONTACT</h6>
-          <p class="small mb-1"><i class="bi bi-geo-alt me-1"></i> Indra Vihar, Delhi-110009</p>
-          <p class="small mb-1"><i class="bi bi-envelope me-1"></i> support@snacky.com</p>
-          <p class="small mb-0"><i class="bi bi-telephone me-1"></i> +91 9654932262</p>
-        </div>
-      </div>
+        <!-- Col 5: Join Squad & Feedback Direct Link -->
+        <div class="col-lg-3 col-md-6">
+          <h6 class="footer-squad-heading">JOIN THE SNACKY CO. SQUAD</h6>
+          <form class="footer-newsletter-form mb-3" onsubmit="event.preventDefault(); handleNewsletterSubmit(this);">
+            <div class="footer-email-input-group">
+              <input type="email" class="form-control footer-email-input" placeholder="E-mail" required>
+              <button type="submit" class="footer-email-btn" aria-label="Subscribe">
+                <i class="bi bi-arrow-right"></i>
+              </button>
+            </div>
+          </form>
 
-      <div class="footer-bottom-bar">
-        <p class="small mb-0">© 2026 Snacky Foods Private Limited. All rights reserved.</p>
-        <div class="d-flex gap-2">
-          <a href="#" class="social-icon-link"><i class="bi bi-facebook"></i></a>
-          <a href="#" class="social-icon-link"><i class="bi bi-instagram"></i></a>
-          <a href="#" class="social-icon-link"><i class="bi bi-twitter-x"></i></a>
+          <!-- Interactive Customer Feedback Bar -->
+          <div class="footer-feedback-prompt-box mb-3">
+            <div class="d-flex align-items-center justify-content-between gap-2">
+              <div>
+                <div class="footer-feedback-title">Loved our snacks?</div>
+                <div class="footer-feedback-subtitle">Share your feedback</div>
+              </div>
+              <a href="feedback.html" class="btn-footer-feedback-pill" aria-label="Give Feedback">
+                <i class="bi bi-chat-heart-fill me-1"></i> Feedback
+              </a>
+            </div>
+          </div>
+
+          <!-- Payment Methods & Copyright -->
+          <div class="d-flex align-items-center justify-content-between flex-wrap gap-2 pt-1">
+            <div class="footer-payment-badges-row">
+              <span class="payment-badge-pill visa-pill">VISA</span>
+              <span class="payment-badge-pill mc-pill"><span class="mc-c1"></span><span class="mc-c2"></span></span>
+              <span class="payment-badge-pill gpay-pill">G Pay</span>
+              <span class="payment-badge-pill upi-pill">UPI</span>
+            </div>
+            <div class="footer-copyright-text">
+              © Snacky Co. 2026
+            </div>
+          </div>
         </div>
+
       </div>
     </div>
   </footer>

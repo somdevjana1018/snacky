@@ -9,46 +9,74 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
-  <link rel="icon" type="image/svg+xml" href="../static/images/favicon.svg">
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Outfit:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="../static/images/snacky_logo_transparent.png">
   <link rel="stylesheet" href="../static/css/style.css">
 </head>
 <body>
 
-  <!-- Top Announcement Bar -->
+  <!-- Top Announcement Bar with Marquee Effect -->
   <div class="top-announcement-bar">
-    🚚 FREE DELIVERY ABOVE ₹199
+    <div class="marquee-track">
+      <div class="marquee-content">
+        <span>🚚 FREE DELIVERY ABOVE ₹199</span> <span class="marquee-dot">•</span>
+        <span>🍿 100% PURE GROUNDNUT OIL</span> <span class="marquee-dot">•</span>
+        <span>✨ NO PALM OIL • NO CHOLESTEROL</span> <span class="marquee-dot">•</span>
+        <span>🎉 USE CODE: SNACKY50 FOR ₹50 OFF</span> <span class="marquee-dot">•</span>
+      </div>
+      <div class="marquee-content">
+        <span>🚚 FREE DELIVERY ABOVE ₹199</span> <span class="marquee-dot">•</span>
+        <span>🍿 100% PURE GROUNDNUT OIL</span> <span class="marquee-dot">•</span>
+        <span>✨ NO PALM OIL • NO CHOLESTEROL</span> <span class="marquee-dot">•</span>
+        <span>🎉 USE CODE: SNACKY50 FOR ₹50 OFF</span> <span class="marquee-dot">•</span>
+      </div>
+    </div>
   </div>
 
-  <!-- Navigation Bar -->
+  <!-- Navigation Bar (#main-navbar) -->
   <nav class="navbar navbar-expand-lg main-navbar" id="main-navbar">
     <div class="container">
       <a class="brand-logo-container" href="index.html">
-        <img src="../static/images/snacky_logo.svg" alt="Snacky Logo" class="brand-logo-img">
+        <img src="../static/images/snacky_logo_transparent.png" alt="Snacky Logo" class="brand-logo-img">
       </a>
 
-      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
 
       <div class="collapse navbar-collapse" id="navbarContent">
-        <ul class="navbar-nav mx-auto mb-2 mb-lg-0 gap-3">
-          <li class="nav-item"><a class="nav-link nav-link-custom" href="index.html">Home</a></li>
-          <li class="nav-item"><a class="nav-link nav-link-custom" href="products.html">Products</a></li>
-          <li class="nav-item"><a class="nav-link nav-link-custom" href="offers.html">Offers</a></li>
-          <li class="nav-item"><a class="nav-link nav-link-custom active" href="about.html">About</a></li>
-          <li class="nav-item"><a class="nav-link nav-link-custom" href="contact.html">Contact</a></li>
+        <ul class="navbar-nav mb-2 mb-lg-0 gap-1 gap-lg-2">
+          <li class="nav-item">
+            <a class="nav-link nav-link-custom" href="index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-link-custom" href="products.html">Products</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-link-custom" href="offers.html">Offers</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-link-custom active" href="about.html">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-link-custom" href="contact.html">Contact</a>
+          </li>
         </ul>
 
         <div class="nav-actions-right">
           <div class="nav-search-container">
             <input type="text" class="nav-search-input" id="nav-search-input" placeholder="Search snacks...">
-            <i class="bi bi-search nav-search-icon"></i>
+            <i class="bi bi-search nav-search-icon" id="nav-search-trigger"></i>
           </div>
-          <a href="auth.html" class="nav-auth-btn" id="nav-user-account-btn">
-            <i class="bi bi-person-circle"></i>
-            <span id="nav-user-text">Login / Sign Up</span>
-          </a>
-          <button class="nav-action-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#cartOffcanvas" title="Shopping Cart">
+
+          <div id="auth-nav-container">
+            <a href="auth.html" class="nav-action-btn" id="nav-user-account-btn" title="Account / Login" aria-label="Account">
+              <i class="bi bi-person"></i>
+            </a>
+          </div>
+
+          <button class="nav-action-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#cartOffcanvas"
+            title="Shopping Cart">
             <i class="bi bi-cart3"></i>
             <span class="cart-count-badge">0</span>
           </button>
@@ -58,13 +86,13 @@
   </nav>
 
   <!-- Hero Banner (#about-hero) -->
-  <section class="container my-4" id="about-hero">
-    <div class="p-5 rounded-4 text-white bg-gradient-hero-1">
-      <div class="row align-items-center g-4">
+  <section class="container my-3 my-md-4" id="about-hero">
+    <div class="p-4 p-md-5 rounded-4 text-white bg-gradient-hero-1">
+      <div class="row align-items-center g-3 g-md-4">
         <div class="col-lg-7 text-center text-lg-start">
-          <span class="badge bg-warning text-dark rounded-pill fw-bold px-3 py-2 mb-2">OUR STORY & MISSION</span>
-          <h1 class="display-4 fw-extrabold mb-3">Reinventing Indian Snacking</h1>
-          <p class="lead text-light-50 mw-600px">Born from a passion for authentic home recipes, prepared in 100% pure groundnut oil with zero palm oil.</p>
+          <span class="badge bg-warning text-dark rounded-pill fw-bold px-3 py-1 mb-2 fs-7">OUR STORY & MISSION</span>
+          <h1 class="fw-extrabold mb-2 about-hero-heading">Reinventing Indian Snacking</h1>
+          <p class="text-light-50 mw-600px mb-0 about-hero-desc">Born from a passion for authentic home recipes, prepared in 100% pure groundnut oil with zero palm oil.</p>
         </div>
         <div class="col-lg-5 text-center">
           <img src="../static/images/hero_about_banner.jpg" alt="Our Story Banner" class="hero-banner-img">
@@ -73,140 +101,264 @@
     </div>
   </section>
 
-  <!-- Origin Story Section (#origin-story) -->
-  <section class="container my-5" id="origin-story">
-    <div class="row align-items-center g-5">
-      <div class="col-lg-6">
-        <span class="badge bg-warning text-dark rounded-pill fw-bold px-3 py-2 mb-2">ESTABLISHED IN DELHI</span>
-        <h2 class="fw-extrabold text-navy mb-4">From a humble home kitchen to Shark Tank India.</h2>
-        <p class="text-muted fs-5 mb-3">
-          Our journey began when our founder Nitin Sharma realized that 95% of commercial snacks in the Indian market relied on cheap, harmful palm oil and heavy preservatives.
-        </p>
-        <p class="text-muted fs-6 mb-4">
-          Determined to change this, Snacky introduced a revolutionary promise: 100% pure groundnut oil, zero palm oil, zero trans fats, and zero compromise on traditional taste.
-        </p>
-        <div class="d-flex gap-4">
-          <div>
-            <h3 class="fw-extrabold text-warning mb-0">60+</h3>
-            <span class="small text-muted">Crunch Varieties</span>
-          </div>
-          <div>
-            <h3 class="fw-extrabold text-warning mb-0">5 Lakh+</h3>
-            <span class="small text-muted">Happy Munchers</span>
-          </div>
-          <div>
-            <h3 class="fw-extrabold text-warning mb-0">100%</h3>
-            <span class="small text-muted">Groundnut Oil</span>
-          </div>
+  <!-- SECTION 1: Home Recipe Origin Story (Screenshot 1) -->
+  <section class="container my-4 my-md-5 py-2 py-md-3" id="story-origin-section">
+    <div class="row align-items-center g-4 g-md-5">
+      <div class="col-lg-5 text-center">
+        <div class="about-story-img-wrapper">
+          <div class="about-blob-bg"></div>
+          <img src="../static/images/snack_makhana.jpg" alt="Home Recipe Roasted Makhana" class="about-story-img shadow-sm">
         </div>
       </div>
+      <div class="col-lg-7">
+        <p class="about-story-text mb-0">
+          When we found that our kid is only eating Snacks that were made with harmful ingredients. We started making Snacks in our Home by infusing <strong class="fw-extrabold text-navy">high-quality ingredients.</strong>
+        </p>
+      </div>
+    </div>
+  </section>
 
-      <div class="col-lg-6">
-        <div class="card card-body p-4 border-0 shadow-sm rounded-4 bg-white text-center">
-          <div class="display-1 mb-3">🍿</div>
-          <h4 class="fw-bold text-navy">Shark Tank Approved</h4>
-          <p class="text-muted small mb-0">Featured on Shark Tank India Season 1, winning hearts and investment for authentic healthy Indian snacking.</p>
+  <!-- SECTION 2: Launch of Snacky Brand (Screenshot 2) -->
+  <section class="container my-4 my-md-5 py-2 py-md-3" id="story-launch-section">
+    <div class="row align-items-center g-4 g-md-5">
+      <div class="col-lg-7 order-2 order-lg-1">
+        <p class="about-story-text mb-0">
+          Soon in <strong class="fw-extrabold text-navy">2021 launched "Snacky"</strong> with the purpose to provide better products with high-quality ingredients.
+        </p>
+      </div>
+      <div class="col-lg-5 order-1 order-lg-2 text-center">
+        <div class="about-story-img-wrapper">
+          <div class="about-blob-bg"></div>
+          <img src="../static/images/paachratan_mixture.jpg" alt="Snacky Makhana & Namkeen Pack" class="about-story-img shadow-sm">
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Trust Badges Section (#trust-badges) -->
-  <section class="container my-5 text-center" id="trust-badges">
-    <div class="section-title-wrapper mb-5">
-      <h2 class="section-title">What makes Snacky special?</h2>
+  <!-- SECTION 3: Brand Philosophy Callout Box (Screenshot 3) -->
+  <section class="container my-4 my-md-5" id="brand-philosophy-callout">
+    <div class="about-callout-box">
+      At Snacky, we believe healthy snacking can be fun too. We follow traditional methods to make all our snacks, just like your grandma used to. We use 100% groundnut oil. No preservatives, No artificial flavors, or colors, no trans fats or cholesterol. We have a large variety of snacks, all of which have a unique taste and flavor. Our products are tastier and healthier than other junk food and can be consumed by anyone.
     </div>
+  </section>
 
-    <div class="row row-cols-2 row-cols-md-3 row-cols-lg-6 g-4">
-      <div class="col">
-        <div class="card card-body border-0 shadow-sm rounded-4 p-3 bg-white h-100">
-          <div class="fs-1 mb-2">🚫</div>
-          <h6 class="fw-bold text-navy mb-1">No Trans Fat</h6>
-          <p class="text-muted font-size-14px mb-0">Heart-healthy goodness</p>
+  <!-- SECTION 4: "Why to choose us?" Full-Width Banner & Circular Badges (Screenshot 4) -->
+  <section class="container my-4 my-md-5" id="why-choose-us">
+    <div class="why-choose-us-section text-center">
+      <h2 class="why-choose-title mb-3 mb-md-4">
+        <span class="text-success me-2">🍃</span> Why to choose us? <span class="text-success ms-2">🍃</span>
+      </h2>
+
+      <div class="d-flex justify-content-center align-items-center flex-wrap gap-2 gap-md-4 pt-2">
+        <!-- 1. Trans Fat Free -->
+        <div class="why-badge-item why-badge-transfat">
+          <i class="bi bi-droplet-half fs-4"></i>
+          <span class="why-badge-label">Trans Fat Free</span>
         </div>
-      </div>
 
-      <div class="col">
-        <div class="card card-body border-0 shadow-sm rounded-4 p-3 bg-white h-100">
-          <div class="fs-1 mb-2">🥜</div>
-          <h6 class="fw-bold text-navy mb-1">No Palm Oil</h6>
-          <p class="text-muted font-size-14px mb-0">100% Groundnut oil</p>
+        <!-- 2. Palm Oil Free -->
+        <div class="why-badge-item why-badge-palmoil">
+          <i class="bi bi-droplet-fill fs-4"></i>
+          <span class="why-badge-label">Palm Oil Free</span>
         </div>
-      </div>
 
-      <div class="col">
-        <div class="card card-body border-0 shadow-sm rounded-4 p-3 bg-white h-100">
-          <div class="fs-1 mb-2">❤️</div>
-          <h6 class="fw-bold text-navy mb-1">No Cholesterol</h6>
-          <p class="text-muted font-size-14px mb-0">Guilt-free munching</p>
+        <!-- 3. No Cholesterol -->
+        <div class="why-badge-item why-badge-cholesterol">
+          <i class="bi bi-heart-fill fs-4"></i>
+          <span class="why-badge-label">No Cholesterol</span>
         </div>
-      </div>
 
-      <div class="col">
-        <div class="card card-body border-0 shadow-sm rounded-4 p-3 bg-white h-100">
-          <div class="fs-1 mb-2">☕</div>
-          <h6 class="fw-bold text-navy mb-1">Tea Time Partner</h6>
-          <p class="text-muted font-size-14px mb-0">Perfect for chai breaks</p>
+        <!-- 4. Tea Time Snacks -->
+        <div class="why-badge-item why-badge-teatime">
+          <i class="bi bi-cup-hot-fill fs-4"></i>
+          <span class="why-badge-label">Tea Time Snacks</span>
         </div>
-      </div>
 
-      <div class="col">
-        <div class="card card-body border-0 shadow-sm rounded-4 p-3 bg-white h-100">
-          <div class="fs-1 mb-2">🌾</div>
-          <h6 class="fw-bold text-navy mb-1">High Fiber</h6>
-          <p class="text-muted font-size-14px mb-0">Wholesome grains</p>
+        <!-- 5. High Fiber -->
+        <div class="why-badge-item why-badge-highfiber">
+          <i class="bi bi-flower1 fs-4"></i>
+          <span class="why-badge-label">High Fiber</span>
         </div>
-      </div>
 
-      <div class="col">
-        <div class="card card-body border-0 shadow-sm rounded-4 p-3 bg-white h-100">
-          <div class="fs-1 mb-2">🧊</div>
-          <h6 class="fw-bold text-navy mb-1">No White Sugar</h6>
-          <p class="text-muted font-size-14px mb-0">Naturally sweetened</p>
+        <!-- 6. No White Sugar -->
+        <div class="why-badge-item why-badge-nosugar">
+          <i class="bi bi-slash-circle fs-4"></i>
+          <span class="why-badge-label">No White Sugar</span>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Dark Footer -->
+  <!-- SECTION 5: "Healthy snacking we're offering to our customers" & 3 Cards Grid (Screenshot 5) -->
+  <section class="container my-5 text-center" id="offering-showcase-section">
+    <div class="mb-5">
+      <h2 class="fw-extrabold text-navy display-5 mb-1">Healthy snacking</h2>
+      <div class="about-signature-text">
+        we're offering to our customers.
+      </div>
+    </div>
+
+    <div class="row g-4 mb-5 text-start">
+      <!-- Card 1: Munchies -->
+      <div class="col-md-4">
+        <div class="about-offering-card">
+          <div>
+            <div class="text-success mb-2"><i class="bi bi-box-fill fs-5"></i></div>
+            <h4 class="fw-extrabold text-navy mb-2">Munchies</h4>
+            <p class="text-muted small mb-3">Snack smart with munchies that are big on taste and free from junk.</p>
+            <a href="products.html?category=namkeen" class="fw-bold text-primary-violet text-decoration-none">Explore &rarr;</a>
+          </div>
+          <div class="mt-4">
+            <img src="../static/images/snack_namkeen.jpg" alt="Munchies" class="about-offering-img">
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2: Healthy Snacks -->
+      <div class="col-md-4">
+        <div class="about-offering-card">
+          <div>
+            <div class="text-success mb-2"><i class="bi bi-heart-pulse fs-5"></i></div>
+            <h4 class="fw-extrabold text-navy mb-2">Healthy Snacks</h4>
+            <p class="text-muted small mb-3">Deliciously light, roasted & high-fiber snacks—makhana & puffs for mindful munching.</p>
+            <a href="products.html?category=healthy" class="fw-bold text-primary-violet text-decoration-none">Explore &rarr;</a>
+          </div>
+          <div class="mt-4">
+            <img src="../static/images/snack_makhana.jpg" alt="Healthy Snacks" class="about-offering-img">
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3: Namkeen -->
+      <div class="col-md-4">
+        <div class="about-offering-card">
+          <div>
+            <div class="text-success mb-2"><i class="bi bi-egg-fried fs-5"></i></div>
+            <h4 class="fw-extrabold text-navy mb-2">Namkeen</h4>
+            <p class="text-muted small mb-3">Wholesome crunch in every bite—our healthy namkeen made in 100% groundnut oil.</p>
+            <a href="products.html?category=namkeen" class="fw-bold text-primary-violet text-decoration-none">Explore &rarr;</a>
+          </div>
+          <div class="mt-4">
+            <img src="../static/images/aloo_bhujia.jpg" alt="Namkeen" class="about-offering-img">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Action Button -->
+    <div>
+      <a href="products.html" class="btn btn-about-explore-more">Explore more snacking options</a>
+    </div>
+  </section>
+
+  <!-- Organic Curved Wave Top (Navy Blue #0B1528) -->
+  <div class="footer-wave-wrapper">
+    <svg class="footer-wave-svg" viewBox="0 0 1440 100" fill="none" preserveAspectRatio="none">
+      <path d="M0,45 C280,85 520,15 800,55 C1080,95 1280,30 1440,50 L1440,100 L0,100 Z" fill="#0B1528"></path>
+    </svg>
+  </div>
+
+  <!-- Organic Deep Navy Blue Footer Section -->
   <footer class="main-footer" id="main-footer">
     <div class="container">
-      <div class="row g-4">
-        <div class="col-lg-4">
+      <div class="row g-4 justify-content-between align-items-start">
+        
+        <!-- Col 1: Brand & Socials -->
+        <div class="col-lg-3 col-md-6 mb-3 mb-lg-0">
           <a class="d-inline-block mb-3" href="index.html">
-            <img src="../static/images/snacky_logo.svg" alt="Snacky Logo" class="footer-logo-img">
+            <img src="../static/images/snacky_logo_transparent.png" alt="Snacky Logo" class="footer-logo-img">
           </a>
-          <p class="small text-muted mb-3">Snacky is India's premium snacks brand bringing you authentic, palm-oil free crunch.</p>
+          <p class="footer-tagline-text mb-3">
+            Age old wisdom meets modern nutrition. 100% pure groundnut oil, zero palm oil & trans-fat free crunch.
+          </p>
+          <div class="footer-social-pill-group">
+            <a href="https://instagram.com" target="_blank" class="footer-social-pill" aria-label="Instagram">
+              <i class="bi bi-instagram"></i>
+            </a>
+            <a href="https://youtube.com" target="_blank" class="footer-social-pill" aria-label="YouTube">
+              <i class="bi bi-youtube"></i>
+            </a>
+            <a href="https://facebook.com" target="_blank" class="footer-social-pill" aria-label="Facebook">
+              <i class="bi bi-facebook"></i>
+            </a>
+            <a href="https://linkedin.com" target="_blank" class="footer-social-pill" aria-label="LinkedIn">
+              <i class="bi bi-linkedin"></i>
+            </a>
+          </div>
         </div>
-        <div class="col-6 col-lg-2">
-          <h6 class="footer-title">SHOP</h6>
+
+        <!-- Col 2: Shop -->
+        <div class="col-6 col-md-3 col-lg-2">
+          <h6 class="footer-nav-heading">Shop</h6>
           <ul class="footer-links-list">
-            <li><a href="products.html?category=namkeen">Namkeen</a></li>
-            <li><a href="products.html?category=chips">Chips & Wafers</a></li>
+            <li><a href="products.html?category=namkeen">Namkeens & Bhujia</a></li>
+            <li><a href="products.html?category=chips">Chips & Crisps</a></li>
             <li><a href="products.html?category=healthy">Healthy Snacks</a></li>
+            <li><a href="offers.html">Offers</a></li>
           </ul>
         </div>
-        <div class="col-6 col-lg-2">
-          <h6 class="footer-title">EXPLORE</h6>
+
+        <!-- Col 3: Explore -->
+        <div class="col-6 col-md-3 col-lg-2">
+          <h6 class="footer-nav-heading">Explore</h6>
           <ul class="footer-links-list">
-            <li><a href="about.html">About Us</a></li>
-            <li><a href="contact.html">Contact Us</a></li>
+            <li><a href="about.html">Our Story</a></li>
+            <li><a href="products.html">All Snacks Catalog</a></li>
+            <li><a href="feedback.html">Customer Feedback</a></li>
           </ul>
         </div>
-        <div class="col-6 col-lg-2">
-          <h6 class="footer-title">HELP</h6>
+
+        <!-- Col 4: Policies & Help -->
+        <div class="col-6 col-md-3 col-lg-2">
+          <h6 class="footer-nav-heading">Customer Care</h6>
           <ul class="footer-links-list">
-            <li><a href="contact.html">Contact Support</a></li>
             <li><a href="track-order.html">Track Order</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+            <li><a href="contact.html#faq-section">Frequently Asked Questions</a></li>
+            <li><a href="about.html">Terms of Service</a></li>
+            <li><a href="about.html">Privacy Policy</a></li>
           </ul>
         </div>
-        <div class="col-6 col-lg-2">
-          <h6 class="footer-title">CONTACT</h6>
-          <p class="small mb-0">+91 9654932262</p>
+
+        <!-- Col 5: Join Squad & Feedback Direct Link -->
+        <div class="col-lg-3 col-md-6">
+          <h6 class="footer-squad-heading">JOIN THE SNACKY CO. SQUAD</h6>
+          <form class="footer-newsletter-form mb-3" onsubmit="event.preventDefault(); handleNewsletterSubmit(this);">
+            <div class="footer-email-input-group">
+              <input type="email" class="form-control footer-email-input" placeholder="E-mail" required>
+              <button type="submit" class="footer-email-btn" aria-label="Subscribe">
+                <i class="bi bi-arrow-right"></i>
+              </button>
+            </div>
+          </form>
+
+          <!-- Interactive Customer Feedback Bar -->
+          <div class="footer-feedback-prompt-box mb-3">
+            <div class="d-flex align-items-center justify-content-between gap-2">
+              <div>
+                <div class="footer-feedback-title">Loved our snacks?</div>
+                <div class="footer-feedback-subtitle">Share your feedback</div>
+              </div>
+              <a href="feedback.html" class="btn-footer-feedback-pill" aria-label="Give Feedback">
+                <i class="bi bi-chat-heart-fill me-1"></i> Feedback
+              </a>
+            </div>
+          </div>
+
+          <!-- Payment Methods & Copyright -->
+          <div class="d-flex align-items-center justify-content-between flex-wrap gap-2 pt-1">
+            <div class="footer-payment-badges-row">
+              <span class="payment-badge-pill visa-pill">VISA</span>
+              <span class="payment-badge-pill mc-pill"><span class="mc-c1"></span><span class="mc-c2"></span></span>
+              <span class="payment-badge-pill gpay-pill">G Pay</span>
+              <span class="payment-badge-pill upi-pill">UPI</span>
+            </div>
+            <div class="footer-copyright-text">
+              © Snacky Co. 2026
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="footer-bottom-bar">
-        <p class="small mb-0">© 2026 Snacky Foods Private Limited. All rights reserved.</p>
+
       </div>
     </div>
   </footer>

@@ -4,56 +4,78 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Live Order Tracking - Snacky</title>
-  <meta name="description" content="Track your Snacky snack order in real-time with step-by-step progress update.">
+  <meta name="description" content="Track your Snacky snack order in real-time with step-by-step progress updates, delivery courier info, and order details.">
   
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
-  <link rel="icon" type="image/svg+xml" href="../static/images/favicon.svg">
+  <link rel="icon" type="image/png" href="../static/images/snacky_logo_transparent.png">
   <link rel="stylesheet" href="../static/css/style.css">
 </head>
 <body>
 
-  <!-- 1. Top Feature Ticker Bar -->
-  <div class="top-ticker-bar">
-    No White Sugar <span class="divider">|</span> High Fiber <span class="divider">|</span> No Palm Oil <span class="divider">|</span> No Cholesterol <span class="divider">|</span> No Trans Fat <span class="divider">|</span> No White Sugar
-  </div>
-
-  <!-- 2. Top Announcement Bar -->
+  <!-- 1. Top Announcement Bar (Yellow full-width strip) -->
   <div class="top-announcement-bar">
-    🚚 FREE DELIVERY ABOVE ₹199
+    <div class="marquee-track">
+      <div class="marquee-content">
+        <span>🚚 FREE DELIVERY ABOVE ₹199</span> <span class="marquee-dot">•</span>
+        <span>🍿 100% PURE GROUNDNUT OIL</span> <span class="marquee-dot">•</span>
+        <span>✨ NO PALM OIL • NO CHOLESTEROL</span> <span class="marquee-dot">•</span>
+        <span>🎉 USE CODE: SNACKY50 FOR ₹50 OFF</span> <span class="marquee-dot">•</span>
+      </div>
+      <div class="marquee-content">
+        <span>🚚 FREE DELIVERY ABOVE ₹199</span> <span class="marquee-dot">•</span>
+        <span>🍿 100% PURE GROUNDNUT OIL</span> <span class="marquee-dot">•</span>
+        <span>✨ NO PALM OIL • NO CHOLESTEROL</span> <span class="marquee-dot">•</span>
+        <span>🎉 USE CODE: SNACKY50 FOR ₹50 OFF</span> <span class="marquee-dot">•</span>
+      </div>
+    </div>
   </div>
 
-  <!-- Navigation Bar -->
+  <!-- 2. Main Navigation Bar (#main-navbar) -->
   <nav class="navbar navbar-expand-lg main-navbar" id="main-navbar">
     <div class="container">
       <a class="brand-logo-container" href="index.html">
-        <img src="../static/images/snacky_logo.svg" alt="Snacky Logo" class="brand-logo-img">
+        <img src="../static/images/snacky_logo_transparent.png" alt="Snacky Logo" class="brand-logo-img">
       </a>
 
-      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
 
       <div class="collapse navbar-collapse" id="navbarContent">
-        <ul class="navbar-nav mx-auto mb-2 mb-lg-0 gap-3">
-          <li class="nav-item"><a class="nav-link nav-link-custom" href="index.html">Home</a></li>
-          <li class="nav-item"><a class="nav-link nav-link-custom" href="products.html">Products</a></li>
-          <li class="nav-item"><a class="nav-link nav-link-custom" href="offers.html">Offers</a></li>
-          <li class="nav-item"><a class="nav-link nav-link-custom" href="about.html">About</a></li>
-          <li class="nav-item"><a class="nav-link nav-link-custom" href="contact.html">Contact</a></li>
+        <ul class="navbar-nav mb-2 mb-lg-0 gap-1 gap-lg-2">
+          <li class="nav-item">
+            <a class="nav-link nav-link-custom" href="index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-link-custom" href="products.html">Products</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-link-custom" href="offers.html">Offers</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-link-custom" href="about.html">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-link-custom" href="contact.html">Contact</a>
+          </li>
         </ul>
 
         <div class="nav-actions-right">
           <div class="nav-search-container">
             <input type="text" class="nav-search-input" id="nav-search-input" placeholder="Search snacks...">
-            <i class="bi bi-search nav-search-icon"></i>
+            <i class="bi bi-search nav-search-icon" id="nav-search-trigger"></i>
           </div>
-          <a href="auth.html" class="nav-auth-btn" id="nav-user-account-btn">
-            <i class="bi bi-person-circle"></i>
-            <span id="nav-user-text">Login / Sign Up</span>
-          </a>
-          <button class="nav-action-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#cartOffcanvas" title="Shopping Cart">
+
+          <div id="auth-nav-container">
+            <a href="auth.html" class="nav-action-btn" id="nav-user-account-btn" title="Account / Login" aria-label="Account">
+              <i class="bi bi-person"></i>
+            </a>
+          </div>
+
+          <button class="nav-action-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#cartOffcanvas"
+            title="Shopping Cart">
             <i class="bi bi-cart3"></i>
             <span class="cart-count-badge">0</span>
           </button>
@@ -62,167 +84,384 @@
     </div>
   </nav>
 
-  <!-- Protected Tracking Container (#track-order-wrapper) -->
-  <section class="container my-5" id="track-order-wrapper">
-    <!-- Guest Access Denied Card (Visible when NOT logged in) -->
-    <div class="card card-body text-center p-5 border-0 shadow-sm rounded-4 bg-white mw-580px display-none" id="track-guest-access-card">
-      <div class="display-1 text-warning mb-3">⚠️</div>
-      <h3 class="fw-extrabold text-navy mb-2">Login Required</h3>
-      <p class="text-muted small mb-4">Please log in to your Snacky account to view and track your active orders.</p>
-      <div>
-        <a href="auth.html" class="btn btn-snacky-primary px-5 py-3 fs-6">Sign In / Register <i class="bi bi-arrow-right"></i></a>
-      </div>
-    </div>
+  <!-- Main Container -->
+  <main class="container-fluid px-3 px-md-5 my-4 my-md-5" id="track-main-container">
+    
+    <!-- Clean Breadcrumb & Order Lookup Search Bar -->
+    <div class="track-top-bar d-flex justify-content-between align-items-center flex-wrap gap-3 mb-4">
+      <nav class="track-breadcrumb-bar mb-0" aria-label="breadcrumb">
+        <a href="index.html" class="text-decoration-none text-muted"><i class="bi bi-house-door me-1"></i> Home</a>
+        <span class="text-muted">/</span>
+        <a href="profile.html" class="text-decoration-none text-muted">Profile</a>
+        <span class="text-muted">/</span>
+        <span class="active text-navy fw-bold">Track Order</span>
+      </nav>
 
-    <!-- Active Order Dashboard (Visible when logged in) -->
-    <div id="track-active-dashboard" class="display-none">
-      <div class="card card-body border-0 shadow-sm rounded-4 p-4 mb-4 bg-white">
-        <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 pb-3 border-bottom mb-4">
-          <div>
-            <span class="badge bg-warning text-dark font-bold px-3 py-2 rounded-pill mb-1">IN TRANSIT</span>
-            <h3 class="fw-extrabold text-navy mb-0">Order #SNK-8947291</h3>
-          </div>
-          <button class="btn btn-outline-secondary rounded-pill fw-bold" onclick="showToast('Downloading invoice PDF...')">
-            <i class="bi bi-download me-1"></i> Download Invoice
+      <!-- Order Lookup Search Form -->
+      <form class="track-search-form" id="track-order-search-form" onsubmit="event.preventDefault(); handleManualOrderSearch();">
+        <div class="track-search-input-group">
+          <i class="bi bi-search track-search-icon"></i>
+          <input type="text" class="form-control track-search-input font-monospace" id="track-order-search-input" placeholder="Enter Order ID (e.g. SNK-849201)" required>
+          <button type="submit" class="btn btn-track-search" id="btn-track-order-search">
+            <i class="bi bi-search me-1"></i> Track
           </button>
         </div>
+      </form>
+    </div>
 
-        <div class="row g-4 mb-4">
-          <div class="col-md-3">
-            <span class="small text-muted d-block">Order Date</span>
-            <strong class="text-navy">28 Aug 2026, 02:45 PM</strong>
+    <!-- Quick Sample Orders Bar -->
+    <div class="track-quick-bar" id="track-quick-order-bar">
+      <span class="small text-muted fw-bold me-1"><i class="bi bi-clock-history me-1"></i> Recent Orders:</span>
+      <button type="button" class="track-quick-btn active" onclick="quickTrackOrder('SNK-849201')">#SNK-849201 (In Transit)</button>
+      <button type="button" class="track-quick-btn" onclick="quickTrackOrder('SNK-7821904')">#SNK-7821904 (Delivered)</button>
+    </div>
+    
+    <!-- Unauthorized / Guest View Container (#guest-guard-view) -->
+    <div class="guest-guard-card d-none" id="guest-guard-view">
+      <div class="guest-guard-icon-wrap">
+        <i class="bi bi-shield-lock-fill"></i>
+      </div>
+      <h3 class="fw-extrabold text-navy mb-2">Sign In to Track Your Orders</h3>
+      <p class="text-muted small mb-4">You need to be logged into your Snacky account to view live tracking information, delivery updates, and past invoices.</p>
+      <div>
+        <a href="auth.html" class="btn btn-snacky-primary px-5 py-3 fs-6 rounded-pill fw-bold">
+          <i class="bi bi-box-arrow-in-right me-2"></i> Sign In / Register
+        </a>
+      </div>
+    </div>
+
+    <!-- Empty Orders View Container (#empty-orders-view) -->
+    <div class="track-screenshot-card text-center py-5 d-none" id="empty-orders-view">
+      <div class="display-3 mb-3">📦</div>
+      <h3 class="fw-extrabold text-navy mb-2">No Orders Found</h3>
+      <p class="text-muted small mb-4">You haven't placed any snack orders yet. Start snacking today with 100% pure groundnut oil goodness!</p>
+      <div>
+        <a href="products.html" class="btn btn-snacky-primary px-4 py-2 rounded-pill fw-bold">
+          <i class="bi bi-bag me-1"></i> Shop Snacks
+        </a>
+      </div>
+    </div>
+
+    <!-- Main Protected Order Tracking Screenshot-Exact Full-Screen Card View (#order-tracking-view) -->
+    <div id="order-tracking-view">
+      <div class="track-screenshot-card" id="order-main-card">
+        
+        <!-- 1. Top Header Row: Cube icon, Order ID, Status Pill, Action Button & Chevron -->
+        <div class="track-card-header">
+          <div class="track-header-left">
+            <div class="track-cube-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                <line x1="12" y1="22.08" x2="12" y2="12"></line>
+              </svg>
+            </div>
+            <h3 class="track-order-id-title" id="order-id-display">Order ID1234</h3>
+            <span class="track-status-pill-green" id="order-status-badge">Order In Transit</span>
           </div>
-          <div class="col-md-3">
-            <span class="small text-muted d-block">Estimated Delivery</span>
-            <strong class="text-success">30 Aug 2026 (By 7 PM)</strong>
-          </div>
-          <div class="col-md-3">
-            <span class="small text-muted d-block">Courier Agent</span>
-            <strong class="text-navy">BlueDart Express (AWB: 98172634)</strong>
-          </div>
-          <div class="col-md-3">
-            <span class="small text-muted d-block">Delivery Address</span>
-            <strong class="text-navy">329, 1st Floor, Indra Vihar, Delhi</strong>
+
+          <div class="track-header-right">
+            <button type="button" class="btn-ready-to-ship" id="order-action-pill" onclick="handleOrderActionClick()">Ready to ship</button>
+            <button type="button" class="btn-track-chevron" id="btn-track-chevron" title="View Options" onclick="toggleOrderDetailedModal()">
+              <i class="bi bi-chevron-right"></i>
+            </button>
           </div>
         </div>
 
-        <!-- 4-Step Visual Progress Stepper -->
-        <div class="card card-body bg-light border-0 rounded-4 p-4 mb-4">
-          <h5 class="fw-bold text-navy mb-4"><i class="bi bi-truck me-2 text-primary"></i> Live Shipment Progress</h5>
+        <!-- 2. Order Tracking Section (Heading, Product in Transit / EST, 4-step progress line) -->
+        <div class="track-section-block">
+          <h4 class="track-section-title">Order Tracking</h4>
+          <div class="track-transit-row">
+            <span class="track-transit-status" id="track-transit-status">Product in Transit</span>
+            <span class="track-est-time" id="track-est-time">EST: 3 days</span>
+          </div>
+
+          <!-- Stepper Track -->
+          <div class="track-stepper-container" id="tracking-stepper">
+            <div class="track-stepper-line-bg"></div>
+            <div class="track-stepper-line-fill" id="stepper-fill-bar" style="width: 66%;"></div>
+
+            <!-- Step 1: Packaged -->
+            <div class="track-step-item completed" id="stepper-node-1">
+              <div class="track-step-dot"><i class="bi bi-check-lg"></i></div>
+              <div class="track-step-name">Packaged</div>
+              <div class="track-step-sub" id="stepper-time-1">Mar 8, 12:04pm</div>
+            </div>
+
+            <!-- Step 2: Sent out -->
+            <div class="track-step-item completed" id="stepper-node-2">
+              <div class="track-step-dot"><i class="bi bi-check-lg"></i></div>
+              <div class="track-step-name">Sent out</div>
+              <div class="track-step-sub" id="stepper-time-2">Mar 8, 12:24pm</div>
+            </div>
+
+            <!-- Step 3: In Transit -->
+            <div class="track-step-item active" id="stepper-node-3">
+              <div class="track-step-dot"><i class="bi bi-check-lg"></i></div>
+              <div class="track-step-name">In Transit</div>
+              <div class="track-step-sub" id="stepper-time-3">Waiting...</div>
+            </div>
+
+            <!-- Step 4: Delivered -->
+            <div class="track-step-item pending" id="stepper-node-4">
+              <div class="track-step-dot"><i class="bi bi-check-lg"></i></div>
+              <div class="track-step-name">Delivered</div>
+              <div class="track-step-sub" id="stepper-time-4">Waiting...</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. 4-Column Metadata Grid (Order Date, Delivery Date, Courier, Address) -->
+        <div class="track-meta-grid" id="track-meta-grid">
+          <div class="track-meta-col">
+            <div class="track-meta-heading">Order Date</div>
+            <div class="track-meta-value" id="order-placed-timestamp">Sept 24, 2023</div>
+          </div>
+          <div class="track-meta-col">
+            <div class="track-meta-heading">Delivery Date</div>
+            <div class="track-meta-value" id="order-delivery-date">Sept 24, 2023</div>
+          </div>
+          <div class="track-meta-col">
+            <div class="track-meta-heading">Courier</div>
+            <div class="track-meta-value d-flex align-items-center gap-2" id="order-courier-partner-wrap">
+              <span class="courier-badge-icon"></span>
+              <span id="order-courier-partner">DHL Courier I...</span>
+            </div>
+          </div>
+          <div class="track-meta-col">
+            <div class="track-meta-heading">Address</div>
+            <div class="track-meta-value text-truncate" id="order-address-snippet" title="Delivery Address">No 4, Good...</div>
+          </div>
+        </div>
+
+        <!-- 4. Lower Grid: Order Info & Order Summary in Widescreen Layout -->
+        <div class="row g-4 pt-2">
           
-          <div class="stepper-wrapper">
-            <div class="stepper-progress-bar w-66-pct"></div>
-            
-            <div class="step-node completed">
-              <div class="step-circle"><i class="bi bi-check-lg"></i></div>
-              <div class="step-title">Order Confirmed</div>
-              <div class="small text-muted">28 Aug, 02:45 PM</div>
-            </div>
+          <!-- Left Column: Order Info Section (Items with product images) -->
+          <div class="col-lg-7 col-xl-8">
+            <div class="track-section-block mb-0 h-100 d-flex flex-column justify-content-between">
+              <div>
+                <h4 class="track-section-title">Order Info</h4>
+                <div class="track-products-list" id="track-order-items-list">
+                  <!-- Rendered dynamically by JavaScript with authentic product photos -->
+                </div>
+              </div>
 
-            <div class="step-node completed">
-              <div class="step-circle"><i class="bi bi-check-lg"></i></div>
-              <div class="step-title">Packed & Checked</div>
-              <div class="small text-muted">28 Aug, 05:12 PM</div>
-            </div>
-
-            <div class="step-node active">
-              <div class="step-circle"><i class="bi bi-truck"></i></div>
-              <div class="step-title">Out for Delivery</div>
-              <div class="small text-muted">29 Aug, 09:00 AM</div>
-            </div>
-
-            <div class="step-node">
-              <div class="step-circle"><i class="bi bi-house-door"></i></div>
-              <div class="step-title">Delivered</div>
-              <div class="small text-muted">Expected 30 Aug</div>
+              <div class="track-view-details-wrap mt-3 pt-2">
+                <button type="button" class="btn-track-view-details" id="btn-toggle-order-details" onclick="toggleOrderDetailedModal()">
+                  View details <i class="bi bi-arrow-right ms-1"></i>
+                </button>
+              </div>
             </div>
           </div>
+
+          <!-- Right Column: Order Summary Section -->
+          <div class="col-lg-5 col-xl-4">
+            <div class="track-section-block mb-0">
+              <h4 class="track-section-title">Order Summary</h4>
+              <div class="track-summary-card" id="track-order-summary-box">
+                <div class="track-summary-line">
+                  <span class="track-summary-label">Sub total</span>
+                  <span class="track-summary-val" id="summary-subtotal-val">₹400.00</span>
+                </div>
+                <div class="track-summary-line">
+                  <span class="track-summary-label">Discount</span>
+                  <span class="track-summary-val text-success" id="summary-discount-val">₹0.00</span>
+                </div>
+                <div class="track-summary-line">
+                  <span class="track-summary-label">Shipping</span>
+                  <span class="track-summary-val" id="summary-shipping-fee">FREE</span>
+                </div>
+                <div class="track-summary-divider"></div>
+                <div class="track-summary-line total-line">
+                  <span class="track-summary-label total-label">Total Amount</span>
+                  <span class="track-summary-val total-val" id="summary-total-paid">₹400.00</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
 
-        <!-- Itemized Summary Table -->
-        <h5 class="fw-bold text-navy mb-3">Itemized Order Summary</h5>
-        <div class="table-responsive">
-          <table class="table align-middle">
-            <thead class="table-light">
-              <tr>
-                <th>Item</th>
-                <th>Weight</th>
-                <th>Price</th>
-                <th>Qty</th>
-                <th class="text-end">Total</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>
-                  <div class="d-flex align-items-center gap-3">
-                    <img src="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2250%22%20height%3D%2250%22%3E%3Crect%20width%3D%2250%22%20height%3D%2250%22%20fill%3D%22%23f1f8f5%22%2F%3E%3Ctext%20x%3D%2225%22%20y%3D%2225%22%20font-size%3D%2220%22%20text-anchor%3D%22middle%22%20dominant-baseline%3D%22central%22%3E🌀%3C%2Ftext%3E%3C%2Fsvg%3E" alt="Chakli" class="rounded-3 w-44px h-44px">
-                    <span class="fw-bold text-navy">Millet Chakli</span>
-                  </div>
-                </td>
-                <td>100 g</td>
-                <td>₹64.00</td>
-                <td>1</td>
-                <td class="text-end fw-bold">₹64.00</td>
-              </tr>
-              <tr>
-                <td>
-                  <div class="d-flex align-items-center gap-3">
-                    <img src="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2250%22%20height%3D%2250%22%3E%3Crect%20width%3D%2250%22%20height%3D%2250%22%20fill%3D%22%23fff8f5%22%2F%3E%3Ctext%20x%3D%2225%22%20y%3D%2225%22%20font-size%3D%2220%22%20text-anchor%3D%22middle%22%20dominant-baseline%3D%22central%22%3E⚪%3C%2Ftext%3E%3C%2Fsvg%3E" alt="Makhana" class="rounded-3 w-44px h-44px">
-                    <span class="fw-bold text-navy">Makhana Twisters</span>
-                  </div>
-                </td>
-                <td>60 g</td>
-                <td>₹120.00</td>
-                <td>1</td>
-                <td class="text-end fw-bold">₹120.00</td>
-              </tr>
-            </tbody>
-          </table>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Detailed Invoice & Order Breakdown Modal -->
+  <div class="modal fade" id="orderDetailModal" tabindex="-1" aria-labelledby="orderDetailModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content track-invoice-modal-content">
+        <div class="modal-header bg-light border-bottom p-4">
+          <div class="d-flex align-items-center gap-3">
+            <div class="track-cube-icon">
+              <i class="bi bi-receipt-cutoff"></i>
+            </div>
+            <div>
+              <h5 class="modal-title fw-bold text-navy mb-0" id="orderDetailModalLabel">Order Invoice & Shipping Details</h5>
+              <span class="small text-muted font-monospace" id="modal-invoice-order-id">#SNK-849201</span>
+            </div>
+          </div>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body p-4">
+          <div class="row g-4 mb-4">
+            <div class="col-md-6">
+              <div class="p-3 bg-light rounded-3">
+                <span class="small text-muted fw-bold d-block text-uppercase mb-1">Delivering To</span>
+                <strong class="text-navy d-block" id="modal-recipient-name">Customer</strong>
+                <p class="small text-muted mb-1" id="modal-recipient-address">329, 1st Floor, Indra Vihar, Delhi - 110009</p>
+                <div class="small fw-bold text-navy"><i class="bi bi-telephone me-1 text-muted"></i><span id="modal-recipient-phone">+91 9876543210</span></div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="p-3 bg-light rounded-3">
+                <span class="small text-muted fw-bold d-block text-uppercase mb-1">Shipment Carrier Details</span>
+                <strong class="text-navy d-block" id="modal-courier-name">BlueDart Express</strong>
+                <p class="small text-muted mb-1">Tracking AWB: <strong class="font-monospace text-navy" id="modal-awb-number">98172634</strong></p>
+                <span class="badge bg-success-subtle text-success px-2 py-1" id="modal-payment-mode">Paid Online via UPI</span>
+              </div>
+            </div>
+          </div>
+
+          <h6 class="fw-bold text-navy mb-2">Itemized Products</h6>
+          <div class="table-responsive">
+            <table class="table align-middle">
+              <thead class="table-light small">
+                <tr>
+                  <th>Product</th>
+                  <th>Weight</th>
+                  <th>Qty</th>
+                  <th>Unit Price</th>
+                  <th class="text-end">Total</th>
+                </tr>
+              </thead>
+              <tbody id="modal-items-table-body">
+                <!-- Dynamic rows -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="modal-footer bg-light p-3 border-top d-flex justify-content-between">
+          <button type="button" class="btn btn-outline-secondary rounded-pill px-4" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-dark rounded-pill px-4" onclick="downloadInvoicePDF()">
+            <i class="bi bi-download me-1"></i> Download Invoice PDF
+          </button>
         </div>
       </div>
     </div>
-  </section>
+  </div>
 
-  <!-- Dark Footer -->
+  </main>
+
+  <!-- Organic Curved Wave Top (Navy Blue #0B1528) -->
+  <div class="footer-wave-wrapper">
+    <svg class="footer-wave-svg" viewBox="0 0 1440 100" fill="none" preserveAspectRatio="none">
+      <path d="M0,45 C280,85 520,15 800,55 C1080,95 1280,30 1440,50 L1440,100 L0,100 Z" fill="#0B1528"></path>
+    </svg>
+  </div>
+
+  <!-- Organic Deep Navy Blue Footer Section -->
   <footer class="main-footer" id="main-footer">
     <div class="container">
-      <div class="row g-4">
-        <div class="col-lg-4">
+      <div class="row g-4 justify-content-between align-items-start">
+        
+        <!-- Col 1: Brand & Socials -->
+        <div class="col-lg-3 col-md-6 mb-3 mb-lg-0">
           <a class="d-inline-block mb-3" href="index.html">
-            <img src="../static/images/snacky_logo.svg" alt="Snacky Logo" class="footer-logo-img">
+            <img src="../static/images/snacky_logo_transparent.png" alt="Snacky Logo" class="footer-logo-img">
           </a>
-          <p class="small text-muted mb-3">Snacky is India's premium snacks brand bringing you authentic, palm-oil free crunch.</p>
+          <p class="footer-tagline-text mb-3">
+            Age old wisdom meets modern nutrition. 100% pure groundnut oil, zero palm oil & trans-fat free crunch.
+          </p>
+          <div class="footer-social-pill-group">
+            <a href="https://instagram.com" target="_blank" class="footer-social-pill" aria-label="Instagram">
+              <i class="bi bi-instagram"></i>
+            </a>
+            <a href="https://youtube.com" target="_blank" class="footer-social-pill" aria-label="YouTube">
+              <i class="bi bi-youtube"></i>
+            </a>
+            <a href="https://facebook.com" target="_blank" class="footer-social-pill" aria-label="Facebook">
+              <i class="bi bi-facebook"></i>
+            </a>
+            <a href="https://linkedin.com" target="_blank" class="footer-social-pill" aria-label="LinkedIn">
+              <i class="bi bi-linkedin"></i>
+            </a>
+          </div>
         </div>
-        <div class="col-6 col-lg-2">
-          <h6 class="footer-title">SHOP</h6>
+
+        <!-- Col 2: Shop -->
+        <div class="col-6 col-md-3 col-lg-2">
+          <h6 class="footer-nav-heading">Shop</h6>
           <ul class="footer-links-list">
-            <li><a href="products.html?category=namkeen">Namkeen</a></li>
-            <li><a href="products.html?category=chips">Chips</a></li>
+            <li><a href="products.html?category=namkeen">Namkeens & Bhujia</a></li>
+            <li><a href="products.html?category=chips">Chips & Crisps</a></li>
             <li><a href="products.html?category=healthy">Healthy Snacks</a></li>
+            <li><a href="offers.html">Offers</a></li>
           </ul>
         </div>
-        <div class="col-6 col-lg-2">
-          <h6 class="footer-title">EXPLORE</h6>
+
+        <!-- Col 3: Explore -->
+        <div class="col-6 col-md-3 col-lg-2">
+          <h6 class="footer-nav-heading">Explore</h6>
           <ul class="footer-links-list">
-            <li><a href="about.html">About Us</a></li>
-            <li><a href="contact.html">Bulk Orders</a></li>
+            <li><a href="about.html">Our Story</a></li>
+            <li><a href="products.html">All Snacks Catalog</a></li>
+            <li><a href="feedback.html">Customer Feedback</a></li>
           </ul>
         </div>
-        <div class="col-6 col-lg-2">
-          <h6 class="footer-title">HELP</h6>
+
+        <!-- Col 4: Policies & Help -->
+        <div class="col-6 col-md-3 col-lg-2">
+          <h6 class="footer-nav-heading">Customer Care</h6>
           <ul class="footer-links-list">
-            <li><a href="contact.html">Contact Us</a></li>
             <li><a href="track-order.html">Track Order</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+            <li><a href="contact.html#faq-section">Frequently Asked Questions</a></li>
+            <li><a href="about.html">Terms of Service</a></li>
+            <li><a href="about.html">Privacy Policy</a></li>
           </ul>
         </div>
-        <div class="col-6 col-lg-2">
-          <h6 class="footer-title">CONTACT</h6>
-          <p class="small mb-0">+91 9654932262</p>
+
+        <!-- Col 5: Join Squad & Feedback Direct Link -->
+        <div class="col-lg-3 col-md-6">
+          <h6 class="footer-squad-heading">JOIN THE SNACKY CO. SQUAD</h6>
+          <form class="footer-newsletter-form mb-3" onsubmit="event.preventDefault(); handleNewsletterSubmit(this);">
+            <div class="footer-email-input-group">
+              <input type="email" class="form-control footer-email-input" placeholder="E-mail" required>
+              <button type="submit" class="footer-email-btn" aria-label="Subscribe">
+                <i class="bi bi-arrow-right"></i>
+              </button>
+            </div>
+          </form>
+
+          <!-- Interactive Customer Feedback Bar -->
+          <div class="footer-feedback-prompt-box mb-3">
+            <div class="d-flex align-items-center justify-content-between gap-2">
+              <div>
+                <div class="footer-feedback-title">Loved our snacks?</div>
+                <div class="footer-feedback-subtitle">Share your feedback</div>
+              </div>
+              <a href="feedback.html" class="btn-footer-feedback-pill" aria-label="Give Feedback">
+                <i class="bi bi-chat-heart-fill me-1"></i> Feedback
+              </a>
+            </div>
+          </div>
+
+          <!-- Payment Methods & Copyright -->
+          <div class="d-flex align-items-center justify-content-between flex-wrap gap-2 pt-1">
+            <div class="footer-payment-badges-row">
+              <span class="payment-badge-pill visa-pill">VISA</span>
+              <span class="payment-badge-pill mc-pill"><span class="mc-c1"></span><span class="mc-c2"></span></span>
+              <span class="payment-badge-pill gpay-pill">G Pay</span>
+              <span class="payment-badge-pill upi-pill">UPI</span>
+            </div>
+            <div class="footer-copyright-text">
+              © Snacky Co. 2026
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="footer-bottom-bar">
-        <p class="small mb-0">© 2026 Snacky Foods Private Limited. All rights reserved.</p>
+
       </div>
     </div>
   </footer>
@@ -250,6 +489,80 @@
         <span class="fw-bold text-warning fs-5" id="cart-total-val">₹0.00</span>
       </div>
       <a href="cart-payment-flow.html" class="btn btn-snacky-primary w-100 py-3 text-center">Proceed to Checkout <i class="bi bi-arrow-right"></i></a>
+    </div>
+  </div>
+
+  <!-- Snack Review Modal -->
+  <div class="modal fade snack-review-modal-custom" id="snackRatingModal" tabindex="-1" aria-labelledby="snackRatingModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content snack-review-modal-content">
+        <div class="modal-header snack-review-modal-header">
+          <div class="d-flex align-items-center gap-2">
+            <div class="snack-header-icon-wrap">
+              <i class="bi bi-star-fill"></i>
+            </div>
+            <div>
+              <h5 class="modal-title snack-review-modal-title" id="snackRatingModalLabel">
+                <span id="rating-modal-snack-title">Review: Snacky Order</span>
+              </h5>
+              <p class="snack-review-modal-subtitle mb-0">Verified Foodie Experience</p>
+            </div>
+          </div>
+          <button type="button" class="btn-feedback-close" data-bs-dismiss="modal" aria-label="Close">
+            <i class="bi bi-x-lg"></i>
+          </button>
+        </div>
+        <form id="snack-review-form" onsubmit="event.preventDefault(); submitSnackReview();">
+          <input type="hidden" id="snack-review-product-name" value="Snacky Order">
+          <input type="hidden" id="snack-review-order-id" value="SNK-8947291">
+          <div class="modal-body snack-review-modal-body">
+            <div class="review-section-block text-center">
+              <label class="review-form-label mb-2 d-block">Overall Snack Rating</label>
+              <div class="star-rating-selector" id="modal-star-rating" role="radiogroup" aria-label="Star Rating">
+                <button type="button" class="star-item-btn active" data-rating="1" aria-label="1 Star"><i class="bi bi-star-fill"></i></button>
+                <button type="button" class="star-item-btn active" data-rating="2" aria-label="2 Stars"><i class="bi bi-star-fill"></i></button>
+                <button type="button" class="star-item-btn active" data-rating="3" aria-label="3 Stars"><i class="bi bi-star-fill"></i></button>
+                <button type="button" class="star-item-btn active" data-rating="4" aria-label="4 Stars"><i class="bi bi-star-fill"></i></button>
+                <button type="button" class="star-item-btn active" data-rating="5" aria-label="5 Stars"><i class="bi bi-star-fill"></i></button>
+              </div>
+              <div class="star-rating-status-text" id="star-rating-status-text">5.0 - Absolutely Exceptional!</div>
+              <input type="hidden" id="snack-review-stars-val" value="5">
+            </div>
+            <div class="review-section-block">
+              <label class="review-form-label">What describes this snack best?</label>
+              <div class="snack-quick-tags-grid" id="snack-review-tag-pills">
+                <button type="button" class="snack-tag-pill active" data-tag="Extra Crispy">
+                  <i class="bi bi-check2 me-1"></i> Extra Crispy
+                </button>
+                <button type="button" class="snack-tag-pill active" data-tag="Perfect Spice">
+                  <i class="bi bi-check2 me-1"></i> Perfect Spice
+                </button>
+                <button type="button" class="snack-tag-pill" data-tag="Low Oil">
+                  <i class="bi bi-check2 me-1"></i> Low Oil
+                </button>
+                <button type="button" class="snack-tag-pill" data-tag="Slightly Salty">
+                  <i class="bi bi-check2 me-1"></i> Slightly Salty
+                </button>
+                <button type="button" class="snack-tag-pill" data-tag="Fresh Aroma">
+                  <i class="bi bi-check2 me-1"></i> Fresh Aroma
+                </button>
+                <button type="button" class="snack-tag-pill" data-tag="Munching Favorite">
+                  <i class="bi bi-check2 me-1"></i> Munching Favorite
+                </button>
+              </div>
+            </div>
+            <div class="review-section-block mb-1">
+              <label class="review-form-label" for="snack-review-comment">Your Detailed Review</label>
+              <textarea class="form-control review-textarea" id="snack-review-comment" rows="3" placeholder="Share your crunch experience, taste notes, packaging feedback..."></textarea>
+            </div>
+          </div>
+          <div class="modal-footer snack-review-modal-footer">
+            <button type="submit" class="btn-snack-review-submit" id="snack-review-submit-btn">
+              <i class="bi bi-send-fill me-2"></i> Submit Snack Review
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   </div>
 
