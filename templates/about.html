@@ -4,16 +4,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>About Us - Snacky</title>
-  <meta name="description" content="Learn about Snacky's mission to revolutionize Indian snacking with zero palm oil and 100% groundnut oil crunch.">
+  <meta name="description" content="Discover the story, mission, values, and passion behind Snacky - Your trusted destination for authentic Indian snacks and modern crunch.">
   
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Outfit:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="icon" type="image/png" href="../static/images/snacky_logo_transparent.png">
   <link rel="stylesheet" href="../static/css/style.css">
 </head>
-<body>
+<body class="about-page-wrapper">
 
   <!-- Top Announcement Bar with Marquee Effect -->
   <div class="top-announcement-bar">
@@ -85,169 +84,701 @@
     </div>
   </nav>
 
-  <!-- Hero Banner (#about-hero) -->
+  <!-- 1. HERO SECTION (#about-hero) -->
   <section class="container my-3 my-md-4" id="about-hero">
-    <div class="p-4 p-md-5 rounded-4 text-white bg-gradient-hero-1">
-      <div class="row align-items-center g-3 g-md-4">
+    <div class="about-hero-card p-4 p-md-5 about-animate-fadein">
+      <div class="row align-items-center g-4 g-lg-5">
         <div class="col-lg-7 text-center text-lg-start">
-          <span class="badge bg-warning text-dark rounded-pill fw-bold px-3 py-1 mb-2 fs-7">OUR STORY & MISSION</span>
-          <h1 class="fw-extrabold mb-2 about-hero-heading">Reinventing Indian Snacking</h1>
-          <p class="text-light-50 mw-600px mb-0 about-hero-desc">Born from a passion for authentic home recipes, prepared in 100% pure groundnut oil with zero palm oil.</p>
+          <div class="about-hero-badge mb-3">
+            <i class="bi bi-patch-check-fill"></i> Authentic Indian Snacking
+          </div>
+          <h1 class="about-hero-title">Good Snacks. Great Moments.</h1>
+          <p class="about-hero-subtitle mb-4">
+            Discover delicious flavours, traditional favourites, and exciting snacks made for every moment.
+          </p>
+          <div>
+            <a href="products.html" class="about-btn-primary">
+              Explore Our Snacks <i class="bi bi-arrow-right"></i>
+            </a>
+          </div>
         </div>
-        <div class="col-lg-5 text-center">
-          <img src="../static/images/hero_about_banner.jpg" alt="Our Story Banner" class="hero-banner-img">
+        <div class="col-lg-5">
+          <div class="about-hero-img-wrap">
+            <img src="../static/images/hero_about_banner.jpg" alt="Snacky Delicious Indian Snacks Range" class="about-hero-img">
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- SECTION 1: Home Recipe Origin Story (Screenshot 1) -->
-  <section class="container my-4 my-md-5 py-2 py-md-3" id="story-origin-section">
-    <div class="row align-items-center g-4 g-md-5">
-      <div class="col-lg-5 text-center">
-        <div class="about-story-img-wrapper">
-          <div class="about-blob-bg"></div>
-          <img src="../static/images/snack_makhana.jpg" alt="Home Recipe Roasted Makhana" class="about-story-img shadow-sm">
+  <!-- 2. OUR STORY SECTION (#our-story-section) -->
+  <section class="container my-5 py-2 py-md-3" id="our-story-section">
+    <div class="row align-items-center g-4 g-lg-5">
+      <div class="col-lg-5">
+        <div class="about-media-box">
+          <img src="../static/images/snack_namkeen.jpg" alt="Traditional Indian Snacks Preparation" class="about-media-img">
         </div>
       </div>
       <div class="col-lg-7">
-        <p class="about-story-text mb-0">
-          When we found that our kid is only eating Snacks that were made with harmful ingredients. We started making Snacks in our Home by infusing <strong class="fw-extrabold text-navy">high-quality ingredients.</strong>
+        <span class="about-section-badge">
+          <i class="bi bi-book-half"></i> Our Heritage &amp; Journey
+        </span>
+        <h2 class="about-section-heading">Our Story</h2>
+        <p class="about-story-p">
+          Snacky started with a simple idea: make great snacks easy to discover and enjoy.
         </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- SECTION 2: Launch of Snacky Brand (Screenshot 2) -->
-  <section class="container my-4 my-md-5 py-2 py-md-3" id="story-launch-section">
-    <div class="row align-items-center g-4 g-md-5">
-      <div class="col-lg-7 order-2 order-lg-1">
-        <p class="about-story-text mb-0">
-          Soon in <strong class="fw-extrabold text-navy">2021 launched "Snacky"</strong> with the purpose to provide better products with high-quality ingredients.
+        <p class="about-story-p">
+          Indian snacks have a special place in our everyday lives. From crunchy namkeen and traditional favourites to exciting new flavours, every snack has its own taste and story.
         </p>
-      </div>
-      <div class="col-lg-5 order-1 order-lg-2 text-center">
-        <div class="about-story-img-wrapper">
-          <div class="about-blob-bg"></div>
-          <img src="../static/images/paachratan_mixture.jpg" alt="Snacky Makhana & Namkeen Pack" class="about-story-img shadow-sm">
+        <p class="about-story-p">
+          We wanted to create a modern online platform where customers can explore different snacks in one place without making the shopping experience complicated.
+        </p>
+        <p class="about-story-p">
+          Snacky combines familiar flavours with a simple and modern digital shopping experience. Our platform is designed to help customers explore products, learn about what they are buying, compare their choices, and conveniently place an order.
+        </p>
+        <div class="about-story-highlight-box">
+          <div class="about-story-highlight-text">
+            ✨ Good food brings people together.
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- SECTION 3: Brand Philosophy Callout Box (Screenshot 3) -->
-  <section class="container my-4 my-md-5" id="brand-philosophy-callout">
-    <div class="about-callout-box">
-      At Snacky, we believe healthy snacking can be fun too. We follow traditional methods to make all our snacks, just like your grandma used to. We use 100% groundnut oil. No preservatives, No artificial flavors, or colors, no trans fats or cholesterol. We have a large variety of snacks, all of which have a unique taste and flavor. Our products are tastier and healthier than other junk food and can be consumed by anyone.
+  <!-- 3. WHAT WE BELIEVE (#what-we-believe-section) -->
+  <section class="container my-5 py-2 py-md-3" id="what-we-believe-section">
+    <div class="text-center mb-4 mb-md-5">
+      <span class="about-section-badge">
+        <i class="bi bi-heart-pulse-fill"></i> Guiding Principles
+      </span>
+      <h2 class="about-section-heading">What We Believe</h2>
+      <p class="text-muted mw-600px mx-auto">
+        The core beliefs that shape our snacking standards and every experience we craft.
+      </p>
+    </div>
+
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-4 g-4">
+      <!-- Belief 1: Delicious -->
+      <div class="col">
+        <div class="about-belief-card">
+          <div class="about-belief-icon-box">
+            <i class="bi bi-stars"></i>
+          </div>
+          <h4>Delicious</h4>
+          <p>Every snack should offer a satisfying taste that makes you want another bite.</p>
+        </div>
+      </div>
+
+      <!-- Belief 2: Quality-Focused -->
+      <div class="col">
+        <div class="about-belief-card">
+          <div class="about-belief-icon-box">
+            <i class="bi bi-shield-check"></i>
+          </div>
+          <h4>Quality-Focused</h4>
+          <p>We believe quality begins with good ingredients, careful preparation, and attention to detail.</p>
+        </div>
+      </div>
+
+      <!-- Belief 3: Enjoyable -->
+      <div class="col">
+        <div class="about-belief-card">
+          <div class="about-belief-icon-box">
+            <i class="bi bi-emoji-smile-fill"></i>
+          </div>
+          <h4>Enjoyable</h4>
+          <p>Snacking should be fun, whether you are enjoying a quick bite or sharing food with family and friends.</p>
+        </div>
+      </div>
+
+      <!-- Belief 4: Accessible -->
+      <div class="col">
+        <div class="about-belief-card">
+          <div class="about-belief-icon-box">
+            <i class="bi bi-bag-check-fill"></i>
+          </div>
+          <h4>Accessible</h4>
+          <p>Finding and choosing your favourite snacks should be simple and convenient.</p>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- SECTION 4: "Why to choose us?" Full-Width Banner & Circular Badges (Screenshot 4) -->
-  <section class="container my-4 my-md-5" id="why-choose-us">
-    <div class="why-choose-us-section text-center">
-      <h2 class="why-choose-title mb-3 mb-md-4">
-        <span class="text-success me-2">🍃</span> Why to choose us? <span class="text-success ms-2">🍃</span>
-      </h2>
-
-      <div class="d-flex justify-content-center align-items-center flex-wrap gap-2 gap-md-4 pt-2">
-        <!-- 1. Trans Fat Free -->
-        <div class="why-badge-item why-badge-transfat">
-          <i class="bi bi-droplet-half fs-4"></i>
-          <span class="why-badge-label">Trans Fat Free</span>
+  <!-- 4. OUR MISSION & VISION (#mission-vision-section) -->
+  <section class="container my-5" id="mission-vision-section">
+    <div class="about-mission-vision-wrapper">
+      <div class="row g-4 g-lg-5">
+        
+        <!-- Left: Our Mission -->
+        <div class="col-lg-6">
+          <div class="about-mv-card">
+            <h3>
+              <span class="about-mv-icon"><i class="bi bi-compass-fill"></i></span>
+              Our Mission
+            </h3>
+            <p class="about-story-p mb-3">
+              Our mission is to create a convenient and enjoyable online destination for snack lovers.
+            </p>
+            <div class="fw-bold text-navy mb-2">We aim to:</div>
+            <ul class="about-mv-list">
+              <li>Offer a wide variety of snacks.</li>
+              <li>Make product discovery simple.</li>
+              <li>Provide clear product information.</li>
+              <li>Create a smooth shopping experience.</li>
+              <li>Continuously improve our products and customer experience.</li>
+            </ul>
+          </div>
         </div>
 
-        <!-- 2. Palm Oil Free -->
-        <div class="why-badge-item why-badge-palmoil">
-          <i class="bi bi-droplet-fill fs-4"></i>
-          <span class="why-badge-label">Palm Oil Free</span>
+        <!-- Right: Our Vision -->
+        <div class="col-lg-6">
+          <div class="about-mv-card">
+            <h3>
+              <span class="about-mv-icon"><i class="bi bi-eye-fill"></i></span>
+              Our Vision
+            </h3>
+            <p class="about-story-p mb-3">
+              Our vision is to build Snacky into a trusted destination for snack lovers.
+            </p>
+            <p class="about-story-p mb-0">
+              We want customers to easily discover new flavours, find their favourite snacks, and enjoy a convenient shopping experience from anywhere.
+            </p>
+          </div>
         </div>
 
-        <!-- 3. No Cholesterol -->
-        <div class="why-badge-item why-badge-cholesterol">
-          <i class="bi bi-heart-fill fs-4"></i>
-          <span class="why-badge-label">No Cholesterol</span>
-        </div>
+      </div>
+    </div>
+  </section>
 
-        <!-- 4. Tea Time Snacks -->
-        <div class="why-badge-item why-badge-teatime">
-          <i class="bi bi-cup-hot-fill fs-4"></i>
-          <span class="why-badge-label">Tea Time Snacks</span>
-        </div>
+  <!-- 5. OUR PRODUCT RANGE (#product-range-section) -->
+  <section class="container my-5 py-2 py-md-3" id="product-range-section">
+    <div class="text-center mb-4 mb-md-5">
+      <span class="about-section-badge">
+        <i class="bi bi-grid-fill"></i> Catalog Overview
+      </span>
+      <h2 class="about-section-heading">Our Product Range</h2>
+      <p class="text-muted mw-600px mx-auto">
+        Snacky brings together a variety of snacks to suit different tastes and occasions.
+      </p>
+    </div>
 
-        <!-- 5. High Fiber -->
-        <div class="why-badge-item why-badge-highfiber">
-          <i class="bi bi-flower1 fs-4"></i>
-          <span class="why-badge-label">High Fiber</span>
-        </div>
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-5 g-3 g-lg-4">
+      
+      <!-- Category 1: Traditional Indian Snacks -->
+      <div class="col">
+        <a href="products.html?category=signature" class="about-range-card">
+          <div class="about-range-img-wrap">
+            <img src="../static/images/millet_chakli.jpg" alt="Traditional Indian Snacks" class="about-range-img">
+          </div>
+          <div class="about-range-body">
+            <h4>Traditional Indian Snacks</h4>
+            <p>Authentic heritage recipes made with classic aromatic spices and time-honoured techniques.</p>
+            <span class="about-range-link">Explore Range <i class="bi bi-arrow-right"></i></span>
+          </div>
+        </a>
+      </div>
 
-        <!-- 6. No White Sugar -->
-        <div class="why-badge-item why-badge-nosugar">
-          <i class="bi bi-slash-circle fs-4"></i>
-          <span class="why-badge-label">No White Sugar</span>
+      <!-- Category 2: Namkeen & Savoury Snacks -->
+      <div class="col">
+        <a href="products.html?category=namkeen" class="about-range-card">
+          <div class="about-range-img-wrap">
+            <img src="../static/images/aloo_bhujia.jpg" alt="Namkeen & Savoury Snacks" class="about-range-img">
+          </div>
+          <div class="about-range-body">
+            <h4>Namkeen &amp; Savoury Snacks</h4>
+            <p>Crunchy sev, spicy mixtures, and classic bhujia prepared in pure groundnut oil.</p>
+            <span class="about-range-link">Explore Namkeens <i class="bi bi-arrow-right"></i></span>
+          </div>
+        </a>
+      </div>
+
+      <!-- Category 3: Healthy & Modern Choices -->
+      <div class="col">
+        <a href="products.html?category=healthy" class="about-range-card">
+          <div class="about-range-img-wrap">
+            <img src="../static/images/snack_makhana.jpg" alt="Healthy & Modern Choices" class="about-range-img">
+          </div>
+          <div class="about-range-body">
+            <h4>Healthy &amp; Modern Choices</h4>
+            <p>Roasted makhana, high-fiber puffs, and mindful snack choices for everyday wellness.</p>
+            <span class="about-range-link">Explore Healthy <i class="bi bi-arrow-right"></i></span>
+          </div>
+        </a>
+      </div>
+
+      <!-- Category 4: Tea-Time Snacks -->
+      <div class="col">
+        <a href="products.html?category=chips" class="about-range-card">
+          <div class="about-range-img-wrap">
+            <img src="../static/images/products/classic_salted_wafers_front.jpg" alt="Tea-Time Snacks" class="about-range-img">
+          </div>
+          <div class="about-range-body">
+            <h4>Tea-Time Snacks</h4>
+            <p>Crisp wafers, salted bites, and golden crunchies tailored for your daily chai breaks.</p>
+            <span class="about-range-link">Explore Tea-Time <i class="bi bi-arrow-right"></i></span>
+          </div>
+        </a>
+      </div>
+
+      <!-- Category 5: Everyday Favourites -->
+      <div class="col">
+        <a href="products.html" class="about-range-card">
+          <div class="about-range-img-wrap">
+            <img src="../static/images/products/cream_and_onion_chips_front.jpg" alt="Everyday Favourites" class="about-range-img">
+          </div>
+          <div class="about-range-body">
+            <h4>Everyday Favourites</h4>
+            <p>Delicious crowd-pleasing chips, crunchies, and wafers made for sharing anytime.</p>
+            <span class="about-range-link">View All Snacks <i class="bi bi-arrow-right"></i></span>
+          </div>
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 6. QUALITY COMES FIRST (#quality-first-section) -->
+  <section class="container my-5 py-2 py-md-3" id="quality-first-section">
+    <div class="row align-items-center g-4 g-lg-5">
+      <div class="col-lg-7">
+        <span class="about-section-badge">
+          <i class="bi bi-patch-check"></i> Pure Standards
+        </span>
+        <h2 class="about-section-heading">Quality Comes First</h2>
+        <p class="about-story-p">
+          At Snacky, we understand that customers care about what they eat.
+        </p>
+        <p class="about-story-p">
+          That is why product quality and information are important parts of our experience. We aim to provide customers with useful details about products so they can make informed choices.
+        </p>
+        
+        <div class="about-quality-checklist">
+          <div class="about-quality-item">
+            <i class="bi bi-check-circle-fill"></i> Product Quality
+          </div>
+          <div class="about-quality-item">
+            <i class="bi bi-check-circle-fill"></i> Ingredient Information
+          </div>
+          <div class="about-quality-item">
+            <i class="bi bi-check-circle-fill"></i> Clear Product Descriptions
+          </div>
+          <div class="about-quality-item">
+            <i class="bi bi-check-circle-fill"></i> Accurate Product Details
+          </div>
+          <div class="about-quality-item">
+            <i class="bi bi-check-circle-fill"></i> Proper Product Presentation
+          </div>
+          <div class="about-quality-item">
+            <i class="bi bi-check-circle-fill"></i> Customer Satisfaction
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-5">
+        <div class="about-media-box">
+          <img src="../static/images/signature_hot_chips.jpg" alt="Snacky High Quality Pure Snack Production" class="about-media-img">
         </div>
       </div>
     </div>
   </section>
 
-  <!-- SECTION 5: "Healthy snacking we're offering to our customers" & 3 Cards Grid (Screenshot 5) -->
-  <section class="container my-5 text-center" id="offering-showcase-section">
-    <div class="mb-5">
-      <h2 class="fw-extrabold text-navy display-5 mb-1">Healthy snacking</h2>
-      <div class="about-signature-text">
-        we're offering to our customers.
-      </div>
+  <!-- 7. MADE FOR EVERY MOMENT (#made-for-every-moment-section) -->
+  <section class="container my-5 py-2 py-md-3" id="made-for-every-moment-section">
+    <div class="text-center mb-4 mb-md-5">
+      <span class="about-section-badge">
+        <i class="bi bi-clock-history"></i> Snacking Occasions
+      </span>
+      <h2 class="about-section-heading">Made for Every Moment</h2>
+      <p class="text-muted mw-600px mx-auto">
+        Whatever the occasion, Snacky is here to add a little more flavour to the moment.
+      </p>
     </div>
 
-    <div class="row g-4 mb-5 text-start">
-      <!-- Card 1: Munchies -->
-      <div class="col-md-4">
-        <div class="about-offering-card">
-          <div>
-            <div class="text-success mb-2"><i class="bi bi-box-fill fs-5"></i></div>
-            <h4 class="fw-extrabold text-navy mb-2">Munchies</h4>
-            <p class="text-muted small mb-3">Snack smart with munchies that are big on taste and free from junk.</p>
-            <a href="products.html?category=namkeen" class="fw-bold text-primary-violet text-decoration-none">Explore &rarr;</a>
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 g-4">
+      <!-- 1. Morning -->
+      <div class="col">
+        <div class="about-moment-card">
+          <div class="about-moment-icon-wrap">
+            <i class="bi bi-sun-fill"></i>
           </div>
-          <div class="mt-4">
-            <img src="../static/images/snack_namkeen.jpg" alt="Munchies" class="about-offering-img">
+          <h4>Morning</h4>
+          <p>Start your day with something light and delicious.</p>
+        </div>
+      </div>
+
+      <!-- 2. Study Time -->
+      <div class="col">
+        <div class="about-moment-card">
+          <div class="about-moment-icon-wrap">
+            <i class="bi bi-journal-bookmark-fill"></i>
+          </div>
+          <h4>Study Time</h4>
+          <p>Take a quick snack break while studying or working.</p>
+        </div>
+      </div>
+
+      <!-- 3. Tea Time -->
+      <div class="col">
+        <div class="about-moment-card">
+          <div class="about-moment-icon-wrap">
+            <i class="bi bi-cup-hot-fill"></i>
+          </div>
+          <h4>Tea Time</h4>
+          <p>Enjoy your favourite snack with a hot cup of tea.</p>
+        </div>
+      </div>
+
+      <!-- 4. Family Time -->
+      <div class="col">
+        <div class="about-moment-card">
+          <div class="about-moment-icon-wrap">
+            <i class="bi bi-people-fill"></i>
+          </div>
+          <h4>Family Time</h4>
+          <p>Share delicious snacks with family and friends.</p>
+        </div>
+      </div>
+
+      <!-- 5. Celebrations -->
+      <div class="col">
+        <div class="about-moment-card">
+          <div class="about-moment-icon-wrap">
+            <i class="bi bi-sparkles"></i>
+          </div>
+          <h4>Celebrations</h4>
+          <p>Make special moments even more enjoyable with something tasty to share.</p>
+        </div>
+      </div>
+
+      <!-- 6. On the Go -->
+      <div class="col">
+        <div class="about-moment-card">
+          <div class="about-moment-icon-wrap">
+            <i class="bi bi-lightning-charge-fill"></i>
+          </div>
+          <h4>On the Go</h4>
+          <p>Choose convenient snacks whenever you need a quick bite.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. WHY CHOOSE SNACKY? (#why-choose-snacky-section) -->
+  <section class="container my-5 py-2 py-md-3" id="why-choose-snacky-section">
+    <div class="text-center mb-4 mb-md-5">
+      <span class="about-section-badge">
+        <i class="bi bi-stars"></i> The Snacky Advantage
+      </span>
+      <h2 class="about-section-heading">Why Choose Snacky?</h2>
+      <p class="text-muted mw-600px mx-auto">
+        Designed from the ground up to give snack lovers the smoothest shopping experience.
+      </p>
+    </div>
+
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 justify-content-center">
+      <!-- 1. A Variety of Choices -->
+      <div class="col">
+        <div class="about-feature-card">
+          <div class="about-feature-icon">
+            <i class="bi bi-grid-3x3-gap-fill"></i>
+          </div>
+          <h4>A Variety of Choices</h4>
+          <p>Explore different flavours, categories, and snack options in one place.</p>
+        </div>
+      </div>
+
+      <!-- 2. Simple Shopping -->
+      <div class="col">
+        <div class="about-feature-card">
+          <div class="about-feature-icon">
+            <i class="bi bi-cart-check-fill"></i>
+          </div>
+          <h4>Simple Shopping</h4>
+          <p>Browse and select products through an easy online experience.</p>
+        </div>
+      </div>
+
+      <!-- 3. Easy Product Discovery -->
+      <div class="col">
+        <div class="about-feature-card">
+          <div class="about-feature-icon">
+            <i class="bi bi-search-heart-fill"></i>
+          </div>
+          <h4>Easy Product Discovery</h4>
+          <p>Use search and categories to quickly find snacks.</p>
+        </div>
+      </div>
+
+      <!-- 4. Clear Information -->
+      <div class="col">
+        <div class="about-feature-card">
+          <div class="about-feature-icon">
+            <i class="bi bi-file-earmark-text-fill"></i>
+          </div>
+          <h4>Clear Information</h4>
+          <p>Explore product details, prices, descriptions, and other useful information.</p>
+        </div>
+      </div>
+
+      <!-- 5. Customer-Focused Experience -->
+      <div class="col">
+        <div class="about-feature-card">
+          <div class="about-feature-icon">
+            <i class="bi bi-heart-fill"></i>
+          </div>
+          <h4>Customer-Focused Experience</h4>
+          <p>We continuously work to make the shopping journey smoother and more enjoyable.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. OUR VALUES (#our-values-section) -->
+  <section class="container my-5 py-2 py-md-3" id="our-values-section">
+    <div class="text-center mb-4 mb-md-5">
+      <span class="about-section-badge">
+        <i class="bi bi-gem"></i> Brand Foundations
+      </span>
+      <h2 class="about-section-heading">Our Values</h2>
+      <p class="text-muted mw-600px mx-auto">
+        The standards that define how we build Snacky every single day.
+      </p>
+    </div>
+
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+      <!-- 1. Quality -->
+      <div class="col">
+        <div class="about-value-card">
+          <div class="about-value-icon">
+            <i class="bi bi-award-fill"></i>
+          </div>
+          <div>
+            <h4>Quality</h4>
+            <p>Quality should always be a priority.</p>
           </div>
         </div>
       </div>
 
-      <!-- Card 2: Healthy Snacks -->
-      <div class="col-md-4">
-        <div class="about-offering-card">
-          <div>
-            <div class="text-success mb-2"><i class="bi bi-heart-pulse fs-5"></i></div>
-            <h4 class="fw-extrabold text-navy mb-2">Healthy Snacks</h4>
-            <p class="text-muted small mb-3">Deliciously light, roasted & high-fiber snacks—makhana & puffs for mindful munching.</p>
-            <a href="products.html?category=healthy" class="fw-bold text-primary-violet text-decoration-none">Explore &rarr;</a>
+      <!-- 2. Taste -->
+      <div class="col">
+        <div class="about-value-card">
+          <div class="about-value-icon">
+            <i class="bi bi-fire"></i>
           </div>
-          <div class="mt-4">
-            <img src="../static/images/snack_makhana.jpg" alt="Healthy Snacks" class="about-offering-img">
+          <div>
+            <h4>Taste</h4>
+            <p>Great flavour is at the heart of every snack experience.</p>
           </div>
         </div>
       </div>
 
-      <!-- Card 3: Namkeen -->
-      <div class="col-md-4">
-        <div class="about-offering-card">
-          <div>
-            <div class="text-success mb-2"><i class="bi bi-egg-fried fs-5"></i></div>
-            <h4 class="fw-extrabold text-navy mb-2">Namkeen</h4>
-            <p class="text-muted small mb-3">Wholesome crunch in every bite—our healthy namkeen made in 100% groundnut oil.</p>
-            <a href="products.html?category=namkeen" class="fw-bold text-primary-violet text-decoration-none">Explore &rarr;</a>
+      <!-- 3. Trust -->
+      <div class="col">
+        <div class="about-value-card">
+          <div class="about-value-icon">
+            <i class="bi bi-shield-shaded"></i>
           </div>
-          <div class="mt-4">
-            <img src="../static/images/aloo_bhujia.jpg" alt="Namkeen" class="about-offering-img">
+          <div>
+            <h4>Trust</h4>
+            <p>Customers should feel confident when choosing Snacky.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4. Simplicity -->
+      <div class="col">
+        <div class="about-value-card">
+          <div class="about-value-icon">
+            <i class="bi bi-check2-circle"></i>
+          </div>
+          <div>
+            <h4>Simplicity</h4>
+            <p>Shopping should be easy, clear, and enjoyable.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5. Innovation -->
+      <div class="col">
+        <div class="about-value-card">
+          <div class="about-value-icon">
+            <i class="bi bi-lightbulb-fill"></i>
+          </div>
+          <div>
+            <h4>Innovation</h4>
+            <p>We look for better ways to improve the snack-shopping experience.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 6. Customer Happiness -->
+      <div class="col">
+        <div class="about-value-card">
+          <div class="about-value-icon">
+            <i class="bi bi-emoji-laughing-fill"></i>
+          </div>
+          <div>
+            <h4>Customer Happiness</h4>
+            <p>A happy customer is one of our most important goals.</p>
           </div>
         </div>
       </div>
     </div>
+  </section>
 
-    <!-- Bottom Action Button -->
-    <div>
-      <a href="products.html" class="btn btn-about-explore-more">Explore more snacking options</a>
+  <!-- 10. MORE THAN JUST SNACKS (#more-than-just-snacks-section) -->
+  <section class="container my-5 py-2 py-md-3" id="more-than-just-snacks-section">
+    <div class="about-emotional-section">
+      <div class="row align-items-center g-4 g-lg-5">
+        <div class="col-lg-8">
+          <span class="about-section-badge">
+            <i class="bi bi-heart-fill"></i> Meaningful Connections
+          </span>
+          <h2 class="about-section-heading">More Than Just Snacks</h2>
+          <p class="about-story-p">
+            Snacky is not only about selling food.
+          </p>
+          <p class="about-story-p">
+            It is about the moments created around food.
+          </p>
+
+          <ul class="about-moment-item-list">
+            <li><i class="bi bi-film"></i> A packet opened during a movie.</li>
+            <li><i class="bi bi-chat-dots-fill"></i> A bowl shared with friends.</li>
+            <li><i class="bi bi-cup-straw"></i> A quick break during a busy day.</li>
+            <li><i class="bi bi-cup-hot-fill"></i> A cup of tea with your favourite namkeen.</li>
+            <li><i class="bi bi-balloon-fill"></i> A snack shared with family during a celebration.</li>
+          </ul>
+
+          <p class="about-story-p">
+            These simple moments are what make snacks special.
+          </p>
+
+          <div class="about-story-highlight-box">
+            <div class="about-story-highlight-text">
+              ✨ Snacky is here to be a part of those moments.
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4 text-center">
+          <div class="about-media-box">
+            <img src="../static/images/paachratan_mixture.jpg" alt="Snack moments shared with friends" class="about-media-img">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11. OUR COMMITMENT (#our-commitment-section) -->
+  <section class="container my-5 py-2 py-md-3" id="our-commitment-section">
+    <div class="text-center mb-4 mb-md-5">
+      <span class="about-section-badge">
+        <i class="bi bi-shield-lock-fill"></i> Our Promise
+      </span>
+      <h2 class="about-section-heading">Our Commitment</h2>
+      <p class="text-muted mw-600px mx-auto">
+        We are committed to continuously improving Snacky and providing customers with a better experience.
+      </p>
+    </div>
+
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3">
+      <!-- 1 -->
+      <div class="col">
+        <div class="about-commitment-card">
+          <i class="bi bi-check-circle-fill"></i>
+          <span>Introduce new products and flavours.</span>
+        </div>
+      </div>
+
+      <!-- 2 -->
+      <div class="col">
+        <div class="about-commitment-card">
+          <i class="bi bi-check-circle-fill"></i>
+          <span>Improve product discovery.</span>
+        </div>
+      </div>
+
+      <!-- 3 -->
+      <div class="col">
+        <div class="about-commitment-card">
+          <i class="bi bi-check-circle-fill"></i>
+          <span>Make online shopping easier.</span>
+        </div>
+      </div>
+
+      <!-- 4 -->
+      <div class="col">
+        <div class="about-commitment-card">
+          <i class="bi bi-check-circle-fill"></i>
+          <span>Provide better product information.</span>
+        </div>
+      </div>
+
+      <!-- 5 -->
+      <div class="col">
+        <div class="about-commitment-card">
+          <i class="bi bi-check-circle-fill"></i>
+          <span>Improve customer convenience.</span>
+        </div>
+      </div>
+
+      <!-- 6 -->
+      <div class="col">
+        <div class="about-commitment-card">
+          <i class="bi bi-check-circle-fill"></i>
+          <span>Build a trusted snack community.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 12. LOOKING AHEAD (#looking-ahead-section) -->
+  <section class="container my-5" id="looking-ahead-section">
+    <div class="about-looking-ahead-box">
+      <div class="row align-items-center g-4">
+        <div class="col-lg-8">
+          <span class="about-section-badge">
+            <i class="bi bi-rocket-takeoff-fill"></i> The Future
+          </span>
+          <h2 class="about-section-heading">Looking Ahead</h2>
+          <p class="about-story-p">
+            The world of snacks is constantly changing, and so are customer preferences.
+          </p>
+          <p class="about-story-p">
+            Snacky aims to grow with those changes while keeping the love for great snacks at the heart of everything we do.
+          </p>
+          <p class="about-story-p mb-0">
+            From traditional flavours to modern snack choices, we want to continue bringing new experiences to snack lovers.
+          </p>
+          <div class="mt-4">
+            <div class="fw-bold fs-5 text-navy">
+              🚀 Our journey has just begun, and we are excited to have you with us.
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 text-center">
+          <img src="../static/images/banana_chips.jpg" alt="Fresh authentic snack creation" class="img-fluid rounded-4 shadow-sm">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 13. FINAL CTA (#final-cta-section) -->
+  <section class="container my-5 pb-4" id="final-cta-section">
+    <div class="about-final-cta-card">
+      <h2 class="about-final-cta-title">Ready to Find Your Favourite Snack?</h2>
+      <p class="about-final-cta-desc">
+        Whether you are looking for a traditional favourite, trying something new, or simply searching for something delicious, Snacky is ready to make your snack experience better.
+      </p>
+      <div>
+        <a href="products.html" class="about-btn-cta">
+          Explore Our Products <i class="bi bi-arrow-right"></i>
+        </a>
+      </div>
+      <div class="about-cta-tagline">
+        Snacky — Good Snacks. Great Moments.
+      </div>
     </div>
   </section>
 
@@ -269,7 +800,7 @@
             <img src="../static/images/snacky_logo_transparent.png" alt="Snacky Logo" class="footer-logo-img">
           </a>
           <p class="footer-tagline-text mb-3">
-            Age old wisdom meets modern nutrition. 100% pure groundnut oil, zero palm oil & trans-fat free crunch.
+            Age old wisdom meets modern nutrition. 100% pure groundnut oil, zero palm oil &amp; trans-fat free crunch.
           </p>
           <div class="footer-social-pill-group">
             <a href="https://instagram.com" target="_blank" class="footer-social-pill" aria-label="Instagram">
@@ -291,8 +822,8 @@
         <div class="col-6 col-md-3 col-lg-2">
           <h6 class="footer-nav-heading">Shop</h6>
           <ul class="footer-links-list">
-            <li><a href="products.html?category=namkeen">Namkeens & Bhujia</a></li>
-            <li><a href="products.html?category=chips">Chips & Crisps</a></li>
+            <li><a href="products.html?category=namkeen">Namkeens &amp; Bhujia</a></li>
+            <li><a href="products.html?category=chips">Chips &amp; Crisps</a></li>
             <li><a href="products.html?category=healthy">Healthy Snacks</a></li>
             <li><a href="offers.html">Offers</a></li>
           </ul>
