@@ -1230,6 +1230,11 @@ function initProductDetailPage() {
   }
 
   updatePriceDisplay();
+
+  // Render product-specific reviews & 4 related products in same category
+  currentDetailPageProduct = prod;
+  renderProductReviews(prod);
+  renderRelatedProducts(prod);
 }
 
 // Offers Page
@@ -3569,6 +3574,435 @@ function submitSiteFeedback() {
   showToast("❤️ Thank you! Your feedback helps us make Snacky even better.");
 }
 
+// --------------------------------------------------------------------------
+// Product-Specific Reviews Database & Generator
+// --------------------------------------------------------------------------
+function getProductSpecificReviews(prod) {
+  if (!prod) prod = SNACKY_PRODUCTS[0];
+
+  const reviewProfiles = {
+    // 203: Desi Masala Potato Chips
+    203: {
+      avgScore: 4.9,
+      reviewCount: 168,
+      distribution: { 5: 88, 4: 10, 3: 2, 2: 0, 1: 0 },
+      reviews: [
+        {
+          id: "seed_203_1",
+          author: "Ananya Gupta",
+          rating: 5,
+          date: "18 Sep 2026",
+          tags: ["Extra Crispy", "Desi Masala Kick", "100% Groundnut Oil"],
+          comment: "The desi masala seasoning on these potato chips is absolutely sensational! Thin, ultra-crispy, and seasoned with that authentic tangy amchur and red chilli punch. Zero greasy palm oil smell!",
+          verified: true
+        },
+        {
+          id: "seed_203_2",
+          author: "Rohan Mehta",
+          rating: 5,
+          date: "12 Sep 2026",
+          tags: ["Munching Favorite", "Perfect Crunch", "Authentic Spices"],
+          comment: "Crispiest chips ever with that authentic chatpata Indian flavor profile. They beat regular supermarket chips hands down. Ordered 5 more packs for the cricket match!",
+          verified: true
+        },
+        {
+          id: "seed_203_3",
+          author: "Shalini Iyer",
+          rating: 4,
+          date: "04 Sep 2026",
+          tags: ["Chai Time Partner", "Fresh Aroma"],
+          comment: "Loved the crunch and how evenly every chip is coated in masala. Perfectly paired with evening ginger chai. Arrived intact with no crushed crumbs!",
+          verified: true
+        }
+      ]
+    },
+    // 205: Classic Salted Wafers
+    205: {
+      avgScore: 4.8,
+      reviewCount: 142,
+      distribution: { 5: 84, 4: 13, 3: 3, 2: 0, 1: 0 },
+      reviews: [
+        {
+          id: "seed_205_1",
+          author: "Priya Nambiar",
+          rating: 5,
+          date: "19 Sep 2026",
+          tags: ["Pure Potato Taste", "Light Sea Salt", "Crispy Perfection"],
+          comment: "Pure potato perfection with just the right pinch of sea salt. Clean groundnut oil fry gives it that nostalgic fresh-from-bakery wafer crispiness!",
+          verified: true
+        },
+        {
+          id: "seed_205_2",
+          author: "Tanmay Joshi",
+          rating: 5,
+          date: "11 Sep 2026",
+          tags: ["Zero Palm Oil", "Clean Taste"],
+          comment: "Wafer-thin and not oily at all. You can truly taste the quality of the potatoes. My grandparents love having these with their evening tea.",
+          verified: true
+        },
+        {
+          id: "seed_205_3",
+          author: "Kavita Das",
+          rating: 4,
+          date: "02 Sep 2026",
+          tags: ["Kids Favorite", "Fresh Crunch"],
+          comment: "Classic golden slices with great crunch. Very gentle on salt, perfect for quick munching anytime.",
+          verified: true
+        }
+      ]
+    },
+    // 206: Cream & Onion Chips
+    206: {
+      avgScore: 4.9,
+      reviewCount: 174,
+      distribution: { 5: 89, 4: 9, 3: 2, 2: 0, 1: 0 },
+      reviews: [
+        {
+          id: "seed_206_1",
+          author: "Arjun Kapoor",
+          rating: 5,
+          date: "20 Sep 2026",
+          tags: ["Creamy & Tangy", "Herb Seasoned", "Addictive Crunch"],
+          comment: "Rich sour cream and roasted onion flavor with an unbelievable crunch! The balance of herbs and mild creaminess is addictive.",
+          verified: true
+        },
+        {
+          id: "seed_206_2",
+          author: "Divya Nair",
+          rating: 5,
+          date: "15 Sep 2026",
+          tags: ["Movie Night Snack", "Extra Crispy"],
+          comment: "The best Cream & Onion chips I've tasted in India. Not synthetic or overly salty like big brands. The resealable pouch keeps them fresh for days.",
+          verified: true
+        },
+        {
+          id: "seed_206_3",
+          author: "Manish Rawat",
+          rating: 4,
+          date: "06 Sep 2026",
+          tags: ["Gourmet Flavor", "Fresh Aroma"],
+          comment: "Loved the herb aroma when opening the pack. Crisp, light, and mouthwatering seasoning on every slice.",
+          verified: true
+        }
+      ]
+    },
+    // 207: Tangy Tomato Crisps
+    207: {
+      avgScore: 4.7,
+      reviewCount: 118,
+      distribution: { 5: 80, 4: 16, 3: 3, 2: 1, 1: 0 },
+      reviews: [
+        {
+          id: "seed_207_1",
+          author: "Ritika Sen",
+          rating: 5,
+          date: "17 Sep 2026",
+          tags: ["Sweet & Tangy", "Chatpata Tomato", "Super Crisp"],
+          comment: "The tangy sun-ripened tomato flavor hits immediately with a subtle sweetness and spicy finish. Absolute delight for tomato chips lovers!",
+          verified: true
+        },
+        {
+          id: "seed_207_2",
+          author: "Gaurav Chawla",
+          rating: 5,
+          date: "09 Sep 2026",
+          tags: ["Party Favorite", "Crunchy Delight"],
+          comment: "Tangy, zesty, and satisfyingly loud crunch! Finished two packets during our road trip.",
+          verified: true
+        },
+        {
+          id: "seed_207_3",
+          author: "Meenakshi V.",
+          rating: 4,
+          date: "29 Aug 2026",
+          tags: ["Fresh Seasoning", "Low Oil"],
+          comment: "Great tomato spice balance without feeling overly sweet. Highly recommended.",
+          verified: true
+        }
+      ]
+    },
+    // 208: Banana Chips Salted
+    208: {
+      avgScore: 4.9,
+      reviewCount: 185,
+      distribution: { 5: 91, 4: 7, 3: 2, 2: 0, 1: 0 },
+      reviews: [
+        {
+          id: "seed_208_1",
+          author: "George Mathew",
+          rating: 5,
+          date: "21 Sep 2026",
+          tags: ["Authentic Kerala Nendran", "Rock Salt & Turmeric", "100% Crisp"],
+          comment: "Authentic Kerala-style raw Nendran banana chips! Thin, golden, and crispy with zero sogginess. Pure crunch and clean oil flavor.",
+          verified: true
+        },
+        {
+          id: "seed_208_2",
+          author: "Swati Kulkarni",
+          rating: 5,
+          date: "14 Sep 2026",
+          tags: ["Fasting Special", "Sea Salt Crunch"],
+          comment: "Crispy golden slices with just rock salt and turmeric. Perfect for fasting days and tea breaks.",
+          verified: true
+        },
+        {
+          id: "seed_208_3",
+          author: "Vivek Sharma",
+          rating: 4,
+          date: "05 Sep 2026",
+          tags: ["Fresh Fragrance", "Non-Greasy"],
+          comment: "Very fresh and crisp. None of the rancid oil aftertaste you get from open local stalls.",
+          verified: true
+        }
+      ]
+    },
+    // 101: Paachratan Mixture
+    101: {
+      avgScore: 4.8,
+      reviewCount: 156,
+      distribution: { 5: 85, 4: 12, 3: 3, 2: 0, 1: 0 },
+      reviews: [
+        {
+          id: "seed_101_1",
+          author: "Suresh Agarwal",
+          rating: 5,
+          date: "22 Sep 2026",
+          tags: ["Royal Dry Fruits", "Potato Lachha", "Pure Groundnut Oil"],
+          comment: "A royal treat in every handful! The combination of crisp potato lachha, whole cashews, plump raisins, and seasoned sev is unmatched.",
+          verified: true
+        },
+        {
+          id: "seed_101_2",
+          author: "Neha Saxena",
+          rating: 5,
+          date: "16 Sep 2026",
+          tags: ["Festive Special", "Sweet & Savoury"],
+          comment: "Generous amount of dry fruits and crispy sev. Perfect festive namkeen to serve guests.",
+          verified: true
+        },
+        {
+          id: "seed_101_3",
+          author: "Alok Sen",
+          rating: 4,
+          date: "08 Sep 2026",
+          tags: ["Clean Aroma", "Aromatic Spices"],
+          comment: "Crispy and balanced sweet-spicy taste. You can tell they use fresh groundnut oil.",
+          verified: true
+        }
+      ]
+    },
+    // 102: Millet Chakli
+    102: {
+      avgScore: 4.9,
+      reviewCount: 162,
+      distribution: { 5: 89, 4: 9, 3: 2, 2: 0, 1: 0 },
+      reviews: [
+        {
+          id: "seed_102_1",
+          author: "Rajeshwari R.",
+          rating: 5,
+          date: "23 Sep 2026",
+          tags: ["Foxtail Millet", "Ajwain & Cumin Aroma", "Guilt-Free Crunch"],
+          comment: "Crunchy foxtail millet spiral with fragrant ajwain and white sesame. It's hard to believe healthy millet snacks can taste this delightfully crunchy!",
+          verified: true
+        },
+        {
+          id: "seed_102_2",
+          author: "Deepa Sundaram",
+          rating: 5,
+          date: "17 Sep 2026",
+          tags: ["High Fiber", "Crispy Spiral"],
+          comment: "Melt-in-mouth crispness with traditional South Indian aroma. My family finished the pack in one sitting.",
+          verified: true
+        },
+        {
+          id: "seed_102_3",
+          author: "Nikhil Rao",
+          rating: 4,
+          date: "10 Sep 2026",
+          tags: ["Tea-Time Favorite", "No Palm Oil"],
+          comment: "Very crunchy and pairs wonderfully with hot filter coffee. No greasy feeling afterwards.",
+          verified: true
+        }
+      ]
+    },
+    // 106: Aloo Bhujia Delight
+    106: {
+      avgScore: 4.9,
+      reviewCount: 194,
+      distribution: { 5: 90, 4: 8, 3: 2, 2: 0, 1: 0 },
+      reviews: [
+        {
+          id: "seed_106_1",
+          author: "Harish Trivedi",
+          rating: 5,
+          date: "24 Sep 2026",
+          tags: ["Mint & Mango Notes", "Fine Besan Sev", "100% Groundnut Oil"],
+          comment: "Tangy amchur and mint notes with fine besan potato sev. Far superior and fresher than standard mass-produced bhujia!",
+          verified: true
+        },
+        {
+          id: "seed_106_2",
+          author: "Sunita Bhasin",
+          rating: 5,
+          date: "18 Sep 2026",
+          tags: ["Chaat Topping", "Extra Crisp"],
+          comment: "Crisp and seasoned to perfection. Our everyday topping for poha, sandwiches, and chaats.",
+          verified: true
+        },
+        {
+          id: "seed_106_3",
+          author: "Amit Singhal",
+          rating: 4,
+          date: "11 Sep 2026",
+          tags: ["Zesty Bite", "Fresh Batch"],
+          comment: "Great crunch and flavor. Groundnut oil makes a noticeable difference in lightness.",
+          verified: true
+        }
+      ]
+    },
+    // 202: Ragi Masala Chips
+    202: {
+      avgScore: 4.8,
+      reviewCount: 135,
+      distribution: { 5: 83, 4: 14, 3: 3, 2: 0, 1: 0 },
+      reviews: [
+        {
+          id: "seed_202_1",
+          author: "Dr. Pooja Nair",
+          rating: 5,
+          date: "22 Sep 2026",
+          tags: ["High Calcium & Fiber", "Spicy Desi Coating", "Wholesome Ragi"],
+          comment: "Rich in ragi fiber and calcium without compromising on tasty Indian masala punch. Best healthy alternative to regular junk chips!",
+          verified: true
+        },
+        {
+          id: "seed_202_2",
+          author: "Karan Bhatia",
+          rating: 5,
+          date: "15 Sep 2026",
+          tags: ["Crispy Texture", "Healthy Munch"],
+          comment: "Finally a healthy ragi chip that actually tastes amazing. Crisp, spicy, and satisfyingly crunchy.",
+          verified: true
+        },
+        {
+          id: "seed_202_3",
+          author: "Meera Seth",
+          rating: 4,
+          date: "07 Sep 2026",
+          tags: ["Desk Snack", "Low Calorie"],
+          comment: "Light, crunchy, and wholesome. Satisfies mid-afternoon cravings guilt-free.",
+          verified: true
+        }
+      ]
+    },
+    // 301: Makhana Twisters
+    301: {
+      avgScore: 4.9,
+      reviewCount: 172,
+      distribution: { 5: 89, 4: 9, 3: 2, 2: 0, 1: 0 },
+      reviews: [
+        {
+          id: "seed_301_1",
+          author: "Shweta Jain",
+          rating: 5,
+          date: "24 Sep 2026",
+          tags: ["100% Roasted", "Himalayan Pink Salt", "High Protein"],
+          comment: "Slow roasted to perfection with fragrant mild herbs and pink salt. 100% roasted with zero greasy feel on fingers!",
+          verified: true
+        },
+        {
+          id: "seed_301_2",
+          author: "Siddharth Roy",
+          rating: 5,
+          date: "19 Sep 2026",
+          tags: ["Fluffy Crunch", "Superfood"],
+          comment: "Huge, fluffy foxnuts with even coating of seasonings. Superior quality makhana in every pouch.",
+          verified: true
+        },
+        {
+          id: "seed_301_3",
+          author: "Ankita Paul",
+          rating: 4,
+          date: "12 Sep 2026",
+          tags: ["Guilt-Free", "Clean Aroma"],
+          comment: "Crispy and light. Great healthy desk snack while working long hours.",
+          verified: true
+        }
+      ]
+    }
+  };
+
+  if (reviewProfiles[prod.id]) {
+    return reviewProfiles[prod.id];
+  }
+
+  // Dynamic Contextual Unique Review Generator for all other products:
+  const hash = String(prod.id || prod.title).split('').reduce((acc, ch) => acc + ch.charCodeAt(0), 0);
+  const avg = (4.7 + (hash % 3) * 0.1).toFixed(1);
+  const count = 110 + (hash % 70);
+  const p5 = 82 + (hash % 10);
+  const p4 = 100 - p5 - 4;
+  
+  const reviewersPool = [
+    { name: "Varun Kapoor", city: "Mumbai" },
+    { name: "Aishwarya Sen", city: "Kolkata" },
+    { name: "Aditya Hegde", city: "Bengaluru" },
+    { name: "Pooja Deshmukh", city: "Pune" },
+    { name: "Manish Chhabra", city: "Delhi" },
+    { name: "Sunil Shenoy", city: "Mangaluru" },
+    { name: "Kritika Anand", city: "Jaipur" },
+    { name: "Prashant Kulkarni", city: "Indore" }
+  ];
+
+  const r1 = reviewersPool[hash % reviewersPool.length];
+  const r2 = reviewersPool[(hash + 3) % reviewersPool.length];
+  const r3 = reviewersPool[(hash + 5) % reviewersPool.length];
+
+  const catHighlights = {
+    namkeen: ["Authentic Besan Crunch", "100% Pure Groundnut Oil", "Classic Savoury Taste"],
+    chips: ["Super Crispy Slices", "Bold Seasoning", "No Palm Oil"],
+    healthy: ["Nutrient Rich", "Low Oil Snacking", "Guilt-Free Crunch"]
+  };
+
+  const tagsList = catHighlights[prod.category] || ["Artisan Recipe", "Fresh Aroma", "Perfect Spice"];
+
+  return {
+    avgScore: parseFloat(avg),
+    reviewCount: count,
+    distribution: { 5: p5, 4: p4, 3: 3, 2: 1, 1: 0 },
+    reviews: [
+      {
+        id: `seed_${prod.id}_1`,
+        author: r1.name,
+        rating: 5,
+        date: "20 Sep 2026",
+        tags: [tagsList[0], tagsList[1]],
+        comment: `The flavor and crunch of ${prod.title} is top-tier! Perfectly seasoned, crisp in every bite, and fried in pure groundnut oil with no heavy aftertaste.`,
+        verified: true
+      },
+      {
+        id: `seed_${prod.id}_2`,
+        author: r2.name,
+        rating: 5,
+        date: "14 Sep 2026",
+        tags: [tagsList[2], "Chai Time Special"],
+        comment: `Ordered ${prod.title} after trying their chips and this did not disappoint. Extremely fresh and packaged with great care.`,
+        verified: true
+      },
+      {
+        id: `seed_${prod.id}_3`,
+        author: r3.name,
+        rating: 4,
+        date: "06 Sep 2026",
+        tags: ["Fresh Aroma", "Munching Favorite"],
+        comment: `Very crunchy with a balanced savory kick. Everyone at home enjoyed snacking on ${prod.title} during tea time.`,
+        verified: true
+      }
+    ]
+  };
+}
+
 // Open Dynamic Snack Rating Modal with dynamic product context
 function openSnackRatingModal(snackTitle, orderId) {
   const modalTitleEl = document.getElementById('rating-modal-snack-title');
@@ -3577,7 +4011,7 @@ function openSnackRatingModal(snackTitle, orderId) {
   const commentInput = document.getElementById('snack-review-comment');
   const starInput = document.getElementById('snack-review-stars-val');
 
-  const title = snackTitle || "Poha Mixture";
+  const title = snackTitle || (currentDetailPageProduct ? currentDetailPageProduct.title : "Snack");
   const oid = orderId || "SNK-" + Math.floor(100000 + Math.random() * 900000);
 
   if (modalTitleEl) modalTitleEl.textContent = `Review: ${title}`;
@@ -3602,12 +4036,8 @@ function openSnackRatingModal(snackTitle, orderId) {
 
 // Helper to open snack review modal directly from product detail page
 function openSnackRatingModalFromDetail() {
-  let title = "Crispy Snack";
-  const titleEl = document.getElementById('detail-product-title') || document.querySelector('.product-detail-title');
-  if (titleEl) {
-    title = titleEl.textContent.trim();
-  }
-  openSnackRatingModal(title, "DETAIL-REVIEW");
+  const prod = currentDetailPageProduct || findProductByIdOrSlug(new URLSearchParams(window.location.search).get('id')) || SNACKY_PRODUCTS[1];
+  openSnackRatingModal(prod.title, "SNK-" + (prod.id || 102));
 }
 
 // Submit Product-Specific Snack Review to localStorage ('snacky_reviews')
@@ -3617,7 +4047,8 @@ function submitSnackReview() {
   const starInput = document.getElementById('snack-review-stars-val');
   const commentInput = document.getElementById('snack-review-comment');
 
-  const snackTitle = snackNameInput ? snackNameInput.value : 'Poha Mixture';
+  const prod = currentDetailPageProduct || findProductByIdOrSlug(new URLSearchParams(window.location.search).get('id')) || SNACKY_PRODUCTS[1];
+  const snackTitle = snackNameInput && snackNameInput.value ? snackNameInput.value : prod.title;
   const orderId = orderIdInput ? orderIdInput.value : 'SNK-8947291';
   const rating = parseInt(starInput ? starInput.value : 5, 10) || 5;
   const comment = commentInput ? commentInput.value.trim() : '';
@@ -3646,6 +4077,7 @@ function submitSnackReview() {
   const newReview = {
     id: 'rev_' + Date.now(),
     orderId: orderId,
+    productId: prod.id,
     snackTitle: snackTitle,
     rating: rating,
     tags: activeTags.length > 0 ? activeTags : ["Extra Crispy", "Perfect Spice"],
@@ -3681,62 +4113,80 @@ function submitSnackReview() {
   // Show confirmation toast
   showToast(`⭐ Thank you for reviewing ${snackTitle}!`);
 
-  // Dynamically update product reviews feed if present
-  renderProductReviews();
+  // Dynamically update product reviews feed for this product
+  renderProductReviews(prod);
 }
 
 // Render dynamic customer reviews on product-detail.html
-function renderProductReviews() {
+function renderProductReviews(prod) {
   const container = document.getElementById('product-reviews-feed-container');
   if (!container) return;
 
-  // Seed verified reviews
-  const seedReviews = [
-    {
-      id: "seed_1",
-      author: "Vikram Malhotra",
-      rating: 5,
-      date: "28 Aug 2026",
-      tags: ["Extra Crispy", "100% Groundnut Oil"],
-      comment: "Hands down the best snack in the market. No oily smell or cheap palm oil aftertaste. The zip pouch keeps it fresh for weeks!",
-      verified: true
-    },
-    {
-      id: "seed_2",
-      author: "Sneha Reddy",
-      rating: 5,
-      date: "24 Aug 2026",
-      tags: ["Perfect Spice", "Low Oil"],
-      comment: "Perfect spice balance and super crispy texture. My entire family enjoyed this during our evening chai time.",
-      verified: true
-    },
-    {
-      id: "seed_3",
-      author: "Rahul Verma",
-      rating: 4,
-      date: "19 Aug 2026",
-      tags: ["Munching Favorite", "Fresh Aroma"],
-      comment: "Very crunchy and light on the stomach. Arrived safely packaged within 2 days.",
-      verified: true
-    }
-  ];
+  if (!prod) {
+    prod = currentDetailPageProduct || findProductByIdOrSlug(new URLSearchParams(window.location.search).get('id')) || SNACKY_PRODUCTS[1];
+  }
+  currentDetailPageProduct = prod;
 
+  const reviewData = getProductSpecificReviews(prod);
+
+  // Read user reviews submitted specifically for this product
   let userReviews = [];
   try {
-    userReviews = JSON.parse(localStorage.getItem('snacky_reviews') || '[]');
+    const allStored = JSON.parse(localStorage.getItem('snacky_reviews') || '[]');
+    userReviews = allStored.filter(r => 
+      (r.snackTitle && r.snackTitle.toLowerCase() === prod.title.toLowerCase()) || 
+      (r.productId && String(r.productId) === String(prod.id))
+    );
   } catch (e) {
     console.warn("Could not parse snacky_reviews from localStorage", e);
   }
 
-  const allReviews = [...userReviews, ...seedReviews];
+  const allReviews = [...userReviews, ...reviewData.reviews];
+  const totalVerifiedCount = reviewData.reviewCount + userReviews.length;
 
-  // Update total count
+  // Update Summary Score Card
+  const avgScoreEl = document.getElementById('product-detail-avg-score');
+  const avgStarsEl = document.getElementById('product-detail-avg-stars');
   const countEl = document.getElementById('product-detail-review-count');
+
+  if (avgScoreEl) avgScoreEl.textContent = reviewData.avgScore.toFixed(1);
+  if (avgStarsEl) {
+    const fullStars = Math.floor(reviewData.avgScore);
+    const halfStar = reviewData.avgScore % 1 >= 0.5;
+    let starsHtml = '';
+    for (let i = 1; i <= 5; i++) {
+      if (i <= fullStars) {
+        starsHtml += '<i class="bi bi-star-fill text-warning me-1"></i>';
+      } else if (i === fullStars + 1 && halfStar) {
+        starsHtml += '<i class="bi bi-star-half text-warning me-1"></i>';
+      } else {
+        starsHtml += '<i class="bi bi-star text-warning me-1"></i>';
+      }
+    }
+    avgStarsEl.innerHTML = starsHtml;
+  }
   if (countEl) {
-    countEl.textContent = `Based on ${128 + userReviews.length} verified foodies`;
+    countEl.textContent = `Based on ${totalVerifiedCount} verified foodies`;
   }
 
-  // Render cards
+  // Update star progress bars
+  const d = reviewData.distribution;
+  const updateBar = (star, pct) => {
+    const fillEl = document.querySelector(`.rating-fill-${star}`);
+    if (fillEl) {
+      fillEl.style.width = `${pct}%`;
+      fillEl.setAttribute('aria-valuenow', pct);
+      const percentLabel = fillEl.closest('.rating-bar-row')?.querySelector('.rating-bar-percent');
+      if (percentLabel) percentLabel.textContent = `${pct}%`;
+    }
+  };
+  updateBar(5, d[5]);
+  updateBar(4, d[4]);
+  updateBar(3, d[3]);
+  updateBar(2, d[2]);
+  updateBar(1, d[1]);
+
+  // Render review cards
   container.innerHTML = allReviews.map(rev => {
     const starsHtml = Array.from({ length: 5 }, (_, i) => 
       `<i class="bi bi-star${i < rev.rating ? '-fill' : ''} text-warning me-1"></i>`
@@ -3771,6 +4221,70 @@ function renderProductReviews() {
       </div>
     `;
   }).join('');
+}
+
+// Render 4 Related Products in the same category on product-detail.html
+function renderRelatedProducts(currentProd) {
+  const container = document.getElementById('related-products-grid');
+  const viewAllLink = document.getElementById('related-view-all-link');
+  if (!container) return;
+
+  if (!currentProd) {
+    currentProd = currentDetailPageProduct || findProductByIdOrSlug(new URLSearchParams(window.location.search).get('id')) || SNACKY_PRODUCTS[1];
+  }
+
+  if (viewAllLink) {
+    viewAllLink.href = `products.html?category=${currentProd.category}`;
+    const catTitles = { namkeen: 'Namkeens', chips: 'Chips & Wafers', healthy: 'Healthy Snacks', signature: 'Signature Range' };
+    viewAllLink.innerHTML = `View All ${catTitles[currentProd.category] || 'Snacks'} <i class="bi bi-arrow-right ms-1"></i>`;
+  }
+
+  // Pick related products in the same category excluding the current product
+  let related = SNACKY_PRODUCTS.filter(p => p.category === currentProd.category && p.id !== currentProd.id);
+
+  // If this category has fewer than 4 items, pull from other categories
+  if (related.length < 4) {
+    const others = SNACKY_PRODUCTS.filter(p => p.id !== currentProd.id && !related.some(r => r.id === p.id));
+    related = [...related, ...others];
+  }
+
+  // Exactly 4 related products
+  const finalRelated = related.slice(0, 4);
+
+  let html = '';
+  finalRelated.forEach(p => {
+    html += `
+      <div class="col">
+        <div class="product-card">
+          <div class="card-top-frame">
+            <a href="product-detail.html?id=${p.id}">
+              <img src="${p.image}" alt="${p.title}" class="product-card-img" loading="lazy">
+            </a>
+          </div>
+          <div class="product-card-body">
+            <a href="product-detail.html?id=${p.id}" class="text-decoration-none">
+              <h6 class="product-title">${p.title}</h6>
+            </a>
+            <div class="price-row-box">
+              <span class="price-selling">₹${p.price.toFixed(2)}</span>
+              <span class="price-mrp">₹${p.mrp.toFixed(2)}</span>
+            </div>
+            <span class="price-discount-pill">${p.discount}% OFF</span>
+            <div class="weight-selector-box">
+              <span class="weight-label-subtext">WEIGHT</span>
+              <span class="weight-badge-pill">${p.weight}</span>
+            </div>
+            ${p.inStock ? 
+              `<button class="btn-card-add-to-cart" onclick="addToCart(${p.id})">
+                 <i class="bi bi-cart-plus-fill me-1"></i> ADD TO CART
+               </button>` : 
+              `<button class="btn-card-disabled" disabled>OUT OF STOCK</button>`}
+          </div>
+        </div>
+      </div>`;
+  });
+
+  container.innerHTML = html;
 }
 
 // --------------------------------------------------------------------------
