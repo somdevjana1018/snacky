@@ -319,13 +319,24 @@ function renderCheckoutItems() {
     itemsSubtotal += lineTotal;
     itemsMrpTotal += mrp * qty;
 
+    let customMixHtml = '';
+    if (item.isCustomMix && item.ingredients && Array.isArray(item.ingredients)) {
+      const ingListStr = item.ingredients.map(ing => `${ing.name} ${ing.qtyGrams}g`).join(', ');
+      customMixHtml = `<div class="text-muted fs-8 mt-1"><i class="bi bi-stars text-warning me-1"></i>${ingListStr}</div>`;
+    }
+
+    const imgHtml = (item.isCustomMix || !item.image)
+      ? ''
+      : `<img src="${item.image}" alt="${item.title}" class="rounded-2" style="width: 44px; height: 44px; object-fit: cover;">`;
+
     itemsHtml += `
       <div class="d-flex align-items-center justify-content-between py-2 border-bottom">
         <div class="d-flex align-items-center gap-2">
-          <img src="${item.image}" alt="${item.title}" class="rounded-2" style="width: 44px; height: 44px; object-fit: cover;">
+          ${imgHtml}
           <div>
             <h6 class="fw-bold text-navy mb-0 small" style="font-size: 0.85rem;">${item.title}</h6>
             <span class="text-muted fs-8"><span class="badge bg-light text-navy border me-1">${item.weight || 'Standard'}</span> • Qty: ${qty} × ₹${price.toFixed(2)}</span>
+            ${customMixHtml}
           </div>
         </div>
         <div class="fw-extrabold text-navy small">₹${lineTotal.toFixed(2)}</div>
@@ -384,23 +395,40 @@ function renderOffcanvasCart() {
     const qty = Number(item.qty) || 1;
     const itemTotal = unitPrice * qty;
 
+    let customDetailsHtml = '';
+    if (item.isCustomMix && item.ingredients && Array.isArray(item.ingredients)) {
+      const pills = item.ingredients.map(ing => `<span class="custom-mix-tag-pill">${ing.name} ${ing.qtyGrams}g</span>`).join('');
+      customDetailsHtml = `
+        <div class="my-1 d-flex flex-wrap gap-1">
+          ${pills}
+        </div>
+        <a href="mix-your-snack.html?edit=${index}" class="btn-cart-edit-mix">
+          <i class="bi bi-pencil-square"></i> Edit Mix
+        </a>`;
+    }
+
+    const imgHtml = (item.isCustomMix || !item.image)
+      ? ''
+      : `<img src="${item.image}" alt="${item.title}" class="cart-item-img">`;
+
     html += `
-      <div class="cart-item-card">
-        <button class="cart-item-remove-btn" onclick="removeFromCart(${index})" title="Remove Item">✕</button>
-        <img src="${item.image}" alt="${item.title}" class="cart-item-img">
-        <div class="flex-grow-1 pe-3">
-          <h6 class="fw-bold text-navy mb-1" style="font-size: 0.95rem; padding-right: 18px;">${item.title}</h6>
+      <div class="cart-item-card ${item.isCustomMix ? 'cart-custom-mix-card' : ''}">
+        <button class="cart-item-remove-btn" onclick="removeFromCart(${index})" title="Remove Item" aria-label="Remove Item">✕</button>
+        ${imgHtml}
+        <div class="cart-item-content-wrap flex-grow-1">
+          <h6 class="cart-item-title fw-bold text-navy">${item.title}</h6>
           <div class="text-muted small mb-2 d-flex align-items-center gap-1 flex-wrap">
             <span class="badge bg-light text-navy border font-monospace px-2 py-1">${item.weight || 'Standard'}</span>
             <span class="text-muted small">• ₹${unitPrice.toFixed(2)} each</span>
           </div>
-          <div class="d-flex justify-content-between align-items-center">
+          ${customDetailsHtml}
+          <div class="d-flex justify-content-between align-items-center mt-2 pt-1">
             <div class="quantity-control-box" style="padding: 2px;">
-              <button class="qty-btn" style="width: 24px; height: 24px;" onclick="updateCartQuantity(${index}, -1)">-</button>
+              <button class="qty-btn" style="width: 24px; height: 24px;" onclick="updateCartQuantity(${index}, -1)" aria-label="Decrease quantity">-</button>
               <span class="qty-val" style="padding: 0 10px; font-size: 0.85rem;">${qty}</span>
-              <button class="qty-btn" style="width: 24px; height: 24px;" onclick="updateCartQuantity(${index}, 1)">+</button>
+              <button class="qty-btn" style="width: 24px; height: 24px;" onclick="updateCartQuantity(${index}, 1)" aria-label="Increase quantity">+</button>
             </div>
-            <div class="fw-extrabold text-navy fs-6">₹${itemTotal.toFixed(2)}</div>
+            <div class="cart-item-price-total fw-extrabold text-navy">₹${itemTotal.toFixed(2)}</div>
           </div>
         </div>
       </div>`;
@@ -482,6 +510,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (document.getElementById('products-grid-container')) initProductsPage();
   if (document.getElementById('product-detail-section')) initProductDetailPage();
+  if (document.getElementById('mix-customizer-app')) initMixYourSnackPage();
   if (document.getElementById('flash-sale-timer-box')) initOffersPage();
   if (document.getElementById('contact-form')) initContactPage();
   if (document.getElementById('search-results-grid')) initSearchPage();
@@ -499,7 +528,7 @@ function initProductsPage() {
   const catParam = urlParams.get('category');
   if (catParam) currentCategoryFilter = catParam.toLowerCase();
 
-  const tabBtns = document.querySelectorAll('.category-tab-btn');
+  const tabBtns = document.querySelectorAll('button.category-tab-btn');
   tabBtns.forEach(btn => {
     if (btn.dataset.category === currentCategoryFilter) {
       tabBtns.forEach(b => b.classList.remove('active'));
@@ -531,6 +560,109 @@ function renderProductsGrid() {
   const categoryHeader = document.getElementById('products-category-header');
   const loadMoreBtn = document.getElementById('load-more-products-btn');
   if (!container) return;
+
+  if (currentCategoryFilter === 'mix') {
+    if (categoryHeader) categoryHeader.textContent = "Mix Your Own Snack";
+    if (countHeader) countHeader.textContent = "12 Ingredients Available (Max 500g)";
+    if (loadMoreBtn) loadMoreBtn.style.display = 'none';
+
+    container.innerHTML = `
+      <div class="col-12" id="mix-customizer-app">
+        <div class="row g-4 align-items-start">
+          
+          <!-- LEFT COLUMN: CUSTOMIZE INGREDIENTS Panel (Wide) -->
+          <div class="col-lg-8 col-xl-8">
+            <div class="mix-panel-card mix-ingredients-panel shadow-sm">
+              <div class="mix-panel-header px-4 py-3 d-flex align-items-center justify-content-between border-bottom">
+                <h3 class="fw-extrabold text-navy mb-0 fs-5 mix-panel-heading">Customize Ingredients</h3>
+                <span class="badge bg-light text-navy border rounded-pill px-3 py-1 fw-bold fs-8" id="active-ingredients-count">0 / 12 selected</span>
+              </div>
+              <div class="mix-ingredients-list p-3 p-md-4" id="mix-ingredients-grid">
+                <!-- Rendered dynamically -->
+              </div>
+            </div>
+          </div>
+
+          <!-- RIGHT COLUMN: PACK SUMMARY Panel (Compact) -->
+          <div class="col-lg-4 col-xl-4">
+            <aside class="mix-panel-card mix-summary-panel shadow-sm" id="mix-summary-sidebar">
+              <div class="mix-panel-header px-4 py-3 d-flex align-items-center justify-content-between border-bottom">
+                <h4 class="fw-extrabold text-navy mb-0 fs-5 mix-panel-heading">Pack Summary</h4>
+                <span class="badge bg-light text-navy border rounded-pill px-3 py-1 font-monospace fs-8">Max 500g</span>
+              </div>
+
+              <div class="p-3 p-md-4">
+                <!-- Total Weight Metric Box -->
+                <div class="mix-summary-metric-section mb-4">
+                  <div class="d-flex justify-content-between align-items-center mb-1">
+                    <span class="text-muted fw-bold text-uppercase fs-8 letter-spacing-1">Total Weight:</span>
+                    <span class="fw-extrabold text-navy fs-5 font-monospace" id="mix-summary-weight-display">0g / 500g</span>
+                  </div>
+                  
+                  <!-- Progress Bar -->
+                  <div class="progress mix-weight-progress-track my-2">
+                    <div class="progress-bar mix-weight-progress-bar bg-warning" id="mix-weight-progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="500"></div>
+                  </div>
+                  
+                  <div class="d-flex justify-content-between text-muted fs-8 font-monospace">
+                    <span>0g</span>
+                    <span class="fw-bold text-navy" id="mix-min-weight-tag"><i class="bi bi-flag-fill text-warning me-1"></i>Min 200g</span>
+                    <span>500g Max</span>
+                  </div>
+                </div>
+
+                <!-- Selected Ingredients List Preview -->
+                <div class="mix-selected-list-container mb-4">
+                  <div class="d-flex justify-content-between align-items-center mb-2">
+                    <span class="text-muted fw-bold text-uppercase fs-8 letter-spacing-1">Selected Breakdown:</span>
+                    <span class="badge bg-light text-navy border" id="mix-items-summary-count">0 items</span>
+                  </div>
+
+                  <!-- Empty State View -->
+                  <div class="mix-empty-state-card text-center p-3 rounded-3" id="mix-empty-state-view">
+                    <div class="fs-4 mb-1">🍿</div>
+                    <h6 class="fw-bold text-navy mb-1 fs-7">Your custom mix is empty.</h6>
+                    <p class="text-muted fs-8 mb-0">Adjust ingredient sliders on the left to start mixing.</p>
+                  </div>
+
+                  <!-- Populated Items List -->
+                  <div class="mix-populated-items-list d-none" id="mix-populated-items-list"></div>
+                </div>
+
+                <!-- Total Price Section -->
+                <div class="mix-summary-price-box p-3 rounded-3 mb-4 text-center">
+                  <span class="text-muted fw-bold text-uppercase fs-8 letter-spacing-1 d-block mb-1">Total Price:</span>
+                  <div class="fw-extrabold text-navy display-6 mix-price-highlight" id="mix-summary-total-price">₹0.00</div>
+                  <div class="text-success fs-8 fw-bold mt-1">
+                    <i class="bi bi-check-circle-fill me-1"></i> 100% Groundnut Oil • Fresh Packed
+                  </div>
+                </div>
+
+                <!-- Validation Feedback Alert Message -->
+                <div class="alert alert-warning py-2 px-3 fs-8 mb-3 d-none rounded-3" id="mix-validation-alert" role="alert">
+                  <i class="bi bi-exclamation-triangle-fill me-1"></i> <span id="mix-validation-alert-text"></span>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="d-grid gap-2">
+                  <button type="button" class="btn btn-mix-add-cart py-3 fw-extrabold" id="btn-add-custom-mix-to-cart" onclick="addCustomMixToCart()">
+                    <i class="bi bi-bag-plus-fill me-2"></i> ADD CUSTOM MIX TO CART
+                  </button>
+                  
+                  <button type="button" class="btn btn-outline-secondary btn-sm py-2 rounded-3 fw-bold" id="btn-reset-custom-mix" onclick="resetCustomSnackMix()">
+                    <i class="bi bi-arrow-counterclockwise me-1"></i> Reset Mix
+                  </button>
+                </div>
+              </div>
+            </aside>
+          </div>
+
+        </div>
+      </div>`;
+
+    initMixYourSnackPage();
+    return;
+  }
 
   let filtered = SNACKY_PRODUCTS;
   if (currentCategoryFilter !== 'all') {
@@ -4826,6 +4958,484 @@ window.addEventListener('load', () => {
     }, 100);
   }
 });
+
+// --------------------------------------------------------------------------
+// 23. Custom Snack Mix Engine (Mix Your Own Snack)
+// --------------------------------------------------------------------------
+const CUSTOM_MIX_INGREDIENTS = [
+  {
+    id: "chips",
+    name: "Chips",
+    pricePer50g: 30, // ₹30 per 50g
+    step: 25,
+    icon: "🥔",
+    desc: "Crispy salted potato wafer crisps",
+    image: "../static/images/products/classic_salted_wafers_front.jpg"
+  },
+  {
+    id: "sev",
+    name: "Sev",
+    pricePer50g: 25, // ₹25 per 50g
+    step: 25,
+    icon: "🍜",
+    desc: "Golden crunchy gram flour strands",
+    image: "../static/images/products/aloo_bhujia_delight_front.jpg"
+  },
+  {
+    id: "boondi",
+    name: "Boondi",
+    pricePer50g: 24, // ₹24 per 50g
+    step: 25,
+    icon: "🟡",
+    desc: "Spiced tiny crispy chickpea pearls",
+    image: "../static/images/products/khatta_meetha_mix_front.jpg"
+  },
+  {
+    id: "peanuts",
+    name: "Peanuts",
+    pricePer50g: 28, // ₹28 per 50g
+    step: 25,
+    icon: "🥜",
+    desc: "Slow roasted spiced crunchy groundnuts",
+    image: "../static/images/products/masala_peanuts_classic_front.jpg"
+  },
+  {
+    id: "lentils",
+    name: "Lentils",
+    pricePer50g: 26, // ₹26 per 50g
+    step: 25,
+    icon: "🥣",
+    desc: "Crispy fried golden salted moong dal",
+    image: "../static/images/products/salted_moong_dal_front.jpg"
+  },
+  {
+    id: "flattened_rice",
+    name: "Flattened Rice",
+    pricePer50g: 22, // ₹22 per 50g
+    step: 25,
+    icon: "🌾",
+    desc: "Roasted lightweight crispy spiced poha",
+    image: "../static/images/products/poha_mixture_front.jpg"
+  },
+  {
+    id: "chana_jor",
+    name: "Chana Jor",
+    pricePer50g: 32, // ₹32 per 50g
+    step: 25,
+    icon: "🧆",
+    desc: "Tangy pressed black chickpeas with chaat masala",
+    image: "../static/images/products/chana_dal_crunch_front.jpg"
+  },
+  {
+    id: "gathiya",
+    name: "Gathiya",
+    pricePer50g: 26, // ₹26 per 50g
+    step: 25,
+    icon: "🥨",
+    desc: "Soft crumbly carom-seed spiced gathiya",
+    image: "../static/images/products/teekha_gathiya_front.jpg"
+  },
+  {
+    id: "cornflakes",
+    name: "Cornflakes",
+    pricePer50g: 25, // ₹25 per 50g
+    step: 25,
+    icon: "🌽",
+    desc: "Crunchy sweet & spicy golden cornflakes",
+    image: "../static/images/products/spicy_corn_mixture_front.jpg"
+  },
+  {
+    id: "banana_chips",
+    name: "Banana Chips",
+    pricePer50g: 35, // ₹35 per 50g
+    step: 25,
+    icon: "🍌",
+    desc: "Crispy Kerala raw banana roundels in groundnut oil",
+    image: "../static/images/products/banana_chips_salted_front.jpg"
+  },
+  {
+    id: "masala_peas",
+    name: "Masala Peas",
+    pricePer50g: 30, // ₹30 per 50g
+    step: 25,
+    icon: "🟢",
+    desc: "Crisp fried green peas tossed in tangy pepper seasoning",
+    image: "../static/images/products/paachratan_mixture_front.jpg"
+  },
+  {
+    id: "papdi",
+    name: "Papdi",
+    pricePer50g: 24, // ₹24 per 50g
+    step: 25,
+    icon: "🫓",
+    desc: "Crispy wafer flakes with ajwain flavor",
+    image: "../static/images/products/butter_chakli_front.jpg"
+  }
+];
+
+let customMixState = {
+  quantities: {}, // { [id]: grams }
+  editingCartIndex: null
+};
+
+function initMixYourSnackPage() {
+  const container = document.getElementById('mix-customizer-app');
+  if (!container) return;
+
+  // Initialize all quantities to 0
+  customMixState.quantities = {};
+  CUSTOM_MIX_INGREDIENTS.forEach(ing => {
+    customMixState.quantities[ing.id] = 0;
+  });
+
+  // Check if editing existing cart mix from URL query ?edit=0
+  const urlParams = new URLSearchParams(window.location.search);
+  const editParam = urlParams.get('edit');
+  if (editParam !== null && editParam !== undefined && editParam !== '') {
+    const editIdx = parseInt(editParam, 10);
+    snackyCart = getFreshCart();
+    if (!isNaN(editIdx) && snackyCart[editIdx] && snackyCart[editIdx].isCustomMix) {
+      customMixState.editingCartIndex = editIdx;
+      const existingItem = snackyCart[editIdx];
+      if (existingItem.rawQuantities) {
+        Object.keys(existingItem.rawQuantities).forEach(k => {
+          if (customMixState.quantities[k] !== undefined) {
+            customMixState.quantities[k] = existingItem.rawQuantities[k] || 0;
+          }
+        });
+      } else if (existingItem.ingredients && Array.isArray(existingItem.ingredients)) {
+        existingItem.ingredients.forEach(ing => {
+          if (ing.id && customMixState.quantities[ing.id] !== undefined) {
+            customMixState.quantities[ing.id] = ing.qtyGrams || 0;
+          }
+        });
+      }
+      showToast("Restored your custom mix for editing!");
+    }
+  }
+
+  renderMixIngredientsGrid();
+  updateMixSummaryUI();
+}
+
+function renderMixIngredientsGrid() {
+  const grid = document.getElementById('mix-ingredients-grid');
+  if (!grid) return;
+
+  let html = '';
+  CUSTOM_MIX_INGREDIENTS.forEach((ing, index) => {
+    const qty = customMixState.quantities[ing.id] || 0;
+    const subtotal = Math.round((qty / 50) * ing.pricePer50g);
+    const isActive = qty > 0;
+
+    html += `
+      <div class="mix-ingredient-row d-flex align-items-center justify-content-between py-2 px-2 px-md-3 border-bottom flex-wrap gap-2 ${isActive ? 'is-active-row' : ''}" id="mix-row-${ing.id}">
+        <!-- 1. Number & Name & Price -->
+        <div class="mix-row-info d-flex align-items-center gap-2">
+          <span class="mix-row-num fw-bold text-muted">${index + 1}.</span>
+          <span class="mix-row-name fw-extrabold text-navy fs-6">${ing.name}</span>
+          <span class="mix-row-rate text-muted fs-8 font-monospace">(₹${ing.pricePer50g}/50g)</span>
+        </div>
+
+        <!-- Controls: [-]  ===o=====  [+]  50g  ₹30 -->
+        <div class="mix-row-controls d-flex align-items-center gap-2 flex-grow-1 justify-content-end">
+          <button type="button" class="mix-btn-step" id="btn-minus-${ing.id}" onclick="changeIngredientQty('${ing.id}', -25)" ${qty <= 0 ? 'disabled' : ''} aria-label="Decrease ${ing.name}">[-]</button>
+          
+          <div class="mix-slider-track-wrap">
+            <input type="range" class="mix-range-slider" id="slider-${ing.id}" min="0" max="500" step="25" value="${qty}" oninput="onMixSliderInput('${ing.id}', this.value)" aria-label="${ing.name} quantity slider">
+          </div>
+          
+          <button type="button" class="mix-btn-step" id="btn-plus-${ing.id}" onclick="changeIngredientQty('${ing.id}', 25)" aria-label="Increase ${ing.name}">[+]</button>
+          
+          <span class="mix-row-qty-badge font-monospace" id="qty-disp-${ing.id}">${qty}g</span>
+          <span class="mix-row-subtotal font-monospace" id="subtotal-${ing.id}">₹${subtotal}</span>
+        </div>
+      </div>`;
+  });
+
+  grid.innerHTML = html;
+}
+
+function onMixSliderInput(ingId, rawVal) {
+  let val = parseInt(rawVal, 10) || 0;
+  val = Math.max(0, Math.round(val / 25) * 25);
+
+  let otherWeight = 0;
+  CUSTOM_MIX_INGREDIENTS.forEach(ing => {
+    if (ing.id !== ingId) {
+      otherWeight += (customMixState.quantities[ing.id] || 0);
+    }
+  });
+
+  if (otherWeight + val > 500) {
+    val = Math.max(0, 500 - otherWeight);
+    const slider = document.getElementById(`slider-${ingId}`);
+    if (slider) slider.value = val;
+    showToast("⚠️ Maximum packet weight is 500g. Please reduce another ingredient before adding more.");
+    updateMixSummaryUI("Maximum packet weight is 500g. Please reduce another ingredient before adding more.");
+  } else {
+    updateMixSummaryUI(null);
+  }
+
+  customMixState.quantities[ingId] = val;
+
+  // Update DOM elements for this row
+  const qtyDisp = document.getElementById(`qty-disp-${ingId}`);
+  const subtotalDisp = document.getElementById(`subtotal-${ingId}`);
+  const minusBtn = document.getElementById(`btn-minus-${ingId}`);
+  const rowEl = document.getElementById(`mix-row-${ingId}`);
+  const ing = CUSTOM_MIX_INGREDIENTS.find(i => i.id === ingId);
+
+  if (ing) {
+    const subtotal = Math.round((val / 50) * ing.pricePer50g);
+    if (qtyDisp) qtyDisp.textContent = `${val}g`;
+    if (subtotalDisp) subtotalDisp.textContent = `₹${subtotal}`;
+    if (minusBtn) minusBtn.disabled = (val <= 0);
+    if (rowEl) {
+      if (val > 0) rowEl.classList.add('is-active-row');
+      else rowEl.classList.remove('is-active-row');
+    }
+  }
+
+  updateMixSummaryUI();
+}
+
+function changeIngredientQty(ingId, delta) {
+  const currentQty = customMixState.quantities[ingId] || 0;
+  let totalWeight = 0;
+  CUSTOM_MIX_INGREDIENTS.forEach(ing => {
+    totalWeight += (customMixState.quantities[ing.id] || 0);
+  });
+
+  if (delta > 0) {
+    if (totalWeight + delta > 500) {
+      showToast("⚠️ Maximum packet weight is 500g. Please reduce another ingredient before adding more.");
+      updateMixSummaryUI("Maximum packet weight is 500g. Please reduce another ingredient before adding more.");
+      return;
+    }
+  }
+
+  const newQty = Math.max(0, currentQty + delta);
+  customMixState.quantities[ingId] = newQty;
+
+  // Update specific row UI
+  const rowEl = document.getElementById(`mix-row-${ingId}`);
+  const qtyDisp = document.getElementById(`qty-disp-${ingId}`);
+  const subtotalDisp = document.getElementById(`subtotal-${ingId}`);
+  const minusBtn = document.getElementById(`btn-minus-${ingId}`);
+  const slider = document.getElementById(`slider-${ingId}`);
+
+  const ing = CUSTOM_MIX_INGREDIENTS.find(i => i.id === ingId);
+  if (ing) {
+    const subtotal = Math.round((newQty / 50) * ing.pricePer50g);
+    if (qtyDisp) qtyDisp.textContent = `${newQty}g`;
+    if (subtotalDisp) subtotalDisp.textContent = `₹${subtotal}`;
+    if (minusBtn) minusBtn.disabled = (newQty <= 0);
+    if (slider) slider.value = newQty;
+    if (rowEl) {
+      if (newQty > 0) rowEl.classList.add('is-active-row');
+      else rowEl.classList.remove('is-active-row');
+    }
+  }
+
+  updateMixSummaryUI();
+}
+
+function updateMixSummaryUI(alertMessage = null) {
+  let totalWeight = 0;
+  let totalPrice = 0;
+  const selectedList = [];
+
+  CUSTOM_MIX_INGREDIENTS.forEach(ing => {
+    const qty = customMixState.quantities[ing.id] || 0;
+    if (qty > 0) {
+      const price = Math.round((qty / 50) * ing.pricePer50g);
+      totalWeight += qty;
+      totalPrice += price;
+      selectedList.push({
+        id: ing.id,
+        name: ing.name,
+        qtyGrams: qty,
+        price: price
+      });
+    }
+  });
+
+  // Active ingredients badge
+  const activeCountBadge = document.getElementById('active-ingredients-count');
+  if (activeCountBadge) {
+    activeCountBadge.textContent = `${selectedList.length} / 12 selected`;
+  }
+
+  // Weight display & progress bar
+  const weightDisp = document.getElementById('mix-summary-weight-display');
+  const progressBar = document.getElementById('mix-weight-progress-bar');
+  const netWeightDisp = document.getElementById('mix-summary-net-weight');
+  const totalPriceDisp = document.getElementById('mix-summary-total-price');
+  const itemsCountDisp = document.getElementById('mix-items-summary-count');
+  const emptyStateView = document.getElementById('mix-empty-state-view');
+  const populatedList = document.getElementById('mix-populated-items-list');
+
+  if (weightDisp) weightDisp.textContent = `${totalWeight}g / 500g`;
+  if (netWeightDisp) netWeightDisp.textContent = `${totalWeight}g`;
+  if (totalPriceDisp) totalPriceDisp.textContent = `₹${totalPrice}`;
+  if (itemsCountDisp) itemsCountDisp.textContent = `${selectedList.length} item${selectedList.length === 1 ? '' : 's'}`;
+
+  if (progressBar) {
+    const pct = Math.min(100, (totalWeight / 500) * 100);
+    progressBar.style.width = `${pct}%`;
+    progressBar.setAttribute('aria-valuenow', totalWeight);
+
+    if (totalWeight >= 200 && totalWeight <= 500) {
+      progressBar.className = "progress-bar mix-weight-progress-bar bg-success";
+    } else if (totalWeight > 500) {
+      progressBar.className = "progress-bar mix-weight-progress-bar bg-danger";
+    } else {
+      progressBar.className = "progress-bar mix-weight-progress-bar bg-warning";
+    }
+  }
+
+  // Render populated list vs empty state
+  if (selectedList.length === 0) {
+    if (emptyStateView) emptyStateView.classList.remove('d-none');
+    if (populatedList) {
+      populatedList.classList.add('d-none');
+      populatedList.innerHTML = '';
+    }
+  } else {
+    if (emptyStateView) emptyStateView.classList.add('d-none');
+    if (populatedList) {
+      populatedList.classList.remove('d-none');
+      let listHtml = '';
+      selectedList.forEach(item => {
+        listHtml += `
+          <div class="mix-selected-item-row">
+            <div class="d-flex align-items-center gap-2">
+              <span class="fw-bold">${item.name}</span>
+            </div>
+            <div class="d-flex align-items-center gap-2">
+              <span class="badge bg-light text-navy border">${item.qtyGrams}g</span>
+              <span class="fw-bold">₹${item.price}</span>
+              <button type="button" class="btn btn-link text-danger p-0 ms-1" style="font-size: 0.8rem; text-decoration: none;" onclick="changeIngredientQty('${item.id}', -${item.qtyGrams})" title="Remove">✕</button>
+            </div>
+          </div>`;
+      });
+      populatedList.innerHTML = listHtml;
+    }
+  }
+
+  // Validation alert banner
+  const alertBox = document.getElementById('mix-validation-alert');
+  const alertText = document.getElementById('mix-validation-alert-text');
+  if (alertBox && alertText) {
+    if (alertMessage) {
+      alertText.textContent = alertMessage;
+      alertBox.classList.remove('d-none');
+    } else {
+      alertBox.classList.add('d-none');
+    }
+  }
+}
+
+function resetCustomSnackMix() {
+  CUSTOM_MIX_INGREDIENTS.forEach(ing => {
+    customMixState.quantities[ing.id] = 0;
+    const qtyDisp = document.getElementById(`qty-disp-${ing.id}`);
+    const subtotalDisp = document.getElementById(`subtotal-${ing.id}`);
+    const minusBtn = document.getElementById(`btn-minus-${ing.id}`);
+    const slider = document.getElementById(`slider-${ing.id}`);
+    const rowEl = document.getElementById(`mix-row-${ing.id}`);
+
+    if (qtyDisp) qtyDisp.textContent = `0g`;
+    if (subtotalDisp) subtotalDisp.textContent = `₹0`;
+    if (minusBtn) minusBtn.disabled = true;
+    if (slider) slider.value = 0;
+    if (rowEl) rowEl.classList.remove('is-active-row');
+  });
+
+  updateMixSummaryUI();
+  showToast("Custom mix reset to 0g.");
+}
+
+function addCustomMixToCart() {
+  let totalWeight = 0;
+  let totalPrice = 0;
+  const selectedList = [];
+
+  CUSTOM_MIX_INGREDIENTS.forEach(ing => {
+    const qty = customMixState.quantities[ing.id] || 0;
+    if (qty > 0) {
+      const price = Math.round((qty / 50) * ing.pricePer50g);
+      totalWeight += qty;
+      totalPrice += price;
+      selectedList.push({
+        id: ing.id,
+        name: ing.name,
+        qtyGrams: qty,
+        price: price
+      });
+    }
+  });
+
+  if (totalWeight === 0) {
+    showToast("⚠️ Please select at least one ingredient.");
+    updateMixSummaryUI("Please select at least one ingredient.");
+    return;
+  }
+
+  if (totalWeight < 200) {
+    showToast("⚠️ Please select at least 200g to create your custom mix.");
+    updateMixSummaryUI("Please select at least 200g to create your custom mix.");
+    return;
+  }
+
+  if (totalWeight > 500) {
+    showToast("⚠️ Maximum packet weight is 500g. Please reduce the quantity of another ingredient.");
+    updateMixSummaryUI("Maximum packet weight is 500g. Please reduce the quantity of another ingredient.");
+    return;
+  }
+
+  snackyCart = getFreshCart();
+
+  const customCartItem = {
+    id: (customMixState.editingCartIndex !== null && snackyCart[customMixState.editingCartIndex] && snackyCart[customMixState.editingCartIndex].isCustomMix)
+        ? snackyCart[customMixState.editingCartIndex].id
+        : "custom_mix_" + Date.now(),
+    title: "Custom Snack Mix",
+    isCustomMix: true,
+    weight: `${totalWeight} g`,
+    price: totalPrice,
+    mrp: Math.round(totalPrice * 1.25),
+    qty: 1,
+    image: "",
+    ingredients: selectedList,
+    rawQuantities: { ...customMixState.quantities }
+  };
+
+  if (customMixState.editingCartIndex !== null && snackyCart[customMixState.editingCartIndex]) {
+    snackyCart[customMixState.editingCartIndex] = customCartItem;
+    customMixState.editingCartIndex = null;
+  } else {
+    snackyCart.push(customCartItem);
+  }
+
+  saveCartState();
+  showToast("🎉 Your custom snack mix has been added to your cart!");
+
+  // Open the offcanvas cart drawer or redirect
+  try {
+    const cartEl = document.getElementById('cartOffcanvas');
+    if (cartEl && window.bootstrap && bootstrap.Offcanvas) {
+      const offcanvasInstance = bootstrap.Offcanvas.getOrCreateInstance(cartEl);
+      offcanvasInstance.show();
+    }
+  } catch(e) {}
+}
+
+function editCustomMixFromCart(cartIndex) {
+  window.location.href = `mix-your-snack.html?edit=${cartIndex}`;
+}
+
 
 
 

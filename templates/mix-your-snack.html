@@ -3,28 +3,30 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Search & Filter Snacks - Snacky</title>
-  <meta name="description" content="Search through Snacky's catalog of 60+ authentic Indian snacks with real-time multi-filters.">
+  <title>Mix Your Own Snack - Snacky</title>
+  <meta name="description" content="Create your perfect snack mix exactly the way you like it. Choose your favourite ingredients, adjust quantities, and build a personalized Snacky packet up to 500g.">
   
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="icon" type="image/png" href="../static/images/snacky_logo_transparent.png">
   <link rel="stylesheet" href="../static/css/style.css">
 </head>
-<body>
+<body class="mix-snack-body">
 
   <!-- Top Announcement Bar with Marquee Effect -->
   <div class="top-announcement-bar">
     <div class="marquee-track">
       <div class="marquee-content">
         <span>🚚 FREE DELIVERY ABOVE ₹199</span> <span class="marquee-dot">•</span>
+        <span>🥨 CUSTOM SNACK MIX BUILDER</span> <span class="marquee-dot">•</span>
         <span>🍿 100% PURE GROUNDNUT OIL</span> <span class="marquee-dot">•</span>
         <span>✨ NO PALM OIL • NO CHOLESTEROL</span> <span class="marquee-dot">•</span>
         <span>🎉 USE CODE: SNACKY50 FOR ₹50 OFF</span> <span class="marquee-dot">•</span>
       </div>
       <div class="marquee-content">
         <span>🚚 FREE DELIVERY ABOVE ₹199</span> <span class="marquee-dot">•</span>
+        <span>🥨 CUSTOM SNACK MIX BUILDER</span> <span class="marquee-dot">•</span>
         <span>🍿 100% PURE GROUNDNUT OIL</span> <span class="marquee-dot">•</span>
         <span>✨ NO PALM OIL • NO CHOLESTEROL</span> <span class="marquee-dot">•</span>
         <span>🎉 USE CODE: SNACKY50 FOR ₹50 OFF</span> <span class="marquee-dot">•</span>
@@ -84,30 +86,143 @@
     </div>
   </nav>
 
-  <!-- Page Header (#search-header) -->
-  <section class="container my-4" id="search-header">
-    <div class="d-flex align-items-center justify-content-between flex-wrap gap-2 pb-2 border-bottom">
-      <div class="d-flex align-items-center gap-3">
-        <a href="products.html" class="btn btn-sm btn-outline-secondary rounded-circle w-36px h-36px d-inline-flex align-items-center justify-content-center" title="Back to Products">
-          <i class="bi bi-arrow-left"></i>
-        </a>
-        <h2 class="section-title mb-0" id="search-query-header">Search Results</h2>
-      </div>
-      <span class="badge bg-navy text-white px-3 py-2 rounded-pill fs-6" id="search-results-count">80 products found</span>
-    </div>
+  <!-- Breadcrumb Navigation -->
+  <section class="container my-3">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb mb-0">
+        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+        <li class="breadcrumb-item"><a href="products.html">Products</a></li>
+        <li class="breadcrumb-item active text-navy fw-bold">Mix Your Own Snack</li>
+      </ol>
+    </nav>
   </section>
 
-  <!-- Full-Width Products Grid Section -->
-  <section class="container mb-5" id="search-body">
-    <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-2 g-md-4" id="search-results-grid">
-      <!-- Dynamically populated by script.js -->
-    </div>
+  <!-- Customizer Container (#mix-customizer-app) -->
+  <main class="container my-4 pb-5" id="mix-customizer-app">
+    <div class="row g-4 align-items-start">
+      
+      <!-- LEFT COLUMN: CUSTOMIZE INGREDIENTS Panel (Wide) -->
+      <div class="col-lg-8 col-xl-8">
+        <div class="mix-panel-card mix-ingredients-panel shadow-sm">
+          <div class="mix-panel-header px-4 py-3 d-flex align-items-center justify-content-between border-bottom">
+            <h3 class="fw-extrabold text-navy mb-0 fs-5 mix-panel-heading">Customize Ingredients</h3>
+            <span class="badge bg-light text-navy border rounded-pill px-3 py-1 fw-bold fs-8" id="active-ingredients-count">0 / 12 selected</span>
+          </div>
 
-    <div class="text-center py-5 bg-white rounded-4 shadow-sm display-none my-4" id="empty-search-state">
-      <div class="display-1 mb-3">🔍</div>
-      <h4 class="fw-bold text-navy" id="empty-search-heading">No products found. Try another search.</h4>
-      <p class="text-muted small mb-4">Try searching for other snacks or browse our full catalog.</p>
-      <a href="products.html" class="btn btn-snacky-primary px-4 py-2">View All Snacks</a>
+          <!-- Ingredients List Rows (1 to 12) -->
+          <div class="mix-ingredients-list p-3 p-md-4" id="mix-ingredients-grid">
+            <!-- Rendered dynamically by script.js with numbered rows, [-], slider track, [+], qty and price -->
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT COLUMN: PACK SUMMARY Panel (Compact) -->
+      <div class="col-lg-4 col-xl-4">
+        <aside class="mix-panel-card mix-summary-panel shadow-sm" id="mix-summary-sidebar">
+          <div class="mix-panel-header px-4 py-3 d-flex align-items-center justify-content-between border-bottom">
+            <h4 class="fw-extrabold text-navy mb-0 fs-5 mix-panel-heading">Pack Summary</h4>
+            <span class="badge bg-light text-navy border rounded-pill px-3 py-1 font-monospace fs-8">Max 500g</span>
+          </div>
+
+          <div class="p-3 p-md-4">
+            <!-- Total Weight Metric Box -->
+            <div class="mix-summary-metric-section mb-4">
+              <div class="d-flex justify-content-between align-items-center mb-1">
+                <span class="text-muted fw-bold text-uppercase fs-8 letter-spacing-1">Total Weight:</span>
+                <span class="fw-extrabold text-navy fs-5 font-monospace" id="mix-summary-weight-display">0g / 500g</span>
+              </div>
+              
+              <!-- Progress Bar -->
+              <div class="progress mix-weight-progress-track my-2">
+                <div class="progress-bar mix-weight-progress-bar bg-warning" id="mix-weight-progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="500"></div>
+              </div>
+              
+              <div class="d-flex justify-content-between text-muted fs-8 font-monospace">
+                <span>0g</span>
+                <span class="fw-bold text-navy" id="mix-min-weight-tag"><i class="bi bi-flag-fill text-warning me-1"></i>Min 200g</span>
+                <span>500g Max</span>
+              </div>
+            </div>
+
+            <!-- Selected Ingredients List Preview -->
+            <div class="mix-selected-list-container mb-4">
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <span class="text-muted fw-bold text-uppercase fs-8 letter-spacing-1">Selected Breakdown:</span>
+                <span class="badge bg-light text-navy border" id="mix-items-summary-count">0 items</span>
+              </div>
+
+              <!-- Empty State View -->
+              <div class="mix-empty-state-card text-center p-3 rounded-3" id="mix-empty-state-view">
+                <div class="fs-4 mb-1">🍿</div>
+                <h6 class="fw-bold text-navy mb-1 fs-7">Your custom mix is empty.</h6>
+                <p class="text-muted fs-8 mb-0">Adjust ingredient sliders on the left to start mixing.</p>
+              </div>
+
+              <!-- Populated Items List -->
+              <div class="mix-populated-items-list d-none" id="mix-populated-items-list">
+                <!-- Rendered dynamically by script.js -->
+              </div>
+            </div>
+
+            <!-- Total Price Section -->
+            <div class="mix-summary-price-box p-3 rounded-3 mb-4 text-center">
+              <span class="text-muted fw-bold text-uppercase fs-8 letter-spacing-1 d-block mb-1">Total Price:</span>
+              <div class="fw-extrabold text-navy display-6 mix-price-highlight" id="mix-summary-total-price">₹0.00</div>
+              <div class="text-success fs-8 fw-bold mt-1">
+                <i class="bi bi-check-circle-fill me-1"></i> 100% Groundnut Oil • Fresh Packed
+              </div>
+            </div>
+
+            <!-- Validation Feedback Alert Message -->
+            <div class="alert alert-warning py-2 px-3 fs-8 mb-3 d-none rounded-3" id="mix-validation-alert" role="alert">
+              <i class="bi bi-exclamation-triangle-fill me-1"></i> <span id="mix-validation-alert-text"></span>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="d-grid gap-2">
+              <button type="button" class="btn btn-mix-add-cart py-3 fw-extrabold" id="btn-add-custom-mix-to-cart" onclick="addCustomMixToCart()">
+                <i class="bi bi-bag-plus-fill me-2"></i> ADD CUSTOM MIX TO CART
+              </button>
+              
+              <button type="button" class="btn btn-outline-secondary btn-sm py-2 rounded-3 fw-bold" id="btn-reset-custom-mix" onclick="resetCustomSnackMix()">
+                <i class="bi bi-arrow-counterclockwise me-1"></i> Reset Mix
+              </button>
+            </div>
+          </div>
+        </aside>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- How It Works Step Section -->
+  <section class="container my-5 py-3">
+    <div class="text-center mb-4">
+      <span class="badge bg-light text-navy border rounded-pill px-3 py-2 fw-bold mb-2">HOW IT WORKS</span>
+      <h3 class="fw-extrabold text-navy">3 Easy Steps to Your Perfect Snack</h3>
+    </div>
+    <div class="row g-4 text-center">
+      <div class="col-md-4">
+        <div class="p-4 bg-white rounded-4 border h-100 shadow-sm">
+          <div class="display-6 text-warning mb-2">1️⃣</div>
+          <h5 class="fw-extrabold text-navy mb-2">Pick Your Ingredients</h5>
+          <p class="text-muted small mb-0">Select from 12 crunchy favourites like Chips, Sev, Peanuts, Gathiya, and Roasted Lentils.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="p-4 bg-white rounded-4 border h-100 shadow-sm">
+          <div class="display-6 text-warning mb-2">2️⃣</div>
+          <h5 class="fw-extrabold text-navy mb-2">Tune the Weight</h5>
+          <p class="text-muted small mb-0">Use 25g increments to customize portions between 200g and 500g total packet weight.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="p-4 bg-white rounded-4 border h-100 shadow-sm">
+          <div class="display-6 text-warning mb-2">3️⃣</div>
+          <h5 class="fw-extrabold text-navy mb-2">Freshly Mixed & Shipped</h5>
+          <p class="text-muted small mb-0">We freshly blend your chosen recipe in 100% groundnut oil and deliver it straight to your doorstep.</p>
+        </div>
+      </div>
     </div>
   </section>
 
