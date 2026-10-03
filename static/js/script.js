@@ -4717,9 +4717,115 @@ function initGlobalScrollRevealAndAnimations() {
   }
 }
 
+// --------------------------------------------------------------------------
+// 22. Global Hash Deep-Linking & In-Page Smooth Scroll Engine
+// --------------------------------------------------------------------------
+function scrollToHashTarget(hashString, isSmooth = true) {
+  if (!hashString || hashString === '#' || hashString === '#!') return false;
+  
+  const rawId = hashString.replace(/^#/, '');
+  // Resolve possible aliases
+  let targetEl = document.getElementById(rawId) || document.querySelector(hashString);
+  
+  if (!targetEl && rawId === 'contact-faqs') {
+    targetEl = document.getElementById('faq-section');
+  } else if (!targetEl && rawId === 'faq-section') {
+    targetEl = document.getElementById('contact-faqs');
+  }
+
+  if (targetEl) {
+    const navBarHeight = 85;
+    const elementPosition = targetEl.getBoundingClientRect().top + window.pageYOffset;
+    const offsetPosition = Math.max(0, elementPosition - navBarHeight);
+
+    window.scrollTo({
+      top: offsetPosition,
+      behavior: isSmooth ? 'smooth' : 'auto'
+    });
+
+    // If target is FAQ section or accordion, ensure first item is expanded
+    if (rawId.includes('faq') || targetEl.id.includes('faq') || targetEl.querySelector('#contactFaqAccordion')) {
+      const firstCollapse = targetEl.querySelector('.accordion-collapse');
+      if (firstCollapse && !firstCollapse.classList.contains('show') && window.bootstrap && window.bootstrap.Collapse) {
+        const bsCollapse = new window.bootstrap.Collapse(firstCollapse, { toggle: true });
+      }
+    }
+
+    // Add subtle visual feedback highlight
+    targetEl.classList.remove('section-target-highlight');
+    void targetEl.offsetWidth; // trigger reflow
+    targetEl.classList.add('section-target-highlight');
+    setTimeout(() => {
+      targetEl.classList.remove('section-target-highlight');
+    }, 3200);
+
+    return true;
+  }
+  return false;
+}
+
+function initGlobalHashNavigation() {
+  // Handle current URL hash on initial page load
+  if (window.location.hash) {
+    setTimeout(() => {
+      scrollToHashTarget(window.location.hash, true);
+    }, 200);
+  }
+
+  // Listen for hash changes in URL
+  window.addEventListener('hashchange', () => {
+    if (window.location.hash) {
+      scrollToHashTarget(window.location.hash, true);
+    }
+  });
+
+  // Intercept in-page and same-page footer / header anchor link clicks
+  document.addEventListener('click', (e) => {
+    const anchor = e.target.closest('a[href*="#"]');
+    if (!anchor) return;
+
+    const href = anchor.getAttribute('href');
+    if (!href || href === '#' || href.startsWith('javascript:')) return;
+
+    try {
+      const url = new URL(anchor.href, window.location.href);
+      const isCurrentPage = (url.pathname === window.location.pathname || 
+                             url.pathname.endsWith(window.location.pathname.split('/').pop())) &&
+                            url.search === window.location.search;
+
+      if (isCurrentPage && url.hash) {
+        const handled = scrollToHashTarget(url.hash, true);
+        if (handled) {
+          e.preventDefault();
+          history.pushState(null, '', url.hash);
+        }
+      }
+    } catch(err) {
+      // Relative hash fallback
+      if (href.startsWith('#')) {
+        const handled = scrollToHashTarget(href, true);
+        if (handled) {
+          e.preventDefault();
+          history.pushState(null, '', href);
+        }
+      }
+    }
+  });
+}
+
 // Call on startup
 document.addEventListener('DOMContentLoaded', () => {
   initGlobalScrollRevealAndAnimations();
+  initGlobalHashNavigation();
 });
+
+window.addEventListener('load', () => {
+  if (window.location.hash) {
+    setTimeout(() => {
+      scrollToHashTarget(window.location.hash, true);
+    }, 100);
+  }
+});
+
 
 
