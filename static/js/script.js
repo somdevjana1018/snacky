@@ -111,29 +111,7 @@ const SNACKY_PRODUCTS = [
   { id: 317, title: "Baked Beetroot Munch", category: "healthy", price: 85, mrp: 105, discount: 19, weight: "60 g", packSize: "100 gram pack", dateAdded: "2026-04-03", rating: 4.7, salesCount: 530, frameClass: "frame-orange", inStock: true, tags: ["No Palm Oil"], image: "../static/images/snack_chips.jpg" },
   { id: 318, title: "Multi-Seed Energy Bar", category: "healthy", price: 50, mrp: 65, discount: 23, weight: "40 g", packSize: "100 gram pack", dateAdded: "2026-01-26", rating: 4.8, salesCount: 880, frameClass: "frame-orange", inStock: true, tags: ["High Fiber"], image: "../static/images/snack_makhana.jpg" },
   { id: 319, title: "Dry Fruit Laddu", category: "healthy", price: 190, mrp: 240, discount: 21, weight: "150 g", packSize: "135 gram pack", dateAdded: "2026-03-27", rating: 4.9, salesCount: 1040, frameClass: "frame-orange", inStock: true, tags: ["Fasting Special / Vrat"], image: "../static/images/paachratan_mixture.jpg" },
-  { id: 320, title: "Baked Mathri Whole Wheat", category: "healthy", price: 90, mrp: 110, discount: 18, weight: "140 g", packSize: "135 gram pack", dateAdded: "2026-02-11", rating: 4.7, salesCount: 660, frameClass: "frame-orange", inStock: true, tags: ["High Fiber"], image: "../static/images/snack_chakli.jpg" },
-
-  // --- SIGNATURE RANGE (20 Items) ---
-  { id: 401, title: "Tapioca Chips", category: "chips", price: 110, mrp: 140, discount: 21, weight: "120 g", packSize: "135 gram pack", dateAdded: "2026-01-02", rating: 4.9, salesCount: 1310, frameClass: "frame-purple", inStock: true, tags: ["Signature Range", "No Palm Oil"], image: "../static/images/signature_tapioca_chips.jpg" },
-  { id: 402, title: "Signature Hot Chips", category: "chips", price: 95, mrp: 120, discount: 21, weight: "100 g", packSize: "100 gram pack", dateAdded: "2026-02-17", rating: 4.9, salesCount: 1510, frameClass: "frame-red", inStock: true, tags: ["Signature Range", "No Palm Oil"], image: "../static/images/signature_hot_chips.jpg" },
-  { id: 403, title: "Nylon Sev", category: "namkeen", price: 80, mrp: 100, discount: 20, weight: "150 g", packSize: "135 gram pack", dateAdded: "2026-03-09", rating: 4.8, salesCount: 890, frameClass: "frame-green", inStock: true, tags: ["Signature Range", "No Palm Oil"], image: "../static/images/aloo_bhujia.jpg" },
-  { id: 404, title: "Manglori Mixture", category: "namkeen", price: 120, mrp: 150, discount: 20, weight: "160 g", packSize: "200 grams - Value Pack", dateAdded: "2026-04-14", rating: 4.8, salesCount: 780, frameClass: "frame-green", inStock: true, tags: ["Signature Range", "No Palm Oil"], image: "../static/images/paachratan_mixture.jpg" },
-  { id: 405, title: "Truffle & Herb Chips", category: "chips", price: 130, mrp: 160, discount: 19, weight: "110 g", packSize: "100 gram pack", dateAdded: "2026-03-31", rating: 4.9, salesCount: 1140, frameClass: "frame-purple", inStock: true, tags: ["Signature Range"], image: "../static/images/signature_tapioca_chips.jpg" },
-  { id: 406, title: "Smoky BBQ Cashews", category: "healthy", price: 240, mrp: 300, discount: 20, weight: "150 g", packSize: "135 gram pack", dateAdded: "2026-02-25", rating: 4.9, salesCount: 1060, frameClass: "frame-red", inStock: true, tags: ["Signature Range", "Premium Dryfruits"], image: "../static/images/paachratan_mixture.jpg" },
-  { id: 407, title: "Spicy Chili Lime Almonds", category: "healthy", price: 220, mrp: 275, discount: 20, weight: "150 g", packSize: "135 gram pack", dateAdded: "2026-01-21", rating: 4.8, salesCount: 910, frameClass: "frame-red", inStock: true, tags: ["Signature Range"], image: "../static/images/paachratan_mixture.jpg" },
-  { id: 408, title: "Sea Salt Pretzels", category: "chips", price: 99, mrp: 125, discount: 21, weight: "100 g", packSize: "100 gram pack", dateAdded: "2026-04-09", rating: 4.7, salesCount: 680, frameClass: "frame-green", inStock: true, tags: ["Signature Range"], image: "../static/images/snack_chips.jpg" },
-  { id: 409, title: "Garlic Bhujia Special", category: "namkeen", price: 85, mrp: 110, discount: 23, weight: "150 g", packSize: "135 gram pack", dateAdded: "2026-02-09", rating: 4.8, salesCount: 870, frameClass: "frame-orange", inStock: true, tags: ["Signature Range", "No Palm Oil"], image: "../static/images/aloo_bhujia.jpg" },
-  { id: 410, title: "Signature Poha Mix", category: "namkeen", price: 80, mrp: 100, discount: 20, weight: "120 g", packSize: "100 gram pack", dateAdded: "2026-03-04", rating: 4.8, salesCount: 790, frameClass: "frame-orange", inStock: true, tags: ["Signature Range", "Groundnut Oil"], image: "../static/images/paachratan_mixture.jpg" },
-  { id: 411, title: "Soya Katori Supreme", category: "chips", price: 75, mrp: 95, discount: 21, weight: "100 g", packSize: "100 gram pack", dateAdded: "2026-01-11", rating: 4.7, salesCount: 670, frameClass: "frame-teal", inStock: true, tags: ["Signature Range"], image: "../static/images/snack_chips.jpg" },
-  { id: 412, title: "Quinoa Jalapeno Puffs", category: "healthy", price: 90, mrp: 115, discount: 22, weight: "70 g", packSize: "100 gram pack", dateAdded: "2026-04-16", rating: 4.8, salesCount: 820, frameClass: "frame-green", inStock: true, tags: ["Signature Range", "Roasted"], image: "../static/images/snack_makhana.jpg" },
-  { id: 413, title: "Peri Peri Makhana", category: "healthy", price: 140, mrp: 175, discount: 20, weight: "80 g", packSize: "100 gram pack", dateAdded: "2026-02-13", rating: 4.9, salesCount: 1390, frameClass: "frame-red", inStock: true, tags: ["Signature Range", "Roasted"], image: "../static/images/snack_makhana.jpg" },
-  { id: 414, title: "Caramelized Roasted Nuts", category: "healthy", price: 250, mrp: 310, discount: 19, weight: "150 g", packSize: "135 gram pack", dateAdded: "2026-03-21", rating: 4.9, salesCount: 1180, frameClass: "frame-purple", inStock: true, tags: ["Signature Range"], image: "../static/images/paachratan_mixture.jpg" },
-  { id: 415, title: "Chatpata Chana Jor", category: "namkeen", price: 70, mrp: 90, discount: 22, weight: "140 g", packSize: "135 gram pack", dateAdded: "2026-01-29", rating: 4.7, salesCount: 730, frameClass: "frame-orange", inStock: true, tags: ["Signature Range"], image: "../static/images/snack_namkeen.jpg" },
-  { id: 416, title: "Kabab Banana Chips", category: "chips", price: 85, mrp: 110, discount: 23, weight: "100 g", packSize: "100 gram pack", dateAdded: "2026-03-17", rating: 4.8, salesCount: 960, frameClass: "frame-teal", inStock: true, tags: ["Signature Range"], image: "../static/images/banana_chips.jpg" },
-  { id: 417, title: "Schezwan Sev Sticks", category: "namkeen", price: 80, mrp: 100, discount: 20, weight: "140 g", packSize: "135 gram pack", dateAdded: "2026-02-02", rating: 4.8, salesCount: 840, frameClass: "frame-red", inStock: true, tags: ["Signature Range"], image: "../static/images/aloo_bhujia.jpg" },
-  { id: 418, title: "Panchratan Royal Mix", category: "namkeen", price: 190, mrp: 240, discount: 21, weight: "160 g", packSize: "200 grams - Value Pack", dateAdded: "2026-04-06", rating: 4.9, salesCount: 1120, frameClass: "frame-purple", inStock: true, tags: ["Signature Range"], image: "../static/images/paachratan_mixture.jpg" },
-  { id: 419, title: "Cheese Herb Corn Balls", category: "healthy", price: 85, mrp: 105, discount: 19, weight: "75 g", packSize: "100 gram pack", dateAdded: "2026-01-23", rating: 4.7, salesCount: 650, frameClass: "frame-yellow", inStock: true, tags: ["Signature Range"], image: "../static/images/snack_makhana.jpg" },
-  { id: 420, title: "Masala Roasted Peanuts", category: "namkeen", price: 65, mrp: 85, discount: 24, weight: "150 g", packSize: "135 gram pack", dateAdded: "2026-03-26", rating: 4.8, salesCount: 820, frameClass: "frame-orange", inStock: true, tags: ["Signature Range"], image: "../static/images/snack_namkeen.jpg" }
+  { id: 320, title: "Baked Mathri Whole Wheat", category: "healthy", price: 90, mrp: 110, discount: 18, weight: "140 g", packSize: "135 gram pack", dateAdded: "2026-02-11", rating: 4.7, salesCount: 660, frameClass: "frame-orange", inStock: true, tags: ["High Fiber"], image: "../static/images/snack_chakli.jpg" }
 ];
 
 // --------------------------------------------------------------------------
@@ -671,7 +649,7 @@ function renderProductsGrid() {
 
   if (countHeader) countHeader.textContent = `${filtered.length} products available`;
   if (categoryHeader) {
-    const titleMap = { all: 'All Products', signature: 'Signature Range', namkeen: 'Namkeens', chips: 'Chips & Wafers', healthy: 'Healthy Snacks' };
+    const titleMap = { all: 'All Products', namkeen: 'Namkeens', chips: 'Chips & Wafers', healthy: 'Healthy Snacks' };
     categoryHeader.textContent = titleMap[currentCategoryFilter] || 'Products';
   }
 
@@ -886,8 +864,8 @@ function getProductDetailsInfo(prod) {
     description = `Nutritious, high-fiber ${prod.title} slow-roasted to crispy perfection with minimal oil and wholesome natural seeds and spices.`;
     ingredients = `Whole Grains / Superfoods, Edible Vegetable Oil (Spray), Rock Salt, Herbs & Natural Spices.`;
   } else {
-    description = `Premium gourmet ${prod.title} from Snacky's Signature Range, crafted with handpicked ingredients and unique artisan seasoning in pure groundnut oil.`;
-    ingredients = `Handpicked Premium Ingredients, Groundnut Oil, Gourmet Spices, Natural Extracts, Rock Salt.`;
+    description = `Delicious and crispy ${prod.title} crafted with premium quality ingredients and traditional recipes.`;
+    ingredients = `Quality Ingredients, Edible Vegetable Oil, Spices, Rock Salt.`;
   }
 
   return {
@@ -4367,7 +4345,7 @@ function renderRelatedProducts(currentProd) {
 
   if (viewAllLink) {
     viewAllLink.href = `products.html?category=${currentProd.category}`;
-    const catTitles = { namkeen: 'Namkeens', chips: 'Chips & Wafers', healthy: 'Healthy Snacks', signature: 'Signature Range' };
+    const catTitles = { namkeen: 'Namkeens', chips: 'Chips & Wafers', healthy: 'Healthy Snacks' };
     viewAllLink.innerHTML = `View All ${catTitles[currentProd.category] || 'Snacks'} <i class="bi bi-arrow-right ms-1"></i>`;
   }
 
