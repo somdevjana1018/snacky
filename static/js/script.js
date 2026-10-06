@@ -1177,6 +1177,38 @@ function initNavbarLiveSearch() {
       });
     }
   });
+
+  // Mobile Search Bar Toggle & Handling
+  const mobileToggleBtn = document.getElementById('mobile-search-toggle-btn');
+  const mobileDropdown = document.getElementById('mobile-search-dropdown');
+  const mobileInput = document.getElementById('mobile-search-input');
+  const mobileCloseBtn = document.getElementById('mobile-search-close-btn');
+
+  if (mobileToggleBtn && mobileDropdown && mobileInput) {
+    mobileToggleBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      mobileDropdown.classList.toggle('is-open');
+      if (mobileDropdown.classList.contains('is-open')) {
+        setTimeout(() => mobileInput.focus(), 80);
+      }
+    });
+
+    if (mobileCloseBtn) {
+      mobileCloseBtn.addEventListener('click', () => {
+        mobileDropdown.classList.remove('is-open');
+      });
+    }
+
+    mobileInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        const val = mobileInput.value.trim();
+        if (val) {
+          window.location.href = `search.html?q=${encodeURIComponent(val)}&focus=1`;
+        }
+      }
+    });
+  }
 }
 
 // --------------------------------------------------------------------------

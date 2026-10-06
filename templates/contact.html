@@ -34,16 +34,13 @@
 
   <!-- Navigation Bar (#main-navbar) -->
   <nav class="navbar navbar-expand-lg main-navbar" id="main-navbar">
-    <div class="container">
+    <div class="container d-flex align-items-center justify-content-between">
       <a class="brand-logo-container" href="index.html">
         <img src="../static/images/snacky_logo_transparent.png" alt="Snacky Logo" class="brand-logo-img">
       </a>
 
-      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <div class="collapse navbar-collapse" id="navbarContent">
+      <!-- Center Navigation Links (Collapses on Mobile) -->
+      <div class="collapse navbar-collapse justify-content-center" id="navbarContent">
         <ul class="navbar-nav mb-2 mb-lg-0 gap-1 gap-lg-2">
           <li class="nav-item">
             <a class="nav-link nav-link-custom" href="index.html">Home</a>
@@ -60,24 +57,56 @@
           <li class="nav-item">
             <a class="nav-link nav-link-custom active" href="contact.html">Contact</a>
           </li>
-        </ul>
-
-        <div class="nav-actions-right">
-          <div class="nav-search-container">
-            <input type="text" class="nav-search-input" id="nav-search-input" placeholder="Search snacks...">
-            <i class="bi bi-search nav-search-icon" id="nav-search-trigger"></i>
-          </div>
-
-          <div id="auth-nav-container">
-            <a href="auth.html" class="nav-action-btn" id="nav-user-account-btn" title="Account / Login" aria-label="Account">
-              <i class="bi bi-person"></i>
+          <li class="nav-item d-lg-none mt-2 pt-2 border-top">
+            <a class="nav-link nav-link-custom d-flex align-items-center gap-2" href="auth.html">
+              <i class="bi bi-person-circle fs-5"></i> <span>My Account / Login</span>
             </a>
-          </div>
+          </li>
+        </ul>
+      </div>
 
-          <button class="nav-action-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#cartOffcanvas"
-            title="Shopping Cart">
-            <i class="bi bi-cart3"></i>
-            <span class="cart-count-badge">0</span>
+      <!-- Right Header Actions (Desktop: Search + Profile + Cart; Mobile: Search Icon + Cart Icon + Hamburger) -->
+      <div class="d-flex align-items-center gap-2 gap-md-3 nav-header-actions-group">
+        <!-- Desktop Search Bar -->
+        <div class="nav-search-container d-none d-lg-block">
+          <input type="text" class="nav-search-input" id="nav-search-input" placeholder="Search snacks...">
+          <i class="bi bi-search nav-search-icon" id="nav-search-trigger"></i>
+        </div>
+
+        <!-- Mobile Search Icon Button -->
+        <button class="nav-icon-link d-lg-none" id="mobile-search-toggle-btn" type="button" aria-label="Search" title="Search">
+          <i class="bi bi-search"></i>
+        </button>
+
+        <!-- Desktop Profile Icon -->
+        <div id="auth-nav-container" class="d-none d-lg-flex">
+          <a href="auth.html" class="nav-action-btn" id="nav-user-account-btn" title="Account / Login" aria-label="Account">
+            <i class="bi bi-person"></i>
+          </a>
+        </div>
+
+        <!-- Cart Icon Button -->
+        <button class="nav-icon-link nav-cart-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#cartOffcanvas"
+          title="Shopping Cart" aria-label="Shopping Cart">
+          <i class="bi bi-cart3"></i>
+          <span class="cart-count-badge">0</span>
+        </button>
+
+        <!-- Mobile Hamburger Menu Button (3 Clean Lines) -->
+        <button class="navbar-toggler border-0 p-0 ms-1 d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation" title="Toggle Menu">
+          <i class="bi bi-list navbar-hamburger-icon"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Slide-down Mobile Search Bar -->
+    <div class="mobile-search-dropdown-bar d-lg-none" id="mobile-search-dropdown">
+      <div class="container py-2">
+        <div class="mobile-search-inner-box">
+          <i class="bi bi-search mobile-search-box-icon"></i>
+          <input type="text" class="mobile-search-input" id="mobile-search-input" placeholder="Search namkeens, chips, snacks...">
+          <button class="mobile-search-close-btn" id="mobile-search-close-btn" type="button" aria-label="Close search">
+            <i class="bi bi-x-lg"></i>
           </button>
         </div>
       </div>
