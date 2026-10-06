@@ -1185,12 +1185,15 @@ a:hover {
 }
 
 .category-blob-title {
+  font-family: 'Outfit', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   font-size: 1.35rem;
   font-weight: 800;
-  color: #0F2942;
+  color: #0A395C;
   text-align: center;
   transition: color 0.25s ease, transform 0.25s ease;
-  margin: 0;
+  margin-top: 6px;
+  margin-bottom: 0;
+  letter-spacing: -0.01em;
 }
 
 .category-blob-card:hover .category-blob-title {
@@ -9892,75 +9895,7 @@ button, a, input, select, textarea, .btn, .nav-link, .category-tab-btn, .clickab
   }
 }
 
-/* --- 5. Category Blobs Section --- */
-.category-blob-card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-decoration: none;
-  width: 100%;
-  max-width: 240px;
-  margin: 0 auto;
-  transition: transform 0.25s ease;
-}
-
-.category-blob-frame {
-  position: relative;
-  width: 100%;
-  height: 140px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.category-blob-shape {
-  position: absolute;
-  width: 88%;
-  height: 88%;
-  border-radius: 50% 50% 45% 55% / 55% 45% 55% 45%;
-  background: #FAF2E6;
-  transition: all 0.3s ease;
-}
-
-.category-blob-card:hover .category-blob-shape {
-  transform: scale(1.05) rotate(4deg);
-  background: #F2E4D0;
-}
-
-.category-blob-title {
-  font-size: 1.05rem;
-  font-weight: 800;
-  color: #0B1528;
-  margin-top: 10px;
-  text-align: center;
-}
-
-@media (max-width: 767.98px) {
-  .category-blob-frame {
-    height: 115px;
-  }
-  .category-blob-title {
-    font-size: 0.92rem;
-    margin-top: 6px;
-  }
-  .category-blob-frame .pouch-front,
-  .category-blob-frame .pouch-back {
-    max-height: 80px !important;
-  }
-}
-
-@media (max-width: 480px) {
-  .category-blob-frame {
-    height: 96px;
-  }
-  .category-blob-title {
-    font-size: 0.84rem;
-  }
-  .category-blob-frame .pouch-front,
-  .category-blob-frame .pouch-back {
-    max-height: 68px !important;
-  }
-}
+/* (Category Blobs are styled in main section lines 1090-1200) */
 
 /* --- 6. Product Cards & Product Grid --- */
 .product-card {
