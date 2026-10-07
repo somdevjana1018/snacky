@@ -198,12 +198,14 @@ function addToCart(productId, weight, qty = 1, customPrice = null, customMrp = n
   } else {
     snackyCart.push({
       id: prod.id,
-      title: prod.title,
+      title: prod.title || prod.name || 'Snack Item',
+      name: prod.title || prod.name || 'Snack Item',
       price: unitPrice,
       mrp: unitMrp,
       weight: selectedWeight,
-      image: prod.image,
-      qty: qty
+      image: prod.image || '',
+      qty: qty,
+      isCustomMix: Boolean(prod.isCustomMix)
     });
   }
 
@@ -303,9 +305,11 @@ function renderCheckoutItems() {
       customMixHtml = `<div class="text-muted fs-8 mt-1"><i class="bi bi-stars text-warning me-1"></i>${ingListStr}</div>`;
     }
 
-    const imgHtml = (item.isCustomMix || !item.image)
-      ? ''
-      : `<img src="${item.image}" alt="${item.title}" class="rounded-2" style="width: 44px; height: 44px; object-fit: cover;">`;
+    const imgPath = (item.isCustomMix || (item.id && String(item.id).startsWith('custom_mix')) || (item.title && item.title.toLowerCase().includes('custom mix')))
+      ? '../static/images/mix_snack_custom_blend.png'
+      : (item.image || resolveProductImage(item));
+
+    const imgHtml = `<img src="${imgPath}" alt="${item.title}" class="rounded-2" style="width: 44px; height: 44px; object-fit: cover;">`;
 
     itemsHtml += `
       <div class="d-flex align-items-center justify-content-between py-2 border-bottom">
@@ -385,9 +389,11 @@ function renderOffcanvasCart() {
         </a>`;
     }
 
-    const imgHtml = (item.isCustomMix || !item.image)
-      ? ''
-      : `<img src="${item.image}" alt="${item.title}" class="cart-item-img">`;
+    const imgPath = (item.isCustomMix || (item.id && String(item.id).startsWith('custom_mix')) || (item.title && item.title.toLowerCase().includes('custom mix')))
+      ? '../static/images/mix_snack_custom_blend.png'
+      : (item.image || resolveProductImage(item));
+
+    const imgHtml = `<img src="${imgPath}" alt="${item.title}" class="cart-item-img" style="object-fit: cover;">`;
 
     html += `
       <div class="cart-item-card ${item.isCustomMix ? 'cart-custom-mix-card' : ''}">
@@ -2449,16 +2455,22 @@ function processPaymentSuccess() {
   let subtotal = 0;
   const orderItems = snackyCart.map(item => {
     const p = parseFloat(item.price) || 0;
-    const q = parseInt(item.quantity) || 1;
+    const q = parseInt(item.qty || item.quantity) || 1;
     subtotal += p * q;
+    const isMix = Boolean(item.isCustomMix || (item.id && String(item.id).startsWith('custom_mix')) || (item.ingredients && item.ingredients.length > 0) || (item.title && item.title.toLowerCase().includes('custom mix')) || (item.name && item.name.toLowerCase().includes('custom mix')));
+    const itemName = (item.name && item.name !== 'undefined') ? item.name : ((item.title && item.title !== 'undefined') ? item.title : (isMix ? 'Custom Snack Mix' : 'Snack Item'));
+    
     return {
       id: item.id || 'snack-' + Date.now(),
-      name: item.name,
-      weight: item.weight || '100 g',
+      name: itemName,
+      title: itemName,
+      weight: item.weight || (isMix ? '200 g' : '100 g'),
       price: p,
       qty: q,
-      image: item.image || '../static/images/snack_chips.jpg',
-      icon: "🍿"
+      isCustomMix: isMix,
+      ingredients: item.ingredients || [],
+      image: isMix ? "../static/images/mix_snack_custom_blend.png" : (item.image || resolveProductImage({ id: item.id, name: itemName })),
+      icon: isMix ? "🥨" : "🍿"
     };
   });
 
@@ -2755,7 +2767,12 @@ const DEFAULT_DEMO_ORDERS = [
 let currentTrackedOrderId = "ID1234";
 
 function resolveProductImage(item) {
-  if (item && item.image && typeof item.image === 'string' && !item.image.includes('placeholder')) {
+  if (!item) return "../static/images/products/paachratan_mixture_front.jpg";
+  const isMix = Boolean(item.isCustomMix || (item.id && String(item.id).startsWith('custom_mix')) || (item.ingredients && item.ingredients.length > 0) || (item.name && item.name.toLowerCase().includes('custom mix')) || (item.title && item.title.toLowerCase().includes('custom mix')));
+  if (isMix) {
+    return "../static/images/mix_snack_custom_blend.png";
+  }
+  if (item.image && typeof item.image === 'string' && !item.image.includes('placeholder') && item.image !== '' && !item.image.includes('undefined')) {
     return item.image;
   }
   if (typeof SNACKY_PRODUCTS !== 'undefined' && Array.isArray(SNACKY_PRODUCTS)) {
@@ -2791,10 +2808,20 @@ function getStoredOrders() {
               addressSnippet: o.addressSnippet || "No 4, Good...",
               actionText: o.actionText || (o.stepIndex >= 3 ? "Track Shipment" : "Ready to ship"),
               recipient: o.recipient || { name: "Customer", phone: "+91 9876543210", addressType: "HOME", fullAddress: "No 4, Good Shepherd Lane, Delhi - 110009" },
-              items: Array.isArray(o.items) && o.items.length > 0 ? o.items.map(it => ({
-                ...it,
-                image: resolveProductImage(it)
-              })) : [
+              items: Array.isArray(o.items) && o.items.length > 0 ? o.items.map(it => {
+                const isMix = Boolean(it.isCustomMix || (it.id && String(it.id).startsWith('custom_mix')) || (it.ingredients && it.ingredients.length > 0) || (it.name && it.name.toLowerCase().includes('custom mix')) || (it.title && it.title.toLowerCase().includes('custom mix')));
+                const itemName = (it.name && it.name !== 'undefined') ? it.name : ((it.title && it.title !== 'undefined') ? it.title : (isMix ? 'Custom Snack Mix' : 'Paachratan Mixture'));
+                return {
+                  ...it,
+                  id: it.id || 101,
+                  name: itemName,
+                  title: itemName,
+                  weight: it.weight || (isMix ? '200 g' : '100 g'),
+                  isCustomMix: isMix,
+                  ingredients: it.ingredients || [],
+                  image: isMix ? '../static/images/mix_snack_custom_blend.png' : (it.image && !it.image.includes('undefined') ? it.image : resolveProductImage({ id: it.id, name: itemName }))
+                };
+              }) : [
                 { id: 101, name: "Paachratan Mixture", weight: "120 g", price: 80, qty: 2, image: "../static/images/products/paachratan_mixture_front.jpg" },
                 { id: 102, name: "Millet Chakli", weight: "150 g", price: 95, qty: 1, image: "../static/images/products/millet_chakli_front.jpg" }
               ],
@@ -2996,6 +3023,34 @@ function renderTrackedOrder(query) {
   });
 
   if (!matchedOrder) {
+    // If user currently has cart items, populate default tracking with active cart items
+    let demoItems = [];
+    const currentCart = getFreshCart();
+    if (currentCart && currentCart.length > 0) {
+      demoItems = currentCart.map(item => {
+        const isMix = Boolean(item.isCustomMix || (item.id && String(item.id).startsWith('custom_mix')) || (item.ingredients && item.ingredients.length > 0) || (item.title && item.title.toLowerCase().includes('custom mix')) || (item.name && item.name.toLowerCase().includes('custom mix')));
+        const itemName = (item.name && item.name !== 'undefined') ? item.name : ((item.title && item.title !== 'undefined') ? item.title : (isMix ? 'Custom Snack Mix' : 'Snack Item'));
+        return {
+          id: item.id,
+          name: itemName,
+          title: itemName,
+          weight: item.weight || (isMix ? '200 g' : '100 g'),
+          price: item.price || 80,
+          qty: item.qty || 1,
+          isCustomMix: isMix,
+          ingredients: item.ingredients || [],
+          image: isMix ? "../static/images/mix_snack_custom_blend.png" : (item.image || resolveProductImage({ id: item.id, name: itemName }))
+        };
+      });
+    } else {
+      demoItems = [
+        { id: 101, name: "Paachratan Mixture", weight: "120 g", price: 80, qty: 2, image: "../static/images/products/paachratan_mixture_front.jpg" },
+        { id: 102, name: "Millet Chakli", weight: "150 g", price: 95, qty: 1, image: "../static/images/products/millet_chakli_front.jpg" }
+      ];
+    }
+
+    const subtotalCalc = demoItems.reduce((sum, it) => sum + ((parseFloat(it.price) || 0) * (parseInt(it.qty) || 1)), 0);
+
     matchedOrder = {
       id: query.toUpperCase().startsWith('SNK-') || query.toUpperCase().startsWith('ID') ? query.toUpperCase() : `ID${query}`,
       status: "Order In Transit",
@@ -3012,11 +3067,8 @@ function renderTrackedOrder(query) {
       actionText: "Ready to ship",
       awbNumber: "DHL-" + Math.floor(10000000 + Math.random() * 90000000),
       recipient: { name: "Snacky Customer", phone: "+91 9876543210", addressType: "HOME", fullAddress: "No 4, Good Shepherd Lane, Delhi - 110009" },
-      items: [
-        { id: 101, name: "Paachratan Mixture", weight: "120 g", price: 80, qty: 2, image: "../static/images/products/paachratan_mixture_front.jpg" },
-        { id: 102, name: "Millet Chakli", weight: "150 g", price: 95, qty: 1, image: "../static/images/products/millet_chakli_front.jpg" }
-      ],
-      billing: { subtotal: 255, delivery: 0, discount: 0, total: 255, paymentMode: "Paid Online via UPI" }
+      items: demoItems,
+      billing: { subtotal: subtotalCalc, delivery: subtotalCalc >= 199 ? 0 : 49, discount: 0, total: subtotalCalc >= 199 ? subtotalCalc : subtotalCalc + 49, paymentMode: "Paid Online via UPI" }
     };
   }
 
@@ -3048,7 +3100,7 @@ function renderTrackedOrder(query) {
   if (transitStatusEl) transitStatusEl.textContent = (matchedOrder.stepIndex >= 4) ? "Product Delivered" : "Product in Transit";
   if (estTimeEl) estTimeEl.textContent = matchedOrder.estDays || "EST: 3 days";
 
-  // Stepper State & Time
+  // Stepper State & Exact Center-Stop Line
   const fillLine = document.getElementById('stepper-fill-bar');
   const stepIdx = matchedOrder.stepIndex || 2;
 
@@ -3071,8 +3123,14 @@ function renderTrackedOrder(query) {
   });
 
   if (fillLine) {
-    const fillWidths = { 1: '15%', 2: '48%', 3: '78%', 4: '100%' };
-    fillLine.style.width = fillWidths[stepIdx] || '48%';
+    // Fill spans precisely to the center of each step node without extending beyond Delivered
+    const fillWidths = {
+      1: '0px',
+      2: 'calc((100% - (var(--stepper-pad-x, 30px) * 2)) * 0.25)',
+      3: 'calc((100% - (var(--stepper-pad-x, 30px) * 2)) * 0.50)',
+      4: 'calc((100% - (var(--stepper-pad-x, 30px) * 2)) * 0.75)'
+    };
+    fillLine.style.width = fillWidths[stepIdx] || 'calc((100% - (var(--stepper-pad-x, 30px) * 2)) * 0.50)';
   }
 
   const stepTime1 = document.getElementById('stepper-time-1');
@@ -3111,26 +3169,63 @@ function renderTrackedOrder(query) {
   }
   if (totalPaid) totalPaid.textContent = `₹${(parseFloat(bill.total) || 0).toFixed(2)}`;
 
-  // E. Order Info Products List (With authentic snack images)
+  // E. Order Info Products List (With dynamic items & no product image for Mix-Your-Snack)
   const itemsContainer = document.getElementById('track-order-items-list');
   const items = matchedOrder.items || [];
 
   if (itemsContainer) {
     itemsContainer.innerHTML = items.map(it => {
-      const imgSrc = resolveProductImage(it);
+      const isMix = Boolean(it.isCustomMix || (it.id && String(it.id).startsWith('custom_mix')) || (it.ingredients && it.ingredients.length > 0) || (it.name && it.name.toLowerCase().includes('custom mix')) || (it.title && it.title.toLowerCase().includes('custom mix')));
+      const itemName = (it.name && it.name !== 'undefined') ? it.name : ((it.title && it.title !== 'undefined') ? it.title : (isMix ? 'Custom Snack Mix' : 'Snack Item'));
       const unitPrice = parseFloat(it.price) || 0;
       const q = parseInt(it.qty) || 1;
       const total = unitPrice * q;
 
+      let imageBoxHtml = '';
+      let detailsHtml = '';
+
+      if (isMix) {
+        // Mix Your Snack: show custom mix bowl image and ingredients blend
+        let ingText = 'Custom Blend';
+        if (it.ingredients && Array.isArray(it.ingredients) && it.ingredients.length > 0) {
+          ingText = it.ingredients.map(ing => `${ing.name || ing.id} (${ing.qtyGrams || ''}g)`).join(' + ');
+        }
+        const mixImgSrc = (it.image && it.image !== '' && !it.image.includes('undefined'))
+          ? it.image
+          : '../static/images/mix_snack_custom_blend.png';
+
+        imageBoxHtml = `
+          <div class="track-product-img-box">
+            <img src="${mixImgSrc}" alt="${itemName}" class="track-product-img" style="object-fit: cover;" onerror="this.src='../static/images/mix_snack_custom_blend.png'">
+          </div>
+        `;
+        detailsHtml = `
+          <h6 class="track-product-name">${itemName}</h6>
+          <span class="track-product-weight">${it.weight || '250 g'} • <span class="text-orange fw-bold">Custom Mix</span></span>
+          <div class="track-mix-ingredients-pill text-truncate" title="${ingText}">
+            <i class="bi bi-stars text-warning me-1"></i>${ingText}
+          </div>
+        `;
+      } else {
+        // Standard item: authentic product image and clean title
+        const imgSrc = it.image && !it.image.includes('undefined') ? it.image : resolveProductImage({ id: it.id, name: itemName });
+        imageBoxHtml = `
+          <div class="track-product-img-box">
+            <img src="${imgSrc}" alt="${itemName}" class="track-product-img" onerror="this.src='../static/images/products/paachratan_mixture_front.jpg'">
+          </div>
+        `;
+        detailsHtml = `
+          <h6 class="track-product-name">${itemName}</h6>
+          <span class="track-product-weight">${it.weight || '100 g'} • Pure Groundnut Oil</span>
+        `;
+      }
+
       return `
         <div class="track-product-row">
           <div class="track-product-left">
-            <div class="track-product-img-box">
-              <img src="${imgSrc}" alt="${it.name}" class="track-product-img" onerror="this.src='../static/images/products/paachratan_mixture_front.jpg'">
-            </div>
+            ${imageBoxHtml}
             <div class="track-product-details">
-              <h6 class="track-product-name">${it.name}</h6>
-              <span class="track-product-weight">${it.weight || '100 g'} • Pure Groundnut Oil</span>
+              ${detailsHtml}
             </div>
           </div>
           <div class="track-product-right">
@@ -3163,15 +3258,29 @@ function renderTrackedOrder(query) {
 
   if (modalTableBody) {
     modalTableBody.innerHTML = items.map(it => {
-      const imgSrc = resolveProductImage(it);
+      const isMix = Boolean(it.isCustomMix || (it.id && String(it.id).startsWith('custom_mix')) || (it.ingredients && it.ingredients.length > 0) || (it.name && it.name.toLowerCase().includes('custom mix')) || (it.title && it.title.toLowerCase().includes('custom mix')));
+      const itemName = (it.name && it.name !== 'undefined') ? it.name : ((it.title && it.title !== 'undefined') ? it.title : (isMix ? 'Custom Snack Mix' : 'Snack Item'));
       const unitPrice = parseFloat(it.price) || 0;
       const q = parseInt(it.qty) || 1;
+
+      let itemIconOrImg = '';
+      if (isMix) {
+        const mixImgSrc = (it.image && it.image !== '' && !it.image.includes('undefined')) ? it.image : '../static/images/mix_snack_custom_blend.png';
+        itemIconOrImg = `<img src="${mixImgSrc}" style="width:36px;height:36px;object-fit:cover;border-radius:6px;border:1px solid #fed7aa;" onerror="this.src='../static/images/mix_snack_custom_blend.png'">`;
+      } else {
+        const imgSrc = it.image && !it.image.includes('undefined') ? it.image : resolveProductImage({ id: it.id, name: itemName });
+        itemIconOrImg = `<img src="${imgSrc}" style="width:36px;height:36px;object-fit:contain;background:#f8fafc;border-radius:6px;border:1px solid #e2e8f0;" onerror="this.src='../static/images/products/paachratan_mixture_front.jpg'">`;
+      }
+
       return `
         <tr>
           <td>
             <div class="d-flex align-items-center gap-2">
-              <img src="${imgSrc}" style="width:36px;height:36px;object-fit:contain;background:#f8fafc;border-radius:6px;border:1px solid #e2e8f0;" onerror="this.src='../static/images/products/paachratan_mixture_front.jpg'">
-              <span class="fw-bold text-navy small">${it.name}</span>
+              ${itemIconOrImg}
+              <div>
+                <span class="fw-bold text-navy small d-block">${itemName}</span>
+                ${isMix ? '<span class="text-muted" style="font-size:0.72rem;"><i class="bi bi-stars text-warning me-1"></i>Handcrafted Custom Blend</span>' : ''}
+              </div>
             </div>
           </td>
           <td><span class="badge bg-light text-navy border small">${it.weight || '100 g'}</span></td>
@@ -5412,12 +5521,13 @@ function addCustomMixToCart() {
         ? snackyCart[customMixState.editingCartIndex].id
         : "custom_mix_" + Date.now(),
     title: "Custom Snack Mix",
+    name: "Custom Snack Mix",
     isCustomMix: true,
     weight: `${totalWeight} g`,
     price: totalPrice,
     mrp: Math.round(totalPrice * 1.25),
     qty: 1,
-    image: "",
+    image: "../static/images/mix_snack_custom_blend.png",
     ingredients: selectedList,
     rawQuantities: { ...customMixState.quantities }
   };

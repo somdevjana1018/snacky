@@ -6797,10 +6797,12 @@ img, svg, video {
 
 /* Horizontal Progress Stepper (Full Width) */
 .track-stepper-container {
+  --stepper-pad-x: 30px;
+  --stepper-line-top: 41px;
   background: #f8fafc;
   border: 1px solid #f1f5f9;
   border-radius: 20px;
-  padding: 28px 30px 24px;
+  padding: 28px var(--stepper-pad-x) 24px;
   display: flex;
   justify-content: space-between;
   position: relative;
@@ -6809,9 +6811,9 @@ img, svg, video {
 
 .track-stepper-line-bg {
   position: absolute;
-  top: 40px;
-  left: 8%;
-  right: 8%;
+  top: var(--stepper-line-top);
+  left: calc(var(--stepper-pad-x) + (100% - (var(--stepper-pad-x) * 2)) * 0.125);
+  right: calc(var(--stepper-pad-x) + (100% - (var(--stepper-pad-x) * 2)) * 0.125);
   height: 3px;
   background: #e2e8f0;
   z-index: 1;
@@ -6819,12 +6821,13 @@ img, svg, video {
 
 .track-stepper-line-fill {
   position: absolute;
-  top: 40px;
-  left: 8%;
+  top: var(--stepper-line-top);
+  left: calc(var(--stepper-pad-x) + (100% - (var(--stepper-pad-x) * 2)) * 0.125);
   height: 3px;
   background: #14532d;
   z-index: 2;
   transition: width 0.5s ease;
+  max-width: calc((100% - (var(--stepper-pad-x) * 2)) * 0.75);
 }
 
 .track-step-item {
@@ -7075,6 +7078,34 @@ img, svg, video {
   color: #94a3b8;
 }
 
+.track-product-mix-badge-box {
+  width: 68px;
+  height: 68px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%);
+  border: 1.5px dashed #fb923c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.track-mix-emoji-icon {
+  font-size: 1.85rem;
+  line-height: 1;
+}
+
+.track-mix-ingredients-pill {
+  font-size: 0.76rem;
+  color: #c2410c;
+  background: #fff8f5;
+  border: 1px solid #fed7aa;
+  padding: 3px 8px;
+  border-radius: 6px;
+  margin-top: 4px;
+  max-width: 320px;
+}
+
 .track-product-right {
   text-align: right;
   flex-shrink: 0;
@@ -7284,64 +7315,302 @@ img, svg, video {
   color: #475569;
 }
 
-/* Responsive queries */
+/* Responsive Queries for Track Order across All Devices */
+@media (max-width: 992px) {
+  .track-screenshot-card {
+    padding: 28px 24px;
+    border-radius: 20px;
+  }
+  .track-meta-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+}
+
 @media (max-width: 768px) {
   .track-top-bar {
     padding: 12px 16px;
     flex-direction: column;
     align-items: stretch !important;
+    gap: 14px;
   }
   .track-search-form {
     max-width: 100%;
-  }
-  .track-search-input-group {
-    padding: 3px 4px 3px 12px;
-  }
-  .track-search-input {
-    font-size: 0.84rem;
-  }
-  .btn-track-search {
-    padding: 7px 14px;
-    font-size: 0.8rem;
-  }
-  .track-stepper-track {
-    flex-direction: column;
-    gap: 20px;
-    align-items: flex-start;
-    padding-left: 10px;
-  }
-  .track-stepper-bg-line {
-    top: 24px;
-    bottom: 24px;
-    left: 32px;
-    width: 4px;
-    height: auto;
-    right: auto;
-  }
-  .track-stepper-fill-line {
-    top: 24px;
-    left: 32px;
-    width: 4px;
-    height: 0%;
-    right: auto;
-  }
-  .track-step-node {
-    flex-direction: row;
-    align-items: center;
-    gap: 16px;
-    text-align: left;
     width: 100%;
   }
-  .track-step-icon-circle {
-    margin-bottom: 0;
-    min-width: 44px;
+  .track-search-input-group {
+    padding: 4px 6px 4px 14px;
   }
-  .track-card {
-    padding: 20px 16px;
+  .track-search-input {
+    font-size: 0.85rem;
+  }
+  .btn-track-search {
+    padding: 8px 16px;
+    font-size: 0.82rem;
+  }
+  .track-quick-bar {
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+  .track-quick-btn {
+    padding: 6px 14px;
+    font-size: 0.78rem;
+  }
+  .track-screenshot-card {
+    padding: 22px 18px;
+    border-radius: 18px;
+    margin-bottom: 28px;
+  }
+  .track-card-header {
+    gap: 12px;
+    margin-bottom: 24px;
+    padding-bottom: 10px;
+  }
+  .track-header-left {
+    gap: 10px;
+  }
+  .track-order-id-title {
+    font-size: 1.2rem;
+  }
+  .track-stepper-container {
+    --stepper-pad-x: 16px;
+    --stepper-line-top: 36px;
+    padding: 22px var(--stepper-pad-x) 18px;
+    border-radius: 16px;
+    margin-bottom: 24px;
+  }
+  .track-step-dot {
+    width: 26px;
+    height: 26px;
+    font-size: 0.8rem;
+    margin-bottom: 8px;
+  }
+  .track-step-name {
+    font-size: 0.82rem;
+  }
+  .track-step-sub {
+    font-size: 0.7rem;
+  }
+  .track-product-row {
+    padding: 10px 12px;
+    gap: 12px;
+  }
+  .track-product-img-box,
+  .track-product-mix-badge-box {
+    width: 58px;
+    height: 58px;
+  }
+  .track-mix-emoji-icon {
+    font-size: 1.6rem;
+  }
+  .track-product-name {
+    font-size: 0.92rem;
+  }
+  .track-product-price {
+    font-size: 0.95rem;
+  }
+  .track-summary-card {
+    padding: 18px 20px;
+    border-radius: 16px;
   }
   .guest-guard-card {
     padding: 32px 20px;
     margin: 20px auto;
+  }
+}
+
+@media (max-width: 576px) {
+  #track-main-container {
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+    margin-top: 16px !important;
+    margin-bottom: 24px !important;
+  }
+  .track-breadcrumb-bar {
+    font-size: 0.8rem;
+    gap: 6px;
+    margin-bottom: 12px;
+  }
+  .track-screenshot-card {
+    padding: 18px 14px;
+    border-radius: 16px;
+  }
+  .track-card-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 18px;
+  }
+  .track-header-left {
+    width: 100%;
+    justify-content: flex-start;
+    gap: 8px;
+  }
+  .track-cube-icon {
+    width: 34px;
+    height: 34px;
+    font-size: 1rem;
+  }
+  .track-order-id-title {
+    font-size: 1.1rem;
+  }
+  .track-status-pill-green {
+    font-size: 0.72rem;
+    padding: 4px 10px;
+  }
+  .track-header-right {
+    width: 100%;
+    justify-content: flex-end;
+    gap: 8px;
+  }
+  .btn-ready-to-ship {
+    padding: 7px 16px;
+    font-size: 0.78rem;
+  }
+  .btn-track-chevron {
+    width: 32px;
+    height: 32px;
+    font-size: 0.85rem;
+  }
+  .track-section-title {
+    font-size: 1.05rem;
+    margin-bottom: 10px;
+  }
+  .track-transit-row {
+    margin-bottom: 12px;
+  }
+  .track-transit-status {
+    font-size: 0.88rem;
+  }
+  .track-est-time {
+    font-size: 0.8rem;
+  }
+  .track-stepper-container {
+    --stepper-pad-x: 8px;
+    --stepper-line-top: 29px;
+    padding: 16px var(--stepper-pad-x) 12px;
+    border-radius: 14px;
+    margin-bottom: 20px;
+  }
+  .track-step-dot {
+    width: 22px;
+    height: 22px;
+    font-size: 0.7rem;
+    margin-bottom: 6px;
+    border-width: 1.5px;
+  }
+  .track-step-name {
+    font-size: 0.7rem;
+    line-height: 1.15;
+    word-break: break-word;
+  }
+  .track-step-sub {
+    font-size: 0.62rem;
+    line-height: 1.1;
+    white-space: normal;
+    word-break: break-word;
+    margin-top: 2px;
+  }
+  .track-meta-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px 10px;
+    padding: 14px 0;
+    margin-bottom: 20px;
+  }
+  .track-meta-heading {
+    font-size: 0.74rem;
+  }
+  .track-meta-value {
+    font-size: 0.88rem;
+  }
+  .track-product-row {
+    padding: 8px 10px;
+    gap: 10px;
+  }
+  .track-product-left {
+    gap: 10px;
+  }
+  .track-product-img-box,
+  .track-product-mix-badge-box {
+    width: 48px;
+    height: 48px;
+    border-radius: 10px;
+    padding: 2px;
+  }
+  .track-mix-emoji-icon {
+    font-size: 1.35rem;
+  }
+  .track-product-name {
+    font-size: 0.88rem;
+  }
+  .track-product-weight {
+    font-size: 0.74rem;
+  }
+  .track-mix-ingredients-pill {
+    font-size: 0.7rem;
+    padding: 2px 6px;
+    max-width: 100%;
+  }
+  .track-product-price {
+    font-size: 0.9rem;
+  }
+  .track-product-qty {
+    font-size: 0.75rem;
+  }
+  .btn-track-view-details {
+    padding: 10px 14px;
+    font-size: 0.86rem;
+  }
+  .track-summary-card {
+    padding: 16px 14px;
+    border-radius: 14px;
+  }
+  .track-summary-label {
+    font-size: 0.86rem;
+  }
+  .track-summary-val {
+    font-size: 0.9rem;
+  }
+  .track-summary-label.total-label {
+    font-size: 0.92rem;
+  }
+  .track-summary-val.total-val {
+    font-size: 1.08rem;
+  }
+  .track-invoice-modal-content .modal-header,
+  .track-invoice-modal-content .modal-body,
+  .track-invoice-modal-content .modal-footer {
+    padding: 14px !important;
+  }
+  .track-invoice-modal-content .modal-footer {
+    flex-direction: column;
+    gap: 8px;
+  }
+  .track-invoice-modal-content .modal-footer button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 380px) {
+  .track-stepper-container {
+    --stepper-pad-x: 4px;
+    --stepper-line-top: 27px;
+    padding: 14px var(--stepper-pad-x) 10px;
+  }
+  .track-step-dot {
+    width: 20px;
+    height: 20px;
+    font-size: 0.65rem;
+  }
+  .track-step-name {
+    font-size: 0.64rem;
+  }
+  .track-step-sub {
+    font-size: 0.58rem;
+  }
+  .track-meta-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
   }
 }
 
